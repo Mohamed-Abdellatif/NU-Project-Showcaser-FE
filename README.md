@@ -1,73 +1,113 @@
-# React + TypeScript + Vite
+# NU Project Showcaser Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application built with React and TypeScript to showcase National University projects. This frontend application provides an intuitive interface for displaying and managing university projects.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Modern React with TypeScript support
+- Fast development with Vite
+- Routing with React Router v7
+- Type-safe development environment
+- ESLint configuration for code quality
+- Responsive layouts
 
-## React Compiler
+## 📋 Prerequisites
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Before you begin, ensure you have the following installed:
+- Node.js (v18 or higher)
+- npm (v9 or higher)
 
-## Expanding the ESLint configuration
+## 🛠️ Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Clone the repository:
+```bash
+git clone https://github.com/Mohamed-Abdellatif/NU-Project-Showcaser-FE.git
+cd NU-Project-Showcaser-FE
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies:
+```bash
+npm install
 ```
+
+## 🔧 Available Scripts
+
+In the project directory, you can run:
+
+- `npm run dev` - Starts the development server using Vite
+- `npm run build` - Builds the app for production (TypeScript build + Vite build)
+- `npm run lint` - Runs ESLint to check code quality
+- `npm run preview` - Preview the production build locally
+
+## 🏗️ Project Structure
+
+```
+NU-Project-Showcaser-FE/
+├── src/
+│   ├── assets/         # Static assets
+│   ├── components/     # Reusable components
+│   ├── constants/      # Application constants
+│   ├── features/       # Feature-specific components
+│   ├── hooks/          # Custom React hooks
+│   ├── layouts/        # Layout components
+│   ├── pages/          # Page components
+│   ├── routes/         # Routing configuration
+│   ├── types/          # TypeScript type definitions
+│   ├── utils/          # Utility functions
+│   ├── App.tsx         # Root component
+│   └── main.tsx        # Application entry point
+├── public/             # Public assets
+└── index.html          # HTML entry point
+```
+
+## 🛡️ Type Safety
+
+The project uses TypeScript for type safety. The configuration is split into:
+- `tsconfig.json` - Base TypeScript configuration
+- `tsconfig.app.json` - Application-specific configuration
+- `tsconfig.node.json` - Node.js environment configuration
+
+## 📝 ESLint Configuration
+
+The project includes a comprehensive ESLint setup for code quality. The configuration includes:
+- Type-aware lint rules
+- React-specific linting
+- Strict TypeScript checks
+
+To enable additional type-aware lint rules, update the ESLint configuration as shown in the [ESLint Configuration Guide](https://eslint.org/docs/latest/use/configure/).
+
+## 🔄 Version Control
+
+The project uses Git for version control. Make sure to:
+1. Create feature branches for new features
+2. Write meaningful commit messages
+3. Follow the project's branching strategy
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📦 Tech Stack
+
+- [React](https://react.dev/) - UI library
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Vite](https://vitejs.dev/) - Build tool and dev server
+- [React Router](https://reactrouter.com/) - Routing
+- [ESLint](https://eslint.org/) - Code quality
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👥 Authors
+
+- Your Name - *Initial work* - [Your GitHub](https://github.com/your-username)
+
+## 🙏 Acknowledgments
+
+- National University for supporting this project
+- All contributors who have helped shape this project
