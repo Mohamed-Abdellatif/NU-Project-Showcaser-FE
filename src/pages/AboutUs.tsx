@@ -5,7 +5,7 @@ const AboutUs = () => {
   const { t } = useTranslation();
   return (
     <Box sx={{ width: "98%", p: 2 }}>
-      <Typography variant="h4" component="h1" sx={{ fontWeight: "bold" }}>
+      <Typography variant="h1" component="h1" sx={{ fontWeight: "bold" }}>
         {t("about.title")}
       </Typography>
       <Typography variant="body1" sx={{ mt: 1, mb: 2 }}>
