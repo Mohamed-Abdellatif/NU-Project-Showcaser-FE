@@ -1,13 +1,10 @@
 // Common interfaces and types for the project
 
 export interface Project {
-  id: string;
+  id: number;
   title: string;
-  description: string;
-  imageUrl?: string;
-  technologies: string[];
-  createdAt: Date;
-  updatedAt: Date;
+  course: string;
+  image: string;
 }
 
 export interface User {
@@ -15,6 +12,12 @@ export interface User {
   name: string;
   email: string;
   role: 'admin' | 'user';
+}
+
+export interface Language {
+  code: string;
+  name: string;
+  dir: 'ltr' | 'rtl';
 }
 
 // Add more types as needed

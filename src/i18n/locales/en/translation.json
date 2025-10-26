@@ -1,0 +1,27 @@
+{
+  "common": {
+    "welcome": "Welcome to NU Project Showcaser",
+    "language": "Language",
+    "loading": "Loading...",
+    "error": "Error",
+    "notFound": "Page not found"
+  },
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact",
+    "searchProject": "Search Project",
+    "login": "Login"
+  },
+  "home": {
+    "title": "Have a winning project?",
+    "subtitle": "Submit Your project and we’ll check it out!",
+    "projects": "Projects",
+    "submitProject": "Submit"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "We are a team of developers who are passionate about creating innovative projects."
+  }
+}
