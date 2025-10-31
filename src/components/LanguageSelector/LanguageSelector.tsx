@@ -3,6 +3,13 @@ import { Button, Menu, MenuItem, Typography, Box } from '@mui/material';
 import { Language as LanguageIcon } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { LANGUAGES } from '../../utils/constants';
+import { languageAtom } from '../../atoms/languageAtom';
+import { useAtom } from "jotai";
+import { useEffect } from "react";
+
+
+
+
 
 
 
@@ -11,21 +18,24 @@ interface LanguageSelectorProps {
   onLanguageChange?: () => void;
 }
 
-export const LanguageSelector = ({ 
+export const LanguageSelector = ({
   variant = 'button',
-  onLanguageChange 
+  onLanguageChange
 }: LanguageSelectorProps) => {
+  const [language, setlanguage] = useAtom(languageAtom)
   const [langMenuAnchor, setLangMenuAnchor] = useState<null | HTMLElement>(null);
   const { i18n } = useTranslation();
+
+
+
 
 
   const handleLanguageChange = (langCode: string) => {
     const lang = LANGUAGES.find(l => l.code === langCode);
     if (lang) {
+      setlanguage(langCode);
       i18n.changeLanguage(langCode);
-      document.dir = lang.dir;
       handleLangMenuClose();
-      onLanguageChange?.();
     }
   };
 
