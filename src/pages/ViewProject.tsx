@@ -90,28 +90,28 @@ const ViewProject = () => {
           Title
         </Typography>
         <Typography sx={{ mb: 2 }}>
-          {"Blah blah blah proper name place name backstory stuff "}
+          {project.title || "Project Title"}
         </Typography>
 
         <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
           Project Description
         </Typography>
         <Typography sx={{ mb: 2 }}>
-          {"Blah blah blah proper name place name backstory stuff "}
+          {"This is the Project Description "}
         </Typography>
 
         <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
           Team Members
         </Typography>
         <Typography sx={{ mb: 2 }}>
-          {"Blah blah blah proper name place name backstory stuff"}
+          {"All team members included"}
         </Typography>
 
         <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
           Github Repo
         </Typography>
         <Typography>
-          {"Blah blah blah proper name place name backstory stuff"}
+          {"This is github's repo"}
         </Typography>
       </Box>
     </Box>
