@@ -5,15 +5,20 @@ import {
   Typography,
 } from '@mui/material';
 import type { Project } from '../../types';
-
+import { useNavigate } from "react-router-dom";
 interface ProjectCardProps {
   project: Project;
   viewMode: 'grid' | 'list';
 }
 
 const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
+  
+  const navigate = useNavigate();
+ 
+
   return (
     <Card
+      onClick={() => navigate(`/projects/${project.id}`)}
       sx={{
         height: '100%',
         display: 'flex',
