@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -16,6 +16,9 @@ import { SearchBox } from "../SearchBox/SearchBox";
 import { LanguageSelector } from "../LanguageSelector/LanguageSelector";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+
+
+
 export const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -35,6 +38,13 @@ export const Navbar = () => {
   const handleToggleMobileSearch = () => {
     setShowMobileSearch(!showMobileSearch);
   };
+  
+
+
+
+
+
+
 
   return (
     <>
