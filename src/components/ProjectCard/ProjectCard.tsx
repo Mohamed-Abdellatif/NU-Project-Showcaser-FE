@@ -12,9 +12,9 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
-  
+
   const navigate = useNavigate();
- 
+
 
   return (
     <Card
@@ -43,13 +43,13 @@ const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
     >
       <CardMedia
         component="img"
-        image={project.image}
-        alt={project.title}
-        sx={{
-          width: viewMode === 'list' ? 300 : '100%',
-          height: viewMode === 'list' ? 300 : 300,
-          objectFit: 'cover',
-        }}
+        image={project.images?.[0]}
+      alt={project.title}
+      sx={{
+        width: viewMode === 'list' ? 300 : '100%',
+        height: viewMode === 'list' ? 300 : 300,
+        objectFit: 'cover'
+      }}
       />
       <CardContent
         sx={{

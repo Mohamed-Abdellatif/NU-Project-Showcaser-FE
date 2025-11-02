@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next"; 
 import ProjectsList from "../components/ProjectsList/ProjectsList";
 import { Box, Button, Typography } from "@mui/material";
 
@@ -6,7 +6,13 @@ const HomePage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="home-page">
+    <Box
+      className="home-page"
+      sx={{
+        backgroundColor: "#FFFFF0", 
+        minHeight: "100vh",
+      }}
+    >
       <Box sx={{ width: "98%", p: 2 }}>
         <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold' }}>
           {t("home.title")}
@@ -28,7 +34,7 @@ const HomePage = () => {
       <section>
         <ProjectsList />
       </section>
-    </div>
+    </Box>
   );
 };
 
