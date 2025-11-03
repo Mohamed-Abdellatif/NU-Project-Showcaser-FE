@@ -12,7 +12,9 @@
     "about": "About",
     "contact": "Contact",
     "searchProject": "Search Project",
-    "login": "Login"
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile"
   },
   "home": {
     "title": "Have a winning project?",

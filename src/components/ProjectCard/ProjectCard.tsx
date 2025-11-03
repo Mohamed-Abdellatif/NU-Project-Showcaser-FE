@@ -4,10 +4,10 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material';
-import type { Project } from '../../types';
 import { useNavigate } from "react-router-dom";
 interface ProjectCardProps {
-  project: Project;
+  // FIXME: fix this type
+  project: any;
   viewMode: 'grid' | 'list';
 }
 

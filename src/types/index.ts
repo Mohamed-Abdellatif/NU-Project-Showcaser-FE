@@ -8,10 +8,13 @@ export interface Project {
 }
 
 export interface User {
-  id: string;
+  _id: string;
   name: string;
   email: string;
   role: 'admin' | 'user';
+  msId: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface Language {

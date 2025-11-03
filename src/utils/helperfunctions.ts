@@ -1,7 +1,7 @@
-import type { Project } from "../types";
 
-export const generatePlaceholderProjects = (): Project[] => {
-  const projects: Project[] = [
+
+export const generatePlaceholderProjects = () => {
+  const projects  = [
     {
       id: 1,
       title: "AI-Powered Study Assistant",
