@@ -1,11 +1,5 @@
 // Common interfaces and types for the project
 
-export interface Project {
-  id: number;
-  title: string;
-  course: string;
-  image: string;
-}
 
 export interface User {
   _id: string;
@@ -24,3 +18,61 @@ export interface Language {
 }
 
 // Add more types as needed
+
+export interface Project {
+  _id: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  teamLeader: string;
+  teamMembers: string[];
+  supervisor: string;
+  stars: number;
+  tags: string[];
+  images: string[];
+  videos: string[];
+  createdAt: string;
+  course: string;
+  repoUrl: string;
+}
+
+// Project creation/update payload
+export interface ProjectCreatePayload {
+  title: string;
+  description: string;
+  technologies?: string[];
+  teamLeader: string;
+  teamMembers?: string[];
+  supervisor: string;
+  stars?: number;
+  tags?: string[];
+  images?: string[];
+  videos?: string[];
+  course?: string;
+  repoUrl?: string;
+}
+
+export interface ProjectUpdatePayload {
+  title?: string;
+  description?: string;
+  technologies?: string[];
+  teamLeader?: string;
+  teamMembers?: string[];
+  supervisor?: string;
+  stars?: number;
+  tags?: string[];
+  images?: string[];
+  videos?: string[];
+  course?: string;
+  repoUrl?: string;
+}
+
+// Search query parameters
+export interface ProjectSearchParams {
+  title?: string;
+  major?: string;
+  supervisor?: string;
+  teamMember?: string;
+  teamLeader?: string;
+  course?: string;
+}

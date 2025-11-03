@@ -25,5 +25,8 @@
   "about": {
     "title": "About Us",
     "subtitle": "We are a team of developers who are passionate about creating innovative projects."
+  },
+  "viewProject": {
+    "recommendedProjects": "Recommended Projects"
   }
 }

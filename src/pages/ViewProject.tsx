@@ -9,22 +9,22 @@ import {
   Button,
   Paper,
 } from "@mui/material";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import DownloadIcon from "@mui/icons-material/Download";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { generatePlaceholderProjects } from "../utils/helperfunctions";
+import { useGetProjectById, useProjects } from "../hooks/useProjects";
+import ProjectsList from "../components/ProjectsList/ProjectsList";
 
 const ViewProject = () => {
   const { projectId } = useParams();
-  const navigate = useNavigate();
-  const projects = generatePlaceholderProjects();
+  const { data: project } = useGetProjectById(projectId!);
+  const { data: projects } = useProjects();
   const [liked, setLiked] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-
 
   //always start for the top when projectId changes
   useEffect(() => {
@@ -32,20 +32,10 @@ const ViewProject = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [projectId]);
 
-  // Find the project based on the projectId from the URL
-  const project = projects.find((p) => p.id === Number(projectId));
-
-  if (!project) {
-    return (
-      <Box sx={{ textAlign: "center", mt: 6 }}>
-        <Typography color="error" variant="h5">
-          Project not found.
-        </Typography>
-      </Box>
-    );
-  }
   // Prepare media array combining images and videos
+  // Must be called before any conditional returns
   const media = useMemo(() => {
+    if (!project) return [];
     const imgs = (project.images || []).map((src) => ({
       type: "image" as const,
       src,
@@ -58,22 +48,34 @@ const ViewProject = () => {
   }, [project]);
 
   // Prepare project files array
-  const projectFiles = (project.images || []).map((src) => ({
-    name: src.split("/").pop() || src,
-    url: src,
-  }));
+  // Must be called before any conditional returns
+  const projectFiles = useMemo(() => {
+    if (!project) return [];
+    return (project.images || []).map((src) => ({
+      name: src.split("/").pop() || src,
+      url: src,
+    }));
+  }, [project]);
 
   // Get recommended projects excluding the current one
+  // Must be called before any conditional returns
   const recommendedProjects = useMemo(() => {
-    const others = projects.filter((p) => p.id !== project.id);
+    if (!project || !projects) return [];
+    const others = projects.filter((p) => p._id !== project._id);
     return others.sort(() => 0.5 - Math.random()).slice(0, 6);
-  }, [project.id]);
+  }, [project, projects]);
 
-  const handleProjectClick = (id: number) => {
-    navigate(`/projects/${id}`);
-    window.scrollTo(0, 0);
-    setTimeout(() => window.location.reload(), 100);
-  };
+  // Now we can do conditional rendering after all hooks are called
+  if (!project) {
+    return (
+      <Box sx={{ textAlign: "center", mt: 6 }}>
+        <Typography color="error" variant="h5">
+          Project not found.
+        </Typography>
+      </Box>
+    );
+  }
+
 
   // Media navigation handlers
   const nextMedia = () =>
@@ -82,7 +84,6 @@ const ViewProject = () => {
     setCurrentIndex((prev) => (prev === 0 ? media.length - 1 : prev - 1));
 
   return (
-
     <Box
       sx={{
         minHeight: "100vh",
@@ -119,7 +120,7 @@ const ViewProject = () => {
       {media.length > 0 && (
         <Box
           sx={{
-            position: "relative", 
+            position: "relative",
             width: "95%",
             maxWidth: "1000px",
             overflow: "hidden",
@@ -138,7 +139,6 @@ const ViewProject = () => {
               width: `${media.length * 100}%`,
             }}
           >
-
             {/* INDIVIDUAL MEDIA ITEM */}
             {media.map((item, idx) => (
               <Box
@@ -245,7 +245,11 @@ const ViewProject = () => {
               Project Info
             </Typography>
             <IconButton onClick={() => setLiked((prev) => !prev)}>
-              {liked ? <StarIcon sx={{ color: "#8b3f7f" }} /> : <StarBorderIcon />}
+              {liked ? (
+                <StarIcon sx={{ color: "#8b3f7f" }} />
+              ) : (
+                <StarBorderIcon />
+              )}
             </IconButton>
           </Box>
 
@@ -260,7 +264,7 @@ const ViewProject = () => {
             <strong>Description:</strong> {project.description}
           </Typography>
 
-          {project.githubRepo && (
+          {project.repoUrl && (
             <Box
               display="flex"
               alignItems="center"
@@ -270,10 +274,12 @@ const ViewProject = () => {
                 textDecoration: "underline",
                 gap: 1,
               }}
-              onClick={() => window.open(project.githubRepo, "_blank")}
+              onClick={() => window.open(project.repoUrl, "_blank")}
             >
-              <GitHubIcon sx={{ fontSize: 23,mt:0.5 }} />
-              <Typography sx={{fontSize: 15, mt:0.5}} variant="body2">Click to view GitHub Repo</Typography>
+              <GitHubIcon sx={{ fontSize: 23, mt: 0.5 }} />
+              <Typography sx={{ fontSize: 15, mt: 0.5 }} variant="body2">
+                Click to view GitHub Repo
+              </Typography>
             </Box>
           )}
         </CardContent>
@@ -348,11 +354,11 @@ const ViewProject = () => {
       </Box>
 
       {/* RECOMMENDED PROJECTS */}
-      {recommendedProjects.length > 0 && (
+      {recommendedProjects && recommendedProjects.length > 0 && (
         <Box
           sx={{
-            width: "90%",
-            maxWidth: "1200px",
+            width: "100%",
+            maxWidth: "1500px",
             mt: 10,
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
@@ -360,56 +366,11 @@ const ViewProject = () => {
             flexWrap: "wrap",
           }}
         >
-          <Typography
-            variant="h5"
-            sx={{
-              width: "100%",
-              mb: 2,
-              color: "#8b3f7f",
-              fontWeight: "bold",
-            }}
-          >
-            Recommended Projects
-          </Typography>
-
-          {recommendedProjects.map((proj) => (
-            <Card
-              key={proj.id}
-              onClick={() => handleProjectClick(proj.id)}
-              sx={{
-                cursor: "pointer",
-                flex: "1 1 30%",
-                minWidth: "280px",
-                borderRadius: "16px",
-                background: "linear-gradient(135deg, #ffcfe6 0%, #ffe4f2 100%)",
-                color: "#6a2c68",
-                boxShadow: 2,
-                overflow: "hidden",
-                transition: "0.3s",
-                "&:hover": { boxShadow: 5 },
-              }}
-            >
-              {proj.images && proj.images[0] && (
-                <CardMedia
-                  component="img"
-                  height="180"
-                  image={proj.images[0]}
-                  alt={proj.title}
-                />
-              )}
-              <CardContent>
-                <Typography variant="h6" fontWeight="bold">
-                  {proj.title}
-                </Typography>
-                <Typography variant="body2" sx={{ opacity: 0.8, mb: 1 }}>
-                  {proj.course}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  {proj.description?.slice(0, 80) || ""}...
-                </Typography>
-              </CardContent>
-            </Card>
-          ))}
+          <ProjectsList
+            projects={recommendedProjects}
+            title="viewProject.recommendedProjects"
+            isViewModeChangeable={false}
+          />
         </Box>
       )}
     </Box>

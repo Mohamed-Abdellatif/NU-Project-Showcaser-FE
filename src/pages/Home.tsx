@@ -1,10 +1,11 @@
 import { useTranslation } from "react-i18next"; 
 import ProjectsList from "../components/ProjectsList/ProjectsList";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, CircularProgress, Alert } from "@mui/material";
+import { useProjects } from "../hooks/useProjects";
 
 const HomePage = () => {
+  const { data: projects, isLoading, isError, error } = useProjects();
   const { t } = useTranslation();
-
   return (
     <Box
       className="home-page"
@@ -32,7 +33,21 @@ const HomePage = () => {
         </Button>
       </Box>
       <section>
-        <ProjectsList />
+        {isLoading && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+            <CircularProgress />
+          </Box>
+        )}
+        {isError && (
+          <Box sx={{ p: 2 }}>
+            <Alert severity="error">
+              {error?.message || t("home.errorLoadingProjects")}
+            </Alert>
+          </Box>
+        )}
+        {!isLoading && !isError && (
+          <ProjectsList projects={projects} />
+        )}
       </section>
     </Box>
   );
