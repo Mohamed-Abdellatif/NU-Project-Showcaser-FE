@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
 import ProjectsList from "../components/ProjectsList/ProjectsList";
 import { Box, Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <div className="home-page">
@@ -15,6 +17,7 @@ const HomePage = () => {
           {t("home.subtitle")}
         </Typography>
         <Button 
+          onClick={() => navigate('/submit')}
           variant="contained" 
           sx={{ 
             bgcolor: "#AE86C9", 

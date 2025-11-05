@@ -23,5 +23,18 @@
   "about": {
     "title": "About Us",
     "subtitle": "We are a team of developers who are passionate about creating innovative projects."
+  },
+  "submit": {
+    "submitProject": "Submit Project",
+    "projectTitle": "Project Title",
+    "projectDescription": "Project Description",
+    "projectImage": "Project Image",
+    "teamMembers": "Team Members",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "universityMail": "University Mail",
+    "addMember": "Add Member",
+    "removeMember": "Remove Member",
+    "submit": "Submit"
   }
 }
