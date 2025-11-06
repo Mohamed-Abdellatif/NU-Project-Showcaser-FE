@@ -54,7 +54,14 @@ const ProjectsList = ({
         }}
       >
         {title && (
-          <Typography variant="h4" component="h1" sx={{ fontWeight: "bold" }}>
+          <Typography variant="h3" component="h1" sx={{
+            width: "100%",
+            mb: 2.5,
+            color: title === "viewProject.recommendedProjects" ? "#6A2C68" : "#333",
+            fontWeight: "bold",
+            fontFamily: 'System-ui, BlinkMacSystemFont,Times New Roman',
+
+          }}>
             {t(title)}
           </Typography>
         )}
@@ -67,24 +74,25 @@ const ProjectsList = ({
             sx={{ display: { xs: "none", sm: "flex" } }}
           >
             {theme.direction === "rtl" ? (
-              <div>
+              <>
                 <ToggleButton value="list" aria-label="list view">
                   <ViewListIcon sx={{ transform: "scaleX(-1)" }} />
                 </ToggleButton>
                 <ToggleButton value="grid" aria-label="grid view">
                   <GridViewIcon />
                 </ToggleButton>
-              </div>
+              </>
             ) : (
-              <div>
+              <>
                 <ToggleButton value="grid" aria-label="grid view">
                   <GridViewIcon />
                 </ToggleButton>
                 <ToggleButton value="list" aria-label="list view">
                   <ViewListIcon />
                 </ToggleButton>
-              </div>
+              </>
             )}
+
           </ToggleButtonGroup>
         )}
       </Box>
@@ -95,15 +103,15 @@ const ProjectsList = ({
           gap: 2,
           ...(effectiveViewMode === "grid"
             ? {
-                gridTemplateColumns: {
-                  xs: "1fr", // 1 column on mobile
-                  sm: "repeat(2, 1fr)", // 2 columns on tablet
-                  md: "repeat(3, 1fr)", // 3 columns on desktop
-                },
-              }
+              gridTemplateColumns: {
+                xs: "1fr", // 1 column on mobile
+                sm: "repeat(2, 1fr)", // 2 columns on tablet
+                md: "repeat(3, 1fr)", // 3 columns on desktop
+              },
+            }
             : {
-                gridTemplateColumns: "1fr", // Always 1 column in list view
-              }),
+              gridTemplateColumns: "1fr", // Always 1 column in list view
+            }),
         }}
       >
         {displayProjects &&

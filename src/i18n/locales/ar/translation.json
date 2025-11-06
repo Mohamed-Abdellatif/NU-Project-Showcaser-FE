@@ -27,6 +27,13 @@
     "subtitle": "نحن فريق من المطورين الذين يهتمون بإنشاء مشاريع مبتكرة."
   },
   "viewProject": {
-    "recommendedProjects": "المشاريع المقترحة"
+    "recommendedProjects": "مشاريع أخرى"
+    ,"projectInfo": "معلومات المشروع"
+    ,"course": "المقرر الدراسي",
+    "teamMembers": "أعضاء الفريق"
+    ,"Description": "الوصف",
+    "githubRepo": "انقر لعرض مستودع GitHub",
+    "projectFiles": "ملفات المشروع",
+    "download": "تحميل"
   }
 }
