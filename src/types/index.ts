@@ -1,5 +1,4 @@
-// Common interfaces and types for the project
-import type { Key } from 'react';
+
 
 
 export interface User {
@@ -21,7 +20,6 @@ export interface Language {
 // Add more types as needed
 
 export interface Project {
-  id: Key | null | undefined;
   _id: string;
   title: string;
   description: string;
