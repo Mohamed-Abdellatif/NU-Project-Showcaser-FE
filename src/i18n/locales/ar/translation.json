@@ -12,7 +12,9 @@
     "about": "حول",
     "contact": "اتصل بنا",
     "searchProject": "ابحث عن مشروع",
-    "login": "تسجيل الدخول"
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "profile": "الملف الشخصي"
   },
   "home": {
     "title": "هل لديك مشروع رائع؟",
@@ -24,17 +26,7 @@
     "title": "حولنا",
     "subtitle": "نحن فريق من المطورين الذين يهتمون بإنشاء مشاريع مبتكرة."
   },
-  "submit": {
-    "submitProject": "إرسال المشروع",
-    "projectTitle": "عنوان المشروع",
-    "projectDescription": "وصف المشروع",
-    "projectImage": "صورة المشروع",
-    "teamMembers": "أعضاء الفريق",
-    "firstName": "الاسم الأول",
-    "lastName": "اسم العائلة",
-    "universityMail": "البريد الجامعي",
-    "addMember": "إضافة عضو",
-    "removeMember": "إزالة عضو",
-    "submit": "إرسال"
+  "viewProject": {
+    "recommendedProjects": "المشاريع المقترحة"
   }
 }

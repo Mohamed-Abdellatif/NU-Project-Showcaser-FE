@@ -4,16 +4,21 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 import type { Project } from '../../types';
-
 interface ProjectCardProps {
   project: Project;
   viewMode: 'grid' | 'list';
 }
 
 const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
+
+  const navigate = useNavigate();
+
+
   return (
     <Card
+      onClick={() => navigate(`/projects/${project._id}`)}
       sx={{
         height: '100%',
         display: 'flex',
@@ -38,13 +43,13 @@ const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
     >
       <CardMedia
         component="img"
-        image={project.image}
-        alt={project.title}
-        sx={{
-          width: viewMode === 'list' ? 300 : '100%',
-          height: viewMode === 'list' ? 300 : 300,
-          objectFit: 'cover',
-        }}
+        image={ project.images?.[0] || `https://placehold.co/600x400/8E44AD/FFF?text=${project.title}`}
+      alt={project.title}
+      sx={{
+        width: viewMode === 'list' ? 300 : '100%',
+        height: viewMode === 'list' ? 300 : 300,
+        objectFit: 'cover'
+      }}
       />
       <CardContent
         sx={{

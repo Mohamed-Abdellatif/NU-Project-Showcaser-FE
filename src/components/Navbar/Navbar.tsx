@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -14,12 +14,19 @@ import {
 import { Menu as MenuIcon, Search as SearchIcon } from "@mui/icons-material";
 import { SearchBox } from "../SearchBox/SearchBox";
 import { LanguageSelector } from "../LanguageSelector/LanguageSelector";
+import { UserMenu } from "../UserMenu/UserMenu";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useAtom } from "jotai";
+import { isAuthenticatedAtom, userAtom } from "../../atoms/authAtom";
+import type { User } from "../../types";
 export const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useAtom(isAuthenticatedAtom);
+  const [, setUser] = useAtom<User | null>(userAtom);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -35,6 +42,36 @@ export const Navbar = () => {
   const handleToggleMobileSearch = () => {
     setShowMobileSearch(!showMobileSearch);
   };
+  
+
+
+  const handleLogin = () => {
+    window.location.href = "http://localhost:3000/auth/microsoft";
+  };
+
+  const handleLogout = async () => {
+    window.location.href = "http://localhost:3000/auth/logout";
+    setIsAuthenticated(false);
+  };
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const res = await axios.get<{ authenticated: boolean , user: User }>(
+        `http://localhost:3000/auth/me`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (res.data.authenticated) {
+        setIsAuthenticated(true);
+        setUser(res.data.user);
+      } else {
+        setIsAuthenticated(false);
+        setUser(null);
+      }
+    };
+    checkAuth();
+  }, []);
 
   return (
     <>
@@ -134,20 +171,25 @@ export const Navbar = () => {
                 <LanguageSelector />
               </Box>
             )}
-            <Button
-              variant="contained"
-              sx={{
-                bgcolor: "#6A1B9A",
-                "&:hover": {
-                  bgcolor: "#4A148C",
-                },
-                display: showMobileSearch ? "none" : "flex",
-                borderRadius: 2,
-                px: { xs: 2, md: 3 },
-              }}
-            >
-              {t("nav.login")}
-            </Button>
+            {!isAuthenticated ? (
+              <Button
+                onClick={handleLogin}
+                variant="contained"
+                sx={{
+                  bgcolor: "#6A1B9A",
+                  "&:hover": {
+                    bgcolor: "#4A148C",
+                  },
+                  display: showMobileSearch ? "none" : "flex",
+                  borderRadius: 2,
+                  px: { xs: 2, md: 3 },
+                }}
+              >
+                {t("nav.login")}
+              </Button>
+            ) : (
+              <UserMenu showMobileSearch={showMobileSearch} onLogout={handleLogout} />
+            )}
           </Box>
         </Toolbar>
       </AppBar>

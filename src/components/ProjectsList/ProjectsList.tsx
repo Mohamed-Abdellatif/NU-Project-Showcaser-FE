@@ -10,17 +10,23 @@ import {
 import GridViewIcon from "@mui/icons-material/GridView";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import type { Project } from "../../types";
-import { generatePlaceholderProjects } from "../../utils/helperfunctions";
 import ProjectCard from "../ProjectCard/ProjectCard";
 import { useTranslation } from "react-i18next";
+import RecommendedProjectCard from "../RecommendedProjectCard/RecommendedProjectCard";
 
 interface ProjectsListProps {
   projects?: Project[];
+  title?: string;
+  isViewModeChangeable?: boolean;
 }
 
-const ProjectsList = ({ projects }: ProjectsListProps) => {
+const ProjectsList = ({
+  projects,
+  title = "home.projects",
+  isViewModeChangeable = true,
+}: ProjectsListProps) => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const displayProjects = projects || generatePlaceholderProjects();
+  const displayProjects = projects || [];
 
   const { t } = useTranslation();
   // Use MUI's useMediaQuery for mobile detection
@@ -47,36 +53,40 @@ const ProjectsList = ({ projects }: ProjectsListProps) => {
           mb: 3,
         }}
       >
-        <Typography variant="h4" component="h1" sx={{ fontWeight: "bold" }}>
-          {t("home.projects")}
-        </Typography>
-        <ToggleButtonGroup
-          value={viewMode}
-          exclusive
-          onChange={handleViewChange}
-          aria-label="view mode"
-          sx={{ display: { xs: "none", sm: "flex" } }}
-        >
-          {theme.direction === 'rtl' ? (
-            <div>
-              <ToggleButton value="list" aria-label="list view">
-                <ViewListIcon sx={{ transform: 'scaleX(-1)' }} />
-              </ToggleButton>
-              <ToggleButton value="grid" aria-label="grid view">
-                <GridViewIcon />
-              </ToggleButton>
-            </div>
-          ) : (
-            <div>
-              <ToggleButton value="grid" aria-label="grid view">
-                <GridViewIcon />
-              </ToggleButton>
-              <ToggleButton value="list" aria-label="list view">
-                <ViewListIcon />
-              </ToggleButton>
-            </div>
-          )}
-        </ToggleButtonGroup>
+        {title && (
+          <Typography variant="h4" component="h1" sx={{ fontWeight: "bold" }}>
+            {t(title)}
+          </Typography>
+        )}
+        {isViewModeChangeable && (
+          <ToggleButtonGroup
+            value={viewMode}
+            exclusive
+            onChange={handleViewChange}
+            aria-label="view mode"
+            sx={{ display: { xs: "none", sm: "flex" } }}
+          >
+            {theme.direction === "rtl" ? (
+              <div>
+                <ToggleButton value="list" aria-label="list view">
+                  <ViewListIcon sx={{ transform: "scaleX(-1)" }} />
+                </ToggleButton>
+                <ToggleButton value="grid" aria-label="grid view">
+                  <GridViewIcon />
+                </ToggleButton>
+              </div>
+            ) : (
+              <div>
+                <ToggleButton value="grid" aria-label="grid view">
+                  <GridViewIcon />
+                </ToggleButton>
+                <ToggleButton value="list" aria-label="list view">
+                  <ViewListIcon />
+                </ToggleButton>
+              </div>
+            )}
+          </ToggleButtonGroup>
+        )}
       </Box>
 
       <Box
@@ -96,11 +106,16 @@ const ProjectsList = ({ projects }: ProjectsListProps) => {
               }),
         }}
       >
-        {displayProjects.map((project) => (
-          <Box key={project.id}>
-            <ProjectCard project={project} viewMode={effectiveViewMode} />
-          </Box>
-        ))}
+        {displayProjects &&
+          displayProjects.map((project: Project) => (
+            <Box key={project._id}>
+              {title === "viewProject.recommendedProjects" ? (
+                <RecommendedProjectCard project={project} />
+              ) : (
+                <ProjectCard project={project} viewMode={effectiveViewMode} />
+              )}
+            </Box>
+          ))}
       </Box>
     </Box>
   );

@@ -1,14 +1,19 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next"; 
 import ProjectsList from "../components/ProjectsList/ProjectsList";
-import { Box, Button, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box, Button, Typography, CircularProgress, Alert } from "@mui/material";
+import { useProjects } from "../hooks/useProjects";
 
 const HomePage = () => {
+  const { data: projects, isLoading, isError, error } = useProjects();
   const { t } = useTranslation();
-  const navigate = useNavigate();
-
   return (
-    <div className="home-page">
+    <Box
+      className="home-page"
+      sx={{
+        backgroundColor: "#FFFFF0", 
+        minHeight: "100vh",
+      }}
+    >
       <Box sx={{ width: "98%", p: 2 }}>
         <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold' }}>
           {t("home.title")}
@@ -29,9 +34,23 @@ const HomePage = () => {
         </Button>
       </Box>
       <section>
-        <ProjectsList />
+        {isLoading && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
+            <CircularProgress />
+          </Box>
+        )}
+        {isError && (
+          <Box sx={{ p: 2 }}>
+            <Alert severity="error">
+              {error?.message || t("home.errorLoadingProjects")}
+            </Alert>
+          </Box>
+        )}
+        {!isLoading && !isError && (
+          <ProjectsList projects={projects} />
+        )}
       </section>
-    </div>
+    </Box>
   );
 };
 
