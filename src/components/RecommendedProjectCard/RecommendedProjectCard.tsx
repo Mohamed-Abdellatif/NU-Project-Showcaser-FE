@@ -16,10 +16,12 @@ const RecommendedProjectCard = ({ project }: { project: Project }) => {
       onClick={() => navigate(`/projects/${project._id}`)}
       sx={{
         cursor: "pointer",
+        width: "96%",
+        height: "97%",
         flex: "1 1 30%",
         minWidth: "280px",
         borderRadius: "16px",
-        background: "linear-gradient(135deg, #ffcfe6 0%, #ffe4f2 100%)",
+        background: "linear-gradient(135deg, #FFE2F1 0%, #FFE2F1  100%)",
         color: "#6a2c68",
         boxShadow: 2,
         overflow: "hidden",

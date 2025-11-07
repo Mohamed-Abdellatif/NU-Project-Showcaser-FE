@@ -78,7 +78,7 @@ export const Navbar = () => {
       <AppBar
         position="sticky"
         sx={{
-          background: "linear-gradient(90deg, #8E44AD, #A569BD)",
+          background: "linear-gradient(60deg, #8E44AD 0%, #A569BD 50%,#8E44AD 100%)",
           boxShadow: 3,
         }}
       >
@@ -108,7 +108,8 @@ export const Navbar = () => {
                 style={{
                   fontWeight: "bold",
                   color: "#283593",
-                  marginRight: 1,
+                  marginRight: 3,
+                  padding: "2px 2px"
                 }}
               >
                 NU

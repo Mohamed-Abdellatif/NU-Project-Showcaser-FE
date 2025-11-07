@@ -27,6 +27,13 @@
     "subtitle": "We are a team of developers who are passionate about creating innovative projects."
   },
   "viewProject": {
-    "recommendedProjects": "Recommended Projects"
+    "recommendedProjects": "Related Projects",
+    "projectInfo": "Project Info",
+    "course": "Course",
+    "teamMembers": "Team Members",
+    "Description": "Description",
+    "githubRepo": "Click to view GitHub Repo",
+    "projectFiles": "Project Files",
+    "download": "Download"
   }
 }
