@@ -1,4 +1,4 @@
-// Common interfaces and types for the project
+
 
 
 export interface User {

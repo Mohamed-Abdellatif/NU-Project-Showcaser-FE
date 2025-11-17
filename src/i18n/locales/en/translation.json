@@ -27,6 +27,31 @@
     "subtitle": "We are a team of developers who are passionate about creating innovative projects."
   },
   "viewProject": {
-    "recommendedProjects": "Recommended Projects"
+    "recommendedProjects": "Related Projects",
+    "projectInfo": "Project Info",
+    "course": "Course",
+    "teamMembers": "Team Members",
+    "Description": "Description",
+    "githubRepo": "Click to view GitHub Repo",
+    "projectFiles": "Project Files",
+    "download": "Download"
+  },
+  "submissionPage": {
+    "Submit Project": "Submit Project",
+    "Project Info": "Project Info",
+    "Project Title": "Project Title",
+    "Short Title for your Project": "Short Title for your Project",
+    "GitHub Repository Link": "GitHub Repository Link",
+    "Project Description": "Project Description",
+    "Team Members": "Team Members",
+    "First Name": "First Name",
+    "Last Name": "Last Name",
+    "University Email": "University Email",
+    "Add Member": "Add Member",
+    "Remove Last Member": "Remove Last Member",
+    "Attachments": "Attachments",
+    "Upload Image (Optional) — Project Logo, Screenshot, or Cover Image": "Upload Image (Optional) — Project Logo, Screenshot, or Cover Image",
+    "Submit": "Submit",
+    "Project submitted successfully!": "Project submitted successfully!"
   }
 }

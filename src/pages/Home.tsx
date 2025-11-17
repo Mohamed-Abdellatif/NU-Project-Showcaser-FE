@@ -1,38 +1,59 @@
-import { useTranslation } from "react-i18next"; 
+import { useTranslation } from "react-i18next";
 import ProjectsList from "../components/ProjectsList/ProjectsList";
 import { Box, Button, Typography, CircularProgress, Alert } from "@mui/material";
 import { useProjects } from "../hooks/useProjects";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const { data: projects, isLoading, isError, error } = useProjects();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   return (
     <Box
       className="home-page"
       sx={{
-        backgroundColor: "#FFFFF0", 
+        backgroundColor: "#FFFFF0",
         minHeight: "100vh",
       }}
     >
-      <Box sx={{ width: "98%", p: 2 }}>
-        <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold' }}>
-          {t("home.title")}
-        </Typography>
-        <Typography variant="body1" sx={{ mt: 1, mb: 2 }}>
-          {t("home.subtitle")}
-        </Typography>
-        <Button 
-          onClick={() => navigate('/submit')}
-          variant="contained" 
-          sx={{ 
-            bgcolor: "#AE86C9", 
-            "&:hover": { bgcolor: "#AE86C7" },
-            mb: 3
-          }}
-        >
-          {t("home.submitProject")}
-        </Button>
+      <Box
+        sx={{
+          position: "relative",
+          display: "inline-block",
+          p: 2,
+          mt: 4,
+          mb: 4,
+          minWidth: 200,
+          minHeight: 100,
+        }}
+
+      >
+        <Box sx={{ width: "100%", p: 2 }}>
+          <Typography variant="h4" component="h1" sx={{
+            fontWeight: 950, 
+            fontSize: '2.5rem',
+            lineHeight: 1.3
+          }}>
+            {t("home.title")}
+          </Typography>
+          <Typography variant="body1" sx={{ mt: 1, mb: 2 }}>
+            {t("home.subtitle")}
+          </Typography>
+          <Button
+            onClick={() => navigate("/submit")}
+            variant="contained"
+            sx={{
+              bgcolor: "#A55ABF",
+              "&:hover": { bgcolor: "#8E44AD" },
+              mb: 3,
+            }}
+          >
+            {t("home.submitProject")}
+          </Button>
+        </Box>
       </Box>
+
+
       <section>
         {isLoading && (
           <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
@@ -50,7 +71,7 @@ const HomePage = () => {
           <ProjectsList projects={projects} />
         )}
       </section>
-    </Box>
+    </Box >
   );
 };
 

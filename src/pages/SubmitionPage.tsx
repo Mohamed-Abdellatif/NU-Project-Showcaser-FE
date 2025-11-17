@@ -55,26 +55,26 @@ const SubmitionPage = () => {
             image,
         };
         console.log("Form Submitted:", formData);
-        alert(t("Project submitted successfully!"));
+        alert(t("submissionPage.Project submitted successfully!"));
         navigate("/");
     };
 
     return (
         <Box sx={{ maxWidth: 710, mx: "auto", p: 3 }}>
             <Typography variant="h4" component="h1" sx={{ fontWeight: "bold", mb: 2 }}>
-                {t("Submit Project")}
+                {t("submissionPage.Submit Project")}
             </Typography>
 
             <Typography variant="h5" sx={{ fontWeight: "bold", mt: 2, mb: 1 }}>
-                {t("Project Info")}
+                {t("submissionPage.Project Info")}
             </Typography>
 
             <Typography sx={{ fontFamily: 'Arial', fontWeight: 'bold', mb: -1, mt: 3 }}>
-                {t("Project Title")}
+                {t("submissionPage.Project Title")}
             </Typography>
 
             <TextField
-                placeholder={t("Short Title for your Project")}
+                placeholder={t("submissionPage.Short Title for your Project")}
                 fullWidth
                 margin="normal"
                 value={projectTitle}
@@ -82,7 +82,7 @@ const SubmitionPage = () => {
             />
 
             <Typography sx={{ fontFamily: 'Arial', fontWeight: 'bold', mb: -1, mt: 2 }}>
-                {t("GitHub Repository Link")}
+                {t("submissionPage.GitHub Repository Link")}
             </Typography>
 
             <TextField
@@ -94,7 +94,7 @@ const SubmitionPage = () => {
             />
 
             <Typography sx={{ fontFamily: 'Arial', fontWeight: 'bold', mb: -1, mt: 2 }}>
-                {t("Project Description")}
+                {t("submissionPage.Project Description")}
             </Typography>
 
             <TextField
@@ -107,14 +107,14 @@ const SubmitionPage = () => {
             />
 
             <Typography variant="h5" sx={{ mt: 3, mb: 1 }}>
-                {t("Team Members")}
+                {t("submissionPage.Team Members")}
             </Typography>
 
             {members.map((member, index) => (
                 <Grid container spacing={2} key={index} sx={{ mb: 1 }}>
-                    <Grid item xs={12} sm={4}>
+                    <Grid>
                         <TextField
-                            label={t("First Name")}
+                            label={t("submissionPage.First Name")}
                             value={member.firstName}
                             onChange={(e) =>
                                 handleMemberChange(index, "firstName", e.target.value)
@@ -122,9 +122,9 @@ const SubmitionPage = () => {
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid>
                         <TextField
-                            label={t("Last Name")}
+                            label={t("submissionPage.Last Name")}
                             value={member.lastName}
                             onChange={(e) =>
                                 handleMemberChange(index, "lastName", e.target.value)
@@ -132,9 +132,9 @@ const SubmitionPage = () => {
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid>
                         <TextField
-                            label={t("University Email")}
+                            label={t("submissionPage.University Email")}
                             value={member.universityMail}
                             onChange={(e) =>
                                 handleMemberChange(index, "universityMail", e.target.value)
@@ -160,7 +160,7 @@ const SubmitionPage = () => {
                     }
                 }}
             >
-                {t("Add Member")}
+                {t("submissionPage.Add Member")}
             </Button>
             {members.length > 1 && (
                 <Button
@@ -180,15 +180,15 @@ const SubmitionPage = () => {
                         }
                     }}
                 >
-                    {t("Remove Last Member")}
+                    {t("submissionPage.Remove Last Member")}
                 </Button>
             )}
 
             <Typography variant="h6" sx={{ mt: 3, mb: 1 }}>
-                {t("Attachments")}
+                {t("submissionPage.Attachments")}
             </Typography>
             <Typography variant="body2" sx={{ mb: 1 }}>
-                {t("Upload Image (Optional) — Project Logo, Screenshot, or Cover Image")}
+                {t("submissionPage.Upload Image (Optional) — Project Logo, Screenshot, or Cover Image")}
             </Typography>
 
             <Paper
@@ -206,7 +206,7 @@ const SubmitionPage = () => {
                     <input type="file" hidden onChange={handleFileChange} />
                 </IconButton>
                 <Typography variant="body2" color="text.secondary">
-                    {image ? image.name : t("Attachments")}
+                    {image ? image.name : t("submissionPage.Attachments")}
                 </Typography>
             </Paper>
 
@@ -221,7 +221,7 @@ const SubmitionPage = () => {
                 }}
                 onClick={handleSubmit}
             >
-                {t("Submit Project")}
+                {t("submissionPage.Submit Project")}
             </Button>
         </Box>
     );

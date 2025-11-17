@@ -27,6 +27,31 @@
     "subtitle": "نحن فريق من المطورين الذين يهتمون بإنشاء مشاريع مبتكرة."
   },
   "viewProject": {
-    "recommendedProjects": "المشاريع المقترحة"
+    "recommendedProjects": "مشاريع أخرى",
+    "projectInfo": "معلومات المشروع",
+    "course": "المقرر الدراسي",
+    "teamMembers": "أعضاء الفريق",
+    "Description": "الوصف",
+    "githubRepo": "انقر لعرض مستودع GitHub",
+    "projectFiles": "ملفات المشروع",
+    "download": "تحميل"
+  },
+  "submissionPage": {
+    "Submit Project": "إرسال مشروع",
+    "Project Info": "معلومات المشروع",
+    "Project Title": "عنوان المشروع",
+    "Short Title for your Project": "عنوان مختصر لمشروعك",
+    "GitHub Repository Link": "رابط مستودع GitHub",
+    "Project Description": "وصف المشروع",
+    "Team Members": "أعضاء الفريق",
+    "First Name": "الاسم الأول",
+    "Last Name": "اسم العائلة",
+    "University Email": "البريد الإلكتروني الجامعي",
+    "Add Member": "إضافة عضو",
+    "Remove Last Member": "إزالة آخر عضو",
+    "Attachments": "المرفقات",
+    "Upload Image (Optional) — Project Logo, Screenshot, or Cover Image": "تحميل صورة (اختياري) — شعار المشروع، لقطة شاشة، أو صورة غلاف",
+    "Submit": "إرسال",
+    "Project submitted successfully!": "تم إرسال المشروع بنجاح!"
   }
 }
