@@ -52,6 +52,14 @@
     "Attachments": "Attachments",
     "Upload Image (Optional) — Project Logo, Screenshot, or Cover Image": "Upload Image (Optional) — Project Logo, Screenshot, or Cover Image",
     "Submit": "Submit",
-    "Project submitted successfully!": "Project submitted successfully!"
+    "Project submitted successfully!": "Project submitted successfully!",
+    "recommendedProjects": "Recommended Projects"
+    ,"projectInfo": "Project Information"
+    ,"course": "Course",
+    "teamMembers": "Team Members"
+    ,"Description": "Description",
+    "githubRepo": "GitHub Repository",
+    "projectFiles": "Project Files",
+    "download": "Download"
   }
 }
