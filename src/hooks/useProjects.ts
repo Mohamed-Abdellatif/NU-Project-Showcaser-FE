@@ -6,7 +6,8 @@ import {
   updateProject, 
   deleteProject, 
   getProjectById,
-  getFeaturedProjects
+  getFeaturedProjects,
+  starProject
 } from '../api/projectsApi';
 import type { 
   Project, 
@@ -15,6 +16,7 @@ import type {
   ProjectUpdatePayload,
   PaginatedProjectsResponse
 } from '../types';
+import { authKeys } from './useAuth';
 
 // Query keys
 export const projectKeys = {
@@ -113,5 +115,19 @@ export const useGetProjectById = (id: string) => {
   return useQuery<Project, Error>({
     queryKey: projectKeys.detail(id),
     queryFn: () => getProjectById(id),
+  });
+};
+
+export const useStarProject = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<string, Error, { id: string; action: 'add' | 'remove' }>({
+    mutationFn: ({ id, action }: { id: string; action: 'add' | 'remove' }) => starProject(id, action),
+    onSuccess: (_data: string, variables: { id: string; action: 'add' | 'remove' }) => {
+      // Invalidate the specific project detail and all lists
+      queryClient.invalidateQueries({ queryKey: projectKeys.detail(variables.id) });
+      queryClient.invalidateQueries({ queryKey: projectKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: authKeys.me() });
+    },
   });
 };

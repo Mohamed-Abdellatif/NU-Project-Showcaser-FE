@@ -17,10 +17,10 @@ import { LanguageSelector } from "../LanguageSelector/LanguageSelector";
 import { UserMenu } from "../UserMenu/UserMenu";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAtom } from "jotai";
 import { isAuthenticatedAtom, userAtom } from "../../atoms/authAtom";
 import type { User } from "../../types";
+import { useAuth } from "../../hooks/useAuth";
 export const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
@@ -30,6 +30,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { data: authData } = useAuth();
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -52,23 +53,20 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const res = await axios.get<{ authenticated: boolean , user: User }>(
-        `http://localhost:3000/auth/me`,
-        {
-          withCredentials: true,
-        }
-      );
-      if (res.data.authenticated) {
+    if (authData) {
+      if (authData.authenticated) {
         setIsAuthenticated(true);
-        setUser(res.data.user);
+        setUser(authData.user);
       } else {
         setIsAuthenticated(false);
         setUser(null);
       }
-    };
-    checkAuth();
-  }, []);
+    } else {
+      // If query fails or returns no data, assume not authenticated
+      setIsAuthenticated(false);
+      setUser(null);
+    }
+  }, [authData, setIsAuthenticated, setUser]);
 
   return (
     <>

@@ -9,6 +9,7 @@ export interface User {
   msId: string;
   firstName: string;
   lastName: string;
+  starredProjects?: string[];
 }
 
 export interface Language {

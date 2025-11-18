@@ -227,3 +227,24 @@ export const getFeaturedProjects = async (): Promise<Project[]> => {
   }
 };
 
+export const starProject = async (id: string, action: 'add' | 'remove'): Promise<string> => {
+  try {
+    const response = await axios.put<string>(
+      `${API_BASE}/star/${id}`,
+      { action },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || 'Failed to star project');
+    }
+    throw error;
+  }
+};
+

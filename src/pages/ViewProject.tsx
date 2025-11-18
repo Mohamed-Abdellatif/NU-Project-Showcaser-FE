@@ -75,6 +75,8 @@ const ViewProject = () => {
         teamMembers={project.teamMembers}
         description={project.description}
         repoUrl={project.repoUrl}
+        stars={project.stars}
+        projectId={project._id}
       />
 
       <ProjectFilesSection projectFiles={projectFiles} />
