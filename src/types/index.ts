@@ -75,4 +75,20 @@ export interface ProjectSearchParams {
   teamMember?: string;
   teamLeader?: string;
   course?: string;
+  page?: number;
+  limit?: number;
+}
+
+// Pagination info
+export interface PaginationInfo {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
+// Paginated response
+export interface PaginatedProjectsResponse {
+  projects: Project[];
+  pagination: PaginationInfo;
 }

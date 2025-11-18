@@ -163,7 +163,7 @@ export const Navbar = () => {
                 <Button onClick={() => navigate("/about")} color="inherit">
                   {t("nav.about")}
                 </Button>
-                <Button color="inherit">{t("nav.projects")}</Button>
+                <Button color="inherit" onClick={() => navigate("/projects")}>{t("nav.projects")}</Button>
                 <LanguageSelector />
               </Box>
             )}
@@ -218,7 +218,10 @@ export const Navbar = () => {
         >
           {t("nav.about")}
         </MenuItem>
-        <MenuItem onClick={handleMenuClose}>{t("nav.projects")}</MenuItem>
+        <MenuItem onClick={() => {
+          navigate("/projects");
+          handleMenuClose();
+        }}>{t("nav.projects")}</MenuItem>
         <LanguageSelector
           variant="menuItem"
           onLanguageChange={handleMenuClose}

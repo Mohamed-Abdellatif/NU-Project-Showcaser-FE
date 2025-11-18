@@ -37,5 +37,30 @@
     "githubRepo": "Click to view GitHub Repo",
     "projectFiles": "Project Files",
     "download": "Download"
+  },
+  "projects": {
+    "title": "All Projects",
+    "advancedSearch": "Advanced Search",
+    "filtersLabel": "Filters",
+    "search": "Search",
+    "clearFilters": "Clear Filters",
+    "noResults": "No projects found",
+    "loading": "Loading projects...",
+    "error": "Error loading projects",
+    "filters": {
+      "title": "Project Title",
+      "teamLeader": "Team Leader",
+      "supervisor": "Supervisor",
+      "major": "Major",
+      "course": "Course",
+      "teamMember": "Team Member"
+    },
+    "pagination": {
+      "showing": "Showing",
+      "to": "to",
+      "of": "of",
+      "results": "results",
+      "perPage": "Per page"
+    }
   }
 }
