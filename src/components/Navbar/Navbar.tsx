@@ -12,7 +12,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { Menu as MenuIcon, Search as SearchIcon } from "@mui/icons-material";
-import { SearchBox } from "../SearchBox/SearchBox";
+import { SearchBoxWithResults } from "../SearchBoxWithResults/SearchBoxWithResults";
 import { LanguageSelector } from "../LanguageSelector/LanguageSelector";
 import { UserMenu } from "../UserMenu/UserMenu";
 import { useTranslation } from "react-i18next";
@@ -22,7 +22,6 @@ import { useAtom } from "jotai";
 import { isAuthenticatedAtom, userAtom } from "../../atoms/authAtom";
 import type { User } from "../../types";
 export const Navbar = () => {
-  const [searchValue, setSearchValue] = useState("");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useAtom(isAuthenticatedAtom);
@@ -42,8 +41,6 @@ export const Navbar = () => {
   const handleToggleMobileSearch = () => {
     setShowMobileSearch(!showMobileSearch);
   };
-  
-
 
   const handleLogin = () => {
     window.location.href = "http://localhost:3000/auth/microsoft";
@@ -119,9 +116,7 @@ export const Navbar = () => {
           </Box>
 
           {/* Search Bar */}
-          <SearchBox
-            value={searchValue}
-            onChange={setSearchValue}
+          <SearchBoxWithResults
             showMobile={showMobileSearch}
             isMobile={isMobile}
             placeholder={t("nav.searchProject")}
