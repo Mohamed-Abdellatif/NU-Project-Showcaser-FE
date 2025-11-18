@@ -188,12 +188,20 @@ export const getProjectById = async (id: string): Promise<Project> => {
     throw error;
   }
 };
-// Export all API functions
-export const projectsApi = {
-  searchProjects,
-  getAllProjects,
-  createProject,
-  updateProject,
-  deleteProject,
-  getProjectById,
+
+export const getFeaturedProjects = async (): Promise<Project[]> => {
+  try {
+    const response = await axios.get<Project[]>(`${API_BASE}/featured`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        error.response?.data?.message || 'Failed to get featured projects'
+      );
+    }
+    throw error;
+  }
 };
+

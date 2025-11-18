@@ -22,7 +22,7 @@ interface ProjectsListProps {
 
 const ProjectsList = ({
   projects,
-  title = "home.projects",
+  title = "home.featuredProjects",
   isViewModeChangeable = true,
 }: ProjectsListProps) => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");

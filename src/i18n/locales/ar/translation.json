@@ -20,7 +20,9 @@
     "title": "هل لديك مشروع رائع؟",
     "subtitle": "أرسل مشروعك وسنتحقق منه!",
     "projects": "المشاريع",
-    "submitProject": "أرسل مشروعك"
+    "submitProject": "أرسل مشروعك",
+    "featuredProjects": "المشاريع المميزة",
+    "allProjects": "جميع المشاريع"
   },
   "about": {
     "title": "حولنا",

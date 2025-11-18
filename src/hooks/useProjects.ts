@@ -5,7 +5,8 @@ import {
   createProject, 
   updateProject, 
   deleteProject, 
-  getProjectById
+  getProjectById,
+  getFeaturedProjects
 } from '../api/projectsApi';
 import type { 
   Project, 
@@ -21,6 +22,7 @@ export const projectKeys = {
   list: (params?: ProjectSearchParams) => [...projectKeys.lists(), params] as const,
   details: () => [...projectKeys.all, 'detail'] as const,
   detail: (id: string) => [...projectKeys.details(), id] as const,
+  featured: () => [...projectKeys.all, 'featured'] as const,
 };
 
 /**
@@ -30,6 +32,13 @@ export const useProjects = () => {
   return useQuery<Project[], Error>({
     queryKey: projectKeys.lists(),
     queryFn: getAllProjects,
+  });
+};
+
+export const useFeaturedProjects = () => {
+  return useQuery<Project[], Error>({
+    queryKey: projectKeys.featured(),
+    queryFn: getFeaturedProjects,
   });
 };
 

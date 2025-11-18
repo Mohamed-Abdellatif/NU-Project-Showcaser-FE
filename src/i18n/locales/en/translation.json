@@ -20,7 +20,9 @@
     "title": "Have a winning project?",
     "subtitle": "Submit Your project and we’ll check it out!",
     "projects": "Projects",
-    "submitProject": "Submit"
+    "submitProject": "Submit",
+    "featuredProjects": "Featured Projects",
+    "allProjects": "All Projects"
   },
   "about": {
     "title": "About Us",
