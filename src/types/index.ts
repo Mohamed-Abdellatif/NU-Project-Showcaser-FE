@@ -51,6 +51,7 @@ export interface ProjectCreatePayload {
   videos?: string[];
   course?: string;
   repoUrl?: string;
+  liveUrl?: string;
 }
 
 export interface ProjectUpdatePayload {

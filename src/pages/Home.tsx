@@ -1,11 +1,13 @@
 import { useTranslation } from "react-i18next";
 import ProjectsList from "../components/ProjectsList/ProjectsList";
 import { Box, Button, Typography, CircularProgress, Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { useFeaturedProjects} from "../hooks/useProjects";
 
 const HomePage = () => {
   const { data: projects, isLoading, isError, error } = useFeaturedProjects();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   return (
     <Box
       className="home-page"
@@ -38,6 +40,7 @@ const HomePage = () => {
             {t("home.subtitle")}
           </Typography>
           <Button
+            onClick={() => navigate("/submit")}
             variant="contained"
             sx={{
               bgcolor: "#A55ABF",
