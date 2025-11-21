@@ -4,6 +4,7 @@ import HomePage from '../pages/Home';
 import AboutUs from '../pages/AboutUs';
 import ViewProject from '../pages/ViewProject';
 import SubmitionPage from '../pages/SubmitionPage';
+import Projects from '../pages/Projects';
 
 
 
@@ -22,11 +23,15 @@ export const router = createBrowserRouter([
       },
       {
         path: '/projects/:projectId',
-        element: <ViewProject/>
+        element: <ViewProject />
       },
       {
         path: '/submit',
-        element: <SubmitionPage/>
+        element: <SubmitionPage />
+      },
+      {
+        path: '/projects',
+        element: <Projects />,
       }
       // Add more routes here as needed
     ],

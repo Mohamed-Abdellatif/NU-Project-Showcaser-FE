@@ -16,7 +16,8 @@ import ProjectFilesSection from "../components/ProjectFilesSection/ProjectFilesS
 const ViewProject = () => {
   const { projectId } = useParams();
   const { data: project } = useGetProjectById(projectId!);
-  const { data: projects } = useProjects();
+  // Fetch more projects for recommendations (limit 50 to get a good pool)
+  const { data: projectsData } = useProjects(1, 50);
 
   const media = useMemo(() => {
     if (!project) return [];
@@ -40,10 +41,10 @@ const ViewProject = () => {
   }, [project]);
 
   const recommendedProjects = useMemo(() => {
-    if (!project || !projects) return [];
-    const others = projects.filter((p) => p._id !== project._id);
+    if (!project || !projectsData?.projects) return [];
+    const others = projectsData.projects.filter((p) => p._id !== project._id);
     return others.sort(() => 0.5 - Math.random()).slice(0, 6);
-  }, [project, projects]);
+  }, [project, projectsData]);
 
   if (!project) {
     return (
@@ -74,6 +75,8 @@ const ViewProject = () => {
         teamMembers={project.teamMembers}
         description={project.description}
         repoUrl={project.repoUrl}
+        stars={project.stars}
+        projectId={project._id}
       />
 
       <ProjectFilesSection projectFiles={projectFiles} />

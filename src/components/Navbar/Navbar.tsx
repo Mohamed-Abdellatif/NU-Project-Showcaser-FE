@@ -12,17 +12,16 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { Menu as MenuIcon, Search as SearchIcon } from "@mui/icons-material";
-import { SearchBox } from "../SearchBox/SearchBox";
+import { SearchBoxWithResults } from "../SearchBoxWithResults/SearchBoxWithResults";
 import { LanguageSelector } from "../LanguageSelector/LanguageSelector";
 import { UserMenu } from "../UserMenu/UserMenu";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAtom } from "jotai";
 import { isAuthenticatedAtom, userAtom } from "../../atoms/authAtom";
 import type { User } from "../../types";
+import { useAuth } from "../../hooks/useAuth";
 export const Navbar = () => {
-  const [searchValue, setSearchValue] = useState("");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useAtom(isAuthenticatedAtom);
@@ -31,6 +30,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { data: authData } = useAuth();
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -42,8 +42,6 @@ export const Navbar = () => {
   const handleToggleMobileSearch = () => {
     setShowMobileSearch(!showMobileSearch);
   };
-  
-
 
   const handleLogin = () => {
     window.location.href = "http://localhost:3000/auth/microsoft";
@@ -55,23 +53,20 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const res = await axios.get<{ authenticated: boolean , user: User }>(
-        `http://localhost:3000/auth/me`,
-        {
-          withCredentials: true,
-        }
-      );
-      if (res.data.authenticated) {
+    if (authData) {
+      if (authData.authenticated) {
         setIsAuthenticated(true);
-        setUser(res.data.user);
+        setUser(authData.user);
       } else {
         setIsAuthenticated(false);
         setUser(null);
       }
-    };
-    checkAuth();
-  }, []);
+    } else {
+      // If query fails or returns no data, assume not authenticated
+      setIsAuthenticated(false);
+      setUser(null);
+    }
+  }, [authData, setIsAuthenticated, setUser]);
 
   return (
     <>
@@ -119,9 +114,7 @@ export const Navbar = () => {
           </Box>
 
           {/* Search Bar */}
-          <SearchBox
-            value={searchValue}
-            onChange={setSearchValue}
+          <SearchBoxWithResults
             showMobile={showMobileSearch}
             isMobile={isMobile}
             placeholder={t("nav.searchProject")}
@@ -168,7 +161,7 @@ export const Navbar = () => {
                 <Button onClick={() => navigate("/about")} color="inherit">
                   {t("nav.about")}
                 </Button>
-                <Button color="inherit">{t("nav.projects")}</Button>
+                <Button color="inherit" onClick={() => navigate("/projects")}>{t("nav.projects")}</Button>
                 <LanguageSelector />
               </Box>
             )}
@@ -223,7 +216,10 @@ export const Navbar = () => {
         >
           {t("nav.about")}
         </MenuItem>
-        <MenuItem onClick={handleMenuClose}>{t("nav.projects")}</MenuItem>
+        <MenuItem onClick={() => {
+          navigate("/projects");
+          handleMenuClose();
+        }}>{t("nav.projects")}</MenuItem>
         <LanguageSelector
           variant="menuItem"
           onLanguageChange={handleMenuClose}

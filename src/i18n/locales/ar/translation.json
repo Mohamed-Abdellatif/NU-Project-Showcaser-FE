@@ -20,7 +20,9 @@
     "title": "هل لديك مشروع رائع؟",
     "subtitle": "أرسل مشروعك وسنتحقق منه!",
     "projects": "المشاريع",
-    "submitProject": "أرسل مشروعك"
+    "submitProject": "أرسل مشروعك",
+    "featuredProjects": "المشاريع المميزة",
+    "allProjects": "جميع المشاريع"
   },
   "about": {
     "title": "حولنا",
@@ -61,5 +63,30 @@
     "githubRepo": "انقر لعرض مستودع GitHub",
     "projectFiles": "ملفات المشروع",
     "download": "تحميل"
+  },
+  "projects": {
+    "title": "جميع المشاريع",
+    "advancedSearch": "بحث متقدم",
+    "filtersLabel": "المرشحات",
+    "search": "بحث",
+    "clearFilters": "مسح المرشحات",
+    "noResults": "لم يتم العثور على مشاريع",
+    "loading": "جاري تحميل المشاريع...",
+    "error": "خطأ في تحميل المشاريع",
+    "filters": {
+      "title": "عنوان المشروع",
+      "teamLeader": "قائد الفريق",
+      "supervisor": "المشرف",
+      "major": "التخصص",
+      "course": "المقرر الدراسي",
+      "teamMember": "عضو الفريق"
+    },
+    "pagination": {
+      "showing": "عرض",
+      "to": "إلى",
+      "of": "من",
+      "results": "نتيجة",
+      "perPage": "لكل صفحة"
+    }
   }
 }

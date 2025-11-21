@@ -22,7 +22,7 @@ interface ProjectsListProps {
 
 const ProjectsList = ({
   projects,
-  title = "home.projects",
+  title = "home.featuredProjects",
   isViewModeChangeable = true,
 }: ProjectsListProps) => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -74,23 +74,23 @@ const ProjectsList = ({
             sx={{ display: { xs: "none", sm: "flex" } }}
           >
             {theme.direction === "rtl" ? (
-              <>
+              <Box sx={{ display: "flex" }}>
                 <ToggleButton value="list" aria-label="list view">
                   <ViewListIcon sx={{ transform: "scaleX(-1)" }} />
                 </ToggleButton>
                 <ToggleButton value="grid" aria-label="grid view">
                   <GridViewIcon />
                 </ToggleButton>
-              </>
+              </Box>
             ) : (
-              <>
+              <Box sx={{ display: "flex" }}>
                 <ToggleButton value="grid" aria-label="grid view">
                   <GridViewIcon />
                 </ToggleButton>
                 <ToggleButton value="list" aria-label="list view">
                   <ViewListIcon />
                 </ToggleButton>
-              </>
+              </Box>
             )}
 
           </ToggleButtonGroup>

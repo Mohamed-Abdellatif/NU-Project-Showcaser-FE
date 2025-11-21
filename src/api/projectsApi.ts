@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Project, ProjectCreatePayload, ProjectSearchParams } from '../types';
+import type { Project, ProjectCreatePayload, ProjectSearchParams, PaginatedProjectsResponse } from '../types';
 import type { ProjectUpdatePayload } from '../types';
 const API_BASE = `${import.meta.env.VITE_API_BASE}/project`;
 // Project interface matching the API response
@@ -49,14 +49,36 @@ export const searchProjects = async (
 };
 
 /**
- * Get all projects from the database
- * @returns Array of all projects
+ * Get all projects from the database with pagination and optional filters
+ * @param page - Page number (default: 1)
+ * @param limit - Items per page (default: 10, max: 100)
+ * @param filters - Optional filter parameters (title, major, supervisor, teamMember, teamLeader, course)
+ * @returns Paginated response with projects and pagination info
  */
-export const getAllProjects = async (): Promise<Project[]> => {
+export const getProjects = async (
+  page: number = 1,
+  limit: number = 10,
+  filters?: Omit<ProjectSearchParams, 'page' | 'limit'>
+): Promise<PaginatedProjectsResponse> => {
   try {
-    const response = await axios.get<Project[]>(API_BASE, {
-      withCredentials: true,
-    });
+    const queryParams = new URLSearchParams();
+    queryParams.append('page', page.toString());
+    queryParams.append('limit', limit.toString());
+
+    // Add filter parameters if provided
+    if (filters?.title) queryParams.append('title', filters.title);
+    if (filters?.major) queryParams.append('major', filters.major);
+    if (filters?.supervisor) queryParams.append('supervisor', filters.supervisor);
+    if (filters?.teamMember) queryParams.append('teamMember', filters.teamMember);
+    if (filters?.teamLeader) queryParams.append('teamLeader', filters.teamLeader);
+    if (filters?.course) queryParams.append('course', filters.course);
+
+    const response = await axios.get<PaginatedProjectsResponse>(
+      `${API_BASE}/?${queryParams.toString()}`,
+      {
+        withCredentials: true,
+      }
+    );
 
     return response.data;
   } catch (error) {
@@ -188,12 +210,41 @@ export const getProjectById = async (id: string): Promise<Project> => {
     throw error;
   }
 };
-// Export all API functions
-export const projectsApi = {
-  searchProjects,
-  getAllProjects,
-  createProject,
-  updateProject,
-  deleteProject,
-  getProjectById,
+
+export const getFeaturedProjects = async (): Promise<Project[]> => {
+  try {
+    const response = await axios.get<Project[]>(`${API_BASE}/featured`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        error.response?.data?.message || 'Failed to get featured projects'
+      );
+    }
+    throw error;
+  }
 };
+
+export const starProject = async (id: string, action: 'add' | 'remove'): Promise<string> => {
+  try {
+    const response = await axios.put<string>(
+      `${API_BASE}/star/${id}`,
+      { action },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || 'Failed to star project');
+    }
+    throw error;
+  }
+};
+

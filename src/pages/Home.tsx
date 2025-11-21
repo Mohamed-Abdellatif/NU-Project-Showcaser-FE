@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import ProjectsList from "../components/ProjectsList/ProjectsList";
 import { Box, Button, Typography, CircularProgress, Alert } from "@mui/material";
-import { useProjects } from "../hooks/useProjects";
 import { useNavigate } from "react-router-dom";
+import { useFeaturedProjects} from "../hooks/useProjects";
 
 const HomePage = () => {
-  const { data: projects, isLoading, isError, error } = useProjects();
+  const { data: projects, isLoading, isError, error } = useFeaturedProjects();
   const { t } = useTranslation();
   const navigate = useNavigate();
   return (
