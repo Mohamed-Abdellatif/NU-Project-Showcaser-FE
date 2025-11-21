@@ -1,28 +1,40 @@
 import { useTranslation } from "react-i18next";
-import { Box, Button, Typography, TextField, Grid, Paper, IconButton} from "@mui/material";
+import { Box, Button, Typography, TextField, Grid, Paper, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { CloudUpload, Add, Remove } from "@mui/icons-material";
 import { useState } from "react";
+import { useCreateProject } from "../hooks/useProjects";
 interface Member {
     firstName: string;
     lastName: string;
-    universityMail: string;
+    // universityMail: string;
 }
 
 const SubmitionPage = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
+    const createProject = useCreateProject();
+
     const [members, setMembers] = useState<Member[]>([
-        { firstName: "", lastName: "", universityMail: "" },
+        // { firstName: "", lastName: "", universityMail: "" },
+        { firstName: "", lastName: "" },
     ]);
     const [projectTitle, setProjectTitle] = useState("");
     const [repoLink, setRepoLink] = useState("");
     const [description, setDescription] = useState("");
-    const [image, setImage] = useState<File | null>(null);
+    const [image, setImage] = useState<File[]>([]);
+    const [technologies, setTechnologies] = useState("");
+    const [tags, setTags] = useState("");
+    const [supervisor, setSupervisor] = useState("");
+    const [course, setCourse] = useState("");
+    const [liveUrl, setLiveUrl] = useState("");
+    const [videos, setVideos] = useState<File[]>([]);
+
 
     const handleAddMember = () => {
-        setMembers([...members, { firstName: "", lastName: "", universityMail: "" }]);
+        // setMembers([...members, { firstName: "", lastName: "", universityMail: "" }]);
+        setMembers([...members, { firstName: "", lastName: "" }]);
     };
 
     const handleRemoveMember = (index: number) => {
@@ -40,21 +52,44 @@ const SubmitionPage = () => {
         setMembers(updatedMembers);
     };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            setImage(e.target.files[0]);
+    const handleVideoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            const newVideos = Array.from(e.target.files);
+            setVideos((prev) => [...prev, ...newVideos]);
+        }
+    };
+
+
+    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            const newImages = Array.from(e.target.files);
+            setImage((prev) => [...prev, ...newImages]);
         }
     };
 
     const handleSubmit = () => {
         const formData = {
-            projectTitle,
-            repoLink,
+            title: projectTitle,
             description,
-            members,
-            image,
+            technologies: [],
+            teamLeader: members[0]?.firstName + " " + members[0]?.lastName,
+            teamMembers: members.slice(1).map(m => `${m.firstName} ${m.lastName}`),
+            supervisor,
+            stars: 0,
+            tags: [],
+            course,
+            images: [],
+            videos: [],
+            repoUrl: repoLink,
+            liveUrl,
         };
         console.log("Form Submitted:", formData);
+        createProject.mutate(formData, {
+            onSuccess: () => {
+                alert(t("submissionPage.Project submitted successfully!"));
+                navigate("/");
+            }
+        });
         alert(t("submissionPage.Project submitted successfully!"));
         navigate("/");
     };
@@ -106,6 +141,61 @@ const SubmitionPage = () => {
                 onChange={(e) => setDescription(e.target.value)}
             />
 
+            <Typography sx={{ fontWeight: "bold", mt: 2 }}>
+                {t("submissionPage.Technologies (comma separated)")}
+            </Typography>
+            <TextField
+                fullWidth
+                margin="normal"
+                value={technologies}
+                onChange={(e) => setTechnologies(e.target.value)}
+                placeholder="Python, React, Node.js"
+            />
+
+            <Typography sx={{ fontWeight: "bold", mt: 2 }}>
+                {t("submissionPage.Tags (comma separated)")}
+            </Typography>
+            <TextField
+                fullWidth
+                margin="normal"
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
+                placeholder="AI, Robotics, ML"
+            />
+
+            <Typography sx={{ fontWeight: "bold", mt: 2 }}>
+                {t("submissionPage.Supervisor")}
+            </Typography>
+            <TextField
+                fullWidth
+                margin="normal"
+                value={supervisor}
+                onChange={(e) => setSupervisor(e.target.value)}
+                placeholder="Dr. Name"
+            />
+
+            <Typography sx={{ fontWeight: "bold", mt: 2 }}>
+                {t("submissionPage.Course")}
+            </Typography>
+            <TextField
+                fullWidth
+                margin="normal"
+                value={course}
+                onChange={(e) => setCourse(e.target.value)}
+                placeholder="Machine Learning"
+            />
+
+            <Typography sx={{ fontWeight: "bold", mt: 2 }}>
+                {t("submissionPage.Live Demo URL (optional)")}
+            </Typography>
+            <TextField
+                fullWidth
+                margin="normal"
+                value={liveUrl}
+                onChange={(e) => setLiveUrl(e.target.value)}
+                placeholder="https://yourproject.com"
+            />
+
             <Typography variant="h5" sx={{ mt: 3, mb: 1 }}>
                 {t("submissionPage.Team Members")}
             </Typography>
@@ -132,7 +222,7 @@ const SubmitionPage = () => {
                             fullWidth
                         />
                     </Grid>
-                    <Grid>
+                    {/* <Grid>
                         <TextField
                             label={t("submissionPage.University Email")}
                             value={member.universityMail}
@@ -141,7 +231,7 @@ const SubmitionPage = () => {
                             }
                             fullWidth
                         />
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             ))}
             <Button
@@ -187,6 +277,74 @@ const SubmitionPage = () => {
             <Typography variant="h6" sx={{ mt: 3, mb: 1 }}>
                 {t("submissionPage.Attachments")}
             </Typography>
+
+            <Typography variant="h6" sx={{ mt: 3 }}>
+                {t("submissionPage.Videos (optional)")}
+            </Typography>
+
+            <Paper
+                variant="outlined"
+                sx={{
+                    borderStyle: "dashed",
+                    borderColor: "#B39DDB",
+                    textAlign: "center",
+                    p: 3,
+                    mb: 2,
+                }}
+            >
+                <IconButton component="label">
+                    <CloudUpload sx={{ fontSize: 40, color: "#6A1B9A" }} />
+                    <input
+                        type="file"
+                        accept="video/*"
+                        multiple
+                        hidden
+                        onChange={handleVideoUpload}
+                    />
+                </IconButton>
+                <Typography variant="body2" color="text.secondary">
+                    {t("submissionPage.Drop or Select Video Files")}
+                </Typography>
+            </Paper>
+
+
+            <Grid container spacing={2} sx={{ mb: 3 }}>
+                {videos.map((videoFile, idx) => (
+                    <Grid>
+                        <Paper
+                            elevation={2}
+                            sx={{
+                                width: 140,
+                                p: 1,
+                                textAlign: "center",
+                                borderRadius: 2,
+                            }}
+                        >
+                            <video
+                                src={URL.createObjectURL(videoFile)}
+                                style={{ width: "100%", borderRadius: 8 }}
+                                controls
+                            />
+                            <Typography variant="body2" noWrap>
+                                {videoFile.name}
+                            </Typography>
+
+                            <Button
+                                color="error"
+                                size="small"
+                                onClick={() =>
+                                    setVideos(videos.filter((_, i) => i !== idx))
+                                }
+                            >
+                                {t("submissionPage.Remove Video")}
+                            </Button>
+                        </Paper>
+                    </Grid>
+                ))}
+            </Grid>
+
+
+
             <Typography variant="body2" sx={{ mb: 1 }}>
                 {t("submissionPage.Upload Image (Optional) — Project Logo, Screenshot, or Cover Image")}
             </Typography>
@@ -203,12 +361,52 @@ const SubmitionPage = () => {
             >
                 <IconButton component="label">
                     <CloudUpload sx={{ fontSize: 40, color: "#6A1B9A" }} />
-                    <input type="file" hidden onChange={handleFileChange} />
+                    <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        hidden
+                        onChange={handleImageUpload}
+                    />
                 </IconButton>
                 <Typography variant="body2" color="text.secondary">
-                    {image ? image.name : t("submissionPage.Attachments")}
+                    {t("submissionPage.Drop or Select Image Files")}
                 </Typography>
             </Paper>
+
+            <Grid container spacing={2} sx={{ mb: 3 }}>
+                {image.map((imageFile, idx) => (
+                    <Grid>
+                        <Paper
+                            elevation={2}
+                            sx={{
+                                width: 140,
+                                p: 1,
+                                textAlign: "center",
+                                borderRadius: 2,
+                            }}
+                        >
+                            <img
+                                src={URL.createObjectURL(imageFile)}
+                                style={{ width: "100%", borderRadius: 8 }}
+                            />
+                            <Typography variant="body2" noWrap>
+                                {imageFile.name}
+                            </Typography>
+
+                            <Button
+                                color="error"
+                                size="small"
+                                onClick={() =>
+                                    setImage(image.filter((_, i) => i !== idx))
+                                }
+                            >
+                                {t("submissionPage.Remove Image")}
+                            </Button>
+                        </Paper>
+                    </Grid>
+                ))}
+            </Grid>
 
             <Button
                 variant="contained"

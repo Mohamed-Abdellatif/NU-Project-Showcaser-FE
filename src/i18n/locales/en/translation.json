@@ -38,7 +38,6 @@
     "projectFiles": "Project Files",
     "download": "Download"
   },
-<<<<<<< HEAD
   "submissionPage": {
     "Submit Project": "Submit Project",
     "Project Info": "Project Info",
@@ -66,15 +65,15 @@
     "Remove Image": "Remove Image",
     "Submit": "Submit",
     "Project submitted successfully!": "Project submitted successfully!",
-    "recommendedProjects": "Recommended Projects"
-    ,"projectInfo": "Project Information"
-    ,"course": "Course",
-    "teamMembers": "Team Members"
-    ,"Description": "Description",
+    "recommendedProjects": "Recommended Projects",
+    "projectInfo": "Project Information",
+    "course": "Course",
+    "teamMembers": "Team Members",
+    "Description": "Description",
     "githubRepo": "GitHub Repository",
     "projectFiles": "Project Files",
     "download": "Download"
-=======
+  },
   "projects": {
     "title": "All Projects",
     "advancedSearch": "Advanced Search",
@@ -99,6 +98,5 @@
       "results": "results",
       "perPage": "Per page"
     }
->>>>>>> origin/main
   }
 }
