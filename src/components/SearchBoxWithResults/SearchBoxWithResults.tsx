@@ -44,7 +44,6 @@ export const SearchBoxWithResults = ({
     const debounceTimer = setTimeout(async () => {
       try {
         const results = await searchProjects({ title: searchValue.trim() });
-        console.log(results);
         setSearchResults(results);
         setShowResults(true);
       } catch (error) {

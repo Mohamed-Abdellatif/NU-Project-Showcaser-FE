@@ -3,9 +3,10 @@ import MainLayout from '../layouts/MainLayout';
 import HomePage from '../pages/Home';
 import AboutUs from '../pages/AboutUs';
 import ViewProject from '../pages/ViewProject';
-import SubmitionPage from '../pages/SubmitionPage';
+import SubmissionPage from '../pages/SubmissionPage';
 import Projects from '../pages/Projects';
 import AcceptProject from '../pages/AcceptProject';
+import RequireAuth from '../hoc/RequireAuth';
 
 
 
@@ -28,7 +29,11 @@ export const router = createBrowserRouter([
       },
       {
         path: '/submit',
-        element: <SubmitionPage />
+        element: (
+          <RequireAuth>
+            <SubmissionPage />
+          </RequireAuth>
+        )
       },
       {
         path: '/projects',
