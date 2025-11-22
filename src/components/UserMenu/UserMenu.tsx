@@ -23,6 +23,7 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
     const lastInitial = user.lastName?.[0]?.toUpperCase() || "";
     return `${firstInitial}.${lastInitial}` || "U";
   };
+  
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setProfileMenuAnchorEl(event.currentTarget);
@@ -35,6 +36,11 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
   const handleProfileClick = () => {
     handleProfileMenuClose();
     navigate("/profile");
+  };
+
+  const handleProjectRequestClick = () => {
+    handleProfileMenuClose();
+    navigate("/Project-Requests");
   };
 
   const handleLogoutClick = () => {
@@ -96,6 +102,9 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
       >
         <MenuItem onClick={handleProfileClick}>
           {t("nav.profile")}
+        </MenuItem>
+        <MenuItem onClick={handleProjectRequestClick}>
+          {t("nav.project-requests")}
         </MenuItem>
         <MenuItem onClick={handleLogoutClick}>
           {t("nav.logout")}

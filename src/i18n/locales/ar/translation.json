@@ -14,7 +14,8 @@
     "searchProject": "ابحث عن مشروع",
     "login": "تسجيل الدخول",
     "logout": "تسجيل الخروج",
-    "profile": "الملف الشخصي"
+    "profile": "الملف الشخصي",
+    "project-requests": "طلبات المشاريع"
   },
   "home": {
     "title": "هل لديك مشروع رائع؟",
@@ -72,7 +73,23 @@
     ,"Description": "الوصف",
     "githubRepo": "انقر لعرض مستودع GitHub",
     "projectFiles": "ملفات المشروع",
-    "download": "تحميل"
+    "download": "تحميل",
+    "comments": "التعليقات",
+    "addComment": "أضف تعليقًا...",
+    "noComments": "لا توجد تعليقات بعد. كن أول من يعلق!",
+    "loginToComment": "يرجى تسجيل الدخول لإضافة تعليق.",
+    "Post": "نشر",
+    "delete": "حذف",
+    "technologies": "التقنيات",
+    "teamLeader": "قائد الفريق",
+    "supervisor": "المشرف",
+    "tags": "العلامات",
+    "notags": "لا توجد علامات متاحة",
+    "notechnology": "لا توجد تقنيات مدرجة",
+    "aboutProject": "حول المشروع",
+    "created": "تم الإنشاء",
+    "none": "لا شيء",
+    "projectDetails": "تفاصيل المشروع"
   },
   "projects": {
     "title": "جميع المشاريع",
@@ -90,7 +107,7 @@
       "major": "التخصص",
       "course": "المقرر الدراسي",
       "teamMember": "عضو الفريق"
-    },
+        },
     "pagination": {
       "showing": "عرض",
       "to": "إلى",
@@ -98,5 +115,13 @@
       "results": "نتيجة",
       "perPage": "لكل صفحة"
     }
-  }
+  },
+  "ProjectRequest": {
+    "title": "طلبات المشاريع",
+    "accept": "قبول",
+    "decline": "رفض",
+    "noRequests": "لا توجد طلبات مشاريع في الوقت الحالي.",
+    "view": "عرض",
+    "ProjectRequests": "طلبات المشاريع"
+    }
 }

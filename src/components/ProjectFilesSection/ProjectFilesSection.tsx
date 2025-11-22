@@ -1,16 +1,12 @@
-import { Box, Typography, Paper, Button } from "@mui/material";
-import DownloadIcon from "@mui/icons-material/Download";
+import { Box, Typography } from "@mui/material";
 import { t } from "i18next";
-interface ProjectFile {
-  name: string;
-  url: string;
+
+interface Props {
+  technologies?: string[];
+  tags?: string[];
 }
 
-interface ProjectFilesSectionProps {
-  projectFiles: ProjectFile[];
-}
-
-const ProjectFilesSection = ({ projectFiles }: ProjectFilesSectionProps) => {
+const ProjectFilesSection = ({ technologies = [], tags = [] }: Props) => {
   return (
     <Box
       sx={{
@@ -21,61 +17,108 @@ const ProjectFilesSection = ({ projectFiles }: ProjectFilesSectionProps) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        minHeight: "60vh",
+        minHeight: "40vh",
+        fontFamily: "'Poppins', sans-serif",
       }}
     >
       <Typography
         variant="h5"
-        sx={{ mb: 4, color: "#8b3f7f", fontWeight: "bold" }}>
-        {t("viewProject.projectFiles")}
-      </Typography>
-
-      <Paper
-        elevation={3}
         sx={{
-          width: "90%",
-          maxWidth: "800px",
-          borderRadius: "16px",
-          overflow: "hidden",
-          backgroundColor: "rgba(255,255,255,0.6)",
+          mb: 4,
+          color: "#8b3f7f",
+          fontWeight: 700,
+          fontFamily: "'Poppins', sans-serif",
         }}
       >
-        {projectFiles.length > 0 ? (
-          projectFiles.map((file, i) => (
+        {t("viewProject.technologies")}
+      </Typography>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: 1.5,
+          mb: 6,
+          maxWidth: "800px",
+        }}
+      >
+        {technologies.length > 0 ? (
+          technologies.map((tech, i) => (
             <Box
               key={i}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              px={3}
-              py={2}
-              borderBottom={
-                i < projectFiles.length - 1 ? "1px solid #f2b6d0" : "none"
-              }
+              sx={{
+                px: 2.5,
+                py: 1,
+                borderRadius: "20px",
+                backgroundColor: "#fce1ee",
+                color: "#702f6b",
+                fontWeight: 300,
+                fontSize: "0.95rem",
+                fontFamily: "'Poppins'",
+                boxShadow: "0px 2px 10px rgba(0,0,0,0.07)",
+              }}
             >
-              <Typography color="text.primary">{file.name}</Typography>
-              <Button
-                variant="outlined"
-                size="small"
-                startIcon={<DownloadIcon />}
-                sx={{
-                  color: "#8b3f7f",
-                  borderColor: "#e598b6",
-                  "&:hover": { borderColor: "#8b3f7f" },
-                }}
-                href={file.url}
-                download
-              >
-                {t("viewProject.download")}
-              </Button>
+              {tech}
             </Box>
           ))
         ) : (
-          <Typography sx={{ textAlign: "center", p: 3, color: "#6a2c68" }}>
-            No files available for download.
+          <Typography
+            sx={{ color: "#6a2c68", fontFamily: "'Poppins', sans-serif" }}
+          >
+            {t("viewProject.notechnology")}
           </Typography>
         )}
-      </Paper>
+      </Box>
+
+      <Typography
+        variant="h5"
+        sx={{
+          mb: 2,
+          color: "#8b3f7f",
+          fontWeight: 700,
+          fontFamily: "'Poppins', sans-serif",
+        }}
+      >
+        {t("viewProject.tags") || "Tags"}
+      </Typography>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: 1.5,
+          maxWidth: "800px",
+        }}
+      >
+        {tags.length > 0 ? (
+          tags.map((tag, i) => (
+            <Box
+              key={i}
+              sx={{
+                px: 2,
+                py: 1,
+                borderRadius: "20px",
+                backgroundColor: "#f3b1d2",
+                color: "#6a2c68",
+                fontWeight: 300,
+                fontSize: "0.9rem",
+                fontFamily: "'Poppins'",
+                boxShadow: "0px 2px 8px rgba(0,0,0,0.08)",
+              }}
+            >
+              {tag}
+            </Box>
+          ))
+        ) : (
+          <Typography
+            sx={{ color: "#6a2c68", fontFamily: "'Poppins', sans-serif" }}
+          >
+            {t("viewProject.notags")}
+          </Typography>
+        )}
+      </Box>
     </Box>
   );
 };

@@ -5,6 +5,7 @@ import AboutUs from '../pages/AboutUs';
 import ViewProject from '../pages/ViewProject';
 import SubmitionPage from '../pages/SubmitionPage';
 import Projects from '../pages/Projects';
+import AcceptProject from '../pages/AcceptProject';
 
 
 
@@ -32,6 +33,11 @@ export const router = createBrowserRouter([
       {
         path: '/projects',
         element: <Projects />,
+      },
+      {
+        path: '/project-requests',
+        element: <AcceptProject />,
+
       }
       // Add more routes here as needed
     ],

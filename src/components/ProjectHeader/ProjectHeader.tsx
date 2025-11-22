@@ -10,11 +10,10 @@ interface MediaItem {
 
 interface ProjectHeaderProps {
   title: string;
-  description: string;
   media: MediaItem[];
 }
 
-export const ProjectHeader = ({ title, description, media }: ProjectHeaderProps) => {
+export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextMedia = () =>
@@ -31,13 +30,6 @@ export const ProjectHeader = ({ title, description, media }: ProjectHeaderProps)
         >
           {title}
         </Typography>
-        <Typography
-          variant="subtitle1"
-          color="text.secondary"
-          sx={{ textAlign: "center", maxWidth: 600, mb: 4 }}
-        >
-          {description}
-        </Typography>
       </>
     );
   }
@@ -50,13 +42,6 @@ export const ProjectHeader = ({ title, description, media }: ProjectHeaderProps)
         sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "#6A2C68", textAlign: "center" }}
       >
         {title}
-      </Typography>
-      <Typography
-        variant="subtitle1"
-        color="text.secondary"
-        sx={{ textAlign: "center", maxWidth: 600, mb: 4 }}
-      >
-        {description}
       </Typography>
 
       {/* MEDIA CAROUSEL */}

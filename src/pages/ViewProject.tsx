@@ -1,4 +1,4 @@
-import {  useMemo} from "react";
+import { useMemo } from "react";
 import {
   Box,
   Typography,
@@ -9,14 +9,12 @@ import { useGetProjectById, useProjects } from "../hooks/useProjects";
 import ProjectsList from "../components/ProjectsList/ProjectsList";
 import ProjectHeader from "../components/ProjectHeader/ProjectHeader";
 import { ProjectInfoCard } from "../components/ProjectInfoCard/ProjectInfoCard";
-import ProjectFilesSection from "../components/ProjectFilesSection/ProjectFilesSection";
-
+import CommentSection from "../components/Comments/CommentSection";
 
 
 const ViewProject = () => {
   const { projectId } = useParams();
   const { data: project } = useGetProjectById(projectId!);
-  // Fetch more projects for recommendations (limit 50 to get a good pool)
   const { data: projectsData } = useProjects(1, 50);
 
   const media = useMemo(() => {
@@ -30,14 +28,6 @@ const ViewProject = () => {
       src,
     }));
     return [...imgs, ...vids];
-  }, [project]);
-
-  const projectFiles = useMemo(() => {
-    if (!project) return [];
-    return (project.images || []).map((src) => ({
-      name: src.split("/").pop() || src,
-      url: src,
-    }));
   }, [project]);
 
   const recommendedProjects = useMemo(() => {
@@ -68,19 +58,38 @@ const ViewProject = () => {
         pb: 8,
       }}
     >
-      <ProjectHeader title={project.title} description={project.description} media={media} />
+      <ProjectHeader title={project.title} media={media} />
 
       <ProjectInfoCard
         course={project.course}
+        supervisor={project.supervisor}
+        teamLeader={project.teamLeader}
         teamMembers={project.teamMembers}
-        description={project.description}
         repoUrl={project.repoUrl}
         stars={project.stars}
         projectId={project._id}
+        description={project.description}
+        technologies={project.technologies}
+        tags={project.tags}
+        createdAt={project.createdAt}
       />
 
-      <ProjectFilesSection projectFiles={projectFiles} />
-      {/* RECOMMENDED PROJECTS */}
+      <Box
+        sx={{
+          width: "85%",
+          maxWidth: "900px",
+          mt: 8,
+          p: 3,
+          borderRadius: 4,
+          backgroundColor: "#ffffffaa",
+          backdropFilter: "blur(6px)",
+          boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
+        }}
+      >
+
+        <CommentSection />
+      </Box>
+
 
       {recommendedProjects && recommendedProjects.length > 0 && (
         <Box

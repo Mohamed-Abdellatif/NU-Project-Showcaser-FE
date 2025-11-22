@@ -1,7 +1,5 @@
-import { Card, CardContent, Typography, Box, IconButton } from "@mui/material";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-import StarIcon from "@mui/icons-material/Star";
-import GitHubIcon from "@mui/icons-material/GitHub";
+import { Card, CardContent, Typography, Box, IconButton, Chip, Button, Divider } from "@mui/material";
+import { Star, StarBorder, GitHub as GitHubIcon, CalendarTodayOutlined, SchoolOutlined, PersonOutlineOutlined, PeopleOutlineOutlined } from "@mui/icons-material";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useStarProject } from "../../hooks/useProjects";
@@ -10,98 +8,118 @@ import { useAtom } from "jotai";
 
 interface ProjectInfoCardProps {
   course?: string;
+  supervisor?: string;
+  teamLeader?: string;
   teamMembers?: string[];
-  description: string;
   repoUrl?: string;
   stars: number;
   projectId: string;
+  description?: string;
+  technologies?: string[];
+  tags?: string[];
+  createdAt?: string;
 }
 
 export const ProjectInfoCard = ({
-  course,
-  teamMembers,
-  description,
-  repoUrl,
-  stars,
-  projectId,
+   supervisor, teamLeader, teamMembers, repoUrl,
+  stars, projectId, description, technologies = [], tags = [], createdAt
 }: ProjectInfoCardProps) => {
   const [user] = useAtom(userAtom);
   const { mutate: starProjectAction } = useStarProject();
-
-  const liked = useMemo(() => {
-    return user?.starredProjects?.includes(projectId);
-  }, [user, projectId]);
-
+  const liked = useMemo(() => user?.starredProjects?.includes(projectId), [user, projectId]);
   const { t } = useTranslation();
+
+  const colors = {
+    textHeader: "#4a1d45",
+    cardBg: "#fae3e3",
+    buttonBg: "#5e1c50",
+    chipBg: "#f0d4da",
+  };
+
   return (
-    <Card
+    <Box
       sx={{
+        display: "flex",
+        gap: 6,
+        width: "70%",
         mt: 6,
-        width: "90%",
-        maxWidth: "900px",
-        borderRadius: "16px",
-        background: "linear-gradient(135deg, #ffcfe6 0%, #ffe4f2 100%)",
-        color: "#6a2c68",
-        boxShadow: 3,
+        fontFamily: "Poppins, sans-serif",
+        flexWrap: "nowrap",
+        justifyContent: "space-between"
       }}
     >
-      <CardContent>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          mb={2}
-        >
-          <Typography variant="h5" fontWeight="bold">
-            {t("viewProject.projectInfo")}
-          </Typography>
-          {/*
-           FIXME: ADD STARS TO THE PROJECT
-           TODO: ADD NOIFICATION FOR THE USER WHEN THE PROJECT IS STARRED OR UNSTARRED OR UNAUTHORIZED
-           */}
-          <Typography variant="body1" sx={{ mb: 2 }}>stars:{stars}</Typography>
-          <IconButton
-            onClick={() =>
-              starProjectAction({
-                id: projectId,
-                action: liked ? "remove" : "add",
-              })
-            }
-          >
-            {liked ? (
-              <StarIcon sx={{ color: "#8b3f7f" }} />
-            ) : (
-              <StarBorderIcon />
-            )}
-          </IconButton>
-        </Box>
-
-        <Typography variant="body1" sx={{ mb: 2 }}>
-          <strong>{t("viewProject.course")}:</strong> {course || "—"}
+      <Box flex={1} minWidth="300px">
+        <Typography variant="h4" sx={{ fontWeight: 800, color: colors.textHeader, mb: 3 }}>
+          {t("viewProject.aboutProject")}
         </Typography>
-        <Typography variant="body1" sx={{ mb: 2 }}>
-          <strong>{t("viewProject.teamMembers")}:</strong>{" "}
-          {(teamMembers || []).join(", ") || "—"}
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 1 }}>
-          <strong>{t("viewProject.Description")}:</strong> {description}
+        <Typography sx={{ fontSize: "1.05rem", color: "#444", mb: 4, lineHeight: 1.7 }}>
+          {description || "No description provided."}
         </Typography>
 
-        {repoUrl && (
-          <Box
-            display="flex"
-            alignItems="center"
-            mt={1}
-            sx={{ cursor: "pointer", textDecoration: "underline", gap: 1 }}
-            onClick={() => window.open(repoUrl, "_blank")}
-          >
-            <GitHubIcon sx={{ fontSize: 23, mt: 0.5 }} />
-            <Typography sx={{ fontSize: 15, mt: 0.5 }} variant="body2">
-              {t("viewProject.githubRepo")}
-            </Typography>
+        {technologies.length > 0 && (
+          <Box mb={3}>
+            <Typography sx={{ fontWeight: 700, color: colors.textHeader, mb: 1.5 }}>Technologies</Typography>
+            <Box sx={{ display: "flex", gap: 1.5, flexWrap: "wrap" }}>
+              {technologies.map(t => <Chip key={t} label={t} sx={{ bgcolor: colors.chipBg, fontWeight: 600, borderRadius: "8px" }} />)}
+            </Box>
           </Box>
         )}
-      </CardContent>
-    </Card>
+
+        {tags.length > 0 && (
+          <Box>
+            <Typography sx={{ fontWeight: 700, color: colors.textHeader, mb: 1.5 }}>Tags</Typography>
+            <Box sx={{ display: "flex", gap: 1.5, flexWrap: "wrap" }}>
+              {tags.map(t => <Chip key={t} label={t} sx={{ bgcolor: "#fceef2", fontWeight: 500, borderRadius: "16px", border: "1px solid #ebdce3" }} />)}
+            </Box>
+          </Box>
+        )}
+      </Box>
+
+      <Card sx={{ width: "350px", borderRadius: 3, background: colors.cardBg, flexShrink: 0 }}>
+        <CardContent sx={{ p: 4 }}>
+          <Typography variant="h5" sx={{ fontWeight: 700, color: colors.textHeader, mb: 2 }}>
+            {t("viewProject.projectDetails")}
+          </Typography>
+          <Divider sx={{ borderColor: "rgba(0,0,0,0.06)", mb: 3 }} />
+
+          {[
+            { icon: <CalendarTodayOutlined />, label: t("viewProject.created"), value: createdAt || "—" },
+            { icon: <SchoolOutlined />, label: t("viewProject.supervisor"), value: supervisor || "—" },
+            { icon: <PersonOutlineOutlined />, label: t("viewProject.teamLeader"), value: teamLeader || "—" },
+            { icon: <PeopleOutlineOutlined />, label: t("viewProject.teamMembers"), value: teamMembers?.join(", ") || t("viewProject.none") },
+          ].map(row => (
+            <InfoRow key={row.label} {...row} />
+          ))}
+
+          {repoUrl && (
+            <Button
+              variant="contained"
+              startIcon={<GitHubIcon />}
+              onClick={() => window.open(repoUrl, "_blank")}
+              sx={{ mt: 4, width: "100%", py: 1.5, bgcolor: colors.buttonBg, "&:hover": { bgcolor: "#45103b" }, borderRadius: 2, fontWeight: 600, fontFamily: "Poppins", textTransform: "none" }}
+            >
+              {t("viewProject.githubRepo")}
+            </Button>
+          )}
+
+          <Box mt={2} display="flex" justifyContent="center" alignItems="center" gap={1}>
+            <IconButton onClick={() => starProjectAction({ id: projectId, action: liked ? "remove" : "add" })} sx={{ padding: 1 }}>
+              {liked ? <Star sx={{ color: colors.buttonBg, fontSize: 28 }} /> : <StarBorder sx={{ color: colors.buttonBg, fontSize: 28 }} />}
+            </IconButton>
+            <Typography sx={{ fontWeight: 700, fontSize: 16, color: colors.textHeader }}>{stars}</Typography>
+          </Box>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
+
+const InfoRow = ({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) => (
+  <Box sx={{ display: "flex", gap: 2, alignItems: "flex-start", mb: 3 }}>
+    <Box sx={{ mt: 0.5, color: "#4a1d45", opacity: 0.8 }}>{icon}</Box>
+    <Box>
+      <Typography sx={{ fontSize: "0.85rem", fontWeight: 600, color: "#4a1d45", opacity: 0.9 }}>{label}:</Typography>
+      <Typography sx={{ fontSize: "1rem", fontWeight: 500, color: "#222" }}>{value}</Typography>
+    </Box>
+  </Box>
+);
