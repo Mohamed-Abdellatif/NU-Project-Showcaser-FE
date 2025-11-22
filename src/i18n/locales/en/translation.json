@@ -55,7 +55,13 @@
     "none": "None",
     "projectDetails": "Project Details",
     "projectNotFound": "Project not found",
-    "noDescription": "No description provided."
+    "noDescription": "No description provided.",
+    "commentAdded": "Comment added successfully",
+    "commentDeleted": "Comment deleted successfully",
+    "loginToStar": "Please log in to star the project",
+    "starProjectAdded": "Project starred successfully",
+    "starProjectRemoved": "Project unstarred successfully",
+    "waitBeforeStarring": "Please wait {{seconds}} second(s) before starring again"
   },
   "submissionPage": {
     "Submit Project": "Submit Project",

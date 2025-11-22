@@ -55,7 +55,13 @@
     "none": "لا شيء",
     "projectDetails": "تفاصيل المشروع",
     "projectNotFound": "المشروع غير موجود",
-    "noDescription": "لا يوجد وصف للمشروع"
+    "noDescription": "لا يوجد وصف للمشروع",
+    "commentAdded": "تم إضافة التعليق بنجاح",
+    "commentDeleted": "تم حذف التعليق بنجاح",
+    "loginToStar": "يرجى تسجيل الدخول لتقييم المشروع",
+    "starProjectAdded": "تم تقييم المشروع بنجاح",
+    "starProjectRemoved": "تم إلغاء تقييم المشروع بنجاح",
+    "waitBeforeStarring": "يرجى الانتظار {{seconds}} ثانية قبل التقييم مرة أخرى"
   },
   "submissionPage": {
     "Submit Project": "إرسال مشروع",

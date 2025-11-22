@@ -75,6 +75,7 @@ const ViewProject = () => {
         technologies={project.technologies}
         tags={project.tags}
         createdAt={project.createdAt}
+        isLoading={isLoading}
       />
 
       <Box
@@ -90,7 +91,7 @@ const ViewProject = () => {
         }}
       >
 
-        <CommentSection />
+        <CommentSection projectId={project._id} />
       </Box>
 
 

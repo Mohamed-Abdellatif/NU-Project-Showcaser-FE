@@ -1,10 +1,11 @@
 import { Card, CardContent, Typography, Box, IconButton, Chip, Button, Divider } from "@mui/material";
 import { Star, StarBorder, GitHub as GitHubIcon, CalendarTodayOutlined, SchoolOutlined, PersonOutlineOutlined, PeopleOutlineOutlined } from "@mui/icons-material";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useStarProject } from "../../hooks/useProjects";
 import { userAtom } from "../../atoms/authAtom";
 import { useAtom } from "jotai";
+import { useToastContext } from "../../contexts/ToastContext";
 
 interface ProjectInfoCardProps {
   course?: string;
@@ -18,16 +19,47 @@ interface ProjectInfoCardProps {
   technologies?: string[];
   tags?: string[];
   createdAt?: string;
+  isLoading?: boolean;
 }
 
 export const ProjectInfoCard = ({
    supervisor, teamLeader, teamMembers, repoUrl,
-  stars, projectId, description, technologies = [], tags = [], createdAt
+  stars, projectId, description, technologies = [], tags = [], createdAt, isLoading
 }: ProjectInfoCardProps) => {
   const [user] = useAtom(userAtom);
-  const { mutate: starProjectAction } = useStarProject();
-  const liked = useMemo(() => user?.starredProjects?.includes(projectId), [user, projectId]);
+  const { mutate: starProjectAction, isPending: isStarring } = useStarProject();
+  const liked = useMemo(() => user?.starredProjects?.includes(projectId), [user, projectId,stars,isLoading,isStarring]);
   const { t } = useTranslation();
+  const { showWarning, showSuccess } = useToastContext();
+  const lastRequestTimeRef = useRef<number>(0);
+  const COOLDOWN_MS = 500; // 0.5 seconds
+
+  const handleStarProject = () => {
+    if (!user) {
+      showWarning(t("viewProject.loginToStar"));
+      return;
+    }
+    if (isStarring || isLoading) {
+      return;
+    }
+    
+    const now = Date.now();
+    const timeSinceLastRequest = now - lastRequestTimeRef.current;
+    
+    if (timeSinceLastRequest < COOLDOWN_MS) {
+      return;
+    }
+    
+    lastRequestTimeRef.current = now;
+    starProjectAction(
+      { id: projectId, action: liked ? "remove" : "add" },
+      {
+        onSuccess: () => {
+          showSuccess(liked ? t("viewProject.starProjectRemoved") : t("viewProject.starProjectAdded"));
+        }
+      }
+    );
+  };
 
   const colors = {
     textHeader: "#4a1d45",
@@ -103,10 +135,14 @@ export const ProjectInfoCard = ({
           )}
 
           <Box mt={2} display="flex" justifyContent="center" alignItems="center" gap={1}>
-            <IconButton onClick={() => starProjectAction({ id: projectId, action: liked ? "remove" : "add" })} sx={{ padding: 1 }}>
+            <IconButton 
+              onClick={handleStarProject} 
+              disabled={isStarring || isLoading}
+              sx={{ padding: 1 }}
+            >
               {liked ? <Star sx={{ color: colors.buttonBg, fontSize: 28 }} /> : <StarBorder sx={{ color: colors.buttonBg, fontSize: 28 }} />}
             </IconButton>
-            <Typography sx={{ fontWeight: 700, fontSize: 16, color: colors.textHeader }}>{stars}</Typography>
+            <Typography sx={{ fontWeight: 700, fontSize: 16, color: colors.textHeader }}>{Number(stars).toFixed(0)}</Typography>
           </Box>
         </CardContent>
       </Card>

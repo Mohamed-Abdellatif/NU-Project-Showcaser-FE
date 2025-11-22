@@ -96,3 +96,6 @@ export interface PaginatedProjectsResponse {
   projects: Project[];
   pagination: PaginationInfo;
 }
+
+// Comment type (re-exported from commentsApi for convenience)
+export type { Comment, CommentCreatePayload } from '../api/commentsApi';
