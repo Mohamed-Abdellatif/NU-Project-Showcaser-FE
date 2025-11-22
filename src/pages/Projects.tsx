@@ -147,7 +147,7 @@ const Projects = () => {
             {projects.length > 0 ? (
               <ProjectsList
                 projects={projects}
-                title=""
+                title=" "
                 isViewModeChangeable={true}
               />
             ) : (
