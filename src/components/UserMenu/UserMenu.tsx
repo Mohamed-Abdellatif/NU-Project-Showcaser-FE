@@ -40,7 +40,7 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
 
   const handleProjectRequestClick = () => {
     handleProfileMenuClose();
-    navigate("/Project-Requests");
+    navigate("/project-requests");
   };
 
   const handleLogoutClick = () => {

@@ -52,7 +52,8 @@
     "created": "Created",
     "none": "None",
     "projectDetails": "Project Details",
-    "noprojeects": "Project not found"
+    "noprojeects": "Project not found",
+    "noDescription": "No description provided."
   },
   "submissionPage": {
     "Submit Project": "Submit Project",
@@ -136,7 +137,9 @@
     "decline": "Decline",
     "noRequests": "No project requests at the moment.",
     "view": "View",
-    "ProjectRequests": "Project Requests"
+    "ProjectRequests": "Project Requests",
+    "errorLoading": "Error loading project requests",
+    "noProjects": "No projects available"
   },
 
   "auth": {

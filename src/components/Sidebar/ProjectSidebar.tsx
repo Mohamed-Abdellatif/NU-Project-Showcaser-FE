@@ -10,20 +10,16 @@ import {
 } from "@mui/material";
 import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
 import { useTranslation } from "react-i18next";
+import type { Project } from "../../types";
 
 // Import Poppins font
 import "@fontsource/poppins/400.css"; // normal weight
 import "@fontsource/poppins/700.css"; // bold weight
 
-interface Project {
-    _id: string;
-    title: string;
-}
-
 interface ProjectSidebarProps {
     projectsData?: { projects: Project[] } | null;
     activeProject: Project | null;
-    setActiveProject: (project: Project) => void;
+    setActiveProject: (project: Project | null) => void;
 }
 
 const ProjectSidebar = ({ projectsData, activeProject, setActiveProject }: ProjectSidebarProps) => {
@@ -113,7 +109,7 @@ const ProjectSidebar = ({ projectsData, activeProject, setActiveProject }: Proje
                             variant="body2"
                             sx={{ mt: 2, textAlign: "center", color: "#888" }}
                         >
-                            {t("ProjectRequest.noProjects")}
+                            {t("ProjectRequest.noRequests")}
                         </Typography>
                     )}
                 </List>

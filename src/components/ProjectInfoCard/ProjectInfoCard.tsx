@@ -53,12 +53,12 @@ export const ProjectInfoCard = ({
           {t("viewProject.aboutProject")}
         </Typography>
         <Typography sx={{ fontSize: "1.05rem", color: "#444", mb: 4, lineHeight: 1.7 }}>
-          {description || "No description provided."}
+          {description || t("viewProject.noDescription")}
         </Typography>
 
         {technologies.length > 0 && (
           <Box mb={3}>
-            <Typography sx={{ fontWeight: 700, color: colors.textHeader, mb: 1.5 }}>Technologies</Typography>
+            <Typography sx={{ fontWeight: 700, color: colors.textHeader, mb: 1.5 }}>{t("viewProject.technologies")}</Typography>
             <Box sx={{ display: "flex", gap: 1.5, flexWrap: "wrap" }}>
               {technologies.map(t => <Chip key={t} label={t} sx={{ bgcolor: colors.chipBg, fontWeight: 600, borderRadius: "8px" }} />)}
             </Box>
@@ -67,7 +67,7 @@ export const ProjectInfoCard = ({
 
         {tags.length > 0 && (
           <Box>
-            <Typography sx={{ fontWeight: 700, color: colors.textHeader, mb: 1.5 }}>Tags</Typography>
+            <Typography sx={{ fontWeight: 700, color: colors.textHeader, mb: 1.5 }}>{t("viewProject.tags")}</Typography>
             <Box sx={{ display: "flex", gap: 1.5, flexWrap: "wrap" }}>
               {tags.map(t => <Chip key={t} label={t} sx={{ bgcolor: "#fceef2", fontWeight: 500, borderRadius: "16px", border: "1px solid #ebdce3" }} />)}
             </Box>

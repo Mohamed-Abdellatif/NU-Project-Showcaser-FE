@@ -136,7 +136,9 @@
     "decline": "رفض",
     "noRequests": "لا توجد طلبات مشاريع في الوقت الحالي.",
     "view": "عرض",
-    "ProjectRequests": "طلبات المشاريع"
+    "ProjectRequests": "طلبات المشاريع",
+    "errorLoading": "خطأ في تحميل طلبات المشاريع",
+    "noProjects": "لا توجد مشاريع متاحة"
     },
   "auth": {
     "mustBeLoggedIn": "يجب عليك تسجيل الدخول للوصول إلى هذه الصفحة"

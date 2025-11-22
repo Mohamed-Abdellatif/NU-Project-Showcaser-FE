@@ -3,6 +3,7 @@ import { useMemo, useState, useEffect } from "react";
 import {
     Box,
     Typography,
+    CircularProgress,
 } from "@mui/material";
 import { useProjects } from "../hooks/useProjects";
 import ProjectHeader from "../components/ProjectHeader/ProjectHeader";
@@ -10,6 +11,7 @@ import { ProjectInfoCard } from "../components/ProjectInfoCard/ProjectInfoCard";
 import ProjectRequestAction from "../components/ProjectRequestAction/ProjectRequestAction";
 import ProjectSidebar from "../components/Sidebar/ProjectSidebar";
 import { useTranslation } from "react-i18next";
+import type { Project } from "../types";
 
 type MediaItem = {
     type: "image" | "video";
@@ -17,10 +19,10 @@ type MediaItem = {
 };
 
 const AcceptProject = () => {
-    const { data: projectsData } = useProjects(1, 6);
+    const { data: projectsData, isLoading, isError, error } = useProjects(1, 6);
     const { t } = useTranslation();
 
-    const [activeProject, setActiveProject] = useState<any>(null);
+    const [activeProject, setActiveProject] = useState<Project | null>(null);
     const [selectedAction, setSelectedAction] =
         useState<"accept" | "decline" | null>(null);
 
@@ -45,6 +47,35 @@ const AcceptProject = () => {
         return [...imgs, ...vids];
     }, [activeProject]);
 
+    if (isLoading) {
+        return (
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    minHeight: "100vh",
+                }}
+            >
+                <CircularProgress />
+            </Box>
+        );
+    }
+
+    if (isError) {
+        return (
+            <Box sx={{ textAlign: "center", mt: 6 }}>
+                <Typography color="error" variant="h5">
+                    {t("ProjectRequest.errorLoading")}
+                </Typography>
+                {error && (
+                    <Typography color="error" variant="body1" sx={{ mt: 2 }}>
+                        {error.message || t("common.error")}
+                    </Typography>
+                )}
+            </Box>
+        );
+    }
 
     if (!activeProject) {
         return (

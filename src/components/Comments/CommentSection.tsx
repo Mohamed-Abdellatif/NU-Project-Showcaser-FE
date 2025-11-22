@@ -21,6 +21,7 @@ import "@fontsource/poppins/700.css";
 interface Comment {
     id: string;
     text: string;
+    userId?: string;
     userFirstName?: string;
     userLastName?: string;
     color?: string;
@@ -49,6 +50,7 @@ export default function CommentSection() {
             ...prev,
             {
                 id: crypto.randomUUID(),
+                userId: user._id,
                 userFirstName: user.firstName,
                 userLastName: user.lastName,
                 text: commentText,
@@ -130,7 +132,7 @@ export default function CommentSection() {
                                     {comment.text}
                                 </Typography>
                             </Box>
-                            {user?.firstName === comment.userFirstName && (
+                            {user?._id === comment.userId && (
                                 <IconButton
                                     onClick={(e) => openMenu(e, comment.id)}
                                     sx={{ height: "fit-content" }}
