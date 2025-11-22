@@ -59,7 +59,7 @@ export const LanguageSelector = ({
           }}
         >
           <LanguageIcon fontSize="small" sx={{ mr: 1 }} />
-          Language
+          {i18n.t('common.language')}
         </MenuItem>
         {LANGUAGES.map((lang) => (
           <MenuItem

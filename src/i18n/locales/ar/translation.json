@@ -1,21 +1,21 @@
 {
   "common": {
-    "welcome": "مرحباً بكم في معرض مشاريع NU",
     "language": "اللغة",
+    "search": "بحث",
     "loading": "جاري التحميل...",
-    "error": "خطأ",
-    "notFound": "الصفحة غير موجودة"
+    "error": "خطأ"
   },
   "nav": {
     "home": "الرئيسية",
     "projects": "المشاريع",
     "about": "حول",
-    "contact": "اتصل بنا",
     "searchProject": "ابحث عن مشروع",
+    "projectShowcase": "معرض المشاريع",
     "login": "تسجيل الدخول",
     "logout": "تسجيل الخروج",
     "profile": "الملف الشخصي",
-    "project-requests": "طلبات المشاريع"
+    "project-requests": "طلبات المشاريع",
+    "starred-projects": "المشاريع المفضلة"
   },
   "home": {
     "title": "هل لديك مشروع رائع؟",
@@ -33,11 +33,29 @@
     "recommendedProjects": "مشاريع أخرى",
     "projectInfo": "معلومات المشروع",
     "course": "المقرر الدراسي",
-    "teamMembers": "أعضاء الفريق",
     "Description": "الوصف",
     "githubRepo": "انقر لعرض مستودع GitHub",
     "projectFiles": "ملفات المشروع",
-    "download": "تحميل"
+    "download": "تحميل",
+    "comments": "التعليقات",
+    "addComment": "أضف تعليقًا...",
+    "noComments": "لا توجد تعليقات بعد. كن أول من يعلق!",
+    "loginToComment": "يرجى تسجيل الدخول لإضافة تعليق.",
+    "Post": "نشر",
+    "delete": "حذف",
+    "technologies": "التقنيات",
+    "teamLeader": "قائد الفريق",
+    "supervisor": "المشرف",
+    "teamMembers": "أعضاء الفريق",
+    "tags": "العلامات",
+    "notechnology": "لا توجد تقنيات مدرجة",
+    "notags": "لا توجد علامات مدرجة",
+    "aboutProject": "حول المشروع",
+    "created": "تم الإنشاء",
+    "none": "لا شيء",
+    "projectDetails": "تفاصيل المشروع",
+    "projectNotFound": "المشروع غير موجود",
+    "noDescription": "لا يوجد وصف للمشروع"
   },
   "submissionPage": {
     "Submit Project": "إرسال مشروع",
@@ -68,37 +86,13 @@
     "Remove Image": "إزالة الصورة",
     "Submit": "إرسال",
     "Project submitted successfully!": "تم إرسال المشروع بنجاح!",
+    "Error: Please fill in all required fields.": "خطأ: يرجى ملء جميع الحقول المطلوبة.",
     "Failed to submit project. Please try again.": "فشل إرسال المشروع. يرجى المحاولة مرة أخرى.",
     "Failed to upload media files. Please try again.": "فشل تحميل ملفات الوسائط. يرجى المحاولة مرة أخرى.",
     "Maximum 10 images allowed. Only the first {{count}} images were added.": "يُسمح بحد أقصى 10 صور. تمت إضافة أول {{count}} صور فقط.",
     "Maximum 10 images allowed. Please remove some images before adding new ones.": "يُسمح بحد أقصى 10 صور. يرجى إزالة بعض الصور قبل إضافة صور جديدة.",
-    "recommendedProjects": "مشاريع أخرى"
-    ,"projectInfo": "معلومات المشروع"
-    ,"course": "المقرر الدراسي",
-    "teamMembers": "أعضاء الفريق"
-    ,"Description": "الوصف",
-    "githubRepo": "انقر لعرض مستودع GitHub",
-    "projectFiles": "ملفات المشروع",
-    "download": "تحميل",
-    "comments": "التعليقات",
-    "addComment": "أضف تعليقًا...",
-    "noComments": "لا توجد تعليقات بعد. كن أول من يعلق!",
-    "loginToComment": "يرجى تسجيل الدخول لإضافة تعليق.",
-    "Post": "نشر",
-    "delete": "حذف",
-    "technologies": "التقنيات",
-    "teamLeader": "قائد الفريق",
-    "supervisor": "المشرف",
-    "tags": "العلامات",
-    "notags": "لا توجد علامات متاحة",
-    "notechnology": "لا توجد تقنيات مدرجة",
-    "aboutProject": "حول المشروع",
-    "created": "تم الإنشاء",
-    "none": "لا شيء",
-    "projectDetails": "تفاصيل المشروع",
     "thumbnail": "الصورة الأولى سيتم استخدامها كعينة المشروع",
     "videoSubtitle": " قم بتحميل فيديو لعرض مشروعك, الحد الأقصى 50 ميجا",
-    "Team Leader": "قائد الفريق",
     "Add your project details and media to NU Project Showcaser": "أضف تفاصيل مشروعك والوسائط إلى معرض مشاريع NU",
     "Drag and drop images here, or click to browse": "اسحب وأفلت الصور هنا، أو انقر للتصفح",
     "Drag and drop video here, or click to browse": "اسحب وأفلت الفيديو هنا، أو انقر للتصفح",
@@ -108,11 +102,9 @@
   "projects": {
     "title": "جميع المشاريع",
     "advancedSearch": "بحث متقدم",
-    "filtersLabel": "المرشحات",
     "search": "بحث",
     "clearFilters": "مسح المرشحات",
     "noResults": "لم يتم العثور على مشاريع",
-    "loading": "جاري تحميل المشاريع...",
     "error": "خطأ في تحميل المشاريع",
     "filters": {
       "title": "عنوان المشروع",
@@ -121,7 +113,7 @@
       "major": "التخصص",
       "course": "المقرر الدراسي",
       "teamMember": "عضو الفريق"
-        },
+    },
     "pagination": {
       "showing": "عرض",
       "to": "إلى",
@@ -131,7 +123,6 @@
     }
   },
   "ProjectRequest": {
-    "title": "طلبات المشاريع",
     "accept": "قبول",
     "decline": "رفض",
     "noRequests": "لا توجد طلبات مشاريع في الوقت الحالي.",
@@ -139,8 +130,12 @@
     "ProjectRequests": "طلبات المشاريع",
     "errorLoading": "خطأ في تحميل طلبات المشاريع",
     "noProjects": "لا توجد مشاريع متاحة"
-    },
+  },
   "auth": {
     "mustBeLoggedIn": "يجب عليك تسجيل الدخول للوصول إلى هذه الصفحة"
+  },
+  "starredProjects": {
+    "title": "المشاريع المفضلة",
+    "noStarredProjects": "لا توجد مشاريع مفضلة"
   }
 }

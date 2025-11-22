@@ -1,8 +1,6 @@
 import { useMemo } from "react";
 import {
   Box,
-  Typography,
-
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useGetProjectById, useProjects } from "../hooks/useProjects";
@@ -10,11 +8,14 @@ import ProjectsList from "../components/ProjectsList/ProjectsList";
 import ProjectHeader from "../components/ProjectHeader/ProjectHeader";
 import { ProjectInfoCard } from "../components/ProjectInfoCard/ProjectInfoCard";
 import CommentSection from "../components/Comments/CommentSection";
+import LoadingState from "../components/LoadingState/LoadingState";
+import ErrorState from "../components/ErrorState/ErrorState";
+import EmptyResults from "../components/EmptyResults/EmptyResults";
 
 
 const ViewProject = () => {
   const { projectId } = useParams();
-  const { data: project } = useGetProjectById(projectId!);
+  const { data: project, isLoading, isError, error } = useGetProjectById(projectId!);
   const { data: projectsData } = useProjects(1, 50);
 
   const media = useMemo(() => {
@@ -36,14 +37,16 @@ const ViewProject = () => {
     return others.sort(() => 0.5 - Math.random()).slice(0, 6);
   }, [project, projectsData]);
 
+  if (isLoading) {
+    return <LoadingState />;
+  }
+
+  if (isError) {
+    return <ErrorState error={error} />;
+  }
+
   if (!project) {
-    return (
-      <Box sx={{ textAlign: "center", mt: 6 }}>
-        <Typography color="error" variant="h5">
-          Project not found.
-        </Typography>
-      </Box>
-    );
+    return <EmptyResults message="viewProject.projectNotFound" />;
   }
 
 

@@ -98,7 +98,7 @@ export const ProjectInfoCard = ({
               onClick={() => window.open(repoUrl, "_blank")}
               sx={{ mt: 4, width: "100%", py: 1.5, bgcolor: colors.buttonBg, "&:hover": { bgcolor: "#45103b" }, borderRadius: 2, fontWeight: 600, fontFamily: "Poppins", textTransform: "none" }}
             >
-              {t("viewProject.githubRepo")}
+             <span style={{ margin: "0 10px" }}> {t("viewProject.githubRepo")}</span>
             </Button>
           )}
 

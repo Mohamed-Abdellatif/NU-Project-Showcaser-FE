@@ -2,16 +2,16 @@
 import { useMemo, useState, useEffect } from "react";
 import {
     Box,
-    Typography,
-    CircularProgress,
 } from "@mui/material";
 import { useProjects } from "../hooks/useProjects";
 import ProjectHeader from "../components/ProjectHeader/ProjectHeader";
 import { ProjectInfoCard } from "../components/ProjectInfoCard/ProjectInfoCard";
 import ProjectRequestAction from "../components/ProjectRequestAction/ProjectRequestAction";
 import ProjectSidebar from "../components/Sidebar/ProjectSidebar";
-import { useTranslation } from "react-i18next";
 import type { Project } from "../types";
+import LoadingState from "../components/LoadingState/LoadingState";
+import ErrorState from "../components/ErrorState/ErrorState";
+import EmptyResults from "../components/EmptyResults/EmptyResults";
 
 type MediaItem = {
     type: "image" | "video";
@@ -20,7 +20,6 @@ type MediaItem = {
 
 const AcceptProject = () => {
     const { data: projectsData, isLoading, isError, error } = useProjects(1, 6);
-    const { t } = useTranslation();
 
     const [activeProject, setActiveProject] = useState<Project | null>(null);
     const [selectedAction, setSelectedAction] =
@@ -48,43 +47,15 @@ const AcceptProject = () => {
     }, [activeProject]);
 
     if (isLoading) {
-        return (
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    minHeight: "100vh",
-                }}
-            >
-                <CircularProgress />
-            </Box>
-        );
+        return <LoadingState />;
     }
 
     if (isError) {
-        return (
-            <Box sx={{ textAlign: "center", mt: 6 }}>
-                <Typography color="error" variant="h5">
-                    {t("ProjectRequest.errorLoading")}
-                </Typography>
-                {error && (
-                    <Typography color="error" variant="body1" sx={{ mt: 2 }}>
-                        {error.message || t("common.error")}
-                    </Typography>
-                )}
-            </Box>
-        );
+        return <ErrorState error={error} />;
     }
 
     if (!activeProject) {
-        return (
-            <Box sx={{ textAlign: "center", mt: 6 }}>
-                <Typography color="error" variant="h5">
-                    {t("ProjectRequest.noProjects")}
-                </Typography>
-            </Box>
-        );
+        return <EmptyResults message="ProjectRequest.noProjects" />;
     }
 
     return (

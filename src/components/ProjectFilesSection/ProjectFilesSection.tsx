@@ -80,7 +80,7 @@ const ProjectFilesSection = ({ technologies = [], tags = [] }: Props) => {
           fontFamily: "'Poppins', sans-serif",
         }}
       >
-        {t("viewProject.tags") || "Tags"}
+        {t("viewProject.tags")}
       </Typography>
 
       <Box

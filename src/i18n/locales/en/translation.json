@@ -1,21 +1,21 @@
 {
   "common": {
-    "welcome": "Welcome to NU Project Showcaser",
     "language": "Language",
+    "search": "Search",
     "loading": "Loading...",
-    "error": "Error",
-    "notFound": "Page not found"
+    "error": "Error"
   },
   "nav": {
     "home": "Home",
     "projects": "Projects",
     "about": "About",
-    "contact": "Contact",
     "searchProject": "Search Project",
+    "projectShowcase": "Project Showcase",
     "login": "Login",
     "logout": "Logout",
     "profile": "Profile",
-    "project-requests": "Project Requests"
+    "project-requests": "Project Requests",
+    "starred-projects": "Starred Projects"
   },
   "home": {
     "title": "Have a Winning Project?",
@@ -48,11 +48,13 @@
     "supervisor": "Supervisor",
     "teamMembers": "Team Members",
     "tags": "Tags",
+    "notechnology": "No technologies listed",
+    "notags": "No tags listed",
     "aboutProject": "About the Project",
     "created": "Created",
     "none": "None",
     "projectDetails": "Project Details",
-    "noprojeects": "Project not found",
+    "projectNotFound": "Project not found",
     "noDescription": "No description provided."
   },
   "submissionPage": {
@@ -89,17 +91,8 @@
     "Failed to upload media files. Please try again.": "Failed to upload media files. Please try again.",
     "Maximum 10 images allowed. Only the first {{count}} images were added.": "Maximum 10 images allowed. Only the first {{count}} images were added.",
     "Maximum 10 images allowed. Please remove some images before adding new ones.": "Maximum 10 images allowed. Please remove some images before adding new ones.",
-    "recommendedProjects": "Recommended Projects",
-    "projectInfo": "Project Information",
-    "course": "Course",
-    "teamMembers": "Team Members",
-    "Description": "Description",
-    "githubRepo": "GitHub Repository",
-    "projectFiles": "Project Files",
-    "download": "Download",
     "thumbnail": "First image will be used as a thumbnail",
     "videoSubtitle": "Upload a video to showcase your project, Maximum 50 MB",
-    "Team Leader": "Team Leader",
     "Add your project details and media to NU Project Showcaser": "Add your project details and media to NU Project Showcaser",
     "Drag and drop images here, or click to browse": "Drag and drop images here, or click to browse",
     "Drag and drop video here, or click to browse": "Drag and drop video here, or click to browse",
@@ -109,11 +102,9 @@
   "projects": {
     "title": "All Projects",
     "advancedSearch": "Advanced Search",
-    "filtersLabel": "Filters",
     "search": "Search",
     "clearFilters": "Clear Filters",
     "noResults": "No projects found",
-    "loading": "Loading projects...",
     "error": "Error loading projects",
     "filters": {
       "title": "Project Title",
@@ -132,7 +123,6 @@
     }
   },
   "ProjectRequest": {
-    "title": "Project Requests",
     "accept": "Accept",
     "decline": "Decline",
     "noRequests": "No project requests at the moment.",
@@ -141,8 +131,11 @@
     "errorLoading": "Error loading project requests",
     "noProjects": "No projects available"
   },
-
   "auth": {
     "mustBeLoggedIn": "You must be logged in to access this page"
+  },
+  "starredProjects": {
+    "title": "Starred Projects",
+    "noStarredProjects": "No starred projects"
   }
 }

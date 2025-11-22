@@ -248,3 +248,16 @@ export const starProject = async (id: string, action: 'add' | 'remove'): Promise
   }
 };
 
+export const getStarredProjects = async (): Promise<Project[]> => {
+  try {
+    const response = await axios.get<Project[]>(`${API_BASE}/starred`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(error.response?.data?.message || 'Failed to get starred projects');
+    }
+    throw error;
+  }
+};

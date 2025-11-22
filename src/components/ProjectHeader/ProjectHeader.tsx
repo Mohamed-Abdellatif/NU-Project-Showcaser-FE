@@ -1,4 +1,4 @@
-import { Box, Typography, IconButton, CardMedia } from "@mui/material";
+import { Box, Typography, IconButton, CardMedia, useTheme } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useState } from "react";
@@ -15,6 +15,8 @@ interface ProjectHeaderProps {
 
 export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const theme = useTheme();
+  const isRTL = theme.direction === 'rtl';
 
   const nextMedia = () =>
     setCurrentIndex((prev) => (prev === media.length - 1 ? 0 : prev + 1));
@@ -35,7 +37,7 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
   }
 
   return (
-    <Box sx={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center",direction: "ltr"}}>
+    <Box sx={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
       {/* Title & Description */}
       <Typography
         variant="h3"
@@ -108,27 +110,27 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
           onClick={prevMedia}
           sx={{
             position: "absolute",
-            left: 20,
+            ...(isRTL ? { right: 20 } : { left: 20 }),
             color: "#8b3f7f",
             background: "rgba(255,255,255,0.7)",
             "&:hover": { background: "rgba(255,255,255,0.9)" },
             zIndex: 5,
           }}
         >
-          <ArrowBackIosNewIcon />
+          {isRTL ? <ArrowForwardIosIcon /> : <ArrowBackIosNewIcon />}
         </IconButton>
         <IconButton
           onClick={nextMedia}
           sx={{
             position: "absolute",
-            right: 20,
+            ...(isRTL ? { left: 20 } : { right: 20 }),
             color: "#8b3f7f",
             background: "rgba(255,255,255,0.7)",
             "&:hover": { background: "rgba(255,255,255,0.9)" },
             zIndex: 5,
           }}
         >
-          <ArrowForwardIosIcon />
+          {isRTL ? <ArrowBackIosNewIcon /> : <ArrowForwardIosIcon />}
         </IconButton>
       </Box>
     </Box>
