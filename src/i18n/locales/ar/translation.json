@@ -14,7 +14,8 @@
     "searchProject": "ابحث عن مشروع",
     "login": "تسجيل الدخول",
     "logout": "تسجيل الخروج",
-    "profile": "الملف الشخصي"
+    "profile": "الملف الشخصي",
+    "project-requests": "طلبات المشاريع"
   },
   "home": {
     "title": "هل لديك مشروع رائع؟",
@@ -79,6 +80,22 @@
     "githubRepo": "انقر لعرض مستودع GitHub",
     "projectFiles": "ملفات المشروع",
     "download": "تحميل",
+    "comments": "التعليقات",
+    "addComment": "أضف تعليقًا...",
+    "noComments": "لا توجد تعليقات بعد. كن أول من يعلق!",
+    "loginToComment": "يرجى تسجيل الدخول لإضافة تعليق.",
+    "Post": "نشر",
+    "delete": "حذف",
+    "technologies": "التقنيات",
+    "teamLeader": "قائد الفريق",
+    "supervisor": "المشرف",
+    "tags": "العلامات",
+    "notags": "لا توجد علامات متاحة",
+    "notechnology": "لا توجد تقنيات مدرجة",
+    "aboutProject": "حول المشروع",
+    "created": "تم الإنشاء",
+    "none": "لا شيء",
+    "projectDetails": "تفاصيل المشروع",
     "thumbnail": "الصورة الأولى سيتم استخدامها كعينة المشروع",
     "videoSubtitle": " قم بتحميل فيديو لعرض مشروعك, الحد الأقصى 50 ميجا",
     "Team Leader": "قائد الفريق",
@@ -104,7 +121,7 @@
       "major": "التخصص",
       "course": "المقرر الدراسي",
       "teamMember": "عضو الفريق"
-    },
+        },
     "pagination": {
       "showing": "عرض",
       "to": "إلى",
@@ -113,6 +130,16 @@
       "perPage": "لكل صفحة"
     }
   },
+  "ProjectRequest": {
+    "title": "طلبات المشاريع",
+    "accept": "قبول",
+    "decline": "رفض",
+    "noRequests": "لا توجد طلبات مشاريع في الوقت الحالي.",
+    "view": "عرض",
+    "ProjectRequests": "طلبات المشاريع",
+    "errorLoading": "خطأ في تحميل طلبات المشاريع",
+    "noProjects": "لا توجد مشاريع متاحة"
+    },
   "auth": {
     "mustBeLoggedIn": "يجب عليك تسجيل الدخول للوصول إلى هذه الصفحة"
   }

@@ -14,10 +14,11 @@
     "searchProject": "Search Project",
     "login": "Login",
     "logout": "Logout",
-    "profile": "Profile"
+    "profile": "Profile",
+    "project-requests": "Project Requests"
   },
   "home": {
-    "title": "Have a winning project?",
+    "title": "Have a Winning Project?",
     "subtitle": "Submit Your project and we’ll check it out!",
     "projects": "Projects",
     "submitProject": "Submit",
@@ -32,11 +33,27 @@
     "recommendedProjects": "Related Projects",
     "projectInfo": "Project Info",
     "course": "Course",
-    "teamMembers": "Team Members",
     "Description": "Description",
     "githubRepo": "Click to view GitHub Repo",
     "projectFiles": "Project Files",
-    "download": "Download"
+    "download": "Download",
+    "comments": "Comments",
+    "addComment": "Add a comment...",
+    "noComments": "No comments yet. Be the first to comment!",
+    "loginToComment": "Please log in to add a comment.",
+    "Post": "Post",
+    "delete": "Delete",
+    "technologies": "Technologies",
+    "teamLeader": "Team Leader",
+    "supervisor": "Supervisor",
+    "teamMembers": "Team Members",
+    "tags": "Tags",
+    "aboutProject": "About the Project",
+    "created": "Created",
+    "none": "None",
+    "projectDetails": "Project Details",
+    "noprojeects": "Project not found",
+    "noDescription": "No description provided."
   },
   "submissionPage": {
     "Submit Project": "Submit Project",
@@ -114,6 +131,17 @@
       "perPage": "Per page"
     }
   },
+  "ProjectRequest": {
+    "title": "Project Requests",
+    "accept": "Accept",
+    "decline": "Decline",
+    "noRequests": "No project requests at the moment.",
+    "view": "View",
+    "ProjectRequests": "Project Requests",
+    "errorLoading": "Error loading project requests",
+    "noProjects": "No projects available"
+  },
+
   "auth": {
     "mustBeLoggedIn": "You must be logged in to access this page"
   }

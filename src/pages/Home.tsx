@@ -30,9 +30,10 @@ const HomePage = () => {
       >
         <Box sx={{ width: "100%", p: 2 }}>
           <Typography variant="h4" component="h1" sx={{
-            fontWeight: 950, 
             fontSize: '2.5rem',
-            lineHeight: 1.3
+            lineHeight: 1.3,
+            fontWeight: "bold",
+            fontFamily: 'System-ui, BlinkMacSystemFont,Times New Roman'
           }}>
             {t("home.title")}
           </Typography>

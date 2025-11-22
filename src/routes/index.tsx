@@ -5,6 +5,7 @@ import AboutUs from '../pages/AboutUs';
 import ViewProject from '../pages/ViewProject';
 import SubmissionPage from '../pages/SubmissionPage';
 import Projects from '../pages/Projects';
+import AcceptProject from '../pages/AcceptProject';
 import RequireAuth from '../hoc/RequireAuth';
 
 
@@ -37,6 +38,11 @@ export const router = createBrowserRouter([
       {
         path: '/projects',
         element: <Projects />,
+      },
+      {
+        path: '/project-requests',
+        element: <AcceptProject />,
+
       }
       // Add more routes here as needed
     ],
