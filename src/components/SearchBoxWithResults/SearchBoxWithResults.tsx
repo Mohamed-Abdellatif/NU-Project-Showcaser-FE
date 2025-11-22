@@ -12,6 +12,7 @@ import { SearchBox } from "../SearchBox/SearchBox";
 import { useNavigate } from "react-router-dom";
 import { searchProjects } from "../../api/projectsApi";
 import type { Project } from "../../types";
+import { useTranslation } from "react-i18next";
 
 interface SearchBoxWithResultsProps {
   showMobile?: boolean;
@@ -22,8 +23,10 @@ interface SearchBoxWithResultsProps {
 export const SearchBoxWithResults = ({
   showMobile = false,
   isMobile = false,
-  placeholder = "Search",
+  placeholder,
 }: SearchBoxWithResultsProps) => {
+  const { t } = useTranslation();
+  const defaultPlaceholder = placeholder || t('common.search');
   const [searchValue, setSearchValue] = useState("");
   const [searchResults, setSearchResults] = useState<Project[]>([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -99,7 +102,7 @@ export const SearchBoxWithResults = ({
         }}
         showMobile={showMobile}
         isMobile={isMobile}
-        placeholder={placeholder}
+        placeholder={defaultPlaceholder}
       />
       {/* Search Results Dropdown */}
       {showResults && (searchResults.length > 0 || isSearching) && (

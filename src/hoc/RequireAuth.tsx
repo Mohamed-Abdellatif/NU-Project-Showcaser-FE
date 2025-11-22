@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, CircularProgress } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks/useAuth';
 import { useToastContext } from '../contexts/ToastContext';
+import LoadingState from '../components/LoadingState/LoadingState';
 
 interface RequireAuthProps {
   children: React.ReactNode;
@@ -30,11 +30,7 @@ const RequireAuth = ({ children }: RequireAuthProps) => {
 
   // Show loading state while checking authentication
   if (isLoading) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
-        <CircularProgress />
-      </Box>
-    );
+    return <LoadingState />;
   }
 
   // If there's an error or user is not authenticated, don't render children

@@ -109,7 +109,7 @@ export const Navbar = () => {
               >
                 NU
               </span>
-              Project Showcase
+              {t("nav.projectShowcase")}
             </Typography>
           </Box>
 

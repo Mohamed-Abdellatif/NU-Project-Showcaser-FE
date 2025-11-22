@@ -23,6 +23,7 @@ const ProjectsPagination = ({
         display: "flex",
         justifyContent: "center",
         mt: 4,
+        direction: "ltr",
       }}
     >
       <Pagination

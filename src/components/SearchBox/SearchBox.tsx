@@ -1,5 +1,6 @@
 import { Box, IconButton, InputBase } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
+import { useTranslation } from 'react-i18next';
 
 interface SearchBoxProps {
   value: string;
@@ -14,8 +15,10 @@ export const SearchBox = ({
   onChange,
   showMobile = false,
   isMobile = false,
-  placeholder = 'Search',
+  placeholder,
 }: SearchBoxProps) => {
+  const { t } = useTranslation();
+  const defaultPlaceholder = placeholder || t('common.search');
   const handleClearSearch = () => {
     onChange('');
   };
@@ -46,7 +49,7 @@ export const SearchBox = ({
       }}
     >
       <InputBase
-        placeholder={placeholder}
+        placeholder={defaultPlaceholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         sx={{

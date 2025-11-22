@@ -7,7 +7,8 @@ import {
   deleteProject, 
   getProjectById,
   getFeaturedProjects,
-  starProject
+  starProject,
+  getStarredProjects
 } from '../api/projectsApi';
 import type { 
   Project, 
@@ -28,6 +29,7 @@ export const projectKeys = {
   details: () => [...projectKeys.all, 'detail'] as const,
   detail: (id: string) => [...projectKeys.details(), id] as const,
   featured: () => [...projectKeys.all, 'featured'] as const,
+  starred: () => [...projectKeys.all, 'starred'] as const,
 };
 
 /**
@@ -128,6 +130,14 @@ export const useStarProject = () => {
       queryClient.invalidateQueries({ queryKey: projectKeys.detail(variables.id) });
       queryClient.invalidateQueries({ queryKey: projectKeys.lists() });
       queryClient.invalidateQueries({ queryKey: authKeys.me() });
+      queryClient.invalidateQueries({ queryKey: projectKeys.starred() });
     },
+  });
+};
+
+export const useStarredProjects = () => {
+  return useQuery<Project[], Error>({
+    queryKey: projectKeys.starred(),
+    queryFn: getStarredProjects,
   });
 };

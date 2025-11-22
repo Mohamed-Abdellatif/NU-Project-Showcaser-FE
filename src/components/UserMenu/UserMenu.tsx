@@ -42,6 +42,10 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
     handleProfileMenuClose();
     navigate("/project-requests");
   };
+  const handleStarredProjectsClick = () => {
+    handleProfileMenuClose();
+    navigate("/starred-projects");
+  };
 
   const handleLogoutClick = () => {
     handleProfileMenuClose();
@@ -105,6 +109,9 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
         </MenuItem>
         <MenuItem onClick={handleProjectRequestClick}>
           {t("nav.project-requests")}
+        </MenuItem>
+        <MenuItem onClick={handleStarredProjectsClick}>
+          {t("nav.starred-projects")}
         </MenuItem>
         <MenuItem onClick={handleLogoutClick}>
           {t("nav.logout")}

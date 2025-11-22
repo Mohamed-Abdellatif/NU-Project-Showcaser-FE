@@ -11,11 +11,11 @@ import EmptyResults from "../components/EmptyResults/EmptyResults";
 import LoadingState from "../components/LoadingState/LoadingState";
 import ErrorState from "../components/ErrorState/ErrorState";
 
-const ITEMS_PER_PAGE_OPTIONS = [12, 24, 48, 64, 128];
+const ITEMS_PER_PAGE_OPTIONS = [12, 24, 48, 64, 100];
 
 const Projects = () => {
   const { t } = useTranslation();
-  
+
   // Filter states
   const [filters, setFilters] = useState<ProjectSearchParams>({
     title: "",
@@ -31,10 +31,12 @@ const Projects = () => {
   const [itemsPerPage, setItemsPerPage] = useState(12);
 
   // Build filter params (only include non-empty filters, excluding page and limit)
-  const filterParams = useMemo<Omit<ProjectSearchParams, 'page' | 'limit'> | undefined>(() => {
-    const params: Omit<ProjectSearchParams, 'page' | 'limit'> = {};
+  const filterParams = useMemo<
+    Omit<ProjectSearchParams, "page" | "limit"> | undefined
+  >(() => {
+    const params: Omit<ProjectSearchParams, "page" | "limit"> = {};
     let hasFilters = false;
-    
+
     if (filters.title?.trim()) {
       params.title = filters.title.trim();
       hasFilters = true;
@@ -59,19 +61,29 @@ const Projects = () => {
       params.teamMember = filters.teamMember.trim();
       hasFilters = true;
     }
-    
+
     return hasFilters ? params : undefined;
   }, [filters]);
 
   // Fetch projects with pagination and filters
-  const { data: projectsData, isLoading, isError, error } = useProjects(page, itemsPerPage, filterParams);
+  const {
+    data: projectsData,
+    isLoading,
+    isError,
+    error,
+  } = useProjects(page, itemsPerPage, filterParams);
 
   // Extract projects and pagination info from response
-  const projects = (projectsData as PaginatedProjectsResponse | undefined)?.projects ?? [];
-  const pagination = (projectsData as PaginatedProjectsResponse | undefined)?.pagination;
+  const projects =
+    (projectsData as PaginatedProjectsResponse | undefined)?.projects ?? [];
+  const pagination = (projectsData as PaginatedProjectsResponse | undefined)
+    ?.pagination;
 
   // Reset to page 1 when filters change
-  const handleFilterChange = (field: keyof ProjectSearchParams, value: string) => {
+  const handleFilterChange = (
+    field: keyof ProjectSearchParams,
+    value: string
+  ) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
     setPage(1);
   };

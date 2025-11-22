@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
 import ProjectsList from "../components/ProjectsList/ProjectsList";
-import { Box, Button, Typography, CircularProgress, Alert } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useFeaturedProjects} from "../hooks/useProjects";
+import LoadingState from "../components/LoadingState/LoadingState";
+import ErrorState from "../components/ErrorState/ErrorState";
 
 const HomePage = () => {
   const { data: projects, isLoading, isError, error } = useFeaturedProjects();
@@ -56,18 +58,8 @@ const HomePage = () => {
 
 
       <section>
-        {isLoading && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
-            <CircularProgress />
-          </Box>
-        )}
-        {isError && (
-          <Box sx={{ p: 2 }}>
-            <Alert severity="error">
-              {error?.message || t("home.errorLoadingProjects")}
-            </Alert>
-          </Box>
-        )}
+        {isLoading && <LoadingState />}
+        {isError && <ErrorState error={error} />}
         {!isLoading && !isError && (
           <ProjectsList projects={projects} />
         )}
