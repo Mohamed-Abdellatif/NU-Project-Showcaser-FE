@@ -52,6 +52,8 @@ export interface ProjectCreatePayload {
   course?: string;
   repoUrl?: string;
   liveUrl?: string;
+  teachingAssistant?: string;
+  status?: string;
 }
 
 export interface ProjectUpdatePayload {

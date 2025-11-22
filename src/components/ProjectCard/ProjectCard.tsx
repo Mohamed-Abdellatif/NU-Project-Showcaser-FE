@@ -5,6 +5,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import type { Project } from '../../types';
 interface ProjectCardProps {
   project: Project;
@@ -14,6 +15,21 @@ interface ProjectCardProps {
 const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
 
   const navigate = useNavigate();
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const handleImageError = () => {
+    // If first image fails and second image exists, use second image
+    if (imageIndex === 0 && project.images?.[1]) {
+      setImageIndex(1);
+    }
+  };
+
+  const getImageSrc = () => {
+    if (project.images?.[imageIndex]) {
+      return project.images[imageIndex];
+    }
+    return `https://placehold.co/600x400/8E44AD/FFF?text=${project.title}`;
+  };
 
 
   return (
@@ -43,13 +59,14 @@ const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
     >
       <CardMedia
         component="img"
-        image={ project.images?.[0] || `https://placehold.co/600x400/8E44AD/FFF?text=${project.title}`}
-      alt={project.title}
-      sx={{
-        width: viewMode === 'list' ? 300 : '100%',
-        height: viewMode === 'list' ? 300 : 300,
-        objectFit: 'cover'
-      }}
+        image={getImageSrc()}
+        alt={project.title}
+        onError={handleImageError}
+        sx={{
+          width: viewMode === 'list' ? 300 : '100%',
+          height: viewMode === 'list' ? 300 : 300,
+          objectFit: 'cover'
+        }}
       />
       <CardContent
         sx={{
