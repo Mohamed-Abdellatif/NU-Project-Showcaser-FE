@@ -59,14 +59,6 @@
     "Attachments": "Attachments",
     "Videos (optional)": "Videos (optional)",
     "Drop or Select Video Files": "Drop or Select Video Files",
-<<<<<<< HEAD
-    "Remove Video": "Remove Video",
-    "Upload Image (Optional) — Project Logo, Screenshot, or Cover Image": "Upload Image (Optional) — Project Logo, Screenshot, or Cover Image",
-    "Drop or Select Image Files": "Drop or Select Image Files",
-    "Remove Image": "Remove Image",
-    "Submit": "Submit",
-    "Project submitted successfully!": "Project submitted successfully!",
-=======
     "Drop or Select Video File": "Drop or Select Video File",
     "Remove Video": "Remove Video",
     "Upload Image (Optional) — Project Logo, Screenshot, or Cover Image": "Upload Image (Optional) — Project Logo, Screenshot, or Cover Image",
@@ -80,7 +72,6 @@
     "Failed to upload media files. Please try again.": "Failed to upload media files. Please try again.",
     "Maximum 10 images allowed. Only the first {{count}} images were added.": "Maximum 10 images allowed. Only the first {{count}} images were added.",
     "Maximum 10 images allowed. Please remove some images before adding new ones.": "Maximum 10 images allowed. Please remove some images before adding new ones.",
->>>>>>> Submition-Page
     "recommendedProjects": "Recommended Projects",
     "projectInfo": "Project Information",
     "course": "Course",
@@ -88,9 +79,6 @@
     "Description": "Description",
     "githubRepo": "GitHub Repository",
     "projectFiles": "Project Files",
-<<<<<<< HEAD
-    "download": "Download"
-=======
     "download": "Download",
     "thumbnail": "First image will be used as a thumbnail",
     "videoSubtitle": "Upload a video to showcase your project, Maximum 50 MB",
@@ -100,7 +88,6 @@
     "Drag and drop video here, or click to browse": "Drag and drop video here, or click to browse",
     "Enter member name": "Enter member name",
     "Teaching Assistant Email": "Teaching Assistant Email"
->>>>>>> Submition-Page
   },
   "projects": {
     "title": "All Projects",
