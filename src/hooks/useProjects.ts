@@ -8,7 +8,8 @@ import {
   getProjectById,
   getFeaturedProjects,
   starProject,
-  getStarredProjects
+  getStarredProjects,
+  getPendingProjectsByTA
 } from '../api/projectsApi';
 import type { 
   Project, 
@@ -30,6 +31,7 @@ export const projectKeys = {
   detail: (id: string) => [...projectKeys.details(), id] as const,
   featured: () => [...projectKeys.all, 'featured'] as const,
   starred: () => [...projectKeys.all, 'starred'] as const,
+  pendingByTA: (taMail: string) => [...projectKeys.all, 'pendingByTA', taMail] as const,
 };
 
 /**
@@ -88,12 +90,19 @@ export const useCreateProject = () => {
 export const useUpdateProject = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<Project, Error, { id: string; updates: ProjectUpdatePayload }>({
-    mutationFn: ({ id, updates }: { id: string; updates: ProjectUpdatePayload }) => updateProject(id, updates),
-    onSuccess: (_data: Project, variables: { id: string; updates: ProjectUpdatePayload }) => {
+  return useMutation<Project, Error, { id: string; updates: ProjectUpdatePayload; taMail?: string }>({
+    mutationFn: (vars) => {
+      const { id, updates } = vars;
+      return updateProject(id, updates);
+    },
+    onSuccess: (_data: Project, variables: { id: string; updates: ProjectUpdatePayload; taMail?: string }) => {
       // Invalidate the specific project detail and all lists
       queryClient.invalidateQueries({ queryKey: projectKeys.detail(variables.id) });
       queryClient.invalidateQueries({ queryKey: projectKeys.lists() });
+      const taMail = variables.taMail || variables.updates.taMail;
+      if (taMail) {
+        queryClient.invalidateQueries({ queryKey: projectKeys.pendingByTA(taMail) });
+      }
     },
   });
 };
@@ -139,5 +148,18 @@ export const useStarredProjects = () => {
   return useQuery<Project[], Error>({
     queryKey: projectKeys.starred(),
     queryFn: getStarredProjects,
+  });
+};
+
+export const useGetPendingProjectsByTA = (taMail: string | undefined) => {
+  return useQuery<Project[], Error>({
+    queryKey: projectKeys.pendingByTA(taMail || ''),
+    queryFn: () => {
+      if (!taMail) {
+        throw new Error('taMail is required');
+      }
+      return getPendingProjectsByTA(taMail);
+    },
+    enabled: !!taMail,
   });
 };

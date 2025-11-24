@@ -75,6 +75,7 @@
     "Supervisor": "Supervisor",
     "Course": "Course",
     "Live Demo URL (optional)": "Live Demo URL (optional)",
+    "Team Leader": "Team Leader",
     "Team Members": "Team Members",
     "First Name": "First Name",
     "Last Name": "Last Name",
@@ -135,7 +136,9 @@
     "view": "View",
     "ProjectRequests": "Project Requests",
     "errorLoading": "Error loading project requests",
-    "noProjects": "No projects available"
+    "noProjects": "No projects available",
+    "projectAccepted": "Project accepted successfully",
+    "projectRejected": "Project rejected successfully"
   },
   "auth": {
     "mustBeLoggedIn": "You must be logged in to access this page"

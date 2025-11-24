@@ -69,6 +69,8 @@ export interface ProjectUpdatePayload {
   videos?: string[];
   course?: string;
   repoUrl?: string;
+  status?: string;
+  taMail?: string;
 }
 
 // Search query parameters

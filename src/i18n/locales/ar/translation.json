@@ -76,6 +76,7 @@
     "Course": "المقرر الدراسي",
     "Live Demo URL (optional)": "رابط العرض المباشر (اختياري)",
     "Team Members": "أعضاء الفريق",
+    "Team Leader": "قائد الفريق",
     "First Name": "الاسم الأول",
     "Last Name": "اسم العائلة",
     "University Email": "البريد الإلكتروني الجامعي",
@@ -135,7 +136,9 @@
     "view": "عرض",
     "ProjectRequests": "طلبات المشاريع",
     "errorLoading": "خطأ في تحميل طلبات المشاريع",
-    "noProjects": "لا توجد مشاريع متاحة"
+    "noProjects": "لا توجد مشاريع متاحة",
+    "projectAccepted": "تم قبول المشروع بنجاح",
+    "projectRejected": "تم رفض المشروع بنجاح"
   },
   "auth": {
     "mustBeLoggedIn": "يجب عليك تسجيل الدخول للوصول إلى هذه الصفحة"
