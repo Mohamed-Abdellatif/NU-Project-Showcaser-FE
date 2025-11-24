@@ -1,9 +1,13 @@
-import axios from 'axios';
-import type { Project, ProjectCreatePayload, ProjectSearchParams, PaginatedProjectsResponse } from '../types';
-import type { ProjectUpdatePayload } from '../types';
+import axios from "axios";
+import type {
+  Project,
+  ProjectCreatePayload,
+  ProjectSearchParams,
+  PaginatedProjectsResponse,
+} from "../types";
+import type { ProjectUpdatePayload } from "../types";
 const API_BASE = `${import.meta.env.VITE_API_BASE}/project`;
 // Project interface matching the API response
-
 
 // API Response types
 interface DeleteResponse {
@@ -21,16 +25,16 @@ export const searchProjects = async (
 ): Promise<Project[]> => {
   try {
     const queryParams = new URLSearchParams();
-    
-    if (params?.title) queryParams.append('title', params.title);
-    if (params?.major) queryParams.append('major', params.major);
-    if (params?.supervisor) queryParams.append('supervisor', params.supervisor);
-    if (params?.teamMember) queryParams.append('teamMember', params.teamMember);
-    if (params?.teamLeader) queryParams.append('teamLeader', params.teamLeader);
+
+    if (params?.title) queryParams.append("title", params.title);
+    if (params?.major) queryParams.append("major", params.major);
+    if (params?.supervisor) queryParams.append("supervisor", params.supervisor);
+    if (params?.teamMember) queryParams.append("teamMember", params.teamMember);
+    if (params?.teamLeader) queryParams.append("teamLeader", params.teamLeader);
 
     const queryString = queryParams.toString();
-    const url = queryString 
-      ? `${API_BASE}/search?${queryString}` 
+    const url = queryString
+      ? `${API_BASE}/search?${queryString}`
       : `${API_BASE}/search`;
 
     const response = await axios.get<Project[]>(url, {
@@ -41,7 +45,7 @@ export const searchProjects = async (
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(
-        error.response?.data?.message || 'Failed to search projects'
+        error.response?.data?.message || "Failed to search projects"
       );
     }
     throw error;
@@ -58,20 +62,23 @@ export const searchProjects = async (
 export const getProjects = async (
   page: number = 1,
   limit: number = 10,
-  filters?: Omit<ProjectSearchParams, 'page' | 'limit'>
+  filters?: Omit<ProjectSearchParams, "page" | "limit">
 ): Promise<PaginatedProjectsResponse> => {
   try {
     const queryParams = new URLSearchParams();
-    queryParams.append('page', page.toString());
-    queryParams.append('limit', limit.toString());
+    queryParams.append("page", page.toString());
+    queryParams.append("limit", limit.toString());
 
     // Add filter parameters if provided
-    if (filters?.title) queryParams.append('title', filters.title);
-    if (filters?.major) queryParams.append('major', filters.major);
-    if (filters?.supervisor) queryParams.append('supervisor', filters.supervisor);
-    if (filters?.teamMember) queryParams.append('teamMember', filters.teamMember);
-    if (filters?.teamLeader) queryParams.append('teamLeader', filters.teamLeader);
-    if (filters?.course) queryParams.append('course', filters.course);
+    if (filters?.title) queryParams.append("title", filters.title);
+    if (filters?.major) queryParams.append("major", filters.major);
+    if (filters?.supervisor)
+      queryParams.append("supervisor", filters.supervisor);
+    if (filters?.teamMember)
+      queryParams.append("teamMember", filters.teamMember);
+    if (filters?.teamLeader)
+      queryParams.append("teamLeader", filters.teamLeader);
+    if (filters?.course) queryParams.append("course", filters.course);
 
     const response = await axios.get<PaginatedProjectsResponse>(
       `${API_BASE}/?${queryParams.toString()}`,
@@ -84,7 +91,7 @@ export const getProjects = async (
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(
-        error.response?.data?.message || 'Failed to fetch projects'
+        error.response?.data?.message || "Failed to fetch projects"
       );
     }
     throw error;
@@ -100,22 +107,18 @@ export const createProject = async (
   project: ProjectCreatePayload
 ): Promise<Project> => {
   try {
-    const response = await axios.post<Project>(
-      API_BASE,
-      project,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      }
-    );
+    const response = await axios.post<Project>(API_BASE, project, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
 
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(
-        error.response?.data?.message || 'Failed to create project'
+        error.response?.data?.message || "Failed to create project"
       );
     }
     throw error;
@@ -133,25 +136,21 @@ export const updateProject = async (
   updates: ProjectUpdatePayload
 ): Promise<Project> => {
   try {
-    const response = await axios.put<Project>(
-      `${API_BASE}/${id}`,
-      updates,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      }
-    );
+    const response = await axios.put<Project>(`${API_BASE}/${id}`, updates, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
 
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 404) {
-        throw new Error('Project not found');
+        throw new Error("Project not found");
       }
       throw new Error(
-        error.response?.data?.message || 'Failed to update project'
+        error.response?.data?.message || "Failed to update project"
       );
     }
     throw error;
@@ -165,21 +164,18 @@ export const updateProject = async (
  */
 export const deleteProject = async (id: string): Promise<string> => {
   try {
-    const response = await axios.delete<DeleteResponse>(
-      `${API_BASE}/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.delete<DeleteResponse>(`${API_BASE}/${id}`, {
+      withCredentials: true,
+    });
 
     return response.data.message;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 404) {
-        throw new Error('Project not found');
+        throw new Error("Project not found");
       }
       throw new Error(
-        error.response?.data?.message || 'Failed to delete project'
+        error.response?.data?.message || "Failed to delete project"
       );
     }
     throw error;
@@ -201,11 +197,9 @@ export const getProjectById = async (id: string): Promise<Project> => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 404) {
-        throw new Error('Project not found');
+        throw new Error("Project not found");
       }
-      throw new Error(
-        error.response?.data?.message || 'Failed to get project'
-      );
+      throw new Error(error.response?.data?.message || "Failed to get project");
     }
     throw error;
   }
@@ -220,21 +214,24 @@ export const getFeaturedProjects = async (): Promise<Project[]> => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(
-        error.response?.data?.message || 'Failed to get featured projects'
+        error.response?.data?.message || "Failed to get featured projects"
       );
     }
     throw error;
   }
 };
 
-export const starProject = async (id: string, action: 'add' | 'remove'): Promise<string> => {
+export const starProject = async (
+  id: string,
+  action: "add" | "remove"
+): Promise<string> => {
   try {
     const response = await axios.put<string>(
       `${API_BASE}/star/${id}`,
       { action },
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         withCredentials: true,
       }
@@ -242,7 +239,9 @@ export const starProject = async (id: string, action: 'add' | 'remove'): Promise
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data?.message || 'Failed to star project');
+      throw new Error(
+        error.response?.data?.message || "Failed to star project"
+      );
     }
     throw error;
   }
@@ -256,7 +255,28 @@ export const getStarredProjects = async (): Promise<Project[]> => {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      throw new Error(error.response?.data?.message || 'Failed to get starred projects');
+      throw new Error(
+        error.response?.data?.message || "Failed to get starred projects"
+      );
+    }
+    throw error;
+  }
+};
+
+export const getPendingProjectsByTA = async (taMail: string): Promise<Project[]> => {
+  try {
+    if (!taMail) {
+      return [];
+    }
+    const response = await axios.get<Project[]>(`${API_BASE}/pending-by-ta/${taMail}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        error.response?.data?.message || "Failed to get project by TA"
+      );
     }
     throw error;
   }

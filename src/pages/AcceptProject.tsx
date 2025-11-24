@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect } from "react";
 import {
     Box,
 } from "@mui/material";
-import { useProjects } from "../hooks/useProjects";
+import { useGetPendingProjectsByTA, useUpdateProject } from "../hooks/useProjects";
 import ProjectHeader from "../components/ProjectHeader/ProjectHeader";
 import { ProjectInfoCard } from "../components/ProjectInfoCard/ProjectInfoCard";
 import ProjectRequestAction from "../components/ProjectRequestAction/ProjectRequestAction";
@@ -12,6 +12,10 @@ import type { Project } from "../types";
 import LoadingState from "../components/LoadingState/LoadingState";
 import ErrorState from "../components/ErrorState/ErrorState";
 import EmptyResults from "../components/EmptyResults/EmptyResults";
+import { userAtom } from "../atoms/authAtom";
+import { useAtom } from "jotai";
+import { useToastContext } from "../contexts/ToastContext";
+import { useTranslation } from "react-i18next";
 
 type MediaItem = {
     type: "image" | "video";
@@ -19,21 +23,31 @@ type MediaItem = {
 };
 
 const AcceptProject = () => {
-    const { data: projectsData, isLoading, isError, error } = useProjects(1, 6);
-
+    const [user] = useAtom(userAtom);
+    const { showSuccess } = useToastContext();
+    const { data: projectsData, isLoading, isError, error } = useGetPendingProjectsByTA(user?.email!);
+    const {isPending: isUpdating, mutate: updateProjectMutation} = useUpdateProject();
+    const { t } = useTranslation();
+    
     const [activeProject, setActiveProject] = useState<Project | null>(null);
-    const [selectedAction, setSelectedAction] =
-        useState<"accept" | "decline" | null>(null);
-
     const handleActionClick = (action: "accept" | "decline") => {
-        setSelectedAction(action);
+        if (action === "accept") {
+            updateProjectMutation({ id: activeProject?._id!, updates: { status: "accepted", taMail: user?.email! }, taMail: user?.email! });
+            showSuccess(t("ProjectRequest.projectAccepted"));
+        } else {
+            updateProjectMutation({ id: activeProject?._id!, updates: { status: "rejected", taMail: user?.email! }, taMail: user?.email! });
+            showSuccess(t("ProjectRequest.projectRejected"));
+        }
+
     };
 
     useEffect(() => {
-        if (!activeProject && projectsData?.projects?.length) {
-            setActiveProject(projectsData.projects[0]);
+        if ( projectsData && projectsData.length > 0  && !isUpdating && !isLoading) {
+            setActiveProject(projectsData[0]);
+        }else{
+            setActiveProject(null);
         }
-    }, [projectsData, activeProject]);
+    }, [projectsData]);
 
     const media: MediaItem[] = useMemo(() => {
         if (!activeProject) return [];
@@ -54,7 +68,7 @@ const AcceptProject = () => {
         return <ErrorState error={error} />;
     }
 
-    if (!activeProject) {
+    if (!activeProject && !isUpdating && !isLoading) {
         return <EmptyResults message="ProjectRequest.noProjects" />;
     }
 
@@ -71,12 +85,12 @@ const AcceptProject = () => {
             }}
         >
             <ProjectSidebar
-                projectsData={projectsData}
+                projectsData={{ projects: projectsData || [] }}
                 activeProject={activeProject}
                 setActiveProject={setActiveProject}
             />
             <ProjectHeader
-                title={activeProject?.title}
+                title={activeProject?.title || ""}
                 media={media}
             />
             <ProjectInfoCard
@@ -85,15 +99,14 @@ const AcceptProject = () => {
                 teamMembers={activeProject?.teamMembers}
                 supervisor={activeProject?.supervisor}
                 repoUrl={activeProject?.repoUrl}
-                stars={activeProject?.stars}
-                projectId={activeProject?._id}
+                stars={activeProject?.stars || 0}
+                projectId={activeProject?._id || ""}
                 description={activeProject?.description}
                 technologies={activeProject?.technologies}
                 tags={activeProject?.tags}
                 createdAt={activeProject?.createdAt}
             />
             <ProjectRequestAction
-                selectedAction={selectedAction}
                 handleActionClick={handleActionClick}
             />
         </Box>
