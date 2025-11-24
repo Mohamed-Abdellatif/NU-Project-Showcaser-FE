@@ -25,20 +25,38 @@ type MediaItem = {
 const AcceptProject = () => {
     const [user] = useAtom(userAtom);
     const { showSuccess } = useToastContext();
-    const { data: projectsData, isLoading, isError, error } = useGetPendingProjectsByTA(user?.email!);
+    const email = user?.email;
+    const { data: projectsData, isLoading, isError, error } = useGetPendingProjectsByTA(email);
     const {isPending: isUpdating, mutate: updateProjectMutation} = useUpdateProject();
     const { t } = useTranslation();
     
     const [activeProject, setActiveProject] = useState<Project | null>(null);
+    
+    if (!email) {
+        return <LoadingState />;
+    }
+    
     const handleActionClick = (action: "accept" | "decline") => {
-        if (action === "accept") {
-            updateProjectMutation({ id: activeProject?._id!, updates: { status: "accepted", taMail: user?.email! }, taMail: user?.email! });
-            showSuccess(t("ProjectRequest.projectAccepted"));
-        } else {
-            updateProjectMutation({ id: activeProject?._id!, updates: { status: "rejected", taMail: user?.email! }, taMail: user?.email! });
-            showSuccess(t("ProjectRequest.projectRejected"));
+        if (!activeProject || !user?.email) {
+            return;
         }
-
+        
+        const status = action === "accept" ? "accepted" : "rejected";
+        const successMessage = action === "accept" 
+            ? t("ProjectRequest.projectAccepted")
+            : t("ProjectRequest.projectRejected");
+        
+        updateProjectMutation(
+            { 
+                id: activeProject._id, 
+                updates: { status, taMail: email } 
+            },
+            {
+                onSuccess: () => {
+                    showSuccess(successMessage);
+                }
+            }
+        );
     };
 
     useEffect(() => {

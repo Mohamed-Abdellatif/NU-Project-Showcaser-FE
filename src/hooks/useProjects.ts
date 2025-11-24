@@ -90,13 +90,19 @@ export const useCreateProject = () => {
 export const useUpdateProject = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<Project, Error, { id: string; updates: ProjectUpdatePayload, taMail: string }>({
-    mutationFn: ({ id, updates }: { id: string; updates: ProjectUpdatePayload, taMail: string }) => updateProject(id, updates),
-    onSuccess: (_data: Project, variables: { id: string; updates: ProjectUpdatePayload, taMail: string }) => {
+  return useMutation<Project, Error, { id: string; updates: ProjectUpdatePayload; taMail?: string }>({
+    mutationFn: (vars) => {
+      const { id, updates } = vars;
+      return updateProject(id, updates);
+    },
+    onSuccess: (_data: Project, variables: { id: string; updates: ProjectUpdatePayload; taMail?: string }) => {
       // Invalidate the specific project detail and all lists
       queryClient.invalidateQueries({ queryKey: projectKeys.detail(variables.id) });
       queryClient.invalidateQueries({ queryKey: projectKeys.lists() });
-      queryClient.invalidateQueries({ queryKey: projectKeys.pendingByTA(variables.taMail!) });
+      const taMail = variables.taMail || variables.updates.taMail;
+      if (taMail) {
+        queryClient.invalidateQueries({ queryKey: projectKeys.pendingByTA(taMail) });
+      }
     },
   });
 };
@@ -145,9 +151,15 @@ export const useStarredProjects = () => {
   });
 };
 
-export const useGetPendingProjectsByTA = (taMail: string) => {
+export const useGetPendingProjectsByTA = (taMail: string | undefined) => {
   return useQuery<Project[], Error>({
-    queryKey: projectKeys.pendingByTA(taMail),
-    queryFn: () => getPendingProjectsByTA(taMail),
+    queryKey: projectKeys.pendingByTA(taMail || ''),
+    queryFn: () => {
+      if (!taMail) {
+        throw new Error('taMail is required');
+      }
+      return getPendingProjectsByTA(taMail);
+    },
+    enabled: !!taMail,
   });
 };
