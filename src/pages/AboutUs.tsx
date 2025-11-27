@@ -1,24 +1,28 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Container, Grid, Paper } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import PersonIcon from "@mui/icons-material/Person";
-import HailIcon from '@mui/icons-material/Hail';
-import DeleteIcon from '@mui/icons-material/Delete';
-import StarIcon from "@mui/icons-material/Star";
+import * as Icons from "@mui/icons-material";
+
+const HailIcon = Icons.Hail;
+const StarIcon = Icons.Star;
+const CodeIcon = Icons.Code;
+const AllInclusiveIcon = Icons.AllInclusive;
+
 
 const AboutUsSection = () => {
   const { t } = useTranslation();
 
   const teamMembers = [
-    { icon: <PersonIcon sx={{ fontSize: 40, color: "#B355F2" ,border: "3px solid rgba(255, 255, 255, 0.62)"}} />, name: "Mohamed" },
-    { icon: <HailIcon sx={{ fontSize: 40, color: "#B355F2" ,border: "3px solid rgba(255, 255, 255, 0.62)"}} />, name: "Fahd" },
-    { icon: <DeleteIcon sx={{ fontSize: 40, color: "#B355F2" ,border: "3px solid rgba(255, 255, 255, 0.62)"}} />, name: "Zeyad" },
-    { icon: <StarIcon sx={{ fontSize: 40, color: "#B355F2" ,border: "3px solid rgba(255, 255, 255, 0.62)"}} />, name: "Omar" },
+    { icon: <AllInclusiveIcon sx={{ fontSize: 40, color: "#9900ffff" }} />, name: "Mohamed", description: "Full Stack Developer" },
+    { icon: <HailIcon sx={{ fontSize: 40, color: "#9900ffff" }} />, name: "Fahd", description: "Frontend Developer" },
+    { icon: <CodeIcon sx={{ fontSize: 40, color: "#9900ffff" }} />, name: "Zeyad", description: "Frontend Developer" },
+    { icon: <StarIcon sx={{ fontSize: 40, color: "#9900ffff" }} />, name: "Omar", description: "Backend Developer" },
   ];
 
   return (
     <Box
       sx={{
         width: "100%",
+        height: "100vh",
         py: 12,
         px: 2,
         background: "#ffd6e8",
@@ -27,95 +31,85 @@ const AboutUsSection = () => {
         alignItems: "center",
       }}
     >
-      {/* Title */}
-      <Typography
-        variant="h3"
-        sx={{
-          fontWeight: "bold",
-          color: "#6a2c68",
-          mb: 2,
-          borderBottom: "3px solid #fff",
-          pb: 1,
-        }}
-      >
-        {t("about.title")}
-      </Typography>
-
-      {/* Description */}
-      <Typography
-        variant="body1"
-        sx={{
-          color: "#6a2c68",
-          maxWidth: 600,
-          textAlign: "center",
-          mb: 8,
-        }}
-      >
-        {t("about.subtitle")}
-      </Typography>
-
-      <Box
-        sx={{
-          width: { xs: "90%", sm: "80%", md: "70%" },
-          position: "relative",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Box
+      <Container maxWidth="lg" sx={{ zIndex: 1 }}>
+        {/* Title */}
+        <Typography
+          variant="h2"
+          align="center"
           sx={{
-            position: "absolute",
-            top: "50%",
-            left: 5,
-            right: 5,
-            height: 8,
-            backgroundColor: "rgba(255,255,255,0.7)",
-            zIndex: 1,
-            transform: "translateY(-180%)",
+            fontWeight: 800,
+            color: "#6a2c68",
+            mb: 2,
+            textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
           }}
-        />
+        >
+          {t("about.title")}
+        </Typography>
 
-        {/* Circles */}
-        {teamMembers.map((member, idx) => (
-          <Box
-            key={idx}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              position: "relative",
-              zIndex: 2,
-            }}
-          >
-            <Box
-              sx={{
-                width: 100,
-                height: 100,
-                borderRadius: "50%",
-                background: "radial-gradient(circle, #faf2e6 0%, #ffd6e8 100%)",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
-                mb: 2,
-              }}
-            >
-              {member.icon}
-            </Box>
-            <Typography
-              sx={{
-                color: "#6a2c68",
-                fontWeight: "bold",
-                fontSize: { xs: "0.85rem", sm: "1rem" },
-              }}
-            >
-              {member.name}
-            </Typography>
-          </Box>
-        ))}
-      </Box>
+        {/* Description */}
+        <Typography
+          variant="h6"
+          align="center"
+          sx={{
+            color: "#8a4c88",
+            maxWidth: 700,
+            mx: "auto",
+            mb: 10,
+            lineHeight: 1.6,
+          }}
+        >
+          {t("about.subtitle")}
+        </Typography>
+
+        {/* Team Grid */}
+        <Grid container spacing={4} justifyContent="center">
+          {teamMembers.map((member, idx) => (
+            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={idx}>
+              <Paper
+                elevation={3}
+                sx={{
+                  p: 4,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  borderRadius: 4,
+                  background: "#FFFFFF",
+                  border: "#B355F2",
+                }}
+              >
+                <Box
+                  className="icon-box"
+                  sx={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: "50%",
+                    background: "linear-gradient(135deg, #B355F2 0%, #C88BFF 50%, #FFD6E8 100%)",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    mb: 3,
+                  }}
+                >
+                  {member.icon}
+                </Box>
+                <Typography
+                  variant="h6"
+                  align="center"
+                  sx={{
+                    fontWeight: "bold",
+                    color: "#4a1c48",
+                  }}
+                >
+                  {member.name}
+                  <Typography variant="body1" align="center">
+                    {member.description}
+                  </Typography>
+                </Typography>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </Box>
   );
 };
