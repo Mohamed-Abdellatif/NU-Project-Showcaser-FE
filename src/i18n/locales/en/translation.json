@@ -104,7 +104,9 @@
     "Drag and drop images here, or click to browse": "Drag and drop images here, or click to browse",
     "Drag and drop video here, or click to browse": "Drag and drop video here, or click to browse",
     "Enter member name": "Enter member name",
-    "Teaching Assistant Email": "Teaching Assistant Email"
+    "Teaching Assistant Email": "Teaching Assistant Email",
+    "Video Too Big!": "Video Too Big!",
+    "Cancel": "Cancel"
   },
   "projects": {
     "title": "All Projects",

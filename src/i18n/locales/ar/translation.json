@@ -104,7 +104,10 @@
     "Drag and drop images here, or click to browse": "اسحب وأفلت الصور هنا، أو انقر للتصفح",
     "Drag and drop video here, or click to browse": "اسحب وأفلت الفيديو هنا، أو انقر للتصفح",
     "Enter member name": "أدخل اسم العضو",
-    "Teaching Assistant Email": "البريد الإلكتروني للمساعد التدريسي"
+    "Teaching Assistant Email": "البريد الإلكتروني للمساعد التدريسي",
+    "Video Too Big!": "الفيديو كبير جدًا!",
+    "Cancel": "إلغاء"
+    
   },
   "projects": {
     "title": "جميع المشاريع",

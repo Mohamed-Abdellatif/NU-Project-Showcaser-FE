@@ -87,7 +87,7 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
                     component="img"
                     image={item.src}
                     alt={`media-${idx}`}
-                    sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    sx={{ width: "100%", height: "100%", objectFit: "fill" }}
                   />
                 ) : (
                   <CardMedia

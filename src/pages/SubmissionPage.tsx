@@ -8,7 +8,7 @@ import {
   Grid,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useCreateProject } from "../hooks/useProjects";
 import { useUploadImage, useUploadVideo } from "../hooks/useMedia";
 import type { Member } from "../types/submission";
@@ -22,6 +22,11 @@ const SubmitionPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { showSuccess, showError, showWarning } = useToastContext();
+
+  const lastRequestTimeRef = useRef<number>(0);
+  const COOLDOWN_MS = 5000; // 5 seconds
+
+
 
   const createProject = useCreateProject();
   const uploadImage = useUploadImage();
@@ -62,6 +67,13 @@ const SubmitionPage = () => {
 
   const handleVideoUpload = (files: File[]) => {
     if (files.length > 0) {
+      const file = files[0];
+      const MAX_SIZE = 50 * 1024 * 1024;
+
+      if (file.size > MAX_SIZE) {
+        showWarning(t("submissionPage.Video Too Big!"));
+        return;
+      }
       setVideo(files[0]);
     }
   };
@@ -113,13 +125,24 @@ const SubmitionPage = () => {
       !projectTitle.trim() ||
       !repoLink.trim() ||
       !teamLeaderFirstName.trim() ||
-      !teamLeaderLastName.trim()
+      !teamLeaderLastName.trim() ||
+      !supervisor.trim() ||
+      !teachingAssistantEmail.trim()
     ) {
       showError(t("submissionPage.Error: Please fill in all required fields."));
       return;
     }
 
     try {
+      const now = Date.now();
+      const timeSinceLastRequest = now - lastRequestTimeRef.current;
+
+      if (timeSinceLastRequest < COOLDOWN_MS) {
+        return;
+      }
+
+      lastRequestTimeRef.current = now;
+
       // Upload images if any
       let imageUrls: string[] = [];
       if (image.length > 0) {
@@ -171,9 +194,21 @@ const SubmitionPage = () => {
       createProject.mutate(formData, {
         onSuccess: () => {
           showSuccess(t("submissionPage.Project submitted successfully!"));
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
+          setCourse("");
+          setDescription("");
+          setImage([]);
+          setLiveUrl("");
+          setMembers([{ firstName: "", lastName: "" }]);
+          setProjectTitle("");
+          setRepoLink("");
+          setSupervisor("");
+          setTags("");
+          setTechnologies("");
+          setTeachingAssistantEmail("");
+          setTeamLeaderFirstName("");
+          setTeamLeaderLastName("");
+          setVideo(null);
+          navigate("/");
         },
         onError: (error) => {
           console.error("Failed to create project:", error);
@@ -337,7 +372,7 @@ const SubmitionPage = () => {
                 }}
                 onClick={handleCancel}
               >
-                Cancel
+                {t("submissionPage.Cancel")}
               </Button>
             </Box>
           </Box>
