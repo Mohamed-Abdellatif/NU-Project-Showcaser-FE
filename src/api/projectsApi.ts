@@ -29,8 +29,18 @@ export const searchProjects = async (
     if (params?.title) queryParams.append("title", params.title);
     if (params?.major) queryParams.append("major", params.major);
     if (params?.supervisor) queryParams.append("supervisor", params.supervisor);
-    if (params?.teamMember) queryParams.append("teamMember", params.teamMember);
-    if (params?.teamLeader) queryParams.append("teamLeader", params.teamLeader);
+    if (params?.teamLeader) {
+      const teamLeaderValue = typeof params.teamLeader === 'string'
+        ? params.teamLeader
+        : JSON.stringify(params.teamLeader);
+      queryParams.append("teamLeader", teamLeaderValue);
+    }
+    if (params?.teamMembers) {
+      const teamMembersValue = Array.isArray(params.teamMembers)
+        ? JSON.stringify(params.teamMembers)
+        : params.teamMembers;
+      queryParams.append("teamMembers", teamMembersValue);
+    }
 
     const queryString = queryParams.toString();
     const url = queryString
@@ -74,10 +84,18 @@ export const getProjects = async (
     if (filters?.major) queryParams.append("major", filters.major);
     if (filters?.supervisor)
       queryParams.append("supervisor", filters.supervisor);
-    if (filters?.teamMember)
-      queryParams.append("teamMember", filters.teamMember);
-    if (filters?.teamLeader)
-      queryParams.append("teamLeader", filters.teamLeader);
+    if (filters?.teamLeader) {
+      const teamLeaderValue = typeof filters.teamLeader === 'string'
+        ? filters.teamLeader
+        : JSON.stringify(filters.teamLeader);
+      queryParams.append("teamLeader", teamLeaderValue);
+    }
+    if (filters?.teamMembers) {
+      const teamMembersValue = Array.isArray(filters.teamMembers)
+        ? JSON.stringify(filters.teamMembers)
+        : filters.teamMembers;
+      queryParams.append("teamMembers", teamMembersValue);
+    }
     if (filters?.course) queryParams.append("course", filters.course);
 
     const response = await axios.get<PaginatedProjectsResponse>(
