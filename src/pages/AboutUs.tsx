@@ -7,14 +7,24 @@ const HailIcon = Icons.Hail;
 const StarIcon = Icons.Star;
 const CodeIcon = Icons.Code;
 const AllInclusiveIcon = Icons.AllInclusive;
+const MailIcon = Icons.Mail;
+const GitHubIcon = Icons.GitHub;
+const LinkedInIcon = Icons.LinkedIn;
 
-const focusY = 840;
+
+const focusY = -450;
 const zoom = 180;
 
 // Animations
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+`;
+
+const float = keyframes`
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
 `;
 
 
@@ -27,32 +37,44 @@ const AboutUsSection = () => {
       name: "Mohamed",
       description: "Full Stack Developer",
       mail: "m.abdellatif2319@nu.edu.eg",
+      mailIcon: <MailIcon sx={{ fontSize: 30, color: "#0f6cbd" }} />,
       github: "https://github.com/Mohamed-Abdellatif",
-      linkedIn: "https://www.linkedin.com/in/mohamed-abdellatif-6060371b0/"
+      githubIcon: <GitHubIcon sx={{ fontSize: 30, color: "#383737" }} />,
+      linkedIn: "https://www.linkedin.com/in/mohamed-abdellatif-6060371b0/",
+      linkedInIcon: <LinkedInIcon sx={{ fontSize: 30, color: "#126bc4" }} />,
     },
     {
       icon: <HailIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
       name: "Fahd",
       description: "Frontend Developer",
       mail: "f.Essameldin2333@nu.edu.eg",
+      mailIcon: <MailIcon sx={{ fontSize: 30, color: "#0f6cbd" }} />,
       github: "https://github.com/FahdKhater",
-      linkedIn: "https://www.linkedin.com/in/fahd-khater-8698a02b0/"
+      githubIcon: <GitHubIcon sx={{ fontSize: 30, color: "#383737" }} />,
+      linkedIn: "https://www.linkedin.com/in/fahd-khater-8698a02b0/",
+      linkedInIcon: <LinkedInIcon sx={{ fontSize: 30, color: "#126bc4" }} />,
     },
     {
       icon: <CodeIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
       name: "Zeyad",
       description: "Frontend Developer",
       mail: "z.ahmed2310@nu.edu.eg",
+      mailIcon: <MailIcon sx={{ fontSize: 30, color: "#0f6cbd" }} />,
       github: "https://github.com/Zeyad-Ahmed2005",
-      linkedIn: "https://www.linkedin.com/in/zeyad-ahmed-b57019278/"
+      githubIcon: <GitHubIcon sx={{ fontSize: 30, color: "#383737" }} />,
+      linkedIn: "https://www.linkedin.com/in/zeyad-ahmed-b57019278/",
+      linkedInIcon: <LinkedInIcon sx={{ fontSize: 30, color: "#126bc4" }} />,
     },
     {
       icon: <StarIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
       name: "Omar",
       description: "Backend Developer",
       mail: "o.tamer2391@nu.edu.eg",
+      mailIcon: <MailIcon sx={{ fontSize: 30, color: "#0f6cbd" }} />,
       github: "https://github.com/Lark01",
-      linkedIn: "https://www.linkedin.com/in/omar-abouhussein-a371592b7/"
+      githubIcon: <GitHubIcon sx={{ fontSize: 30, color: "#383737" }} />,
+      linkedIn: "https://www.linkedin.com/in/omar-abouhussein-a371592b7/",
+      linkedInIcon: <LinkedInIcon sx={{ fontSize: 30, color: "#126bc4" }} />,
     },
   ];
 
@@ -120,16 +142,17 @@ const AboutUsSection = () => {
                   borderRadius: 4,
                   background: "#FFFFFF",
                   border: "#B355F2",
-                  animation: `${fadeIn} 0.8s ease-out ${0.4 + idx * 0.1}s backwards`,
-                  "&:hover": {
-                    transform: "translateY(-10px)",
-                    boxShadow: "0 20px 40px rgba(179, 85, 242, 0.2)",
-                    background: "rgba(255, 255, 255, 0.8)",
-                    "& .icon-box": {
-                      transform: "scale(1.1) rotate(5deg)",
-                      background: "linear-gradient(135deg, #B355F2 0%, #C88BFF 50%, #FFD6E8 100%)",
-                    },
-                  },
+                  animation: `${float} 6s ease-out ${1 + idx * 1.5}s backwards infinite`,
+                  // animation: `${fadeIn} 0.8s ease-out ${0.4 + idx * 0.1}s backwards`,
+                  // "&:hover": {
+                  //   transform: "translateY(-10px)",
+                  //   boxShadow: "0 20px 40px rgba(179, 85, 242, 0.2)",
+                  //   background: "rgba(255, 255, 255, 0.8)",
+                  //   "& .icon-box": {
+                  //     transform: "scale(1.1) rotate(5deg)",
+                  //     background: "linear-gradient(135deg, #B355F2 0%, #C88BFF 50%, #FFD6E8 100%)",
+                  //   },
+                  // },
                 }}
               >
                 <Box className="icon-box"
@@ -157,6 +180,17 @@ const AboutUsSection = () => {
                   {member.name}
                   <Typography variant="body1" align="center">
                     {member.description}
+                  </Typography>
+                  <Typography align="center">
+                    <a href={`mailto:${member.mail}`} style={{ marginRight: "5px", marginLeft: "5px" }}>
+                      {member.mailIcon}
+                    </a>
+                    <a href={member.github} style={{ marginRight: "5px", marginLeft: "5px" }}>
+                      {member.githubIcon}
+                    </a>
+                    <a href={member.linkedIn} style={{ marginRight: "5px", marginLeft: "5px" }}>
+                      {member.linkedInIcon}
+                    </a>
                   </Typography>
                 </Typography>
               </Paper>
