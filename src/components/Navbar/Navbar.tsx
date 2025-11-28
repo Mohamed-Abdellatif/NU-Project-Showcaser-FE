@@ -21,6 +21,10 @@ import { useAtom } from "jotai";
 import { isAuthenticatedAtom, userAtom } from "../../atoms/authAtom";
 import type { User } from "../../types";
 import { useAuth } from "../../hooks/useAuth";
+
+const LOGIN_MICROSOFT_BASE = `${import.meta.env.VITE_API_BASE}/auth/microsoft`;
+const LOGOUT_BASE = `${import.meta.env.VITE_API_BASE}/auth/logout`;
+
 export const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
@@ -44,11 +48,11 @@ export const Navbar = () => {
   };
 
   const handleLogin = () => {
-    window.location.href = "http://localhost:3000/auth/microsoft";
+    window.location.href = LOGIN_MICROSOFT_BASE;
   };
 
   const handleLogout = async () => {
-    window.location.href = "http://localhost:3000/auth/logout";
+    window.location.href = LOGOUT_BASE;
     setIsAuthenticated(false);
   };
 

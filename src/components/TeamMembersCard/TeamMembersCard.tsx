@@ -1,33 +1,74 @@
 import { Card, CardContent, Typography, Grid, TextField, Box, Chip, Button } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import type { Member } from "../../types/submission";
+import { useState } from "react";
+import type { Member } from "../../types/index";
 
 interface TeamMembersCardProps {
-    teamLeaderFirstName: string;
-    teamLeaderLastName: string;
+    teamLeader: string;
+    teamLeaderEmail: string;
     members: Member[];
-    newMemberName: string;
-    onTeamLeaderFirstNameChange: (value: string) => void;
-    onTeamLeaderLastNameChange: (value: string) => void;
-    onNewMemberNameChange: (value: string) => void;
+    newMember: Member;
+    onNewMemberChange: (value: Member) => void;
     onAddMember: () => void;
     onRemoveMember: (index: number) => void;
 }
 
 const TeamMembersCard = ({
-    teamLeaderFirstName,
-    teamLeaderLastName,
+    teamLeader,
     members,
-    newMemberName,
-    onTeamLeaderFirstNameChange,
-    onTeamLeaderLastNameChange,
-    onNewMemberNameChange,
+    newMember,
+    onNewMemberChange,
     onAddMember,
     onRemoveMember,
+    teamLeaderEmail,
 }: TeamMembersCardProps) => {
     const { t, i18n } = useTranslation();
     const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+    const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
+
+    const validateEmail = (email: string): boolean => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        
+        const newErrors: { name?: string; email?: string } = {};
+        
+        if (!newMember.name.trim()) {
+            newErrors.name = t("submissionPage.Name is required") || "Name is required";
+        }
+        
+        if (!newMember.email.trim()) {
+            newErrors.email = t("submissionPage.Email is required") || "Email is required";
+        } else if (!validateEmail(newMember.email)) {
+            newErrors.email = t("submissionPage.Please enter a valid email address") || "Please enter a valid email address";
+        }
+        
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+        
+        setErrors({});
+        onAddMember();
+    };
+
+    const handleNameChange = (value: string) => {
+        onNewMemberChange({ name: value, email: newMember.email });
+        if (errors.name) {
+            setErrors({ ...errors, name: undefined });
+        }
+    };
+
+    const handleEmailChange = (value: string) => {
+        onNewMemberChange({ name: newMember.name, email: value });
+        if (errors.email) {
+            setErrors({ ...errors, email: undefined });
+        }
+    };
 
     return (
         <Card
@@ -56,11 +97,10 @@ const TeamMembersCard = ({
                 <Grid container spacing={2} sx={{ mb: 3 }}>
                     <Grid size={{ xs: 6 }}>
                         <TextField
-                            label={t("submissionPage.First Name")}
+                            label={t("submissionPage.name")}
                             fullWidth
                             required
-                            value={teamLeaderFirstName}
-                            onChange={(e) => onTeamLeaderFirstNameChange(e.target.value)}
+                            value={teamLeader ? `${teamLeader.split(" ")[0]} ${teamLeader.split(" ")[1]}` : ""}
                             dir={currentDir}
                             sx={{
                                 direction: currentDir,
@@ -76,15 +116,15 @@ const TeamMembersCard = ({
                                     dir: currentDir,
                                 },
                             }}
+                            disabled
                         />
                     </Grid>
                     <Grid size={{ xs: 6 }}>
                         <TextField
-                            label={t("submissionPage.Last Name")}
+                            label={t("submissionPage.email")}
                             fullWidth
                             required
-                            value={teamLeaderLastName}
-                            onChange={(e) => onTeamLeaderLastNameChange(e.target.value)}
+                            value={teamLeaderEmail}
                             dir={currentDir}
                             sx={{
                                 direction: currentDir,
@@ -100,6 +140,7 @@ const TeamMembersCard = ({
                                     dir: currentDir,
                                 },
                             }}
+                            disabled
                         />
                     </Grid>
                 </Grid>
@@ -107,12 +148,13 @@ const TeamMembersCard = ({
                 {/* Team Members as Chips */}
                 <Box sx={{ mb: 2, display: "flex", flexWrap: "wrap", gap: 1 }}>
                     {members.map((member, index) => {
-                        const fullName = `${member.firstName} ${member.lastName}`.trim();
+                        const fullName = `${member.name}`.trim();
+                        const email = `${member.email}`.trim();
                         if (!fullName) return null;
                         return (
                             <Chip
                                 key={index}
-                                label={fullName}
+                                label={`${fullName} (${email})`}
                                 onDelete={() => onRemoveMember(index)}
                                 sx={{
                                     bgcolor: "#e1bee7",
@@ -126,19 +168,42 @@ const TeamMembersCard = ({
                     })}
                 </Box>
 
-                {/* Add Member Input */}
-                <Box sx={{ display: "flex", gap: 1, mb: 2, alignItems: "center" }}>
+                {/* Add Member Form */}
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    sx={{ display: "flex", gap: 1, mb: 2, alignItems: "flex-start" }}
+                >
                     <TextField
                         placeholder={t("submissionPage.Enter member name")}
                         fullWidth
                         size="small"
-                        value={newMemberName}
-                        onChange={(e) => onNewMemberNameChange(e.target.value)}
-                        onKeyPress={(e) => {
-                            if (e.key === "Enter") {
-                                onAddMember();
-                            }
+                        value={newMember.name}
+                        onChange={(e) => handleNameChange(e.target.value)}
+                        error={!!errors.name}
+                        helperText={errors.name}
+                        required
+                        sx={{
+                            "& .MuiInputBase-input": {
+                                direction: currentDir,
+                            },
                         }}
+                        slotProps={{
+                            input: {
+                                dir: currentDir,
+                            },
+                        }}
+                    />
+                    <TextField
+                        placeholder={t("submissionPage.Enter member email")}
+                        fullWidth
+                        size="small"
+                        value={newMember.email}
+                        onChange={(e) => handleEmailChange(e.target.value)}
+                        error={!!errors.email}
+                        helperText={errors.email}
+                        type="email"
+                        required
                         sx={{
                             "& .MuiInputBase-input": {
                                 direction: currentDir,
@@ -151,9 +216,9 @@ const TeamMembersCard = ({
                         }}
                     />
                     <Button
+                        type="submit"
                         variant="contained"
                         startIcon={<Add />}
-                        onClick={onAddMember}
                         size="small"
                         sx={{
                             bgcolor: "#6a1b9a",
@@ -161,7 +226,7 @@ const TeamMembersCard = ({
                             minWidth: "auto",
                             px: 2,
                             whiteSpace: "nowrap",
-                            height: "40px",
+                            height: "39px",
                         }}
                     >
                         {t("submissionPage.Add Member")}

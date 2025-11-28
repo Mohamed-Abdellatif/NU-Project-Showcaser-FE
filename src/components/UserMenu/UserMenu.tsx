@@ -12,7 +12,8 @@ interface UserMenuProps {
 }
 
 export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
-  const [profileMenuAnchorEl, setProfileMenuAnchorEl] = useState<null | HTMLElement>(null);
+  const [profileMenuAnchorEl, setProfileMenuAnchorEl] =
+    useState<null | HTMLElement>(null);
   const [user] = useAtom<User | null>(userAtom);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -23,7 +24,6 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
     const lastInitial = user.lastName?.[0]?.toUpperCase() || "";
     return `${firstInitial}.${lastInitial}` || "U";
   };
-  
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setProfileMenuAnchorEl(event.currentTarget);
@@ -35,7 +35,7 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
 
   const handleProfileClick = () => {
     handleProfileMenuClose();
-    navigate("/profile");
+    navigate(`/profile/${user?.email.split("@")[0]}`);
   };
 
   const handleProjectRequestClick = () => {
@@ -46,7 +46,10 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
     handleProfileMenuClose();
     navigate("/starred-projects");
   };
-
+  const handleSubmitProjectClick = () => {
+    handleProfileMenuClose();
+    navigate("/submit");
+  };
   const handleLogoutClick = () => {
     handleProfileMenuClose();
     onLogout();
@@ -104,20 +107,18 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
           },
         }}
       >
-        <MenuItem onClick={handleProfileClick}>
-          {t("nav.profile")}
-        </MenuItem>
+        <MenuItem onClick={handleProfileClick}>{t("nav.profile")}</MenuItem>
         <MenuItem onClick={handleProjectRequestClick}>
           {t("nav.project-requests")}
         </MenuItem>
         <MenuItem onClick={handleStarredProjectsClick}>
           {t("nav.starred-projects")}
         </MenuItem>
-        <MenuItem onClick={handleLogoutClick}>
-          {t("nav.logout")}
+        <MenuItem onClick={handleSubmitProjectClick}>
+          {t("nav.submit-project")}
         </MenuItem>
+        <MenuItem onClick={handleLogoutClick}>{t("nav.logout")}</MenuItem>
       </Menu>
     </>
   );
 };
-

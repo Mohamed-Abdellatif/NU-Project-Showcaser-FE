@@ -1,17 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import type { Project } from "../../types";
-import {
- 
-    Typography,
-    Card,
-    CardContent,
-    CardMedia,
-    
-  } from "@mui/material";
+import { Typography, Card, CardContent, CardMedia } from "@mui/material";
 
 const RecommendedProjectCard = ({ project }: { project: Project }) => {
   const navigate = useNavigate();
-  return <Card
+  return (
+    <Card
       key={project._id}
       onClick={() => navigate(`/projects/${project._id}`)}
       sx={{
@@ -29,14 +23,16 @@ const RecommendedProjectCard = ({ project }: { project: Project }) => {
         "&:hover": { boxShadow: 5 },
       }}
     >
-      {project.images && project.images[0] && (
-        <CardMedia
-          component="img"
-          height="180"
-          image={project.images[0]}
-          alt={project.title}
-        />
-      )}
+      <CardMedia
+        component="img"
+        height="180"
+        image={
+          project.images[0] ||
+          `https://placehold.co/600x400/8E44AD/FFF?text=${project.title}`
+        }
+        alt={project.title}
+      />
+
       <CardContent>
         <Typography variant="h6" fontWeight="bold">
           {project.title}
@@ -49,6 +45,7 @@ const RecommendedProjectCard = ({ project }: { project: Project }) => {
         </Typography>
       </CardContent>
     </Card>
+  );
 };
 
 export default RecommendedProjectCard;
