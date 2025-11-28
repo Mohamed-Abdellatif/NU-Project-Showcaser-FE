@@ -15,7 +15,8 @@
     "logout": "Logout",
     "profile": "Profile",
     "project-requests": "Project Requests",
-    "starred-projects": "Starred Projects"
+    "starred-projects": "Starred Projects",
+    "submit-project": "Submit Project"
   },
   "home": {
     "title": "Have a Winning Project?",

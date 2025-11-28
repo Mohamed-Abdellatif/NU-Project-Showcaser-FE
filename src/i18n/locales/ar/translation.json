@@ -15,7 +15,8 @@
     "logout": "تسجيل الخروج",
     "profile": "الملف الشخصي",
     "project-requests": "طلبات المشاريع",
-    "starred-projects": "المشاريع المفضلة"
+    "starred-projects": "المشاريع المفضلة",
+    "submit-project": "إرسال مشروع"
   },
   "home": {
     "title": "هل لديك مشروع رائع؟",

@@ -1,7 +1,7 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Box, Button } from "@mui/material";
 import { useAtom } from "jotai";
-import { userAtom } from "../atoms/authAtom";
+import { isAuthenticatedAtom, userAtom } from "../atoms/authAtom";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProjects } from "../hooks/useProjects";
 import ProfileHeader from "../components/ProfileHeader/ProfileHeader";
@@ -9,31 +9,53 @@ import PersonalInfoCard from "../components/PersonalInfoCard/PersonalInfoCard";
 import ProjectShowcase from "../components/ProjectShowcase/ProjectShowcase";
 import { useGetProfileByUserName } from "../hooks/useUser";
 import LoadingState from "../components/LoadingState/LoadingState";
+import ProjectsPagination from "../components/ProjectsPagination/ProjectsPagination";
+import type { PaginatedProjectsResponse } from "../types";
 
 // Main Component
 const UserProfile = () => {
   const { userName } = useParams();
+  const [ ,setIsAuthenticated] = useAtom(isAuthenticatedAtom);
   const { data: userProfileData, isLoading: isLoadingUserProfile } =
     useGetProfileByUserName(userName);
-  const [user] = useAtom(userAtom);
+  const [user, setUser] = useAtom(userAtom);
   const navigate = useNavigate();
+  const isMyProfile = useMemo(() => {
+    return user?.email === userProfileData?.email;
+  }, [user, userProfileData]);
 
   const userData = useMemo(() => {
-    return user || userProfileData;
-  }, [userProfileData, user]);
+    return isMyProfile ? user : userProfileData;
+  }, [user, userProfileData, isMyProfile]);
+
+  // Pagination state
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 10;
 
   // Fetch user's projects (as team leader)
-  const { data: projectsData } = useProjects(1, 10, {
-    teamLeader: { name: "", email: user?.email || "" },
-    teamMembers: [{ name: "", email: user?.email || "" }],
+  const { data: projectsData } = useProjects(page, itemsPerPage, {
+    teamLeader: { name: "", email: userProfileData?.email || "" },
+    teamMembers: [{ name: "", email: userProfileData?.email || "" }],
   });
 
   const userProjects = useMemo(() => {
-    return projectsData?.projects || [];
+    return (
+      (projectsData as PaginatedProjectsResponse | undefined)?.projects || []
+    );
   }, [projectsData]);
 
+  const pagination = useMemo(() => {
+    return (projectsData as PaginatedProjectsResponse | undefined)?.pagination;
+  }, [projectsData]);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
   const handleLogout = () => {
-    // Handle logout - you may need to implement this based on your auth system
+      window.location.href = "http://localhost:3000/auth/logout";
+      setIsAuthenticated(false);
+      setUser(null);
     navigate("/");
   };
 
@@ -65,11 +87,17 @@ const UserProfile = () => {
           width: "100%",
         }}
       >
-        {user && (
+        {user && isMyProfile && (
           <ProfileHeader onEditClick={() => navigate("/edit-profile")} />
         )}
         <PersonalInfoCard user={userData || null} />
-        <ProjectShowcase projects={userProjects} user={user} />
+        <ProjectShowcase projects={userProjects} user={user} isMyProfile={isMyProfile} />
+        {pagination && (
+          <ProjectsPagination
+            pagination={pagination}
+            onPageChange={handlePageChange}
+          />
+        )}
 
         {/* Footer Buttons */}
         <Box
@@ -98,7 +126,7 @@ const UserProfile = () => {
           >
             View All Projects
           </Button>
-          {user && (
+          {user && isMyProfile && (
             <Box
               sx={{
                 display: "flex",

@@ -6,9 +6,10 @@ import ProfileProjectCard from "../ProfileProjectCard/ProfileProjectCard";
 interface ProjectShowcaseProps {
   projects: Project[];
   user: User | null;
+  isMyProfile: boolean;
 }
 
-const ProjectShowcase = ({ projects, user }: ProjectShowcaseProps) => {
+const ProjectShowcase = ({ projects, user, isMyProfile }: ProjectShowcaseProps) => {
   const navigate = useNavigate();
 
   return (
@@ -33,7 +34,7 @@ const ProjectShowcase = ({ projects, user }: ProjectShowcaseProps) => {
         >
           Projects Showcase
         </Typography>
-          {user && (
+          {user && isMyProfile && (
             <Button
             variant="contained"
             onClick={() => navigate("/submit")}
