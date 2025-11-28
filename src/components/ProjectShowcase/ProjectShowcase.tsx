@@ -1,13 +1,14 @@
 import { Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import type { Project } from "../../types";
+import type { Project, User } from "../../types";
 import ProfileProjectCard from "../ProfileProjectCard/ProfileProjectCard";
 
 interface ProjectShowcaseProps {
   projects: Project[];
+  user: User | null;
 }
 
-const ProjectShowcase = ({ projects }: ProjectShowcaseProps) => {
+const ProjectShowcase = ({ projects, user }: ProjectShowcaseProps) => {
   const navigate = useNavigate();
 
   return (
@@ -32,26 +33,27 @@ const ProjectShowcase = ({ projects }: ProjectShowcaseProps) => {
         >
           Projects Showcase
         </Typography>
-        <Button
-          variant="contained"
-          onClick={() => navigate("/submit")}
-          sx={{
-            backgroundColor: "#6C3BFF",
-            color: "#ffffff",
-            borderRadius: "16px",
-            px: 3,
-            py: 1.5,
-            textTransform: "none",
-            fontWeight: 600,
-            boxShadow: "0px 4px 16px rgba(108, 59, 255, 0.3)",
-            "&:hover": {
-              backgroundColor: "#5A2FE6",
-              boxShadow: "0px 6px 20px rgba(108, 59, 255, 0.4)",
-            },
-          }}
-        >
-          Submit New Project
-        </Button>
+          {user && (
+            <Button
+            variant="contained"
+            onClick={() => navigate("/submit")}
+            sx={{
+              backgroundColor: "#6C3BFF",
+              color: "#ffffff",
+              borderRadius: "16px",
+              px: 3,
+              py: 1.5,
+              textTransform: "none",
+              fontWeight: 600,
+              boxShadow: "0px 4px 16px rgba(108, 59, 255, 0.3)",
+              "&:hover": {
+                backgroundColor: "#5A2FE6",
+                boxShadow: "0px 6px 20px rgba(108, 59, 255, 0.4)",
+              },
+            }}
+          >
+            Submit New Project
+          </Button>)}
       </Box>
 
       {projects.length > 0 ? (

@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
-  getUserById,
+  getProfileByUserName, 
   updateUser,
   completeProfile,
   getCurrentUser,
@@ -14,25 +14,25 @@ import { authKeys } from './useAuth';
 export const userKeys = {
   all: ['users'] as const,
   details: () => [...userKeys.all, 'detail'] as const,
-  detail: (id: string) => [...userKeys.details(), id] as const,
+  detail: (userName: string) => [...userKeys.details(), userName] as const,
   me: () => [...userKeys.all, 'me'] as const,
 };
 
 /**
- * Hook to fetch user by ID
- * @param userId - User ID to fetch
+ * Hook to fetch user by user name
+ * @param userName - User name to fetch
  * @returns Query result with user object
  */
-export const useGetUser = (userId: string | undefined) => {
+export const useGetProfileByUserName = (userName: string | undefined) => {
   return useQuery<User, Error>({
-    queryKey: userKeys.detail(userId || ''),
+    queryKey: userKeys.detail(userName || ''),
     queryFn: () => {
-      if (!userId) {
-        throw new Error('User ID is required');
+      if (!userName) {
+        throw new Error('User name is required');
       }
-      return getUserById(userId);
+      return getProfileByUserName(userName);
     },
-    enabled: !!userId,
+    enabled: !!userName,
   });
 };
 

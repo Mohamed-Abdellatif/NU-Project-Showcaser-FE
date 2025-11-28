@@ -30,9 +30,9 @@ export interface CompleteProfilePayload {
  * @param userId - User ID
  * @returns User object
  */
-export const getUserById = async (userId: string): Promise<User> => {
+export const getProfileByUserName = async (userName: string): Promise<User> => {
   try {
-    const response = await axios.get<User>(`${USER_BASE}/${userId}`, {
+    const response = await axios.get<User>(`${USER_BASE}/profile/${userName}`, {
       withCredentials: true,
     });
     return response.data;

@@ -112,7 +112,11 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
               value={user?.email || "N/A"}
               icon={<EmailIcon />}
             />
-            <InfoField label="School" value="ITCS" icon={<SchoolIcon />} />
+            <InfoField
+              label="School"
+              value={user?.school || "N/A"}
+              icon={<SchoolIcon />}
+            />
             <InfoField
               label="GitHub"
               value={user?.githubUrl || "N/A"}
