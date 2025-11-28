@@ -2,6 +2,7 @@ import { Box, Typography, Container, Grid, Paper } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import * as Icons from "@mui/icons-material";
 import { keyframes } from "@mui/system";
+import { useToastContext } from "../contexts/ToastContext";
 
 const HailIcon = Icons.Hail;
 const StarIcon = Icons.Star;
@@ -30,6 +31,7 @@ const float = keyframes`
 
 const AboutUsSection = () => {
   const { t } = useTranslation();
+  const { showSuccess } = useToastContext();
 
   const teamMembers = [
     {
@@ -47,7 +49,7 @@ const AboutUsSection = () => {
       icon: <HailIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
       name: "Fahd",
       description: "Frontend Developer",
-      mail: "f.Essameldin2333@nu.edu.eg",
+      mail: "f.essameldin2333@nu.edu.eg",
       mailIcon: <MailIcon sx={{ fontSize: 30, color: "#0f6cbd" }} />,
       github: "https://github.com/FahdKhater",
       githubIcon: <GitHubIcon sx={{ fontSize: 30, color: "#383737" }} />,
@@ -142,17 +144,17 @@ const AboutUsSection = () => {
                   borderRadius: 4,
                   background: "#FFFFFF",
                   border: "#B355F2",
-                  animation: `${float} 6s ease-out ${1 + idx * 1.5}s backwards infinite`,
-                  // animation: `${fadeIn} 0.8s ease-out ${0.4 + idx * 0.1}s backwards`,
-                  // "&:hover": {
-                  //   transform: "translateY(-10px)",
-                  //   boxShadow: "0 20px 40px rgba(179, 85, 242, 0.2)",
-                  //   background: "rgba(255, 255, 255, 0.8)",
-                  //   "& .icon-box": {
-                  //     transform: "scale(1.1) rotate(5deg)",
-                  //     background: "linear-gradient(135deg, #B355F2 0%, #C88BFF 50%, #FFD6E8 100%)",
-                  //   },
-                  // },
+                  // animation: `${float} 6s ease-out ${1 + idx * 1.5}s backwards infinite`,
+                  animation: `${fadeIn} 0.8s ease-out ${0.4 + idx * 0.1}s backwards`,
+                  "&:hover": {
+                    transform: "translateY(-10px)",
+                    boxShadow: "0 20px 40px rgba(179, 85, 242, 0.2)",
+                    background: "rgba(255, 255, 255, 0.8)",
+                    "& .icon-box": {
+                      transform: "scale(1.1) rotate(5deg)",
+                      background: "linear-gradient(135deg, #B355F2 0%, #C88BFF 50%, #FFD6E8 100%)",
+                    },
+                  },
                 }}
               >
                 <Box className="icon-box"
@@ -182,7 +184,12 @@ const AboutUsSection = () => {
                     {member.description}
                   </Typography>
                   <Typography align="center">
-                    <a href={`mailto:${member.mail}`} style={{ marginRight: "5px", marginLeft: "5px" }}>
+                    <a
+                      onClick={() => {
+                        navigator.clipboard.writeText(member.mail); showSuccess(`${member.mail} copied to clipboard!`);
+                      }}
+                      style={{ marginRight: "5px", marginLeft: "5px", cursor: "pointer" }}
+                    >
                       {member.mailIcon}
                     </a>
                     <a href={member.github} style={{ marginRight: "5px", marginLeft: "5px" }}>
