@@ -79,6 +79,8 @@
     "Team Members": "Team Members",
     "First Name": "First Name",
     "Last Name": "Last Name",
+    "name": "Name",
+    "email": "Email",
     "University Email": "University Email",
     "Add Member": "Add Member",
     "Remove Last Member": "Remove Last Member",
@@ -104,6 +106,10 @@
     "Drag and drop images here, or click to browse": "Drag and drop images here, or click to browse",
     "Drag and drop video here, or click to browse": "Drag and drop video here, or click to browse",
     "Enter member name": "Enter member name",
+    "Enter member email": "Enter member email",
+    "Name is required": "Name is required",
+    "Email is required": "Email is required",
+    "Please enter a valid email address": "Please enter a valid email address",
     "Teaching Assistant Email": "Teaching Assistant Email",
     "Video Too Big!": "Video Too Big!",
     "Cancel": "Cancel"
@@ -143,10 +149,31 @@
     "projectRejected": "Project rejected successfully"
   },
   "auth": {
-    "mustBeLoggedIn": "You must be logged in to access this page"
+    "mustBeLoggedIn": "You must be logged in to access this page",
+    "mustCompleteProfile": "You must complete your profile to access this page",
+    "profileCompletedSuccessfully": "Profile completed already"
   },
   "starredProjects": {
     "title": "Starred Projects",
     "noStarredProjects": "No starred projects"
+  },
+  "completeProfile": {
+    "title": "Complete Your Profile",
+    "subtitle": "Just few more details to get started on the NU Project Showcaser.",
+    "pleaseProvideMoreDetails": "Please provide more details to get started with the profile.",
+    "profileCompletedSuccessfully": "Profile completed successfully",
+    "pleaseFixValidationErrorsBeforeSubmitting": "Please fix the validation errors before submitting",
+    "save": "Save and Continue",
+    "skip": "Skip for now"
+  },
+  "editProfile": {
+    "title": "Edit Your Profile",
+    "subtitle": "Update your profile information on the NU Project Showcaser.",
+    "pleaseUpdateYourDetails": "Please update your details to keep your profile information current.",
+    "profileUpdatedSuccessfully": "Profile updated successfully",
+    "pleaseFixValidationErrorsBeforeSubmitting": "Please fix the validation errors before submitting",
+    "save": "Save Changes",
+    "failedToUpdateProfile": "Failed to update profile. Please try again.",
+    "failedToLoadProfile": "Failed to load profile. Please try again."
   }
 }

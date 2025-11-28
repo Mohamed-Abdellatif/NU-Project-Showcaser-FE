@@ -8,21 +8,24 @@ import {
   Grid,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useCreateProject } from "../hooks/useProjects";
 import { useUploadImage, useUploadVideo } from "../hooks/useMedia";
-import type { Member } from "../types/submission";
+import type { Member } from "../types/index";
 import ProjectDetailsCard from "../components/ProjectDetailsCard/ProjectDetailsCard";
 import TeamMembersCard from "../components/TeamMembersCard/TeamMembersCard";
 import ImageUploadCard from "../components/ImageUploadCard/ImageUploadCard";
 import VideoUploadCard from "../components/VideoUploadCard/VideoUploadCard";
 import { useToastContext } from "../contexts/ToastContext";
+import { useAtom } from "jotai";
+import { userAtom } from "../atoms/authAtom";
+import type { User } from "../types";
 
 const SubmitionPage = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { showSuccess, showError, showWarning } = useToastContext();
-
+  const [user] = useAtom<User | null>(userAtom);
   const lastRequestTimeRef = useRef<number>(0);
   const COOLDOWN_MS = 5000; // 5 seconds
 
@@ -32,9 +35,7 @@ const SubmitionPage = () => {
   const uploadImage = useUploadImage();
   const uploadVideo = useUploadVideo();
 
-  const [members, setMembers] = useState<Member[]>([
-    { firstName: "", lastName: "" },
-  ]);
+  const [members, setMembers] = useState<Member[]>([]);
   const [projectTitle, setProjectTitle] = useState("");
   const [repoLink, setRepoLink] = useState("");
   const [description, setDescription] = useState("");
@@ -46,19 +47,15 @@ const SubmitionPage = () => {
   const [teachingAssistantEmail, setTeachingAssistantEmail] = useState("");
   const [liveUrl, setLiveUrl] = useState("");
   const [video, setVideo] = useState<File | null>(null);
-  const [newMemberName, setNewMemberName] = useState("");
-  const [teamLeaderFirstName, setTeamLeaderFirstName] = useState("");
-  const [teamLeaderLastName, setTeamLeaderLastName] = useState("");
+  const [newMember, setNewMember] = useState<Member>({ name: "", email: "" });
+  const teamLeader = useMemo(() => user?.firstName + " " + user?.lastName, [user]);
 
   const handleAddMember = () => {
-    if (newMemberName.trim()) {
-      const nameParts = newMemberName.trim().split(" ");
-      const firstName = nameParts[0] || "";
-      const lastName = nameParts.slice(1).join(" ") || "";
-      setMembers([...members, { firstName, lastName }]);
-      setNewMemberName("");
+    if (newMember.name.trim() && newMember.email.trim() && !members.some(m => m.email === newMember.email)) {
+      setMembers([...members, newMember]);
+      setNewMember({ name: "", email: "" });
     }
-  };
+  };  
 
   const handleRemoveMember = (index: number) => {
     const updatedMembers = members.filter((_, i) => i !== index);
@@ -124,8 +121,7 @@ const SubmitionPage = () => {
     if (
       !projectTitle.trim() ||
       !repoLink.trim() ||
-      !teamLeaderFirstName.trim() ||
-      !teamLeaderLastName.trim() ||
+      !teamLeader.trim() ||
       !supervisor.trim() ||
       !teachingAssistantEmail.trim()
     ) {
@@ -169,10 +165,8 @@ const SubmitionPage = () => {
           .split(",")
           .map((t) => t.trim())
           .filter((t) => t),
-        teamLeader: `${teamLeaderFirstName} ${teamLeaderLastName}`.trim(),
-        teamMembers: members
-          .map((m) => `${m.firstName} ${m.lastName}`.trim())
-          .filter((m) => m.length > 0),
+        teamLeader: { name: teamLeader.trim(), email: user?.email! },
+        teamMembers: members.filter(m => m.name.trim() && m.email.trim()),
         supervisor,
         stars: 0,
         status: "pending-ta",
@@ -187,9 +181,6 @@ const SubmitionPage = () => {
         repoUrl: repoLink,
         liveUrl,
       };
-
-      console.log("Form Submitted:", formData);
-
       // Create project with uploaded media URLs
       createProject.mutate(formData, {
         onSuccess: () => {
@@ -198,15 +189,13 @@ const SubmitionPage = () => {
           setDescription("");
           setImage([]);
           setLiveUrl("");
-          setMembers([{ firstName: "", lastName: "" }]);
+          setMembers([]);
           setProjectTitle("");
           setRepoLink("");
           setSupervisor("");
           setTags("");
           setTechnologies("");
           setTeachingAssistantEmail("");
-          setTeamLeaderFirstName("");
-          setTeamLeaderLastName("");
           setVideo(null);
           navigate("/");
         },
@@ -301,13 +290,11 @@ const SubmitionPage = () => {
             {/* Right Column - Team Members Card */}
             <Grid size={{ xs: 12, md: 6 }}>
               <TeamMembersCard
-                teamLeaderFirstName={teamLeaderFirstName}
-                teamLeaderLastName={teamLeaderLastName}
+                teamLeader={teamLeader}
+                teamLeaderEmail={user?.email!}
                 members={members}
-                newMemberName={newMemberName}
-                onTeamLeaderFirstNameChange={setTeamLeaderFirstName}
-                onTeamLeaderLastNameChange={setTeamLeaderLastName}
-                onNewMemberNameChange={setNewMemberName}
+                newMember={newMember}
+                onNewMemberChange={setNewMember}
                 onAddMember={handleAddMember}
                 onRemoveMember={handleRemoveMember}
               />

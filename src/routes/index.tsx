@@ -8,6 +8,10 @@ import Projects from "../pages/Projects";
 import AcceptProject from "../pages/AcceptProject";
 import RequireAuth from "../hoc/RequireAuth";
 import StarredProjectsPage from "../pages/StarredProjectsPage";
+import Profile from "../pages/UserProfile";
+import CompleteProfile from "../pages/CompleteProfile";
+import EditProfile from "../pages/editProfile";
+import RequireCompleteProfile from "../hoc/RequireCompleteProfile";
 
 export const router = createBrowserRouter([
   {
@@ -30,7 +34,9 @@ export const router = createBrowserRouter([
         path: "/submit",
         element: (
           <RequireAuth>
-            <SubmissionPage />
+            <RequireCompleteProfile>
+              <SubmissionPage />
+            </RequireCompleteProfile>
           </RequireAuth>
         ),
       },
@@ -51,6 +57,32 @@ export const router = createBrowserRouter([
         element: (
           <RequireAuth>
             <StarredProjectsPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <RequireAuth>
+            <Profile />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: "/complete-profile",
+        element: (
+          <RequireCompleteProfile completedProfile={true}>
+            <RequireAuth>
+              <CompleteProfile />
+            </RequireAuth>
+          </RequireCompleteProfile>
+        ),
+      },
+      {
+        path: "/edit-profile",
+        element: (
+          <RequireAuth>
+            <EditProfile />
           </RequireAuth>
         ),
       },

@@ -79,6 +79,8 @@
     "Team Leader": "قائد الفريق",
     "First Name": "الاسم الأول",
     "Last Name": "اسم العائلة",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
     "University Email": "البريد الإلكتروني الجامعي",
     "Add Member": "إضافة عضو",
     "Remove Last Member": "إزالة آخر عضو",
@@ -104,6 +106,10 @@
     "Drag and drop images here, or click to browse": "اسحب وأفلت الصور هنا، أو انقر للتصفح",
     "Drag and drop video here, or click to browse": "اسحب وأفلت الفيديو هنا، أو انقر للتصفح",
     "Enter member name": "أدخل اسم العضو",
+    "Enter member email": "أدخل البريد الإلكتروني للعضو",
+    "Name is required": "الاسم مطلوب",
+    "Email is required": "البريد الإلكتروني مطلوب",
+    "Please enter a valid email address": "يرجى إدخال عنوان بريد إلكتروني صحيح",
     "Teaching Assistant Email": "البريد الإلكتروني للمساعد التدريسي",
     "Video Too Big!": "الفيديو كبير جدًا!",
     "Cancel": "إلغاء"
@@ -144,10 +150,31 @@
     "projectRejected": "تم رفض المشروع بنجاح"
   },
   "auth": {
-    "mustBeLoggedIn": "يجب عليك تسجيل الدخول للوصول إلى هذه الصفحة"
+    "mustBeLoggedIn": "يجب عليك تسجيل الدخول للوصول إلى هذه الصفحة", 
+    "mustCompleteProfile": "يجب عليك إكمال ملفك الشخصي للوصول إلى هذه الصفحة",
+    "profileCompletedSuccessfully": "تم إكمال ملفك الشخصي بالفعل"
   },
   "starredProjects": {
     "title": "المشاريع المفضلة",
     "noStarredProjects": "لا توجد مشاريع مفضلة"
+  },
+  "completeProfile": {
+    "title": "إكمال ملفك الشخصي",
+    "subtitle": "أرسل مشروعك وسنتحقق منه!",
+    "pleaseProvideMoreDetails": "يرجى تقديم المزيد من التفاصيل للبدء في معرض مشاريع NU",
+    "profileCompletedSuccessfully": "تم إكمال ملفك الشخصي بنجاح",
+    "pleaseFixValidationErrorsBeforeSubmitting": "يرجى إصلاح الأخطاء التي تم العثور عليها قبل إرسال المشروع",
+    "save": "حفظ واستمرار",
+    "skip": "تخطي للآن"
+  },
+  "editProfile": {
+    "title": "تعديل ملفك الشخصي",
+    "subtitle": "قم بتحديث معلومات ملفك الشخصي في معرض مشاريع NU.",
+    "pleaseUpdateYourDetails": "يرجى تحديث تفاصيلك للحفاظ على معلومات ملفك الشخصي محدثة.",
+    "profileUpdatedSuccessfully": "تم تحديث ملفك الشخصي بنجاح",
+    "pleaseFixValidationErrorsBeforeSubmitting": "يرجى إصلاح الأخطاء التي تم العثور عليها قبل إرسال المشروع",
+    "save": "حفظ التغييرات",
+    "failedToUpdateProfile": "فشل تحديث الملف الشخصي. يرجى المحاولة مرة أخرى.",
+    "failedToLoadProfile": "فشل تحميل الملف الشخصي. يرجى المحاولة مرة أخرى."
   }
 }

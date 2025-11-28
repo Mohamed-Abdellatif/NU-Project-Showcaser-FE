@@ -2,6 +2,11 @@
 
 
 export interface User {
+  linkedInUrl: string;
+  githubUrl: string;
+  universityId: string;
+  school: string;
+  major: string;
   _id: string;
   name: string;
   email: string;
@@ -25,8 +30,8 @@ export interface Project {
   title: string;
   description: string;
   technologies: string[];
-  teamLeader: string;
-  teamMembers: string[];
+  teamLeader: Member;
+  teamMembers: Member[];
   supervisor: string;
   stars: number;
   tags: string[];
@@ -42,8 +47,8 @@ export interface ProjectCreatePayload {
   title: string;
   description: string;
   technologies?: string[];
-  teamLeader: string;
-  teamMembers?: string[];
+  teamLeader: Member;
+  teamMembers?: Member[];
   supervisor: string;
   stars?: number;
   tags?: string[];
@@ -78,8 +83,8 @@ export interface ProjectSearchParams {
   title?: string;
   major?: string;
   supervisor?: string;
-  teamMember?: string;
-  teamLeader?: string;
+  teamMembers?: Member[];
+  teamLeader?: Member;
   course?: string;
   page?: number;
   limit?: number;
@@ -101,3 +106,14 @@ export interface PaginatedProjectsResponse {
 
 // Comment type (re-exported from commentsApi for convenience)
 export type { Comment, CommentCreatePayload } from '../api/commentsApi';
+
+// User API types (re-exported from userApi for convenience)
+export type {
+  UserUpdatePayload,
+  CompleteProfilePayload,
+} from '../api/userApi';
+
+export interface Member {
+  name: string;
+  email: string;
+}

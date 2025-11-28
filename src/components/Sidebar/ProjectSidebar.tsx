@@ -23,7 +23,7 @@ interface ProjectSidebarProps {
 }
 
 const ProjectSidebar = ({ projectsData, activeProject, setActiveProject }: ProjectSidebarProps) => {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(true);
     const { t } = useTranslation();
 
     return (

@@ -6,12 +6,13 @@ import { useStarProject } from "../../hooks/useProjects";
 import { userAtom } from "../../atoms/authAtom";
 import { useAtom } from "jotai";
 import { useToastContext } from "../../contexts/ToastContext";
+import type { Member } from "../../types";
 
 interface ProjectInfoCardProps {
   course?: string;
   supervisor?: string;
-  teamLeader?: string;
-  teamMembers?: string[];
+  teamLeader?: Member;
+  teamMembers?: Member[];
   repoUrl?: string;
   stars: number;
   projectId: string;
@@ -117,8 +118,8 @@ export const ProjectInfoCard = ({
           {[
             { icon: <CalendarTodayOutlined />, label: t("viewProject.created"), value: createdAt || "—" },
             { icon: <SchoolOutlined />, label: t("viewProject.supervisor"), value: supervisor || "—" },
-            { icon: <PersonOutlineOutlined />, label: t("viewProject.teamLeader"), value: teamLeader || "—" },
-            { icon: <PeopleOutlineOutlined />, label: t("viewProject.teamMembers"), value: teamMembers?.join(", ") || t("viewProject.none") },
+            { icon: <PersonOutlineOutlined />, label: t("viewProject.teamLeader"), value: `${teamLeader?.name} (${teamLeader?.email})` || "—" },
+            { icon: <PeopleOutlineOutlined />, label: t("viewProject.teamMembers"), value: teamMembers?.map(m => `${m.name} (${m.email})`).join(", ") || t("viewProject.none") },
           ].map(row => (
             <InfoRow key={row.label} {...row} />
           ))}

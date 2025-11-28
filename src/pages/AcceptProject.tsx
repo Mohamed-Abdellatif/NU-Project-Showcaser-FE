@@ -118,7 +118,7 @@ const AcceptProject = () => {
       <ProjectHeader title={activeProject?.title || ""} media={media} />
       <ProjectInfoCard
         course={activeProject?.course}
-        teamLeader={activeProject?.teamLeader}
+        teamLeader={activeProject?.teamLeader }
         teamMembers={activeProject?.teamMembers}
         supervisor={activeProject?.supervisor}
         repoUrl={activeProject?.repoUrl}
