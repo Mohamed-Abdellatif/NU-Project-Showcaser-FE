@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/Home";
 import AboutUs from "../pages/AboutUs";
@@ -12,6 +12,7 @@ import Profile from "../pages/UserProfile";
 import CompleteProfile from "../pages/CompleteProfile";
 import EditProfile from "../pages/editProfile";
 import RequireCompleteProfile from "../hoc/RequireCompleteProfile";
+import RequireProfileExists from "../hoc/RequireProfileExists";
 
 export const router = createBrowserRouter([
   {
@@ -62,7 +63,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profile/:userName",
-        element: <Profile />,
+        element: (
+          <RequireProfileExists>
+            <Profile />
+          </RequireProfileExists>
+        ),
       },
       {
         path: "/complete-profile",
@@ -81,6 +86,10 @@ export const router = createBrowserRouter([
             <EditProfile />
           </RequireAuth>
         ),
+      },
+      {
+        path: "*",
+        element: <Navigate to="/" replace />,
       },
       // Add more routes here as needed
     ],
