@@ -30,6 +30,7 @@ const AboutUsSection = () => {
   const teamMembers = [
     {
       icon: <AllInclusiveIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
+      image: "https://media.licdn.com/dms/image/v2/D4D03AQGtGQEb_iUdBA/profile-displayphoto-shrink_800_800/B4DZSyHXscGkAc-/0/1738155065020?e=1766016000&v=beta&t=HhlK6uGfntPwIRQ2p08M1FZyYFM8UuBavJN1XqQSeyk",
       name: "Mohamed",
       description: "Full Stack Developer",
       mail: "m.abdellatif2319@nu.edu.eg",
@@ -41,6 +42,7 @@ const AboutUsSection = () => {
     },
     {
       icon: <HailIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
+      image: "https://media.licdn.com/dms/image/v2/D4E03AQHqobwKdu293g/profile-displayphoto-shrink_800_800/B4EZZDNwJZG0Ag-/0/1744884407028?e=1766016000&v=beta&t=TlSsh3ThfEK8gly7a93nv1KtT4Pe78ofYtW5aT4xcAA",
       name: "Fahd",
       description: "Frontend Developer",
       mail: "f.essameldin2333@nu.edu.eg",
@@ -52,6 +54,7 @@ const AboutUsSection = () => {
     },
     {
       icon: <CodeIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
+      image: "https://media.licdn.com/dms/image/v2/D4E03AQH4F0D7vnNZGQ/profile-displayphoto-shrink_800_800/B4EZTDCdtXHcAg-/0/1738438991474?e=1766016000&v=beta&t=eKEO6mjaXKz76NZKZER5nBTDKHrjMg1y_0zB08T0yQk",
       name: "Zeyad",
       description: "Frontend Developer",
       mail: "z.ahmed2310@nu.edu.eg",
@@ -63,6 +66,7 @@ const AboutUsSection = () => {
     },
     {
       icon: <StarIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
+      image: "https://media.licdn.com/dms/image/v2/D4D03AQEeIgWJLMoIaA/profile-displayphoto-shrink_800_800/B4DZVLPlO9HIAc-/0/1740724131973?e=1766016000&v=beta&t=z55N1VaKGJJe2uvB5V_9dC44Y7RBG8KcBg4amK0cYZk",
       name: "Omar",
       description: "Backend Developer",
       mail: "o.tamer2391@nu.edu.eg",
@@ -145,8 +149,7 @@ const AboutUsSection = () => {
                     boxShadow: "0 20px 40px rgba(179, 85, 242, 0.2)",
                     background: "rgba(255, 255, 255, 0.8)",
                     "& .icon-box": {
-                      transform: "scale(1.1) rotate(5deg)",
-                      background: "linear-gradient(135deg, #B355F2 0%, #C88BFF 50%, #FFD6E8 100%)",
+                      transform: "scale(1.1) rotate(0deg)",
                     },
                   },
                 }}
@@ -156,14 +159,13 @@ const AboutUsSection = () => {
                     width: 80,
                     height: 80,
                     borderRadius: "50%",
-                    background: "linear-gradient(135deg, #B355F2 0%, #C88BFF 50%, #FFD6E8 100%)",
+                    background: `url(${member.image}) center center/cover no-repeat`,
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     mb: 3,
                   }}
                 >
-                  {member.icon}
                 </Box>
                 <Typography
                   variant="h6"
