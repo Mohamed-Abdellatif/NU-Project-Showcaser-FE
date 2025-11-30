@@ -13,7 +13,7 @@ const GitHubIcon = Icons.GitHub;
 const LinkedInIcon = Icons.LinkedIn;
 
 
-const focusY = -450;
+const focusY = -100;
 const zoom = 180;
 
 // Animations
@@ -84,7 +84,7 @@ const AboutUsSection = () => {
     <Box
       sx={{
         width: "100%",
-        height: "70vh",
+        height: "90vh",
         py: 12,
         px: 2,
         // background: "#ffd6e8",
@@ -144,9 +144,9 @@ const AboutUsSection = () => {
                   borderRadius: 4,
                   background: "#FFFFFF",
                   border: "#B355F2",
-                  // animation: `${float} 6s ease-out ${1 + idx * 1.5}s backwards infinite`,
                   animation: `${fadeIn} 0.8s ease-out ${0.4 + idx * 0.1}s backwards`,
                   "&:hover": {
+                    transition: "transform 1s ease, box-shadow 0.3s ease, background 0.3s ease",
                     transform: "translateY(-10px)",
                     boxShadow: "0 20px 40px rgba(179, 85, 242, 0.2)",
                     background: "rgba(255, 255, 255, 0.8)",
