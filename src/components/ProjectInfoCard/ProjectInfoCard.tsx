@@ -98,10 +98,10 @@ export const ProjectInfoCard = ({
   };
 
   const colors = {
-    textHeader: "#4a1d45",
-    cardBg: "#fae3e3",
-    buttonBg: "#5e1c50",
-    chipBg: "#f0d4da",
+    textHeader: "#414F75",
+    cardBg: "#f0f6ff",
+    buttonBg: "#414F75",
+    chipBg: "#e8f1fe",
   };
 
   return (
@@ -208,11 +208,10 @@ export const ProjectInfoCard = ({
             {
               icon: <PersonOutlineOutlined />,
               label: t("viewProject.teamLeader"),
-              value: `${teamLeader?.name} ` || "—",
-
-              onClick: () => {
+              value: teamLeader?.name || "—",
+              onClick: teamLeader ? () => {
                 navigate(`/profile/${teamLeader?.email.split("@")[0]}`);
-              },
+              } : undefined,
             },
             {
               icon: <PeopleOutlineOutlined />,
@@ -297,11 +296,6 @@ const InfoRow = ({
       alignItems: "flex-start",
       mb: 3,
       cursor: onClick ? "pointer" : "default",
-      "&:hover": onClick
-        ? {
-            opacity: 0.8,
-          }
-        : {},
     }}
     onClick={onClick}
   >
@@ -317,7 +311,17 @@ const InfoRow = ({
       >
         {label}:
       </Typography>
-      <Typography sx={{ fontSize: "1rem", fontWeight: 500, color: "#222" }}>
+      <Typography 
+        sx={{ 
+          fontSize: "1rem", 
+          fontWeight: 500, 
+          color: "#222",
+          textDecoration: onClick ? "underline" : "none",
+          "&:hover": onClick ? {
+            opacity: 0.7,
+          } : {},
+        }}
+      >
         {value}
       </Typography>
     </Box>

@@ -9,12 +9,13 @@ import {
 } from "@mui/icons-material";
 import type { User } from "../../types";
 import InfoField from "../InfoField/InfoField";
-
+import { useTranslation } from "react-i18next";
 interface PersonalInfoCardProps {
   user: User | null;
 }
 
 const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
+  const { t } = useTranslation();
   const getInitials = () => {
     if (!user) return "U";
     const firstInitial = user.firstName?.[0]?.toUpperCase() || "";
@@ -60,7 +61,7 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
               sx={{
                 width: { xs: 120, md: 140 },
                 height: { xs: 120, md: 140 },
-                bgcolor: "#6C3BFF",
+                bgcolor: "#414F75",
                 fontSize: "3rem",
                 fontWeight: 700,
               }}
@@ -85,7 +86,7 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
                   fontSize: "1rem",
                 }}
               >
-                Computer Science Student
+                {t("profile.university")}
               </Typography>
             </Box>
           </Box>

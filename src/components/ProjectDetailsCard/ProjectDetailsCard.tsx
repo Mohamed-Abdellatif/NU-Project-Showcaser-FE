@@ -59,7 +59,7 @@ const ProjectDetailsCard = ({
                     sx={{
                         fontWeight: "bold",
                         mb: 3,
-                        color: "#6a1b9a",
+                        color: "#4d6aff",
                     }}
                 >
                     {t("submissionPage.Project Info")}

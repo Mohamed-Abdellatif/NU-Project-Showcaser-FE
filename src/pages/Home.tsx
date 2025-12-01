@@ -2,11 +2,22 @@ import { useTranslation } from "react-i18next";
 import ProjectsList from "../components/ProjectsList/ProjectsList";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useFeaturedProjects} from "../hooks/useProjects";
+import { useFeaturedProjects } from "../hooks/useProjects";
 import LoadingState from "../components/LoadingState/LoadingState";
 import ErrorState from "../components/ErrorState/ErrorState";
+import "@fontsource/inter/500.css";
+import "@fontsource/poppins/500.css";
 
 const HomePage = () => {
+  const textStyle = {
+    fontFamily: "Inter,poppins,sans-serif",
+    fontWeight: 500,
+    fontSize: "1rem",
+    textTransform: "none",
+    minWidth: "auto",
+    opacity: 0.95,
+  };
+
   const { data: projects, isLoading, isError, error } = useFeaturedProjects();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -14,7 +25,7 @@ const HomePage = () => {
     <Box
       className="home-page"
       sx={{
-        backgroundColor: "#FFFFF0",
+        backgroundColor: "#F8F9FA",
         minHeight: "100vh",
       }}
     >
@@ -23,8 +34,10 @@ const HomePage = () => {
           position: "relative",
           display: "inline-block",
           p: 2,
-          mt: 4,
+          mt: 3,
           mb: 4,
+          
+          ml: 3,
           minWidth: 200,
           minHeight: 100,
         }}
@@ -46,9 +59,10 @@ const HomePage = () => {
             onClick={() => navigate("/submit")}
             variant="contained"
             sx={{
-              bgcolor: "#A55ABF",
-              "&:hover": { bgcolor: "#8E44AD" },
-              mb: 3,
+              ...textStyle,
+              bgcolor: "#4d6aff",
+              "&:hover": { bgcolor: "#4d6aff" },
+              mb: 1,
             }}
           >
             {t("home.submitProject")}
@@ -57,13 +71,14 @@ const HomePage = () => {
       </Box>
 
 
-      <section>
+      <section style={{ padding: '10px', margin: '20px' }}>
         {isLoading && <LoadingState />}
         {isError && <ErrorState error={error} />}
         {!isLoading && !isError && (
           <ProjectsList projects={projects} />
         )}
       </section>
+
     </Box >
   );
 };

@@ -112,7 +112,7 @@ const Projects = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#FFFFF0",
+        backgroundColor: "#FFFFF8",
         minHeight: "100vh",
         py: 4,
         px: { xs: 2, sm: 4 },

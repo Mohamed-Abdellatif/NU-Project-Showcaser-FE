@@ -9,14 +9,14 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import type { Project } from "../../types";
-
+import { useTranslation } from "react-i18next";
 interface ProfileProjectCardProps {
   project: Project;
 }
 
 const ProfileProjectCard = ({ project }: ProfileProjectCardProps) => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   const getImageSrc = () => {
     if (project.images?.[0]) {
       return project.images[0];
@@ -101,7 +101,7 @@ const ProfileProjectCard = ({ project }: ProfileProjectCardProps) => {
             },
           }}
         >
-          View Project
+          {t("profile.viewProjectDetails")}
         </Button>
       </CardContent>
     </Card>

@@ -2,7 +2,7 @@ import { Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import type { Project, User } from "../../types";
 import ProfileProjectCard from "../ProfileProjectCard/ProfileProjectCard";
-
+import { useTranslation } from "react-i18next";
 interface ProjectShowcaseProps {
   projects: Project[];
   user: User | null;
@@ -11,6 +11,7 @@ interface ProjectShowcaseProps {
 
 const ProjectShowcase = ({ projects, user, isMyProfile }: ProjectShowcaseProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <Box sx={{ mb: 4 }}>
@@ -32,7 +33,7 @@ const ProjectShowcase = ({ projects, user, isMyProfile }: ProjectShowcaseProps) 
             color: "#1a1a1a",
           }}
         >
-          Projects Showcase
+          
         </Typography>
           {user && isMyProfile && (
             <Button
@@ -53,7 +54,7 @@ const ProjectShowcase = ({ projects, user, isMyProfile }: ProjectShowcaseProps) 
               },
             }}
           >
-            Submit New Project
+            {t("profile.submitNewProject")}
           </Button>)}
       </Box>
 
@@ -99,7 +100,7 @@ const ProjectShowcase = ({ projects, user, isMyProfile }: ProjectShowcaseProps) 
           }}
         >
           <Typography variant="body1" sx={{ color: "text.secondary" }}>
-            No projects yet. Submit your first project!
+            {t("profile.noProjectsSubmitted")}
           </Typography>
         </Box>
       )}

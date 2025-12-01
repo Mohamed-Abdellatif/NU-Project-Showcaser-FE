@@ -28,7 +28,7 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
       <>
         <Typography
           variant="h3"
-          sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "#6A2C68", textAlign: "center" }}
+          sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "#414F75", textAlign: "center" }}
         >
           {title}
         </Typography>
@@ -41,7 +41,7 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
       {/* Title & Description */}
       <Typography
         variant="h3"
-        sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "#6A2C68", textAlign: "center" }}
+        sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "#4C5D8A", textAlign: "center" }}
       >
         {title}
       </Typography>
@@ -111,7 +111,7 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
           sx={{
             position: "absolute",
             ...(isRTL ? { right: 20 } : { left: 20 }),
-            color: "#8b3f7f",
+            color: "#1f2937",
             background: "rgba(255,255,255,0.7)",
             "&:hover": { background: "rgba(255,255,255,0.9)" },
             zIndex: 5,
@@ -124,7 +124,7 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
           sx={{
             position: "absolute",
             ...(isRTL ? { left: 20 } : { right: 20 }),
-            color: "#8b3f7f",
+            color: "#1f2937",
             background: "rgba(255,255,255,0.7)",
             "&:hover": { background: "rgba(255,255,255,0.9)" },
             zIndex: 5,

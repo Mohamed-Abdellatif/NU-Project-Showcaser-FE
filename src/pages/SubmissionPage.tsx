@@ -22,6 +22,15 @@ import { userAtom } from "../atoms/authAtom";
 import type { User } from "../types";
 
 const SubmitionPage = () => {
+  const textStyle = {
+    fontFamily: "Inter",
+    fontWeight: 500,
+    fontSize: "1.05rem",
+    textTransform: "none",
+    letterSpacing: ".3px",
+    minWidth: "auto",
+    opacity: 0.95,
+  };
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { showSuccess, showError, showWarning } = useToastContext();
@@ -55,7 +64,7 @@ const SubmitionPage = () => {
       setMembers([...members, newMember]);
       setNewMember({ name: "", email: "" });
     }
-  };  
+  };
 
   const handleRemoveMember = (index: number) => {
     const updatedMembers = members.filter((_, i) => i !== index);
@@ -331,7 +340,7 @@ const SubmitionPage = () => {
           {/* Submission Section */}
           <Box sx={{ mt: 4 }}>
             {/* Action Buttons */}
-            <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+            <Box sx={{ display: "flex", gap: 2, mt: 2}}>
               <Button
                 variant="contained"
                 fullWidth

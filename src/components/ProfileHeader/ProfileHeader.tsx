@@ -1,11 +1,12 @@
 import { Box, Typography, Button } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material";
-
+import { useTranslation } from "react-i18next";
 interface ProfileHeaderProps {
   onEditClick?: () => void;
 }
 
 const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
+  const { t } = useTranslation();
   return (
     <Box
       sx={{
@@ -27,7 +28,7 @@ const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
             color: "#1a1a1a",
           }}
         >
-          User Profile
+          {t("profile.profileHeaderTitle")}
         </Typography>
         <Typography
           variant="body1"
@@ -36,7 +37,7 @@ const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
             fontSize: "1.1rem",
           }}
         >
-          View and manage your personal details and projects
+          {t("profile.profileHeaderSubtitle")}
         </Typography>
       </Box>
       <Button
@@ -57,7 +58,7 @@ const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
           },
         }}
       >
-        Edit Profile
+        {t("profile.editProfile")}
       </Button>
     </Box>
   );

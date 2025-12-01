@@ -177,5 +177,40 @@
     "save": "حفظ التغييرات",
     "failedToUpdateProfile": "فشل تحديث الملف الشخصي. يرجى المحاولة مرة أخرى.",
     "failedToLoadProfile": "فشل تحميل الملف الشخصي. يرجى المحاولة مرة أخرى."
+  },
+  "profile": {
+    "editProfile": "تعديل الملف الشخصي",
+    "projectsSubmitted": "المشاريع المقدمة",
+    "noProjectsSubmitted": "لم يتم تقديم أي مشاريع بعد.",
+    "memberSince": "عضو منذ",
+    "viewProfile": "عرض الملف الشخصي",
+    "backToHome": "العودة إلى الصفحة الرئيسية",
+    "failedToLoadUserProfile": "فشل تحميل الملف الشخصي للمستخدم. يرجى المحاولة مرة أخرى.",
+    "loadingUserProfile": "جاري تحميل الملف الشخصي للمستخدم...",
+    "errorLoadingUserProfile": "خطأ في تحميل الملف الشخصي للمستخدم.",
+    "noProjectsFound": "لم يتم العثور على مشاريع لهذا المستخدم.",
+    "projects": "المشاريع",
+    "about": "حول",
+    "email": "البريد الإلكتروني",
+    "major": "التخصص",
+    "universityId": "رقم الجامعة",
+    "name": "الاسم",
+    "edit": "تعديل",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "profileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح",
+    "failedToUpdateProfile": "فشل تحديث الملف الشخصي. يرجى المحاولة مرة أخرى.",
+    "pleaseFixValidationErrorsBeforeSubmitting": "يرجى إصلاح أخطاء التحقق قبل الإرسال",
+    "updateProfile": "تحديث الملف الشخصي",
+    "loading": "جاري تحميل الملف الشخصي...",
+    "error": "خطأ في تحميل الملف الشخصي.",
+    "viewAllProjects": "عرض جميع المشاريع"
+    ,"starredProjects": "المشاريع المفضلة"
+    ,"deactivateAccount": "تعطيل الحساب",
+    "profileHeaderTitle": "الملف الشخصي للمستخدم",
+    "profileHeaderSubtitle": "عرض وإدارة التفاصيل والمشاريع الشخصية الخاصة بك",
+    "University": "جامعة النيل",
+    "submitNewProject": "إرسال مشروع جديد",
+    "viewProjectDetails": "عرض تفاصيل المشروع"
   }
 }

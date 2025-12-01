@@ -3,7 +3,6 @@ import {
   AppBar,
   Toolbar,
   Box,
-  Typography,
   Button,
   IconButton,
   Menu,
@@ -21,6 +20,7 @@ import { useAtom } from "jotai";
 import { isAuthenticatedAtom, userAtom } from "../../atoms/authAtom";
 import type { User } from "../../types";
 import { useAuth } from "../../hooks/useAuth";
+import "@fontsource/inter/500.css";
 
 const LOGIN_MICROSOFT_BASE = `${import.meta.env.VITE_API_BASE}/auth/microsoft`;
 const LOGOUT_BASE = `${import.meta.env.VITE_API_BASE}/auth/logout`;
@@ -28,30 +28,35 @@ const LOGOUT_BASE = `${import.meta.env.VITE_API_BASE}/auth/logout`;
 export const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
+
   const [isAuthenticated, setIsAuthenticated] = useAtom(isAuthenticatedAtom);
   const [, setUser] = useAtom<User | null>(userAtom);
-  const { t } = useTranslation();
+
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { data: authData } = useAuth();
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+
+  const textStyle = {
+    fontFamily: "Inter",
+    fontWeight: 500,
+    fontSize: "1.05rem",
+    textTransform: "none",
+    letterSpacing: ".3px",
+    minWidth: "auto",
+    opacity: 0.95,
+  };
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) =>
     setAnchorEl(event.currentTarget);
-  };
+  const handleMenuClose = () => setAnchorEl(null);
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleToggleMobileSearch = () => {
+  const handleToggleMobileSearch = () =>
     setShowMobileSearch(!showMobileSearch);
-  };
 
-  const handleLogin = () => {
-    window.location.href = LOGIN_MICROSOFT_BASE;
-  };
-
-  const handleLogout = async () => {
+  const handleLogin = () => (window.location.href = LOGIN_MICROSOFT_BASE);
+  const handleLogout = () => {
     window.location.href = LOGOUT_BASE;
     setIsAuthenticated(false);
   };
@@ -65,10 +70,6 @@ export const Navbar = () => {
         setIsAuthenticated(false);
         setUser(null);
       }
-    } else {
-      // If query fails or returns no data, assume not authenticated
-      setIsAuthenticated(false);
-      setUser(null);
     }
   }, [authData, setIsAuthenticated, setUser]);
 
@@ -77,157 +78,177 @@ export const Navbar = () => {
       <AppBar
         position="sticky"
         sx={{
-          background: "linear-gradient(60deg, #8E44AD 0%, #A569BD 50%,#8E44AD 100%)",
-          boxShadow: 3,
+          backgroundColor: "6C3BFF",
+          boxShadow: "none",
+          height: "80px",
+          display: "flex",
+          justifyContent: "center",
+
         }}
       >
         <Toolbar
           sx={{
-            justifyContent: "space-between",
-            py: { xs: 1, md: 2 },
-            flexDirection: {
-              xs: showMobileSearch ? "column" : "row",
-              md: "row",
-            },
-            gap: { xs: showMobileSearch ? 2 : 0, md: 0 },
+            minHeight: "70px !important",
+            height: "70px",
+            px: { xs: 1, md: 3 },
+            display: "flex",
+            alignItems: "center",
+            direction: i18n.dir(), // Add RTL support
           }}
         >
-          {/* Logo */}
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography
-              variant="h6"
+          {/* LEFT SECTION - Logo & Navigation (flips for RTL) */}
+          <Box sx={{
+            display: "flex",
+            alignItems: "center",
+            flexShrink: 0,
+            mr: i18n.dir() === 'rtl' ? 0 : 'auto',
+            ml: i18n.dir() === 'rtl' ? 'auto' : 0,
+          }}>
+            <Box
               sx={{
-                color: "white",
-                display: {
-                  xs: isMobile && showMobileSearch ? "none" : "block",
-                },
+                width: 75,
+                height: 67.5,
+                display: showMobileSearch && isMobile ? "none" : "flex",
+                alignItems: "center",
+                flexShrink: 0,
+                mr: 3,
               }}
             >
-              <span
+              <img
+                src="../../public/Logo.svg"
+                alt="Logo"
                 style={{
-                  fontWeight: "bold",
-                  color: "#283593",
-                  marginRight: 3,
-                  padding: "2px 2px"
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                  scale: 1.1
                 }}
-              >
-                NU
-              </span>
-              {t("nav.projectShowcase")}
-            </Typography>
-          </Box>
+              />
+            </Box>
 
-          {/* Search Bar */}
-          <SearchBoxWithResults
-            showMobile={showMobileSearch}
-            isMobile={isMobile}
-            placeholder={t("nav.searchProject")}
-          />
-
-          {/* Navigation Links and Login Button */}
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: { xs: 1, md: 2 },
-            }}
-          >
-            {isMobile ? (
-              <>
-                <IconButton
-                  color="inherit"
-                  onClick={handleToggleMobileSearch}
-                  sx={{ display: { sm: "none" } }}
-                >
-                  <SearchIcon />
-                </IconButton>
-                <IconButton
-                  color="inherit"
-                  onClick={handleMenuOpen}
-                  sx={{
-                    display: showMobileSearch ? "none" : "flex",
-                  }}
-                >
-                  <MenuIcon />
-                </IconButton>
-              </>
-            ) : (
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: { sm: 1, md: 2 },
-                  alignItems: "center",
-                }}
-              >
-                <Button color="inherit" onClick={() => navigate("/")}>
+            {/* NAVIGATION BUTTONS */}
+            {!isMobile && (
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2.5 }}> {/* 1.25x gap (2 * 1.25 = 2.5) */}
+                <Button sx={textStyle} color="inherit" onClick={() => navigate("/")}>
                   {t("nav.home")}
                 </Button>
-                <Button onClick={() => navigate("/about")} color="inherit">
+                <Button sx={textStyle} color="inherit" onClick={() => navigate("/about")}>
                   {t("nav.about")}
                 </Button>
-                <Button color="inherit" onClick={() => navigate("/projects")}>{t("nav.projects")}</Button>
-                <LanguageSelector />
+                <Button sx={textStyle} color="inherit" onClick={() => navigate("/projects")}>
+                  {t("nav.projects")}
+                </Button>
               </Box>
             )}
+          </Box>
+
+          {/* CENTER SECTION - Search bar exactly in middle */}
+          <Box sx={{
+            position: 'absolute',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '380px',
+            display: !isMobile || showMobileSearch ? 'flex' : 'none'
+          }}>
+            <SearchBoxWithResults
+              placeholder={t("nav.searchProject")}
+              showMobile={showMobileSearch}
+              isMobile={isMobile}
+            />
+          </Box>
+
+          {/* RIGHT SECTION - Language & Login (flips for RTL) */}
+          <Box sx={{
+            paddingRight: isMobile ? 0 : 1,
+            display: "flex",
+            alignItems: "center",
+            gap: 3,
+            flexShrink: 0,
+            ml: i18n.dir() === 'rtl' ? 0 : 'auto', // Flip for RTL
+            mr: i18n.dir() === 'rtl' ? 'auto' : 0, // Flip for RTL
+          }}>
+            {/* Language Selector */}
+            {!isMobile && <LanguageSelector />}
+
+            {/* Login/User Menu */}
             {!isAuthenticated ? (
-              <Button
-                onClick={handleLogin}
-                variant="contained"
-                sx={{
-                  bgcolor: "#6A1B9A",
-                  "&:hover": {
-                    bgcolor: "#4A148C",
-                  },
-                  display: showMobileSearch ? "none" : "flex",
-                  borderRadius: 2,
-                  px: { xs: 2, md: 3 },
-                }}
-              >
-                {t("nav.login")}
-              </Button>
+              !isMobile && (
+                <Button
+                  onClick={handleLogin}
+                  sx={{
+                    ...textStyle,
+                    color: "#fff",
+                    border: "1.6px solid rgba(255,255,255,.8)",
+                    borderRadius: "8px",
+                    px: 2,
+                    py: 0.5,
+                    "&:hover": {
+                      backgroundColor: "rgba(255,255,255,0.15)",
+                    },
+                  }}
+                >
+                  {t("nav.login")}
+                </Button>
+              )
             ) : (
-              <UserMenu showMobileSearch={showMobileSearch} onLogout={handleLogout} />
+              !isMobile && <UserMenu showMobileSearch={showMobileSearch} onLogout={handleLogout} />
+            )}
+
+            {/* Mobile Actions */}
+            {isMobile && (
+              <>
+                {/* Search Toggle */}
+                {!showMobileSearch && (
+                  <IconButton color="inherit" onClick={handleToggleMobileSearch}>
+                    <SearchIcon sx={{ fontSize: "26px" }} />
+                  </IconButton>
+                )}
+
+                {/* Mobile Menu */}
+                {!showMobileSearch && (
+                  <IconButton color="inherit" onClick={handleMenuOpen}>
+                    <MenuIcon sx={{ fontSize: "30px" }} />
+                  </IconButton>
+                )}
+
+                {/* Mobile Login */}
+                {!showMobileSearch && !isAuthenticated && (
+                  <Button
+                    onClick={handleLogin}
+                    sx={{
+                      ...textStyle,
+                      color: "#fff",
+                      border: "1.6px solid rgba(255,255,255,.8)",
+                      borderRadius: "8px",
+                      px: 1.5,
+                      py: 0.5,
+                      fontSize: "0.9rem",
+                      "&:hover": {
+                        backgroundColor: "rgba(255,255,255,0.15)",
+                      },
+                    }}
+                  >
+                    {t("nav.login")}
+                  </Button>
+                )}
+              </>
             )}
           </Box>
         </Toolbar>
       </AppBar>
 
-      {/* Mobile Menu */}
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
-        sx={{
-          "& .MuiPaper-root": {
-            width: 200,
-            mt: 1,
-          },
-        }}
-      >
-        <MenuItem
-          onClick={() => {
-            navigate("/");
-            handleMenuClose();
-          }}
-        >
+      {/* MOBILE MENU */}
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+        <MenuItem sx={textStyle} onClick={() => navigate("/")}>
           {t("nav.home")}
         </MenuItem>
-        <MenuItem
-          onClick={() => {
-            navigate("/about");
-            handleMenuClose();
-          }}
-        >
+        <MenuItem sx={textStyle} onClick={() => navigate("/about")}>
           {t("nav.about")}
         </MenuItem>
-        <MenuItem onClick={() => {
-          navigate("/projects");
-          handleMenuClose();
-        }}>{t("nav.projects")}</MenuItem>
-        <LanguageSelector
-          variant="menuItem"
-          onLanguageChange={handleMenuClose}
-        />
+        <MenuItem sx={textStyle} onClick={() => navigate("/projects")}>
+          {t("nav.projects")}
+        </MenuItem>
+        <LanguageSelector variant="menuItem" onLanguageChange={handleMenuClose} />
       </Menu>
     </>
   );

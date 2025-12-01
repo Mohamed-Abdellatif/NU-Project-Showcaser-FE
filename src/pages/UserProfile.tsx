@@ -11,9 +11,10 @@ import { useGetProfileByUserName } from "../hooks/useUser";
 import LoadingState from "../components/LoadingState/LoadingState";
 import ProjectsPagination from "../components/ProjectsPagination/ProjectsPagination";
 import type { PaginatedProjectsResponse } from "../types";
-
+import { useTranslation } from "react-i18next";
 // Main Component
 const UserProfile = () => {
+  const { t } = useTranslation();
   const { userName } = useParams();
   const [ ,setIsAuthenticated] = useAtom(isAuthenticatedAtom);
   const { data: userProfileData, isLoading: isLoadingUserProfile } =
@@ -124,7 +125,7 @@ const UserProfile = () => {
               },
             }}
           >
-            View All Projects
+            {t("profile.viewAllProjects")}
           </Button>
           {user && isMyProfile && (
             <Box
@@ -171,7 +172,7 @@ const UserProfile = () => {
                   },
                 }}
               >
-                Deactivate Account
+                {t("profile.deactivateAccount")}
               </Button>
             </Box>
           )}
