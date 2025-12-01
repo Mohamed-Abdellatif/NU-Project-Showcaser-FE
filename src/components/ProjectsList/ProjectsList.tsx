@@ -57,7 +57,7 @@ const ProjectsList = ({
           <Typography variant="h3" component="h1" sx={{
             width: "100%",
             mb: 2.5,
-            color: title === "viewProject.recommendedProjects" ? "#6A2C68" : "#333",
+            color: title === "viewProject.recommendedProjects" ? "var(--accent)" : "#333",
             fontWeight: "bold",
             fontFamily: 'System-ui, BlinkMacSystemFont,Times New Roman',
 

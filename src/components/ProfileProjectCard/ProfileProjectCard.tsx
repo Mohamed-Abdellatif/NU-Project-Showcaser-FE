@@ -36,7 +36,7 @@ const ProfileProjectCard = ({ project }: ProfileProjectCardProps) => {
         flexDirection: "column",
         "&:hover": {
           transform: "translateY(-4px)",
-          boxShadow: "0px 8px 24px rgba(108, 59, 255, 0.2)",
+          boxShadow: "0px 8px 24px rgba(77, 106, 255, 0.2)",
         },
       }}
     >
@@ -75,8 +75,8 @@ const ProfileProjectCard = ({ project }: ProfileProjectCardProps) => {
               label={tech}
               size="small"
               sx={{
-                backgroundColor: "rgba(108, 59, 255, 0.1)",
-                color: "#6C3BFF",
+                backgroundColor: "var(--background-light)",
+                color: "var(--accent)",
                 fontWeight: 600,
                 fontSize: "0.75rem",
               }}
@@ -88,16 +88,16 @@ const ProfileProjectCard = ({ project }: ProfileProjectCardProps) => {
           onClick={() => navigate(`/projects/${project._id}`)}
           sx={{
             mt: "auto",
-            backgroundColor: "#6C3BFF",
+            backgroundColor: "var(--accent)",
             color: "#ffffff",
             borderRadius: "12px",
             py: 1,
             textTransform: "none",
             fontWeight: 600,
-            boxShadow: "0px 4px 12px rgba(108, 59, 255, 0.3)",
+            boxShadow: "0px 4px 12px rgba(77, 106, 255, 0.3)",
             "&:hover": {
-              backgroundColor: "#5A2FE6",
-              boxShadow: "0px 6px 16px rgba(108, 59, 255, 0.4)",
+              backgroundColor: "var(--primary)",
+              boxShadow: "0px 6px 16px rgba(77, 106, 255, 0.4)",
             },
           }}
         >

@@ -98,10 +98,10 @@ export const ProjectInfoCard = ({
   };
 
   const colors = {
-    textHeader: "#414F75",
-    cardBg: "#f0f6ff",
-    buttonBg: "#414F75",
-    chipBg: "#e8f1fe",
+    textHeader: "var(--text-primary)",
+    cardBg: "var(--background-lighter)",
+    buttonBg: "var(--text-primary)",
+    chipBg: "var(--background-light)",
   };
 
   return (
@@ -165,7 +165,7 @@ export const ProjectInfoCard = ({
                   key={t}
                   label={t}
                   sx={{
-                    bgcolor: "#fceef2",
+                    bgcolor: "var(--tag-background)",
                     fontWeight: 500,
                     borderRadius: "16px",
                     border: "1px solid #ebdce3",
@@ -234,7 +234,7 @@ export const ProjectInfoCard = ({
                 width: "100%",
                 py: 1.5,
                 bgcolor: colors.buttonBg,
-                "&:hover": { bgcolor: "#45103b" },
+                "&:hover": { bgcolor: "var(--accent)" },
                 borderRadius: 2,
                 fontWeight: 600,
                 fontFamily: "Poppins",

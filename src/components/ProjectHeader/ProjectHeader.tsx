@@ -28,7 +28,7 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
       <>
         <Typography
           variant="h3"
-          sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "#414F75", textAlign: "center" }}
+          sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "var(--text-primary)", textAlign: "center", textTransform: "uppercase"}}
         >
           {title}
         </Typography>
@@ -41,7 +41,7 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
       {/* Title & Description */}
       <Typography
         variant="h3"
-        sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "#4C5D8A", textAlign: "center" }}
+        sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "var(--text-primary)", textAlign: "center", textTransform: "uppercase" }}
       >
         {title}
       </Typography>

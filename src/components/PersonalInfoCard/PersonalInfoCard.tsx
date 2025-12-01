@@ -61,7 +61,7 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
               sx={{
                 width: { xs: 120, md: 140 },
                 height: { xs: 120, md: 140 },
-                bgcolor: "#414F75",
+                bgcolor: "var(--text-primary)",
                 fontSize: "3rem",
                 fontWeight: 700,
               }}

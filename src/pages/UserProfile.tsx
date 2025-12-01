@@ -116,12 +116,12 @@ const UserProfile = () => {
             variant="text"
             onClick={() => navigate("/projects")}
             sx={{
-              color: "#6C3BFF",
+              color: "var(--accent)",
               textTransform: "none",
               fontWeight: 600,
               fontSize: "1rem",
               "&:hover": {
-                backgroundColor: "rgba(108, 59, 255, 0.04)",
+                backgroundColor: "var(--background-light)",
               },
             }}
           >

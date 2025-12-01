@@ -78,7 +78,7 @@ export const Navbar = () => {
       <AppBar
         position="sticky"
         sx={{
-          backgroundColor: "#1976d2",
+          backgroundColor: "var(--primary)",
           boxShadow: "none",
           height: "80px",
           display: "flex",
@@ -115,7 +115,7 @@ export const Navbar = () => {
               }}
             >
               <img
-                src="../../public/Logo.svg"
+                src="../../Logo.svg"
                 alt="Logo"
                 style={{
                   width: "100%",

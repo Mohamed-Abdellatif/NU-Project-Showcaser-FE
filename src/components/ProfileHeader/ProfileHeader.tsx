@@ -48,13 +48,13 @@ const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
           borderRadius: "24px",
           px: 3,
           py: 1.5,
-          borderColor: "#6C3BFF",
-          color: "#6C3BFF",
+          borderColor: "var(--accent)",
+          color: "var(--accent)",
           textTransform: "none",
           fontWeight: 600,
           "&:hover": {
-            borderColor: "#5A2FE6",
-            backgroundColor: "rgba(108, 59, 255, 0.04)",
+            borderColor: "var(--primary)",
+            backgroundColor: "var(--background-light)",
           },
         }}
       >

@@ -105,7 +105,7 @@ export default function CommentSection({ projectId }: { projectId: string }) {
             variant="contained"
             onClick={handleAddComment}
             sx={{
-              bgcolor: "#8E44AD",
+              bgcolor: "var(--accent)",
               width: 80,
               height: 60,
               flexShrink: 0,
@@ -127,7 +127,7 @@ export default function CommentSection({ projectId }: { projectId: string }) {
               {/* Only show avatar if comment exists */}
               <Avatar
                 sx={{
-                  bgcolor: "#7B5EAA",
+                  bgcolor: "var(--accent)",
                   fontWeight: 700,
                   fontFamily: "Poppins",
                 }}

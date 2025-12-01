@@ -12,8 +12,8 @@ interface GradientIconBoxProps {
 const GradientIconBox = ({
   icon,
   size = { xs: 100, sm: 120 },
-  gradientFrom = "#6C3BFF",
-  gradientTo = "#B355F2",
+  gradientFrom = "var(--accent)",
+  gradientTo = "var(--primary)",
   borderRadius = "20px",
 }: GradientIconBoxProps) => {
   const width = typeof size === "number" ? size : size.xs || 100;
@@ -31,7 +31,7 @@ const GradientIconBox = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        boxShadow: "0px 4px 16px rgba(108, 59, 255, 0.3)",
+        boxShadow: "0px 4px 16px rgba(77, 106, 255, 0.3)",
       }}
     >
       <Box

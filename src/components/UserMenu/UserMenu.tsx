@@ -66,13 +66,13 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
           height: { xs: 40, md: 48 },
           p: 0,
           "&:hover .MuiAvatar-root": {
-            bgcolor: "#4A148C",
+            bgcolor: "var(--primary)",
           },
         }}
       >
         <Avatar
           sx={{
-            bgcolor: "#6A1B9A",
+            bgcolor: "var(--accent)",
             color: "white",
             width: { xs: 40, md: 48 },
             height: { xs: 40, md: 48 },

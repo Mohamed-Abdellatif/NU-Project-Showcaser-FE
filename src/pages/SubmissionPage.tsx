@@ -253,7 +253,7 @@ const SubmitionPage = () => {
             sx={{
               fontWeight: "bold",
               mb: 1,
-              color: "#6a1b9a",
+              color: "var(--accent)",
             }}
           >
             {t("submissionPage.Submit Project")}
@@ -345,8 +345,8 @@ const SubmitionPage = () => {
                 variant="contained"
                 fullWidth
                 sx={{
-                  bgcolor: "#6a1b9a",
-                  "&:hover": { bgcolor: "#7b1fa2" },
+                  bgcolor: "var(--accent)",
+                  "&:hover": { bgcolor: "var(--primary)" },
                   fontWeight: "bold",
                   py: 1.5,
                 }}

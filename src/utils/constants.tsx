@@ -19,7 +19,7 @@ export const LANGUAGES: Language[] = [
 
   export const foundingMembers: FoundingMember[] = [
     {
-      icon: <AllInclusiveIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
+      icon: <AllInclusiveIcon sx={{ fontSize: 40, color: "var(--accent)" }} />,
       image: "https://media.licdn.com/dms/image/v2/D4D03AQGtGQEb_iUdBA/profile-displayphoto-shrink_800_800/B4DZSyHXscGkAc-/0/1738155065020?e=1766016000&v=beta&t=HhlK6uGfntPwIRQ2p08M1FZyYFM8UuBavJN1XqQSeyk",
       name: "Mohamed",
       description: "Full Stack Developer",
@@ -31,7 +31,7 @@ export const LANGUAGES: Language[] = [
       linkedInIcon: <LinkedInIcon sx={{ fontSize: 30, color: "#126bc4" }} />,
     },
     {
-      icon: <HailIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
+      icon: <HailIcon sx={{ fontSize: 40, color: "var(--accent)" }} />,
       image: "https://media.licdn.com/dms/image/v2/D4E03AQHqobwKdu293g/profile-displayphoto-shrink_800_800/B4EZZDNwJZG0Ag-/0/1744884407028?e=1766016000&v=beta&t=TlSsh3ThfEK8gly7a93nv1KtT4Pe78ofYtW5aT4xcAA",
       name: "Fahd",
       description: "Frontend Developer",
@@ -43,7 +43,7 @@ export const LANGUAGES: Language[] = [
       linkedInIcon: <LinkedInIcon sx={{ fontSize: 30, color: "#126bc4" }} />,
     },
     {
-      icon: <CodeIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
+      icon: <CodeIcon sx={{ fontSize: 40, color: "var(--accent)" }} />,
       image: "https://media.licdn.com/dms/image/v2/D4E03AQH4F0D7vnNZGQ/profile-displayphoto-shrink_800_800/B4EZTDCdtXHcAg-/0/1738438991474?e=1766016000&v=beta&t=eKEO6mjaXKz76NZKZER5nBTDKHrjMg1y_0zB08T0yQk",
       name: "Zeyad",
       description: "Frontend Developer",
@@ -55,7 +55,7 @@ export const LANGUAGES: Language[] = [
       linkedInIcon: <LinkedInIcon sx={{ fontSize: 30, color: "#126bc4" }} />,
     },
     {
-      icon: <StarIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
+      icon: <StarIcon sx={{ fontSize: 40, color: "var(--accent)" }} />,
       image: "https://media.licdn.com/dms/image/v2/D4D03AQEeIgWJLMoIaA/profile-displayphoto-shrink_800_800/B4DZVLPlO9HIAc-/0/1740724131973?e=1766016000&v=beta&t=z55N1VaKGJJe2uvB5V_9dC44Y7RBG8KcBg4amK0cYZk",
       name: "Omar",
       description: "Backend Developer",

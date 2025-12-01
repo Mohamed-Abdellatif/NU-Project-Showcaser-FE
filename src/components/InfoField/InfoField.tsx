@@ -60,9 +60,9 @@ const InfoField = ({ label, value, icon, onClick }: InfoFieldProps) => {
           <IconButton
             size="small"
             sx={{
-              color: "#6C3BFF",
+              color: "var(--accent)",
               "&:hover": {
-                backgroundColor: "rgba(108, 59, 255, 0.1)",
+                backgroundColor: "var(--background-light)",
               },
             }}
           >

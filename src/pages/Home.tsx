@@ -60,8 +60,8 @@ const HomePage = () => {
             variant="contained"
             sx={{
               ...textStyle,
-              bgcolor: "#4d6aff",
-              "&:hover": { bgcolor: "#4d6aff" },
+              bgcolor: "var(--accent)",
+              "&:hover": { bgcolor: "var(--accent)" },
               mb: 1,
             }}
           >

@@ -40,17 +40,17 @@ const ProjectShowcase = ({ projects, user, isMyProfile }: ProjectShowcaseProps) 
             variant="contained"
             onClick={() => navigate("/submit")}
             sx={{
-              backgroundColor: "#6C3BFF",
+              backgroundColor: "var(--accent)",
               color: "#ffffff",
               borderRadius: "16px",
               px: 3,
               py: 1.5,
               textTransform: "none",
               fontWeight: 600,
-              boxShadow: "0px 4px 16px rgba(108, 59, 255, 0.3)",
+              boxShadow: "0px 4px 16px rgba(77, 106, 255, 0.3)",
               "&:hover": {
-                backgroundColor: "#5A2FE6",
-                boxShadow: "0px 6px 20px rgba(108, 59, 255, 0.4)",
+                backgroundColor: "var(--primary)",
+                boxShadow: "0px 6px 20px rgba(77, 106, 255, 0.4)",
               },
             }}
           >
@@ -73,7 +73,7 @@ const ProjectShowcase = ({ projects, user, isMyProfile }: ProjectShowcaseProps) 
               borderRadius: 4,
             },
             "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "#6C3BFF",
+              backgroundColor: "var(--accent)",
               borderRadius: 4,
             },
           }}
