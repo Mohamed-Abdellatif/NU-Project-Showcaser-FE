@@ -10,7 +10,7 @@ export interface User {
   _id: string;
   name: string;
   email: string;
-  role: 'admin' | 'user';
+  role: 'student' | 'supervisor' | 'admin';
   msId: string;
   firstName: string;
   lastName: string;
@@ -116,4 +116,22 @@ export type {
 export interface Member {
   name: string;
   email: string;
+}
+
+export interface FoundingMember {
+  icon: React.ReactNode;
+  image: string;
+  name: string;
+  description: string;
+  mail: string;
+  mailIcon: React.ReactNode;
+  github: string;
+  githubIcon: React.ReactNode;
+  linkedIn: string;
+  linkedInIcon: React.ReactNode;
+}
+
+export interface School {
+  name: string;
+  majors: string[];
 }

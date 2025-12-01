@@ -108,9 +108,11 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
         }}
       >
         <MenuItem onClick={handleProfileClick}>{t("nav.profile")}</MenuItem>
-        <MenuItem onClick={handleProjectRequestClick}>
-          {t("nav.project-requests")}
-        </MenuItem>
+        {user?.role === "supervisor" && (
+          <MenuItem onClick={handleProjectRequestClick}>
+            {t("nav.project-requests")}
+          </MenuItem>
+        )}
         <MenuItem onClick={handleStarredProjectsClick}>
           {t("nav.starred-projects")}
         </MenuItem>

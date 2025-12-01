@@ -19,11 +19,11 @@ const Projects = () => {
   // Filter states
   const [filters, setFilters] = useState<ProjectSearchParams>({
     title: "",
-    teamLeader: "",
+    teamLeader: { name: "", email: "" },
     supervisor: "",
     major: "",
     course: "",
-    teamMember: "",
+    teamMembers: [{ name: "", email: "" }],
   });
 
   // Pagination states
@@ -41,8 +41,8 @@ const Projects = () => {
       params.title = filters.title.trim();
       hasFilters = true;
     }
-    if (filters.teamLeader?.trim()) {
-      params.teamLeader = filters.teamLeader.trim();
+    if (filters.teamLeader?.name?.trim()) {
+      params.teamLeader = { name: filters.teamLeader.name.trim(), email: filters.teamLeader.email };
       hasFilters = true;
     }
     if (filters.supervisor?.trim()) {
@@ -57,8 +57,8 @@ const Projects = () => {
       params.course = filters.course.trim();
       hasFilters = true;
     }
-    if (filters.teamMember?.trim()) {
-      params.teamMember = filters.teamMember.trim();
+    if (filters.teamMembers && filters.teamMembers.length > 0) {
+      params.teamMembers = filters.teamMembers;
       hasFilters = true;
     }
 
@@ -91,11 +91,11 @@ const Projects = () => {
   const handleClearFilters = () => {
     setFilters({
       title: "",
-      teamLeader: "",
+      teamLeader: { name: "", email: "" },
       supervisor: "",
       major: "",
       course: "",
-      teamMember: "",
+      teamMembers: [{ name: "", email: "" }],
     });
     setPage(1);
   };

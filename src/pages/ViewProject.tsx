@@ -3,7 +3,7 @@ import {
   Box,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { useGetProjectById, useProjects } from "../hooks/useProjects";
+import { useGetProjectById, useRelatedProjects } from "../hooks/useProjects";
 import ProjectsList from "../components/ProjectsList/ProjectsList";
 import ProjectHeader from "../components/ProjectHeader/ProjectHeader";
 import { ProjectInfoCard } from "../components/ProjectInfoCard/ProjectInfoCard";
@@ -16,7 +16,7 @@ import EmptyResults from "../components/EmptyResults/EmptyResults";
 const ViewProject = () => {
   const { projectId } = useParams();
   const { data: project, isLoading, isError, error } = useGetProjectById(projectId!);
-  const { data: projectsData } = useProjects(1, 50);
+  const { data: relatedProjects } = useRelatedProjects(projectId);
 
   const media = useMemo(() => {
     if (!project) return [];
@@ -31,11 +31,7 @@ const ViewProject = () => {
     return [...imgs, ...vids];
   }, [project]);
 
-  const recommendedProjects = useMemo(() => {
-    if (!project || !projectsData?.projects) return [];
-    const others = projectsData.projects.filter((p) => p._id !== project._id);
-    return others.sort(() => 0.5 - Math.random()).slice(0, 6);
-  }, [project, projectsData]);
+  
 
   if (isLoading) {
     return <LoadingState />;
@@ -95,7 +91,7 @@ const ViewProject = () => {
       </Box>
 
 
-      {recommendedProjects && recommendedProjects.length > 0 && (
+      {relatedProjects && relatedProjects.length > 0 && (
         <Box
           sx={{
             width: "85%",
@@ -108,7 +104,7 @@ const ViewProject = () => {
           }}
         >
           <ProjectsList
-            projects={recommendedProjects}
+            projects={relatedProjects}
             title="viewProject.recommendedProjects"
             isViewModeChangeable={false}
           />

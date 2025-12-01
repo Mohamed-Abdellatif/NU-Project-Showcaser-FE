@@ -9,7 +9,8 @@ import {
   getFeaturedProjects,
   starProject,
   getStarredProjects,
-  getPendingProjectsByTA
+  getPendingProjectsByTA,
+  getRelatedProjects
 } from '../api/projectsApi';
 import type { 
   Project, 
@@ -32,6 +33,7 @@ export const projectKeys = {
   featured: () => [...projectKeys.all, 'featured'] as const,
   starred: () => [...projectKeys.all, 'starred'] as const,
   pendingByTA: (taMail: string) => [...projectKeys.all, 'pendingByTA', taMail] as const,
+  related: (id: string) => [...projectKeys.all, 'related', id] as const,
 };
 
 /**
@@ -161,5 +163,22 @@ export const useGetPendingProjectsByTA = (taMail: string | undefined) => {
       return getPendingProjectsByTA(taMail);
     },
     enabled: !!taMail,
+  });
+};
+
+/**
+ * Hook to get related projects by project ID
+ * @param id - MongoDB ObjectId of the project
+ */
+export const useRelatedProjects = (id: string | undefined) => {
+  return useQuery<Project[], Error>({
+    queryKey: projectKeys.related(id || ''),
+    queryFn: () => {
+      if (!id) {
+        throw new Error('Project ID is required');
+      }
+      return getRelatedProjects(id);
+    },
+    enabled: !!id,
   });
 };

@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { LANGUAGES } from '../../utils/constants';
 import { languageAtom } from '../../atoms/languageAtom';
 import { useAtom } from "jotai";
-import { useEffect } from "react";
 
 
 
@@ -19,10 +18,9 @@ interface LanguageSelectorProps {
 }
 
 export const LanguageSelector = ({
-  variant = 'button',
-  onLanguageChange
+  variant = 'button'
 }: LanguageSelectorProps) => {
-  const [language, setlanguage] = useAtom(languageAtom)
+  const [, setlanguage] = useAtom(languageAtom)
   const [langMenuAnchor, setLangMenuAnchor] = useState<null | HTMLElement>(null);
   const { i18n } = useTranslation();
 

@@ -152,6 +152,7 @@
   "auth": {
     "mustBeLoggedIn": "You must be logged in to access this page",
     "mustCompleteProfile": "You must complete your profile to access this page",
+    "mustBeSupervisor": "You must be a supervisor to access this page",
     "profileCompletedSuccessfully": "Profile completed already"
   },
   "starredProjects": {

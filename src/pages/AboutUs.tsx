@@ -3,18 +3,14 @@ import { useTranslation } from "react-i18next";
 import * as Icons from "@mui/icons-material";
 import { keyframes } from "@mui/system";
 import { useToastContext } from "../contexts/ToastContext";
+import { foundingMembers } from "../utils/constants";
+import type { FoundingMember } from "../types";
 
-const HailIcon = Icons.Hail;
-const StarIcon = Icons.Star;
-const CodeIcon = Icons.Code;
-const AllInclusiveIcon = Icons.AllInclusive;
+
 const MailIcon = Icons.Mail;
 const GitHubIcon = Icons.GitHub;
 const LinkedInIcon = Icons.LinkedIn;
 
-
-const focusY = -100;
-const zoom = 180;
 
 // Animations
 const fadeIn = keyframes`
@@ -27,74 +23,51 @@ const AboutUsSection = () => {
   const { t } = useTranslation();
   const { showSuccess } = useToastContext();
 
-  const teamMembers = [
-    {
-      icon: <AllInclusiveIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
-      image: "https://media.licdn.com/dms/image/v2/D4D03AQGtGQEb_iUdBA/profile-displayphoto-shrink_800_800/B4DZSyHXscGkAc-/0/1738155065020?e=1766016000&v=beta&t=HhlK6uGfntPwIRQ2p08M1FZyYFM8UuBavJN1XqQSeyk",
-      name: "Mohamed",
-      description: "Full Stack Developer",
-      mail: "m.abdellatif2319@nu.edu.eg",
-      mailIcon: <MailIcon sx={{ fontSize: 30, color: "#0f6cbd" }} />,
-      github: "https://github.com/Mohamed-Abdellatif",
-      githubIcon: <GitHubIcon sx={{ fontSize: 30, color: "#383737" }} />,
-      linkedIn: "https://www.linkedin.com/in/mohamed-abdellatif-6060371b0/",
-      linkedInIcon: <LinkedInIcon sx={{ fontSize: 30, color: "#126bc4" }} />,
-    },
-    {
-      icon: <HailIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
-      image: "https://media.licdn.com/dms/image/v2/D4E03AQHqobwKdu293g/profile-displayphoto-shrink_800_800/B4EZZDNwJZG0Ag-/0/1744884407028?e=1766016000&v=beta&t=TlSsh3ThfEK8gly7a93nv1KtT4Pe78ofYtW5aT4xcAA",
-      name: "Fahd",
-      description: "Frontend Developer",
-      mail: "f.essameldin2333@nu.edu.eg",
-      mailIcon: <MailIcon sx={{ fontSize: 30, color: "#0f6cbd" }} />,
-      github: "https://github.com/FahdKhater",
-      githubIcon: <GitHubIcon sx={{ fontSize: 30, color: "#383737" }} />,
-      linkedIn: "https://www.linkedin.com/in/fahd-khater-8698a02b0/",
-      linkedInIcon: <LinkedInIcon sx={{ fontSize: 30, color: "#126bc4" }} />,
-    },
-    {
-      icon: <CodeIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
-      image: "https://media.licdn.com/dms/image/v2/D4E03AQH4F0D7vnNZGQ/profile-displayphoto-shrink_800_800/B4EZTDCdtXHcAg-/0/1738438991474?e=1766016000&v=beta&t=eKEO6mjaXKz76NZKZER5nBTDKHrjMg1y_0zB08T0yQk",
-      name: "Zeyad",
-      description: "Frontend Developer",
-      mail: "z.ahmed2310@nu.edu.eg",
-      mailIcon: <MailIcon sx={{ fontSize: 30, color: "#0f6cbd" }} />,
-      github: "https://github.com/Zeyad-Ahmed2005",
-      githubIcon: <GitHubIcon sx={{ fontSize: 30, color: "#383737" }} />,
-      linkedIn: "https://www.linkedin.com/in/zeyad-ahmed-b57019278/",
-      linkedInIcon: <LinkedInIcon sx={{ fontSize: 30, color: "#126bc4" }} />,
-    },
-    {
-      icon: <StarIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
-      image: "https://media.licdn.com/dms/image/v2/D4D03AQEeIgWJLMoIaA/profile-displayphoto-shrink_800_800/B4DZVLPlO9HIAc-/0/1740724131973?e=1766016000&v=beta&t=z55N1VaKGJJe2uvB5V_9dC44Y7RBG8KcBg4amK0cYZk",
-      name: "Omar",
-      description: "Backend Developer",
-      mail: "o.tamer2391@nu.edu.eg",
-      mailIcon: <MailIcon sx={{ fontSize: 30, color: "#0f6cbd" }} />,
-      github: "https://github.com/Lark01",
-      githubIcon: <GitHubIcon sx={{ fontSize: 30, color: "#383737" }} />,
-      linkedIn: "https://www.linkedin.com/in/omar-abouhussein-a371592b7/",
-      linkedInIcon: <LinkedInIcon sx={{ fontSize: 30, color: "#126bc4" }} />,
-    },
-  ];
 
   return (
     <Box
       sx={{
-        width: "100%",
-        height: "90vh",
-        py: 12,
-        px: 2,
-        // background: "#ffd6e8",
-        background: `linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffd6e8 40%),
-                 url('https://www.nu.edu.eg/sites/default/files/banners/2024-03/1920x480_-_copy.png') center ${focusY}% / ${zoom}% no-repeat`,
+        width: "97.4%",
+        minHeight: { xs: "auto", sm: "90vh" },
+        py: { xs: 4, sm: 8, md: 12 },
+        px: { xs: 1, sm: 2 },
+        position: "relative",
+        overflow: "hidden",
+        background: "#ffd6e8", // base background
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         animation: `${fadeIn} 0.8s ease-in-out`,
+        // IMAGE on top layer
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "300px",
+          backgroundImage: "url('https://www.nu.edu.eg/sites/default/files/banners/2024-03/1920x480_-_copy.png')",
+          backgroundPosition: "center top",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          zIndex: 1,
+          pointerEvents: "none",
+        },
+        // GRADIENT that blends image → pink background
+        "&::after": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "300px",
+          background: "linear-gradient(to bottom, rgba(255,214,232,0) 0%, rgba(255,214,232,0.3) 40%, rgba(255,214,232,0.6) 60%, #ffd6e8 100%)",
+          zIndex: 2,
+          pointerEvents: "none",
+        },
       }}
     >
-      <Container maxWidth="lg" sx={{ zIndex: 1 }}>
+      <Container maxWidth="lg" sx={{ zIndex: 3, width: "100%", position: "relative" }}>
 
         {/* Title */}
         <Typography
@@ -103,10 +76,12 @@ const AboutUsSection = () => {
           sx={{
             fontWeight: 800,
             color: "#6a2c68",
-            marginTop: "150px",
-            mb: 2,
+            marginTop: { xs: "20px", sm: "80px", md: "150px" },
+            mb: { xs: 1, sm: 2 },
+            fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
             textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
             animation: `${fadeIn} 0.8s ease-out`,
+            px: { xs: 2, sm: 0 },
           }}
         >
           {t("about.title")}
@@ -120,22 +95,24 @@ const AboutUsSection = () => {
             color: "#8a4c88",
             maxWidth: 700,
             mx: "auto",
-            mb: 10,
+            mb: { xs: 4, sm: 6, md: 10 },
             lineHeight: 1.6,
             animation: `${fadeIn} 0.2s ease-out backwards`,
+            fontSize: { xs: "0.9rem", sm: "1rem", md: "1.25rem" },
+            px: { xs: 2, sm: 3, md: 0 },
           }}
         >
           {t("about.subtitle")}
         </Typography>
 
         {/* Team Grid */}
-        <Grid container spacing={4} justifyContent="center">
-          {teamMembers.map((member, idx) => (
+        <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} justifyContent="center">
+          {foundingMembers.map((member: FoundingMember, idx: number) => (
             <Grid size={{ xs: 12, sm: 6, md: 3 }} key={idx}>
               <Paper
                 elevation={3}
                 sx={{
-                  p: 4,
+                  p: { xs: 2, sm: 3, md: 4 },
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
@@ -156,14 +133,14 @@ const AboutUsSection = () => {
               >
                 <Box className="icon-box"
                   sx={{
-                    width: 80,
-                    height: 80,
+                    width: { xs: 60, sm: 70, md: 80 },
+                    height: { xs: 60, sm: 70, md: 80 },
                     borderRadius: "50%",
                     background: `url(${member.image}) center center/cover no-repeat`,
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    mb: 3,
+                    mb: { xs: 2, sm: 2.5, md: 3 },
                   }}
                 >
                 </Box>
@@ -173,26 +150,42 @@ const AboutUsSection = () => {
                   sx={{
                     fontWeight: "bold",
                     color: "#4a1c48",
+                    fontSize: { xs: "1rem", sm: "1.1rem", md: "1.25rem" },
                   }}
                 >
                   {member.name}
-                  <Typography variant="body1" align="center">
+                  <Typography 
+                    variant="body1" 
+                    align="center"
+                    sx={{
+                      fontSize: { xs: "0.85rem", sm: "0.9rem", md: "1rem" },
+                      mt: 0.5,
+                    }}
+                  >
                     {member.description}
                   </Typography>
-                  <Typography align="center">
+                  <Typography 
+                    align="center"
+                    sx={{
+                      mt: { xs: 1, sm: 1.5 },
+                      display: "flex",
+                      justifyContent: "center",
+                      gap: { xs: 1, sm: 1.5 },
+                    }}
+                  >
                     <a
                       onClick={() => {
                         navigator.clipboard.writeText(member.mail); showSuccess(`${member.mail} copied to clipboard!`);
                       }}
-                      style={{ marginRight: "5px", marginLeft: "5px", cursor: "pointer" }}
+                      style={{ cursor: "pointer" }}
                     >
-                      {member.mailIcon}
+                      <MailIcon sx={{ fontSize: { xs: 24, sm: 28, md: 30 }, color: "#0f6cbd" }} />
                     </a>
-                    <a href={member.github} style={{ marginRight: "5px", marginLeft: "5px" }}>
-                      {member.githubIcon}
+                    <a href={member.github} target="_blank" rel="noopener noreferrer">
+                      <GitHubIcon sx={{ fontSize: { xs: 24, sm: 28, md: 30 }, color: "#383737" }} />
                     </a>
-                    <a href={member.linkedIn} style={{ marginRight: "5px", marginLeft: "5px" }}>
-                      {member.linkedInIcon}
+                    <a href={member.linkedIn} target="_blank" rel="noopener noreferrer">
+                      <LinkedInIcon sx={{ fontSize: { xs: 24, sm: 28, md: 30 }, color: "#126bc4" }} />
                     </a>
                   </Typography>
                 </Typography>

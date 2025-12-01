@@ -126,8 +126,8 @@ const ProjectFilters = ({
           <TextField
             fullWidth
             label={t("projects.filters.teamMember")}
-            value={filters.teamMember || ""}
-            onChange={(e) => onFilterChange("teamMember", e.target.value)}
+            value={filters.teamMembers || ""}
+            onChange={(e) => onFilterChange("teamMembers", e.target.value)}
             variant="outlined"
           />
         </Box>

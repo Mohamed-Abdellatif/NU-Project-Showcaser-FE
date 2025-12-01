@@ -152,6 +152,7 @@
   "auth": {
     "mustBeLoggedIn": "يجب عليك تسجيل الدخول للوصول إلى هذه الصفحة",
     "mustCompleteProfile": "يجب عليك إكمال ملفك الشخصي للوصول إلى هذه الصفحة",
+    "mustBeSupervisor": "يجب أن تكون مشرفًا للوصول إلى هذه الصفحة",
     "profileCompletedSuccessfully": "تم إكمال ملفك الشخصي بالفعل"
   },
   "starredProjects": {

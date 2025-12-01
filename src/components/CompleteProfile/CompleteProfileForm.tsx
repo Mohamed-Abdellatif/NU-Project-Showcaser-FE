@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, MenuItem } from "@mui/material";
 import {
   LinkedIn as LinkedInIcon,
   Book as BookIcon,
@@ -10,6 +10,7 @@ import IconInputField from "../IconInputField/IconInputField";
 import GradientButton from "../GradientButton/GradientButton";
 import CompleteProfileSkipLink from "./CompleteProfileSkipLink";
 import { useTranslation } from "react-i18next";
+import { useSchools } from "../../hooks/useSchools";
 
 interface CompleteProfileFormProps {
   linkedInUrl: string;
@@ -59,6 +60,10 @@ const CompleteProfileForm = ({
   showSkipLink = true,
 }: CompleteProfileFormProps) => {
   const { t } = useTranslation();
+  const { data: schools } = useSchools();
+
+  const selectedSchool = schools?.find((s) => s.name === school);
+  const majors = selectedSchool?.majors || [];
 
   return (
     <Box component="form" onSubmit={onSubmit}>
@@ -75,22 +80,40 @@ const CompleteProfileForm = ({
         icon={<PersonIcon />}
       />
 
+      {/* School/Department Field */}
+      <IconInputField
+        placeholder="School/Department"
+        value={school}
+        onChange={(e) => {
+          onSchoolChange(e.target.value);
+          onMajorChange("");
+        }}
+        icon={<ShieldIcon />}
+        select
+        sx={{ mb: 4 }}
+      >
+        {schools?.map((schoolOption) => (
+          <MenuItem key={schoolOption.name} value={schoolOption.name}>
+            {schoolOption.name}
+          </MenuItem>
+        ))}
+      </IconInputField>
+
       {/* Major Field */}
       <IconInputField
         placeholder="Major"
         value={major}
         onChange={(e) => onMajorChange(e.target.value)}
         icon={<BookIcon />}
-      />
-
-      {/* School/Department Field */}
-      <IconInputField
-        placeholder="School/Department"
-        value={school}
-        onChange={(e) => onSchoolChange(e.target.value)}
-        icon={<ShieldIcon />}
-        sx={{ mb: 4 }}
-      />
+        select
+        disabled={!school || majors.length === 0}
+      >
+        {majors.map((majorOption) => (
+          <MenuItem key={majorOption} value={majorOption}>
+            {majorOption}
+          </MenuItem>
+        ))}
+      </IconInputField>
 
       {/* LinkedIn Field */}
       <IconInputField
@@ -119,12 +142,7 @@ const CompleteProfileForm = ({
       />
 
       {/* Primary Button */}
-      <GradientButton
-        type="submit"
-        fullWidth
-        sx={{ mb: 2 }}
-        onClick={onSubmit}
-      >
+      <GradientButton type="submit" fullWidth sx={{ mb: 2 }} onClick={onSubmit}>
         {submitButtonText || t("completeProfile.save")}
       </GradientButton>
 
@@ -137,4 +155,3 @@ const CompleteProfileForm = ({
 };
 
 export default CompleteProfileForm;
-

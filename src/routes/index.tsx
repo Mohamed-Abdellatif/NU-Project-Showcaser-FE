@@ -13,6 +13,7 @@ import CompleteProfile from "../pages/CompleteProfile";
 import EditProfile from "../pages/editProfile";
 import RequireCompleteProfile from "../hoc/RequireCompleteProfile";
 import RequireProfileExists from "../hoc/RequireProfileExists";
+import RequireSupervisor from "../hoc/RequireSupervisor";
 
 export const router = createBrowserRouter([
   {
@@ -49,7 +50,9 @@ export const router = createBrowserRouter([
         path: "/project-requests",
         element: (
           <RequireAuth>
-            <AcceptProject />
+            <RequireSupervisor>
+              <AcceptProject />
+            </RequireSupervisor>
           </RequireAuth>
         ),
       },
