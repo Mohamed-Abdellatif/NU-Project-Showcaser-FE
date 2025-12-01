@@ -13,11 +13,11 @@ import {
 import FilterListIcon from "@mui/icons-material/FilterList";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useTranslation } from "react-i18next";
-import type { ProjectSearchParams } from "../../types";
+import type { Member, ProjectSearchParams } from "../../types";
 
 interface ProjectFiltersProps {
   filters: ProjectSearchParams;
-  onFilterChange: (field: keyof ProjectSearchParams, value: string) => void;
+  onFilterChange: (field: keyof ProjectSearchParams, value: string | Member | Member[]) => void;
   onClearFilters: () => void;
 }
 
@@ -31,7 +31,31 @@ const ProjectFilters = ({
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [showFilters, setShowFilters] = useState(!isMobile);
 
-  const hasActiveFilters = Object.values(filters).some((value) => value?.trim());
+  const hasActiveFilters = Object.entries(filters).some(([key, value]) => {
+    // Skip pagination params
+    if (key === 'page' || key === 'limit') return false;
+    
+    if (value === undefined) return false;
+    
+    //strings
+    if (typeof value === 'string') {
+      return value.trim().length > 0;
+    }
+    
+    //Member 
+    if (!Array.isArray(value) && typeof value === 'object' && 'name' in value) {
+      return (value.name?.trim().length > 0) || (value.email?.trim().length > 0);
+    }
+    
+    //Member[]
+    if (Array.isArray(value)) {
+      return value.length > 0 && value.some(member => 
+        (member.name?.trim().length > 0) || (member.email?.trim().length > 0)
+      );
+    }
+    
+    return false;
+  });
 
   return (
     <Paper
@@ -98,8 +122,11 @@ const ProjectFilters = ({
           <TextField
             fullWidth
             label={t("projects.filters.teamLeader")}
-            value={filters.teamLeader || ""}
-            onChange={(e) => onFilterChange("teamLeader", e.target.value)}
+            value={filters.teamLeader?.name || ""}
+            onChange={(e) => {
+              const name = e.target.value;
+              onFilterChange("teamLeader", name ? { name, email: filters.teamLeader?.email || "" } : { name: "", email: "" });
+            }}
             variant="outlined"
           />
           <TextField
@@ -126,8 +153,20 @@ const ProjectFilters = ({
           <TextField
             fullWidth
             label={t("projects.filters.teamMember")}
-            value={filters.teamMembers || ""}
-            onChange={(e) => onFilterChange("teamMembers", e.target.value)}
+            value={filters.teamMembers?.map((member) => member.name).join(", ") || ""}
+            onChange={(e) => {
+              const inputValue = e.target.value;
+              if (!inputValue.trim()) {
+                onFilterChange("teamMembers", [{ name: "", email: "" }]);
+              } else {
+                const names = inputValue.split(",").map(name => name.trim()).filter(name => name);
+                const members: Member[] = names.map(name => ({
+                  name,
+                  email: filters.teamMembers?.find(m => m.name === name)?.email || ""
+                }));
+                onFilterChange("teamMembers", members.length > 0 ? members : [{ name: "", email: "" }]);
+              }
+            }}
             variant="outlined"
           />
         </Box>

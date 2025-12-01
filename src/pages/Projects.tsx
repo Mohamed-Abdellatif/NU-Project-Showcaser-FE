@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Box, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useProjects } from "../hooks/useProjects";
-import type { ProjectSearchParams, PaginatedProjectsResponse } from "../types";
+import type { ProjectSearchParams, PaginatedProjectsResponse, Member } from "../types";
 import ProjectsList from "../components/ProjectsList/ProjectsList";
 import ProjectFilters from "../components/ProjectFilters/ProjectFilters";
 import ResultsHeader from "../components/ResultsHeader/ResultsHeader";
@@ -82,7 +82,7 @@ const Projects = () => {
   // Reset to page 1 when filters change
   const handleFilterChange = (
     field: keyof ProjectSearchParams,
-    value: string
+    value: string | Member | Member[]
   ) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
     setPage(1);
