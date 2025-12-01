@@ -78,7 +78,7 @@ export const Navbar = () => {
       <AppBar
         position="sticky"
         sx={{
-          backgroundColor: "6C3BFF",
+          backgroundColor: "#1976d2",
           boxShadow: "none",
           height: "80px",
           display: "flex",
