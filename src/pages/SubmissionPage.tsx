@@ -20,16 +20,19 @@ import { useToastContext } from "../contexts/ToastContext";
 import { useAtom } from "jotai";
 import { userAtom } from "../atoms/authAtom";
 import type { User } from "../types";
+import { useSendMail } from "../hooks/useNotify";
+import {
+  requestProjectToTAEmail,
+} from "../utils/constants";
 
 const SubmitionPage = () => {
   const { t } = useTranslation();
+  const sendEmail = useSendMail();
   const navigate = useNavigate();
   const { showSuccess, showError, showWarning } = useToastContext();
   const [user] = useAtom<User | null>(userAtom);
   const lastRequestTimeRef = useRef<number>(0);
   const COOLDOWN_MS = 5000; // 5 seconds
-
-
 
   const createProject = useCreateProject();
   const uploadImage = useUploadImage();
@@ -48,14 +51,21 @@ const SubmitionPage = () => {
   const [liveUrl, setLiveUrl] = useState("");
   const [video, setVideo] = useState<File | null>(null);
   const [newMember, setNewMember] = useState<Member>({ name: "", email: "" });
-  const teamLeader = useMemo(() => user?.firstName + " " + user?.lastName, [user]);
+  const teamLeader = useMemo(
+    () => user?.firstName + " " + user?.lastName,
+    [user]
+  );
 
   const handleAddMember = () => {
-    if (newMember.name.trim() && newMember.email.trim() && !members.some(m => m.email === newMember.email)) {
+    if (
+      newMember.name.trim() &&
+      newMember.email.trim() &&
+      !members.some((m) => m.email === newMember.email)
+    ) {
       setMembers([...members, newMember]);
       setNewMember({ name: "", email: "" });
     }
-  };  
+  };
 
   const handleRemoveMember = (index: number) => {
     const updatedMembers = members.filter((_, i) => i !== index);
@@ -166,7 +176,7 @@ const SubmitionPage = () => {
           .map((t) => t.trim())
           .filter((t) => t),
         teamLeader: { name: teamLeader.trim(), email: user?.email! },
-        teamMembers: members.filter(m => m.name.trim() && m.email.trim()),
+        teamMembers: members.filter((m) => m.name.trim() && m.email.trim()),
         supervisor,
         stars: 0,
         status: "pending-ta",
@@ -198,6 +208,11 @@ const SubmitionPage = () => {
           setTeachingAssistantEmail("");
           setVideo(null);
           navigate("/");
+          sendEmail.mutate({
+            to: teachingAssistantEmail,
+            subject: requestProjectToTAEmail.subject,
+            html: requestProjectToTAEmail.html,
+          });
         },
         onError: (error) => {
           console.error("Failed to create project:", error);
