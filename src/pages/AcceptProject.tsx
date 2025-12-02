@@ -17,6 +17,8 @@ import { userAtom } from "../atoms/authAtom";
 import { useAtom } from "jotai";
 import { useToastContext } from "../contexts/ToastContext";
 import { useTranslation } from "react-i18next";
+import { useSendMail } from "../hooks/useNotify";
+import { acceptProjectEmail, declineProjectEmail } from "../utils/constants";
 
 type MediaItem = {
   type: "image" | "video";
@@ -25,6 +27,7 @@ type MediaItem = {
 
 const AcceptProject = () => {
   const [user] = useAtom(userAtom);
+  const sendEmail = useSendMail();
   const { showSuccess } = useToastContext();
   const email = user?.email;
   const {
@@ -58,6 +61,19 @@ const AcceptProject = () => {
       {
         onSuccess: () => {
           showSuccess(successMessage);
+          if (action === "accept") {
+            sendEmail.mutate({
+              to: activeProject.teamLeader.email,
+              subject: acceptProjectEmail(activeProject.title.toUpperCase()).subject,
+              html: acceptProjectEmail(activeProject.title.toUpperCase()).html,
+            });
+          } else {
+            sendEmail.mutate({
+              to: activeProject.teamLeader.email,
+              subject: declineProjectEmail(activeProject.title.toUpperCase()).subject,
+              html: declineProjectEmail(activeProject.title.toUpperCase()).html,
+            });
+          }
         },
       }
     );
@@ -118,7 +134,7 @@ const AcceptProject = () => {
       <ProjectHeader title={activeProject?.title || ""} media={media} />
       <ProjectInfoCard
         course={activeProject?.course}
-        teamLeader={activeProject?.teamLeader }
+        teamLeader={activeProject?.teamLeader}
         teamMembers={activeProject?.teamMembers}
         supervisor={activeProject?.supervisor}
         repoUrl={activeProject?.repoUrl}
