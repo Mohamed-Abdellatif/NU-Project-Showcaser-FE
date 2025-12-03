@@ -84,7 +84,7 @@ const TeamMembersCard = ({
                     sx={{
                         fontWeight: "bold",
                         mb: 3,
-                        color: "#6a1b9a",
+                        color: "var(--accent)",
                     }}
                 >
                     {t("submissionPage.Team Members")}
@@ -157,10 +157,10 @@ const TeamMembersCard = ({
                                 label={`${fullName} (${email})`}
                                 onDelete={() => onRemoveMember(index)}
                                 sx={{
-                                    bgcolor: "#e1bee7",
-                                    color: "#6a1b9a",
+                                    bgcolor: "var(--background-light)",
+                                    color: "var(--accent)",
                                     "& .MuiChip-deleteIcon": {
-                                        color: "#6a1b9a",
+                                        color: "var(--accent)",
                                     },
                                 }}
                             />
@@ -221,8 +221,8 @@ const TeamMembersCard = ({
                         startIcon={<Add />}
                         size="small"
                         sx={{
-                            bgcolor: "#6a1b9a",
-                            "&:hover": { bgcolor: "#7b1fa2" },
+                            bgcolor: "var(--accent)",
+                            "&:hover": { bgcolor: "var(--primary)" },
                             minWidth: "auto",
                             px: 2,
                             whiteSpace: "nowrap",

@@ -14,10 +14,10 @@ import {
 import LoadingState from "../components/LoadingState/LoadingState";
 import ProjectsPagination from "../components/ProjectsPagination/ProjectsPagination";
 import type { PaginatedProjectsResponse } from "../types";
+import { useTranslation } from "react-i18next";
 import { useSendMail } from "../hooks/useNotify";
 import { deactivateAccountEmail } from "../utils/constants";
 import { useToastContext } from "../contexts/ToastContext";
-import { useTranslation } from "react-i18next";
 import ValidationModal from "../components/ValidationModal/ValidationModal";
 const LOGOUT_BASE = `${import.meta.env.VITE_API_BASE}/auth/logout`;
 
@@ -105,7 +105,7 @@ const UserProfile = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: "#FAF9F6",
+        background: "linear-gradient(135deg, var(--background-lighter) 0%, var(--background-light) 100%)",
         py: { xs: 3, md: 6 },
         px: { xs: 2, md: 4 },
         display: "flex",
@@ -143,23 +143,26 @@ const UserProfile = () => {
             gap: 2,
             mt: 4,
             pt: 4,
-            borderTop: "1px solid rgba(0,0,0,0.1)",
+            borderTop: "1px solid rgba(89, 134, 217, 0.2)",
           }}
         >
           <Button
             variant="text"
             onClick={() => navigate("/projects")}
             sx={{
-              color: "#6C3BFF",
+              color: "var(--accent)",
               textTransform: "none",
               fontWeight: 600,
               fontSize: "1rem",
+              fontFamily: "Inter, Poppins, system-ui, sans-serif",
               "&:hover": {
-                backgroundColor: "rgba(108, 59, 255, 0.04)",
+                backgroundColor: "rgba(89, 134, 217, 0.1)",
+                borderRadius: "12px",
               },
+              transition: "all 0.25s ease",
             }}
           >
-            View All Projects
+            {t("profile.viewAllProjects")}
           </Button>
           {user && isMyProfile && (
             <Box
@@ -176,15 +179,22 @@ const UserProfile = () => {
                 sx={{
                   borderColor: "#d32f2f",
                   color: "#d32f2f",
-                  borderRadius: "12px",
+                  borderRadius: "20px",
                   px: 3,
-                  py: 1,
+                  py: 1.5,
                   textTransform: "none",
                   fontWeight: 600,
+                  fontFamily: "Inter, Poppins, system-ui, sans-serif",
+                  background: "rgba(255, 255, 255, 0.8)",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
                   "&:hover": {
                     borderColor: "#c62828",
-                    backgroundColor: "rgba(211, 47, 47, 0.04)",
+                    backgroundColor: "rgba(211, 47, 47, 0.1)",
+                    transform: "translateY(-2px)",
+                    boxShadow: "0px 4px 12px rgba(211, 47, 47, 0.2)",
                   },
+                  transition: "all 0.25s ease",
                 }}
               >
                 Logout
@@ -195,20 +205,27 @@ const UserProfile = () => {
                 sx={{
                   borderColor: "#d32f2f",
                   color: "#d32f2f",
-                  borderRadius: "12px",
+                  borderRadius: "20px",
                   px: 3,
-                  py: 1,
+                  py: 1.5,
                   textTransform: "none",
                   fontWeight: 600,
+                  fontFamily: "Inter, Poppins, system-ui, sans-serif",
+                  background: "rgba(255, 255, 255, 0.8)",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
                   "&:hover": {
                     borderColor: "#c62828",
-                    backgroundColor: "rgba(211, 47, 47, 0.04)",
+                    backgroundColor: "rgba(211, 47, 47, 0.1)",
+                    transform: "translateY(-2px)",
+                    boxShadow: "0px 4px 12px rgba(211, 47, 47, 0.2)",
                   },
+                  transition: "all 0.25s ease",
                 }}
               >
-                Deactivate Account
+                {t("profile.deactivateAccount")}
               </Button>}
-            </Box>
+            </Box> 
           )}
         </Box>
       </Box>

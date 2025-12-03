@@ -146,3 +146,12 @@ export interface SuggestionCreatePayload {
   description: string;
   images?: string[];
 }
+export interface HeroSlideConfig {
+  decorativeBarColor: string;
+  buttonLink: string;
+  translationKeys: {
+    title: string;
+    subtitle: string;
+    ctaText: string;
+  };
+}

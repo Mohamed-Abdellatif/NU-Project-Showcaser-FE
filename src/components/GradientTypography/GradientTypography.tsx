@@ -7,8 +7,8 @@ interface GradientTypographyProps extends TypographyProps {
 
 const GradientTypography = ({
   children,
-  gradientFrom = "#6C3BFF",
-  gradientTo = "#B355F2",
+  gradientFrom = "var(--accent)",
+  gradientTo = "var(--primary)",
   sx,
   ...props
 }: GradientTypographyProps) => {

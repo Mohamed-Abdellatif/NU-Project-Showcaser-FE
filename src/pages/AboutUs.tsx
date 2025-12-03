@@ -33,7 +33,7 @@ const AboutUsSection = () => {
         px: { xs: 1, sm: 2 },
         position: "relative",
         overflow: "hidden",
-        background: "#ffd6e8", // base background
+        background: "var(--background-light)", // base background
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -53,7 +53,7 @@ const AboutUsSection = () => {
           zIndex: 1,
           pointerEvents: "none",
         },
-        // GRADIENT that blends image → pink background
+        // GRADIENT that blends image → glassmorphism theme background
         "&::after": {
           content: '""',
           position: "absolute",
@@ -61,7 +61,7 @@ const AboutUsSection = () => {
           left: 0,
           width: "100%",
           height: "300px",
-          background: "linear-gradient(to bottom, rgba(255,214,232,0) 0%, rgba(255,214,232,0.3) 40%, rgba(255,214,232,0.6) 60%, #ffd6e8 100%)",
+          background: "linear-gradient(to bottom, rgba(240, 246, 255, 0) 0%, rgba(240, 246, 255, 0.4) 30%, rgba(89, 134, 217, 0.5) 50%, rgba(25, 118, 210, 0.6) 70%, var(--background-light) 100%)",
           zIndex: 2,
           pointerEvents: "none",
         },

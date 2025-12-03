@@ -24,7 +24,7 @@ const CompleteProfileSkipLink = ({ onSkip, skipLinkText }: CompleteProfileSkipLi
         href="#"
         onClick={handleSkip}
         sx={{
-          color: "#6C3BFF",
+          color: "var(--accent)",
           textDecoration: "none",
           fontSize: "0.95rem",
           fontWeight: 500,

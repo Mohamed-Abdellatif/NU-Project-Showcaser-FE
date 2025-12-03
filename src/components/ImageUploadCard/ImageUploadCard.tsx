@@ -55,7 +55,7 @@ const ImageUploadCard = ({
     >
       <CardContent>
         <Box sx={{ display: "flex", alignItems: "center",  }}>
-          <CameraAlt sx={{ color: "#6a1b9a", mr: 1 }} />
+          <CameraAlt sx={{ color: "var(--accent)", mr: 1 }} />
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
             {t("submissionPage.Images")} ({images.length}/10)
           </Typography>
@@ -75,15 +75,15 @@ const ImageUploadCard = ({
             mb: 2,
             cursor: "pointer",
             "&:hover": {
-              borderColor: "#6a1b9a",
-              bgcolor: "#f3e5f5",
+              borderColor: "var(--accent)",
+              bgcolor: "var(--background-light)",
             },
           }}
           onDragOver={onDragOver}
           onDrop={onDrop}
           onClick={handleFileSelect}
         >
-          <CloudUpload sx={{ fontSize: 40, color: "#6a1b9a", mb: 1 }} />
+          <CloudUpload sx={{ fontSize: 40, color: "var(--accent)", mb: 1 }} />
           <Typography variant="body2" color="text.secondary" dir={currentDir}>
             {t("submissionPage.Drag and drop images here, or click to browse")}
           </Typography>

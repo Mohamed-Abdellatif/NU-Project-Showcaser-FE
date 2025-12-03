@@ -1,4 +1,4 @@
-import type { FoundingMember, Language } from "../types";
+import type { FoundingMember, HeroSlideConfig, Language } from "../types";
 
 import * as Icons from "@mui/icons-material";
 
@@ -13,6 +13,46 @@ const LinkedInIcon = Icons.LinkedIn;
 export const LANGUAGES: Language[] = [
   { code: "en", name: "English", dir: "ltr" },
   { code: "ar", name: "العربية", dir: "rtl" },
+];
+
+
+export const HERO_SLIDES_CONFIG: HeroSlideConfig[] = [
+  {
+    decorativeBarColor: "#F59E0B",
+    buttonLink: "/submit",
+    translationKeys: {
+      title: "home.heroSlides.slide1.title",
+      subtitle: "home.heroSlides.slide1.subtitle",
+      ctaText: "home.heroSlides.slide1.ctaText",
+    },
+  },
+  {
+    decorativeBarColor: "#3B82F6",
+    buttonLink: "/projects",
+    translationKeys: {
+      title: "home.heroSlides.slide2.title",
+      subtitle: "home.heroSlides.slide2.subtitle",
+      ctaText: "home.heroSlides.slide2.ctaText",
+    },
+  },
+  {
+    decorativeBarColor: "#10B981",
+    buttonLink: "/about",
+    translationKeys: {
+      title: "home.heroSlides.slide3.title",
+      subtitle: "home.heroSlides.slide3.subtitle",
+      ctaText: "home.heroSlides.slide3.ctaText",
+    },
+  },
+  {
+    decorativeBarColor: "#8B5CF6",
+    buttonLink: "/profile",
+    translationKeys: {
+      title: "home.heroSlides.slide4.title",
+      subtitle: "home.heroSlides.slide4.subtitle",
+      ctaText: "home.heroSlides.slide4.ctaText",
+    },
+  },
 ];
 
 export const foundingMembers: FoundingMember[] = [

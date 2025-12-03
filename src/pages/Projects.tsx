@@ -109,10 +109,12 @@ const Projects = () => {
     setPage(newPage);
   };
 
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+
   return (
     <Box
       sx={{
-        backgroundColor: "#FFFFF0",
+        background: "linear-gradient(135deg, var(--background-lighter) 0%, var(--background-light) 100%)",
         minHeight: "100vh",
         py: 4,
         px: { xs: 2, sm: 4 },
@@ -124,10 +126,11 @@ const Projects = () => {
           variant="h3"
           component="h1"
           sx={{
-            mb: 3,
+            mb: 4,
             fontWeight: "bold",
-            fontFamily: "System-ui, BlinkMacSystemFont, Times New Roman",
-            color: "#333",
+            fontFamily: "Inter, Poppins, system-ui, sans-serif",
+            color: "var(--text-primary)",
+            fontSize: { xs: "2rem", md: "2.5rem" },
           }}
         >
           {t("projects.title")}
@@ -153,6 +156,8 @@ const Projects = () => {
               itemsPerPage={itemsPerPage}
               onItemsPerPageChange={handleItemsPerPageChange}
               itemsPerPageOptions={ITEMS_PER_PAGE_OPTIONS}
+              viewMode={viewMode}
+              onViewModeChange={setViewMode}
             />
 
             {/* Projects List */}
@@ -160,7 +165,9 @@ const Projects = () => {
               <ProjectsList
                 projects={projects}
                 title=" "
-                isViewModeChangeable={true}
+                isViewModeChangeable={false}
+                viewMode={viewMode}
+                onViewModeChange={setViewMode}
               />
             ) : (
               <EmptyResults />

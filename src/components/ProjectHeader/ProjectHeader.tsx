@@ -17,18 +17,38 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const theme = useTheme();
   const isRTL = theme.direction === 'rtl';
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const nextMedia = () =>
-    setCurrentIndex((prev) => (prev === media.length - 1 ? 0 : prev + 1));
-  const prevMedia = () =>
-    setCurrentIndex((prev) => (prev === 0 ? media.length - 1 : prev - 1));
+  const nextMedia = () => {
+    if (isTransitioning) return; 
+    setIsTransitioning(true);
+    
+    setCurrentIndex((prev) => {
+      const next = prev === media.length - 1 ? 0 : prev + 1;
+      return next;
+    });
+    
+    setTimeout(() => setIsTransitioning(false), 300);
+  };
+
+  const prevMedia = () => {
+    if (isTransitioning) return; 
+    setIsTransitioning(true);
+    
+    setCurrentIndex((prev) => {
+      const next = prev === 0 ? media.length - 1 : prev - 1;
+      return next;
+    });
+    
+    setTimeout(() => setIsTransitioning(false), 300);
+  };
 
   if (!media || media.length === 0) {
     return (
       <>
         <Typography
           variant="h3"
-          sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "#6A2C68", textAlign: "center" }}
+          sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "var(--text-primary)", textAlign: "center", textTransform: "uppercase" }}
         >
           {title}
         </Typography>
@@ -41,7 +61,7 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
       {/* Title & Description */}
       <Typography
         variant="h3"
-        sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "#6A2C68", textAlign: "center" }}
+        sx={{ mt: 5, mb: 1, fontWeight: "bold", color: "var(--text-primary)", textAlign: "center", textTransform: "uppercase" }}
       >
         {title}
       </Typography>
@@ -71,7 +91,14 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
           {media.map((item, idx) => (
             <Box
               key={idx}
-              sx={{ flex: "0 0 100%", display: "flex", justifyContent: "center", alignItems: "center" }}
+              sx={{
+                flex: "0 0 100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                opacity: idx === currentIndex ? 1 : 0,
+                transition: "opacity 0.3s ease-in-out",
+              }}
             >
               <Box
                 sx={{
@@ -80,14 +107,53 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
                   borderRadius: "20px",
                   overflow: "hidden",
                   boxShadow: "0 8px 25px rgba(0,0,0,0.25)",
+                  position: "relative",
+                  opacity: isTransitioning && idx === currentIndex ? 0.7 : 1,
+                  transition: "opacity 0.6s ease-in-out",
                 }}
               >
+                {/* Blurred background */}
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    backgroundImage: `url(${item.src})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    filter: "blur(20px)",
+                    zIndex: 1,
+                  }}
+                />
+
+                {/* Blue overlay */}
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "rgba(0, 123, 255, 0.2)",
+                    zIndex: 2,
+                  }}
+                />
+
+                {/* Foreground media */}
                 {item.type === "image" ? (
                   <CardMedia
                     component="img"
                     image={item.src}
                     alt={`media-${idx}`}
-                    sx={{ width: "100%", height: "100%", objectFit: "fill" }}
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                      position: "relative",
+                      zIndex: 3,
+                    }}
                   />
                 ) : (
                   <CardMedia
@@ -97,7 +163,13 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
                     loop
                     muted
                     playsInline
-                    sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      position: "relative",
+                      zIndex: 3,
+                    }}
                   />
                 )}
               </Box>
@@ -111,7 +183,7 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
           sx={{
             position: "absolute",
             ...(isRTL ? { right: 20 } : { left: 20 }),
-            color: "#8b3f7f",
+            color: "#1f2937",
             background: "rgba(255,255,255,0.7)",
             "&:hover": { background: "rgba(255,255,255,0.9)" },
             zIndex: 5,
@@ -124,7 +196,7 @@ export const ProjectHeader = ({ title, media }: ProjectHeaderProps) => {
           sx={{
             position: "absolute",
             ...(isRTL ? { left: 20 } : { right: 20 }),
-            color: "#8b3f7f",
+            color: "#1f2937",
             background: "rgba(255,255,255,0.7)",
             "&:hover": { background: "rgba(255,255,255,0.9)" },
             zIndex: 5,

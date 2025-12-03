@@ -43,7 +43,7 @@ const ProjectSidebar = ({ projectsData, activeProject, setActiveProject }: Proje
                 <ArrowDropDownCircleIcon
                     sx={{
                         fontSize: 48,
-                        color: "#7B1FA2",
+                        color: "var(--accent)",
                         transform: sidebarOpen ? "rotate(-90deg)" : "rotate(90deg)",
                         transition: "transform 0.25s ease",
                     }}
@@ -83,7 +83,7 @@ const ProjectSidebar = ({ projectsData, activeProject, setActiveProject }: Proje
                                     paddingRight: 1,
                                     "&:hover": { background: "#f5f5f5" },
                                     backgroundColor:
-                                        activeProject?._id === p._id ? "#EDE0F7" : "transparent",
+                                        activeProject?._id === p._id ? "var(--background-light)" : "transparent",
                                 }}
                             >
                                 <ListItemText primary={p.title} />
@@ -92,8 +92,8 @@ const ProjectSidebar = ({ projectsData, activeProject, setActiveProject }: Proje
                                     variant="contained"
                                     size="small"
                                     sx={{
-                                        backgroundColor: "#7B1FA2",
-                                        "&:hover": { backgroundColor: "#6A1B9A" },
+                                        backgroundColor: "var(--accent)",
+                                        "&:hover": { backgroundColor: "var(--primary)" },
                                     }}
                                     onClick={() => {
                                         setActiveProject(p);

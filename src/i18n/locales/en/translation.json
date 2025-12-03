@@ -20,11 +20,34 @@
   },
   "home": {
     "title": "Have a Winning Project?",
-    "subtitle": "Submit Your project and we’ll check it out!",
+    "subtitle": "Submit Your project and we'll check it out!",
     "projects": "Projects",
     "submitProject": "Submit",
     "featuredProjects": "Featured Projects",
-    "allProjects": "All Projects"
+    "allProjects": "All Projects",
+    "View Project": "View Project",
+    "heroSlides": {
+      "slide1": {
+        "title": "Have a Winning Project?",
+        "subtitle": "Showcase your work to the community!",
+        "ctaText": "Submit Your Project"
+      },
+      "slide2": {
+        "title": "Join the Innovation Hub",
+        "subtitle": "Connect with talented developers and creators!",
+        "ctaText": "Explore Projects"
+      },
+      "slide3": {
+        "title": "Share Your Success",
+        "subtitle": "Inspire others with your amazing achievements!",
+        "ctaText": "Learn More"
+      },
+      "slide4": {
+        "title": "Build Your Portfolio",
+        "subtitle": "Show the world what you're capable of!",
+        "ctaText": "Start Building"
+      }
+    }
   },
   "about": {
     "title": "About Us",
@@ -179,6 +202,41 @@
     "failedToUpdateProfile": "Failed to update profile. Please try again.",
     "failedToLoadProfile": "Failed to load profile. Please try again."
   },
+  "profile" : {
+    "editProfile": "Edit Profile",
+    "projectsSubmitted": "Projects Submitted",
+    "noProjectsSubmitted": "No projects submitted yet.",
+    "viewProfile": "View Profile"
+    ,"failedToLoadUserProfile": "Failed to load user profile. Please try again."
+    ,"loadingUserProfile": "Loading user profile..."
+    ,"errorLoadingUserProfile": "Error loading user profile."
+    ,"noProjectsFound": "No projects found for this user."
+    ,"projects": "Projects"
+    ,"about": "About"
+    ,"email": "Email"
+    ,"major": "Major"
+    ,"universityId": "University ID"
+    ,"name": "Name",
+    "edit": "Edit",
+    "save": "Save",
+    "cancel": "Cancel",
+    "profileUpdatedSuccessfully": "Profile updated successfully",
+    "failedToUpdateProfile": "Failed to update profile. Please try again."
+    ,"pleaseFixValidationErrorsBeforeSubmitting": "Please fix the validation errors before submitting",
+    "updateProfile": "Update Profile",
+    "loading": "Loading profile...",
+    "error": "Error loading profile.",
+    "viewAllProjects": "View All Projects",
+    "deactivateAccount": "Deactivate Account",
+    "starredProjects": "Starred Projects",
+    "profileHeaderTitle": "User Profile",
+    "profileHeaderSubtitle": "View and manage your personal details and projects",
+    "university": "Nile University",
+    "submitNewProject": "Submit New Project",
+    "viewProjectDetails": "View Project Details",
+    "school" : "School",
+    "github" : "GitHub",
+    "linkedIn" : "LinkedIn"},
   "userProfile": {
     "requestDeactivateAccountSuccessfully": "Request to deactivate account has been sent successfully",
     "requestDeactivateAccountFailed": "Failed to send request to deactivate account. Please try again.",

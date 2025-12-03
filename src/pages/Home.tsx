@@ -1,70 +1,42 @@
-import { useTranslation } from "react-i18next";
 import ProjectsList from "../components/ProjectsList/ProjectsList";
-import { Box, Button, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useFeaturedProjects} from "../hooks/useProjects";
+import { Box } from "@mui/material";
+import { useFeaturedProjects } from "../hooks/useProjects";
 import LoadingState from "../components/LoadingState/LoadingState";
 import ErrorState from "../components/ErrorState/ErrorState";
+import HeroCard from "../components/HeroCard/HeroCard";
+import { useState } from "react";
+import "@fontsource/inter/500.css";
+import "@fontsource/poppins/500.css";
 
 const HomePage = () => {
   const { data: projects, isLoading, isError, error } = useFeaturedProjects();
-  const { t } = useTranslation();
-  const navigate = useNavigate();
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+
   return (
     <Box
       className="home-page"
       sx={{
-        backgroundColor: "#FFFFF0",
+        background:
+          "linear-gradient(135deg, var(--background-lighter) 0%, var(--Off-White) 100%)",
         minHeight: "100vh",
       }}
     >
-      <Box
-        sx={{
-          position: "relative",
-          display: "inline-block",
-          p: 2,
-          mt: 4,
-          mb: 4,
-          minWidth: 200,
-          minHeight: 100,
-        }}
+      <HeroCard />
 
-      >
-        <Box sx={{ width: "100%", p: 2 }}>
-          <Typography variant="h4" component="h1" sx={{
-            fontSize: '2.5rem',
-            lineHeight: 1.3,
-            fontWeight: "bold",
-            fontFamily: 'System-ui, BlinkMacSystemFont,Times New Roman'
-          }}>
-            {t("home.title")}
-          </Typography>
-          <Typography variant="body1" sx={{ mt: 1, mb: 2 }}>
-            {t("home.subtitle")}
-          </Typography>
-          <Button
-            onClick={() => navigate("/submit")}
-            variant="contained"
-            sx={{
-              bgcolor: "#A55ABF",
-              "&:hover": { bgcolor: "#8E44AD" },
-              mb: 3,
-            }}
-          >
-            {t("home.submitProject")}
-          </Button>
-        </Box>
-      </Box>
-
-
-      <section>
+      <Box sx={{ padding: "10px", margin: "20px" }}>
         {isLoading && <LoadingState />}
         {isError && <ErrorState error={error} />}
+
         {!isLoading && !isError && (
-          <ProjectsList projects={projects} />
+          <ProjectsList
+            projects={projects}
+            isViewModeChangeable={true}
+            viewMode={viewMode}
+            onViewModeChange={setViewMode}
+          />
         )}
-      </section>
-    </Box >
+      </Box>
+    </Box>
   );
 };
 

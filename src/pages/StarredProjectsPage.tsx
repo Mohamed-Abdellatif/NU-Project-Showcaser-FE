@@ -13,7 +13,12 @@ const StarredProjectsPage = () => {
   if (isError) return <ErrorState error={error} />;
   if (projects.length === 0) return <EmptyResults message="starredProjects.noStarredProjects" />;
   return (
-    <Box>
+    <Box
+    sx={{
+      backgroundColor: "var(--background-light)",
+      minHeight: "100vh",
+    }}
+    >
       <ProjectsList projects={projects} title="starredProjects.title" />
     </Box>
   )

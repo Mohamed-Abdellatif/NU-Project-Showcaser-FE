@@ -40,6 +40,14 @@ interface ProjectInfoCardProps {
   createdAt?: string;
   isLoading?: boolean;
 }
+const formatName = (name: string | undefined) => {
+  if (!name || typeof name !== 'string') return "—";
+  return name
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
 
 export const ProjectInfoCard = ({
   supervisor,
@@ -98,10 +106,10 @@ export const ProjectInfoCard = ({
   };
 
   const colors = {
-    textHeader: "#4a1d45",
-    cardBg: "#fae3e3",
-    buttonBg: "#5e1c50",
-    chipBg: "#f0d4da",
+    textHeader: "var(--text-primary)",
+    cardBg: "fff",
+    buttonBg: "var(--text-primary)",
+    chipBg: "var(--background-light)",
   };
 
   return (
@@ -165,7 +173,7 @@ export const ProjectInfoCard = ({
                   key={t}
                   label={t}
                   sx={{
-                    bgcolor: "#fceef2",
+                    bgcolor: "var(--tag-background)",
                     fontWeight: 500,
                     borderRadius: "16px",
                     border: "1px solid #ebdce3",
@@ -198,21 +206,20 @@ export const ProjectInfoCard = ({
             {
               icon: <CalendarTodayOutlined />,
               label: t("viewProject.created"),
-              value: createdAt || "—",
+              value: createdAt ? createdAt.split("T")[0] : "—",
             },
             {
               icon: <SchoolOutlined />,
               label: t("viewProject.supervisor"),
-              value: supervisor || "—",
+              value: formatName(supervisor) || "—",
             },
             {
               icon: <PersonOutlineOutlined />,
               label: t("viewProject.teamLeader"),
-              value: `${teamLeader?.name} ` || "—",
-
-              onClick: () => {
+              value: formatName(teamLeader?.name) || "—",
+              onClick: teamLeader ? () => {
                 navigate(`/profile/${teamLeader?.email.split("@")[0]}`);
-              },
+              } : undefined,
             },
             {
               icon: <PeopleOutlineOutlined />,
@@ -234,8 +241,8 @@ export const ProjectInfoCard = ({
                 mt: 4,
                 width: "100%",
                 py: 1.5,
-                bgcolor: colors.buttonBg,
-                "&:hover": { bgcolor: "#45103b" },
+                bgcolor: "var(--text-primary)",
+                "&:hover": { bgcolor: "var(--text-Secondary)" },
                 borderRadius: 2,
                 fontWeight: 600,
                 fontFamily: "Poppins",
@@ -297,11 +304,6 @@ const InfoRow = ({
       alignItems: "flex-start",
       mb: 3,
       cursor: onClick ? "pointer" : "default",
-      "&:hover": onClick
-        ? {
-            opacity: 0.8,
-          }
-        : {},
     }}
     onClick={onClick}
   >
@@ -317,7 +319,17 @@ const InfoRow = ({
       >
         {label}:
       </Typography>
-      <Typography sx={{ fontSize: "1rem", fontWeight: 500, color: "#222" }}>
+      <Typography 
+        sx={{ 
+          fontSize: "1rem", 
+          fontWeight: 500, 
+          color: "#222",
+          textDecoration: onClick ? "underline" : "none",
+          "&:hover": onClick ? {
+            opacity: 0.7,
+          } : {},
+        }}
+      >
         {value}
       </Typography>
     </Box>
