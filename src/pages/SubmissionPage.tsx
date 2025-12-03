@@ -26,15 +26,6 @@ import {
 } from "../utils/constants";
 
 const SubmitionPage = () => {
-  const textStyle = {
-    fontFamily: "Inter",
-    fontWeight: 500,
-    fontSize: "1.05rem",
-    textTransform: "none",
-    letterSpacing: ".3px",
-    minWidth: "auto",
-    opacity: 0.95,
-  };
   const { t } = useTranslation();
   const sendEmail = useSendMail();
   const navigate = useNavigate();
@@ -246,7 +237,7 @@ const SubmitionPage = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        bgcolor: "#f5f5f5",
+        bgcolor: "var(--background-light)",
         py: 4,
         px: 2,
       }}

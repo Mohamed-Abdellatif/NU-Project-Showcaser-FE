@@ -1,6 +1,6 @@
 import { Box, InputBase, IconButton } from "@mui/material";
-import { Search as SearchIcon, Clear as ClearIcon } from "@mui/icons-material";
-import { ReactNode } from "react";
+import {  Clear as ClearIcon } from "@mui/icons-material";
+import type { ReactNode } from "react";
 
 interface GlassInputProps {
   placeholder?: string;

@@ -1,4 +1,5 @@
-import { Box, Typography, Card, IconButton } from "@mui/material";
+import { Box, Typography, IconButton } from "@mui/material";
+import GlassCard from "../GlassCard/GlassCard";
 
 export interface InfoFieldProps {
   label: string;
@@ -9,19 +10,24 @@ export interface InfoFieldProps {
 
 const InfoField = ({ label, value, icon, onClick }: InfoFieldProps) => {
   return (
-    <Card
+    <GlassCard
+      elevation="light"
       onClick={onClick}
       sx={{
-        p: 2,
-        borderRadius: "16px",
-        backgroundColor: "#ffffff",
-        boxShadow: "0px 2px 8px rgba(0,0,0,0.08)",
-        transition: "all 0.2s",
+        p: 2.5,
+        borderRadius: "20px",
+        background: "rgba(255, 255, 255, 0.7)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
+        border: "1px solid rgba(89, 134, 217, 0.2)",
+        boxShadow: "0px 4px 16px rgba(0, 0, 0, 0.06)",
+        transition: "all 0.25s ease",
         cursor: onClick ? "pointer" : "default",
         "&:hover": onClick
           ? {
-              boxShadow: "0px 4px 12px rgba(0,0,0,0.12)",
+              boxShadow: "0px 6px 20px rgba(0, 0, 0, 0.1)",
               transform: "translateY(-2px)",
+              border: "1px solid rgba(89, 134, 217, 0.4)",
             }
           : {},
       }}
@@ -37,11 +43,12 @@ const InfoField = ({ label, value, icon, onClick }: InfoFieldProps) => {
           <Typography
             variant="caption"
             sx={{
-              color: "text.secondary",
+              color: "#7A86A0",
               fontSize: "0.75rem",
               fontWeight: 500,
               mb: 0.5,
               display: "block",
+              fontFamily: "Inter, Poppins, system-ui, sans-serif",
             }}
           >
             {label}
@@ -50,7 +57,8 @@ const InfoField = ({ label, value, icon, onClick }: InfoFieldProps) => {
             variant="body2"
             sx={{
               fontWeight: 600,
-              color: "#1a1a1a",
+              color: "var(--text-primary)",
+              fontFamily: "Inter, Poppins, system-ui, sans-serif",
             }}
           >
             {value}
@@ -70,7 +78,7 @@ const InfoField = ({ label, value, icon, onClick }: InfoFieldProps) => {
           </IconButton>
         )}
       </Box>
-    </Card>
+    </GlassCard>
   );
 };
 

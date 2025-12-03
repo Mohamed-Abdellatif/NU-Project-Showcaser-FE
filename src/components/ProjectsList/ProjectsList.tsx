@@ -12,7 +12,6 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import type { Project } from "../../types";
 import ProjectCard from "../ProjectCard/ProjectCard";
 import { useTranslation } from "react-i18next";
-import RecommendedProjectCard from "../RecommendedProjectCard/RecommendedProjectCard";
 
 interface ProjectsListProps {
   projects?: Project[];
@@ -29,9 +28,9 @@ const ProjectsList = ({
   viewMode: externalViewMode,
   onViewModeChange: externalOnViewModeChange,
 }: ProjectsListProps) => {
-
-  const [internalViewMode, setInternalViewMode] =
-    useState<"grid" | "list">("grid");
+  const [internalViewMode, setInternalViewMode] = useState<"grid" | "list">(
+    "grid"
+  );
 
   const displayProjects = projects || [];
   const { t } = useTranslation();
@@ -134,7 +133,7 @@ const ProjectsList = ({
       <Box
         sx={{
           display: "grid",
-          gap: { xs: 2, md: 3 },
+          gap: { xs: 2.5, md: 3.5 },
           ...(effectiveViewMode === "grid"
             ? {
                 gridTemplateColumns: {
@@ -150,11 +149,7 @@ const ProjectsList = ({
       >
         {displayProjects.map((project: Project) => (
           <Box key={project._id}>
-            {title === "viewProject.recommendedProjects" ? (
-              <RecommendedProjectCard project={project} />
-            ) : (
-              <ProjectCard project={project} viewMode={effectiveViewMode} />
-            )}
+            <ProjectCard project={project} viewMode={effectiveViewMode} />
           </Box>
         ))}
       </Box>

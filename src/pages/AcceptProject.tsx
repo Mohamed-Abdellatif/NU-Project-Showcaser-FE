@@ -118,7 +118,7 @@ const AcceptProject = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        background: "linear-gradient(180deg, #FFFFF8 0%, #FAF2E6 100%)",
+        background: "var(--background-light)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

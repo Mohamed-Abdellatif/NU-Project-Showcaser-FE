@@ -1,4 +1,4 @@
-import { Box, Typography, Card, CardContent, Avatar } from "@mui/material";
+import { Box, Typography, CardContent, Avatar } from "@mui/material";
 import {
   GitHub as GitHubIcon,
   LinkedIn as LinkedInIcon,
@@ -10,6 +10,7 @@ import {
 import type { User } from "../../types";
 import InfoField from "../InfoField/InfoField";
 import { useTranslation } from "react-i18next";
+import GlassCard from "../GlassCard/GlassCard";
 interface PersonalInfoCardProps {
   user: User | null;
 }
@@ -30,13 +31,16 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
     : "User";
 
   return (
-    <Card
+    <GlassCard
+      elevation="medium"
       sx={{
-        borderRadius: "24px",
-        boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
-        backgroundColor: "#ffffff",
         p: 4,
         mb: 4,
+        background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 246, 255, 0.85) 100%)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        borderRadius: "28px",
+        boxShadow: "0px 8px 32px rgba(0, 0, 0, 0.08)",
       }}
     >
       <CardContent sx={{ p: 0 }}>
@@ -74,7 +78,8 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
                 sx={{
                   fontWeight: 700,
                   mb: 0.5,
-                  color: "#1a1a1a",
+                  fontFamily: "Inter, Poppins, system-ui, sans-serif",
+                  color: "var(--text-primary)",
                 }}
               >
                 {fullName}
@@ -82,8 +87,9 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
               <Typography
                 variant="body2"
                 sx={{
-                  color: "text.secondary",
+                  color: "#7A86A0",
                   fontSize: "1rem",
+                  fontFamily: "Inter, Poppins, system-ui, sans-serif",
                 }}
               >
                 {t("profile.university")}
@@ -142,7 +148,7 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
           </Box>
         </Box>
       </CardContent>
-    </Card>
+    </GlassCard>
   );
 };
 

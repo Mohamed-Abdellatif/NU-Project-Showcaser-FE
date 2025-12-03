@@ -50,7 +50,7 @@ const ViewProject = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        background: "linear-gradient(180deg, #FFFFF8 0%, #F8F9FA 100%)",
+        background: "var(--background-light)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

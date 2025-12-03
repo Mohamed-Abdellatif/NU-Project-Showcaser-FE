@@ -25,7 +25,8 @@ const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
             fontWeight: 700,
             mb: 1,
             fontSize: { xs: "2rem", md: "2.5rem" },
-            color: "#1a1a1a",
+            fontFamily: "Inter, Poppins, system-ui, sans-serif",
+            color: "var(--text-primary)",
           }}
         >
           {t("profile.profileHeaderTitle")}
@@ -33,8 +34,9 @@ const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
         <Typography
           variant="body1"
           sx={{
-            color: "text.secondary",
+            color: "#7A86A0",
             fontSize: "1.1rem",
+            fontFamily: "Inter, Poppins, system-ui, sans-serif",
           }}
         >
           {t("profile.profileHeaderSubtitle")}
@@ -45,17 +47,24 @@ const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
         startIcon={<EditIcon />}
         onClick={onEditClick}
         sx={{
-          borderRadius: "24px",
+          borderRadius: "20px",
           px: 3,
           py: 1.5,
-          borderColor: "var(--accent)",
+          background: "rgba(255, 255, 255, 0.8)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          border: "1px solid rgba(89, 134, 217, 0.3)",
           color: "var(--accent)",
           textTransform: "none",
           fontWeight: 600,
+          fontFamily: "Inter, Poppins, system-ui, sans-serif",
           "&:hover": {
             borderColor: "var(--primary)",
-            backgroundColor: "var(--background-light)",
+            background: "rgba(255, 255, 255, 0.9)",
+            transform: "translateY(-2px)",
+            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
           },
+          transition: "all 0.25s ease",
         }}
       >
         {t("profile.editProfile")}

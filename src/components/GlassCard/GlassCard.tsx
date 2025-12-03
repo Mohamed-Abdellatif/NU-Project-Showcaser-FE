@@ -5,7 +5,7 @@ import type { SxProps, Theme } from "@mui/system";
 interface GlassCardProps extends Omit<React.ComponentProps<typeof Box>, "sx"> {
   children: React.ReactNode;
   elevation?: "light" | "medium" | "heavy";
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   sx?: SxProps<Theme>;
 }
 

@@ -122,7 +122,7 @@ const EditProfile = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: "#FFF9F0",
+        backgroundColor: "var(--background-light)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

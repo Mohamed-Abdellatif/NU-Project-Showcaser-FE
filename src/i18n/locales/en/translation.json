@@ -20,12 +20,34 @@
   },
   "home": {
     "title": "Have a Winning Project?",
-    "subtitle": "Submit Your project and we’ll check it out!",
+    "subtitle": "Submit Your project and we'll check it out!",
     "projects": "Projects",
     "submitProject": "Submit",
     "featuredProjects": "Featured Projects",
     "allProjects": "All Projects",
-    "View Project": "View Project"
+    "View Project": "View Project",
+    "heroSlides": {
+      "slide1": {
+        "title": "Have a Winning Project?",
+        "subtitle": "Showcase your work to the community!",
+        "ctaText": "Submit Your Project"
+      },
+      "slide2": {
+        "title": "Join the Innovation Hub",
+        "subtitle": "Connect with talented developers and creators!",
+        "ctaText": "Explore Projects"
+      },
+      "slide3": {
+        "title": "Share Your Success",
+        "subtitle": "Inspire others with your amazing achievements!",
+        "ctaText": "Learn More"
+      },
+      "slide4": {
+        "title": "Build Your Portfolio",
+        "subtitle": "Show the world what you're capable of!",
+        "ctaText": "Start Building"
+      }
+    }
   },
   "about": {
     "title": "About Us",

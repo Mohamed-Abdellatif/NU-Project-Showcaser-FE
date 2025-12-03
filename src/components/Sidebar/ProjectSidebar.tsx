@@ -83,7 +83,7 @@ const ProjectSidebar = ({ projectsData, activeProject, setActiveProject }: Proje
                                     paddingRight: 1,
                                     "&:hover": { background: "#f5f5f5" },
                                     backgroundColor:
-                                        activeProject?._id === p._id ? "#EDE0F7" : "transparent",
+                                        activeProject?._id === p._id ? "var(--background-light)" : "transparent",
                                 }}
                             >
                                 <ListItemText primary={p.title} />

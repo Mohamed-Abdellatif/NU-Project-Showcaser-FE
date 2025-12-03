@@ -131,3 +131,13 @@ export interface School {
   name: string;
   majors: string[];
 }
+
+export interface HeroSlideConfig {
+  decorativeBarColor: string;
+  buttonLink: string;
+  translationKeys: {
+    title: string;
+    subtitle: string;
+    ctaText: string;
+  };
+}

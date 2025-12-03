@@ -105,7 +105,7 @@ const UserProfile = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: "#FAF9F6",
+        background: "linear-gradient(135deg, var(--background-lighter) 0%, var(--background-light) 100%)",
         py: { xs: 3, md: 6 },
         px: { xs: 2, md: 4 },
         display: "flex",
@@ -143,7 +143,7 @@ const UserProfile = () => {
             gap: 2,
             mt: 4,
             pt: 4,
-            borderTop: "1px solid rgba(0,0,0,0.1)",
+            borderTop: "1px solid rgba(89, 134, 217, 0.2)",
           }}
         >
           <Button
@@ -154,9 +154,12 @@ const UserProfile = () => {
               textTransform: "none",
               fontWeight: 600,
               fontSize: "1rem",
+              fontFamily: "Inter, Poppins, system-ui, sans-serif",
               "&:hover": {
-                backgroundColor: "var(--background-light)",
+                backgroundColor: "rgba(89, 134, 217, 0.1)",
+                borderRadius: "12px",
               },
+              transition: "all 0.25s ease",
             }}
           >
             {t("profile.viewAllProjects")}
@@ -176,15 +179,22 @@ const UserProfile = () => {
                 sx={{
                   borderColor: "#d32f2f",
                   color: "#d32f2f",
-                  borderRadius: "12px",
+                  borderRadius: "20px",
                   px: 3,
-                  py: 1,
+                  py: 1.5,
                   textTransform: "none",
                   fontWeight: 600,
+                  fontFamily: "Inter, Poppins, system-ui, sans-serif",
+                  background: "rgba(255, 255, 255, 0.8)",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
                   "&:hover": {
                     borderColor: "#c62828",
-                    backgroundColor: "rgba(211, 47, 47, 0.04)",
+                    backgroundColor: "rgba(211, 47, 47, 0.1)",
+                    transform: "translateY(-2px)",
+                    boxShadow: "0px 4px 12px rgba(211, 47, 47, 0.2)",
                   },
+                  transition: "all 0.25s ease",
                 }}
               >
                 Logout
@@ -195,15 +205,22 @@ const UserProfile = () => {
                 sx={{
                   borderColor: "#d32f2f",
                   color: "#d32f2f",
-                  borderRadius: "12px",
+                  borderRadius: "20px",
                   px: 3,
-                  py: 1,
+                  py: 1.5,
                   textTransform: "none",
                   fontWeight: 600,
+                  fontFamily: "Inter, Poppins, system-ui, sans-serif",
+                  background: "rgba(255, 255, 255, 0.8)",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
                   "&:hover": {
                     borderColor: "#c62828",
-                    backgroundColor: "rgba(211, 47, 47, 0.04)",
+                    backgroundColor: "rgba(211, 47, 47, 0.1)",
+                    transform: "translateY(-2px)",
+                    boxShadow: "0px 4px 12px rgba(211, 47, 47, 0.2)",
                   },
+                  transition: "all 0.25s ease",
                 }}
               >
                 {t("profile.deactivateAccount")}

@@ -40,7 +40,7 @@ interface ProjectInfoCardProps {
   createdAt?: string;
   isLoading?: boolean;
 }
-const formatName = (name) => {
+const formatName = (name: string | undefined) => {
   if (!name || typeof name !== 'string') return "—";
   return name
     .toLowerCase()
@@ -107,7 +107,7 @@ export const ProjectInfoCard = ({
 
   const colors = {
     textHeader: "var(--text-primary)",
-    cardBg: "var(--background-lighter)",
+    cardBg: "fff",
     buttonBg: "var(--text-primary)",
     chipBg: "var(--background-light)",
   };
