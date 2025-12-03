@@ -17,16 +17,16 @@ interface PersonalInfoCardProps {
 const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
   const { t } = useTranslation();
   const getInitials = () => {
-    if (!user) return "U";
+    if (!user) return "";
     const firstInitial = user.firstName?.[0]?.toUpperCase() || "";
     const lastInitial = user.lastName?.[0]?.toUpperCase() || "";
-    return `${firstInitial}${lastInitial}` || "U";
+    return `${firstInitial}.${lastInitial}` || "U";
   };
 
   const fullName = user
     ? `${user.firstName || ""} ${user.lastName || ""}`.trim() ||
-      user.name ||
-      "User"
+    user.name ||
+    "User"
     : "User";
 
   return (
@@ -61,7 +61,7 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
               sx={{
                 width: { xs: 120, md: 140 },
                 height: { xs: 120, md: 140 },
-                bgcolor: "var(--text-primary)",
+                bgcolor: "var(--primary)",
                 fontSize: "3rem",
                 fontWeight: 700,
               }}
@@ -104,22 +104,22 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
             }}
           >
             <InfoField
-              label="University ID"
+              label={t("profile.universityId")}
               value={user?.universityId || "N/A"}
               icon={<PersonIcon />}
             />
             <InfoField
-              label="Email"
+              label={t("profile.email")}
               value={user?.email || "N/A"}
               icon={<EmailIcon />}
             />
             <InfoField
-              label="School"
+              label={t("profile.school")}
               value={user?.school || "N/A"}
               icon={<SchoolIcon />}
             />
             <InfoField
-              label="GitHub"
+              label={t("profile.github")}
               value={user?.githubUrl || "N/A"}
               icon={<GitHubIcon />}
               onClick={() => {
@@ -127,12 +127,12 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
               }}
             />
             <InfoField
-              label="Major"
+              label={t("profile.major")}
               value={user?.major || "N/A"}
               icon={<BallotIcon />}
             />
             <InfoField
-              label="LinkedIn"
+              label={t("profile.linkedIn")}
               value={user?.linkedInUrl || "N/A"}
               icon={<LinkedInIcon />}
               onClick={() => {

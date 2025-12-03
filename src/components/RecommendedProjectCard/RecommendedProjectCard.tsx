@@ -15,7 +15,7 @@ const RecommendedProjectCard = ({ project }: { project: Project }) => {
         flex: "1 1 30%",
         minWidth: "280px",
         borderRadius: "16px",
-        background: `linear-gradient(135deg, var(--background-lighter) 0%, var(--background-light) 100%)`,
+        background: `linear-gradient(135deg, var(--background-lighter) 0%, var(--Off-White) 100%)`,
          color: "var(--text-primary)",
         boxShadow: 2,
         overflow: "hidden",
@@ -34,7 +34,7 @@ const RecommendedProjectCard = ({ project }: { project: Project }) => {
       />
 
       <CardContent>
-        <Typography variant="h6" fontWeight="bold">
+        <Typography variant="h6" fontWeight="bold" sx={{ textTransform: "capitalize" }}>
           {project.title}
         </Typography>
         <Typography variant="body2" sx={{ opacity: 0.8, mb: 1 }}>

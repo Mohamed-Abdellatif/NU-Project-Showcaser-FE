@@ -24,7 +24,8 @@
     "projects": "Projects",
     "submitProject": "Submit",
     "featuredProjects": "Featured Projects",
-    "allProjects": "All Projects"
+    "allProjects": "All Projects",
+    "View Project": "View Project"
   },
   "about": {
     "title": "About Us",
@@ -211,6 +212,9 @@
     "university": "Nile University",
     "submitNewProject": "Submit New Project",
     "viewProjectDetails": "View Project Details",
+    "school" : "School",
+    "github" : "GitHub",
+    "linkedIn" : "LinkedIn"},
   "userProfile": {
     "requestDeactivateAccountSuccessfully": "Request to deactivate account has been sent successfully",
     "requestDeactivateAccountFailed": "Failed to send request to deactivate account. Please try again.",
@@ -224,5 +228,4 @@
     "confirm": "Confirm",
     "cancel": "Cancel"
   }
-}
 }

@@ -29,15 +29,15 @@ const ProjectsList = ({
   viewMode: externalViewMode,
   onViewModeChange: externalOnViewModeChange,
 }: ProjectsListProps) => {
-  const [internalViewMode, setInternalViewMode] = useState<"grid" | "list">("grid");
-  const displayProjects = projects || [];
 
+  const [internalViewMode, setInternalViewMode] =
+    useState<"grid" | "list">("grid");
+
+  const displayProjects = projects || [];
   const { t } = useTranslation();
-  // Use MUI's useMediaQuery for mobile detection
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  
-  // Use external viewMode if provided, otherwise use internal state
+
   const viewMode = externalViewMode ?? internalViewMode;
   const effectiveViewMode = isMobile ? "grid" : viewMode;
 
@@ -80,87 +80,83 @@ const ProjectsList = ({
             {t(title)}
           </Typography>
         )}
-        {isViewModeChangeable && (
-          <ToggleButtonGroup
-            value={viewMode}
-            exclusive
-            onChange={handleViewChange}
-            aria-label="view mode"
-            sx={{
-              display: { xs: "none", sm: "flex" },
-              background: "rgba(255, 255, 255, 0.8)",
-              backdropFilter: "blur(10px)",
-              WebkitBackdropFilter: "blur(10px)",
-              borderRadius: "20px",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              boxShadow: "0px 4px 16px rgba(0, 0, 0, 0.06)",
-              "& .MuiToggleButton-root": {
-                border: "none",
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            ml: "auto",
+          }}
+        >
+          {isViewModeChangeable && (
+            <ToggleButtonGroup
+              value={viewMode}
+              exclusive
+              onChange={handleViewChange}
+              aria-label="view mode"
+              sx={{
+                background: "rgba(255, 255, 255, 0.8)",
+                backdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(10px)",
                 borderRadius: "20px",
-                color: "var(--text-primary)",
-                "&.Mui-selected": {
-                  background: "var(--primary)",
-                  color: "#fff",
+                border: "1px solid rgba(255, 255, 255, 0.18)",
+                boxShadow: "0px 4px 16px rgba(0, 0, 0, 0.06)",
+                "& .MuiToggleButton-root": {
+                  border: "none",
+                  borderRadius: "20px",
+                  color: "var(--text-primary)",
+                  "&.Mui-selected": {
+                    background: "var(--primary)",
+                    color: "#fff",
+                    "&:hover": {
+                      background: "var(--accent)",
+                    },
+                  },
                   "&:hover": {
-                    background: "var(--accent)",
+                    background: "rgba(25, 118, 210, 0.1)",
                   },
                 },
-                "&:hover": {
-                  background: "rgba(25, 118, 210, 0.1)",
-                },
-              },
-            }}
-          >
-            {theme.direction === "rtl" ? (
-              <Box sx={{ display: "flex" }}>
-                <ToggleButton value="list" aria-label="list view">
-                  <ViewListIcon sx={{ transform: "scaleX(-1)" }} />
-                </ToggleButton>
-                <ToggleButton value="grid" aria-label="grid view">
-                  <GridViewIcon />
-                </ToggleButton>
-              </Box>
-            ) : (
-              <Box sx={{ display: "flex" }}>
-                <ToggleButton value="grid" aria-label="grid view">
-                  <GridViewIcon />
-                </ToggleButton>
-                <ToggleButton value="list" aria-label="list view">
-                  <ViewListIcon />
-                </ToggleButton>
-              </Box>
-            )}
-          </ToggleButtonGroup>
-        )}
+              }}
+            >
+              <ToggleButton value="grid" aria-label="grid view">
+                <GridViewIcon />
+              </ToggleButton>
+              <ToggleButton value="list" aria-label="list view">
+                <ViewListIcon />
+              </ToggleButton>
+            </ToggleButtonGroup>
+          )}
+        </Box>
       </Box>
 
+      {/* Project Grid/List */}
       <Box
         sx={{
           display: "grid",
           gap: { xs: 2, md: 3 },
           ...(effectiveViewMode === "grid"
             ? {
-              gridTemplateColumns: {
-                xs: "1fr",
-                sm: "repeat(2, 1fr)",
-                md: "repeat(3, 1fr)",
-              },
-            }
+                gridTemplateColumns: {
+                  xs: "1fr",
+                  sm: "repeat(2, 1fr)",
+                  md: "repeat(3, 1fr)",
+                },
+              }
             : {
-              gridTemplateColumns: "1fr",
-            }),
+                gridTemplateColumns: "1fr",
+              }),
         }}
       >
-        {displayProjects &&
-          displayProjects.map((project: Project) => (
-            <Box key={project._id}>
-              {title === "viewProject.recommendedProjects" ? (
-                <RecommendedProjectCard project={project} />
-              ) : (
-                <ProjectCard project={project} viewMode={effectiveViewMode} />
-              )}
-            </Box>
-          ))}
+        {displayProjects.map((project: Project) => (
+          <Box key={project._id}>
+            {title === "viewProject.recommendedProjects" ? (
+              <RecommendedProjectCard project={project} />
+            ) : (
+              <ProjectCard project={project} viewMode={effectiveViewMode} />
+            )}
+          </Box>
+        ))}
       </Box>
     </Box>
   );

@@ -24,7 +24,8 @@
     "projects": "المشاريع",
     "submitProject": "أرسل مشروعك",
     "featuredProjects": "المشاريع المميزة",
-    "allProjects": "جميع المشاريع"
+    "allProjects": "جميع المشاريع",
+    "View Project": "عرض المشروع"
   },
   "about": {
     "title": "حولنا",
@@ -210,9 +211,13 @@
     ,"deactivateAccount": "تعطيل الحساب",
     "profileHeaderTitle": "الملف الشخصي للمستخدم",
     "profileHeaderSubtitle": "عرض وإدارة التفاصيل والمشاريع الشخصية الخاصة بك",
-    "University": "جامعة النيل",
+    "university": "جامعة النيل",
     "submitNewProject": "إرسال مشروع جديد",
     "viewProjectDetails": "عرض تفاصيل المشروع",
+    "school" : "المدرسة",
+    "github" : "جيت هاب",
+    "linkedIn" : "لينكد إن"},
+
   "userProfile": {
     "requestDeactivateAccountSuccessfully": "تم طلب إلغاء الحساب بنجاح",
     "requestDeactivateAccountFailed": "فشل طلب إلغاء الحساب. يرجى المحاولة مرة أخرى.",
@@ -227,4 +232,3 @@
     "cancel": "إلغاء"
   }
   }
-}

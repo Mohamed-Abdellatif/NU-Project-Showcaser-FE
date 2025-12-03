@@ -10,9 +10,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Star } from '@mui/icons-material';
-import { 
-  Code as CodeIcon, 
-  CameraAlt as CameraIcon, 
+import {
+  Code as CodeIcon,
+  CameraAlt as CameraIcon,
   Folder as FolderIcon,
   GridView as GridIcon,
   ViewList as ListIcon,
@@ -20,7 +20,7 @@ import {
 } from '@mui/icons-material';
 import GlassCard from '../GlassCard/GlassCard';
 import type { Project } from '../../types';
-
+import { useTranslation } from 'react-i18next';
 interface ProjectCardProps {
   project: Project;
   viewMode: 'grid' | 'list';
@@ -36,7 +36,6 @@ const getProjectIcon = (title: string, course?: string): React.ReactNode => {
   if (titleLower.includes('folder') || titleLower.includes('file')) return <FolderIcon />;
   return <SettingsIcon />;
 };
-
 const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
   const navigate = useNavigate();
   const [imageIndex, setImageIndex] = useState(0);
@@ -78,8 +77,10 @@ const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
     }
     navigate(`/projects/${project._id}`);
   };
+    const { t } = useTranslation();
 
   return (
+
     <GlassCard
       elevation="medium"
       onClick={handleCardClick}
@@ -160,6 +161,7 @@ const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
               color: 'var(--text-primary)',
               fontSize: '1.1rem',
               flex: 1,
+              textTransform: 'capitalize',
             }}
           >
             {project.title}
@@ -213,7 +215,7 @@ const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
               },
             }}
           >
-            View Project
+            {t('View Project')}
           </Link>
         </Box>
       </CardContent>
