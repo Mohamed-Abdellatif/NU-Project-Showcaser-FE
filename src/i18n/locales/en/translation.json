@@ -202,27 +202,27 @@
     "failedToUpdateProfile": "Failed to update profile. Please try again.",
     "failedToLoadProfile": "Failed to load profile. Please try again."
   },
-  "profile" : {
+  "profile": {
     "editProfile": "Edit Profile",
     "projectsSubmitted": "Projects Submitted",
     "noProjectsSubmitted": "No projects submitted yet.",
-    "viewProfile": "View Profile"
-    ,"failedToLoadUserProfile": "Failed to load user profile. Please try again."
-    ,"loadingUserProfile": "Loading user profile..."
-    ,"errorLoadingUserProfile": "Error loading user profile."
-    ,"noProjectsFound": "No projects found for this user."
-    ,"projects": "Projects"
-    ,"about": "About"
-    ,"email": "Email"
-    ,"major": "Major"
-    ,"universityId": "University ID"
-    ,"name": "Name",
+    "viewProfile": "View Profile",
+    "failedToLoadUserProfile": "Failed to load user profile. Please try again.",
+    "loadingUserProfile": "Loading user profile...",
+    "errorLoadingUserProfile": "Error loading user profile.",
+    "noProjectsFound": "No projects found for this user.",
+    "projects": "Projects",
+    "about": "About",
+    "email": "Email",
+    "major": "Major",
+    "universityId": "University ID",
+    "name": "Name",
     "edit": "Edit",
     "save": "Save",
     "cancel": "Cancel",
     "profileUpdatedSuccessfully": "Profile updated successfully",
-    "failedToUpdateProfile": "Failed to update profile. Please try again."
-    ,"pleaseFixValidationErrorsBeforeSubmitting": "Please fix the validation errors before submitting",
+    "failedToUpdateProfile": "Failed to update profile. Please try again.",
+    "pleaseFixValidationErrorsBeforeSubmitting": "Please fix the validation errors before submitting",
     "updateProfile": "Update Profile",
     "loading": "Loading profile...",
     "error": "Error loading profile.",
@@ -234,9 +234,10 @@
     "university": "Nile University",
     "submitNewProject": "Submit New Project",
     "viewProjectDetails": "View Project Details",
-    "school" : "School",
-    "github" : "GitHub",
-    "linkedIn" : "LinkedIn"},
+    "school": "School",
+    "github": "GitHub",
+    "linkedIn": "LinkedIn"
+  },
   "userProfile": {
     "requestDeactivateAccountSuccessfully": "Request to deactivate account has been sent successfully",
     "requestDeactivateAccountFailed": "Failed to send request to deactivate account. Please try again.",

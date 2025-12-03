@@ -228,16 +228,18 @@
     "updateProfile": "تحديث الملف الشخصي",
     "loading": "جاري تحميل الملف الشخصي...",
     "error": "خطأ في تحميل الملف الشخصي.",
+    "viewAllProjects": "عرض جميع المشاريع",
+    "starredProjects": "المشاريع المفضلة",
+    "deactivateAccount": "تعطيل الحساب",
     "profileHeaderTitle": "الملف الشخصي للمستخدم",
     "profileHeaderSubtitle": "عرض وإدارة التفاصيل والمشاريع الشخصية الخاصة بك",
     "university": "جامعة النيل",
     "submitNewProject": "إرسال مشروع جديد",
     "viewProjectDetails": "عرض تفاصيل المشروع",
-    "school" : "المدرسة",
-    "github" : "جيت هاب",
-    "linkedIn" : "لينكد إن"},
-
-   
+    "school": "المدرسة",
+    "github": "جيت هاب",
+    "linkedIn": "لينكد إن"
+  },
   "userProfile": {
     "requestDeactivateAccountSuccessfully": "تم طلب إلغاء الحساب بنجاح",
     "requestDeactivateAccountFailed": "فشل طلب إلغاء الحساب. يرجى المحاولة مرة أخرى.",
