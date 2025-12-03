@@ -131,3 +131,18 @@ export interface School {
   name: string;
   majors: string[];
 }
+
+export interface Suggestion {
+  _id: string;
+  title: string;
+  description: string;
+  images?: string[];
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface SuggestionCreatePayload {
+  title: string;
+  description: string;
+  images?: string[];
+}
