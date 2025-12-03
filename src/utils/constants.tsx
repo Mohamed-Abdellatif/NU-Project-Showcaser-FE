@@ -37,7 +37,7 @@ export const HERO_SLIDES_CONFIG: HeroSlideConfig[] = [
   },
   {
     decorativeBarColor: "#10B981",
-    buttonLink: "/about",
+    buttonLink: "/learn-more",
     translationKeys: {
       title: "home.heroSlides.slide3.title",
       subtitle: "home.heroSlides.slide3.subtitle",

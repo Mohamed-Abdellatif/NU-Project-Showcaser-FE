@@ -202,27 +202,27 @@
     "failedToUpdateProfile": "Failed to update profile. Please try again.",
     "failedToLoadProfile": "Failed to load profile. Please try again."
   },
-  "profile" : {
+  "profile": {
     "editProfile": "Edit Profile",
     "projectsSubmitted": "Projects Submitted",
     "noProjectsSubmitted": "No projects submitted yet.",
-    "viewProfile": "View Profile"
-    ,"failedToLoadUserProfile": "Failed to load user profile. Please try again."
-    ,"loadingUserProfile": "Loading user profile..."
-    ,"errorLoadingUserProfile": "Error loading user profile."
-    ,"noProjectsFound": "No projects found for this user."
-    ,"projects": "Projects"
-    ,"about": "About"
-    ,"email": "Email"
-    ,"major": "Major"
-    ,"universityId": "University ID"
-    ,"name": "Name",
+    "viewProfile": "View Profile",
+    "failedToLoadUserProfile": "Failed to load user profile. Please try again.",
+    "loadingUserProfile": "Loading user profile...",
+    "errorLoadingUserProfile": "Error loading user profile.",
+    "noProjectsFound": "No projects found for this user.",
+    "projects": "Projects",
+    "about": "About",
+    "email": "Email",
+    "major": "Major",
+    "universityId": "University ID",
+    "name": "Name",
     "edit": "Edit",
     "save": "Save",
     "cancel": "Cancel",
     "profileUpdatedSuccessfully": "Profile updated successfully",
-    "failedToUpdateProfile": "Failed to update profile. Please try again."
-    ,"pleaseFixValidationErrorsBeforeSubmitting": "Please fix the validation errors before submitting",
+    "failedToUpdateProfile": "Failed to update profile. Please try again.",
+    "pleaseFixValidationErrorsBeforeSubmitting": "Please fix the validation errors before submitting",
     "updateProfile": "Update Profile",
     "loading": "Loading profile...",
     "error": "Error loading profile.",
@@ -234,9 +234,10 @@
     "university": "Nile University",
     "submitNewProject": "Submit New Project",
     "viewProjectDetails": "View Project Details",
-    "school" : "School",
-    "github" : "GitHub",
-    "linkedIn" : "LinkedIn"},
+    "school": "School",
+    "github": "GitHub",
+    "linkedIn": "LinkedIn"
+  },
   "userProfile": {
     "requestDeactivateAccountSuccessfully": "Request to deactivate account has been sent successfully",
     "requestDeactivateAccountFailed": "Failed to send request to deactivate account. Please try again.",
@@ -249,5 +250,28 @@
     "title": "Are you sure?",
     "confirm": "Confirm",
     "cancel": "Cancel"
+  },
+  "learnmore": {
+      "hero": {
+        "title": "Learn More About NU Podium",
+        "subtitle": "Discover how our platform celebrates innovation, creativity, and hard work by giving top-performing students a dedicated space to present their achievements to the world, highlight their impact, and inspire others within the Nile University community.",
+        "startExploring": "Start Exploring Projects"
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "benefitsQuestion": "How will this website benefit you?",
+        "benefitsAnswer": "NU Podium provides a prestigious and credible platform where you can showcase your academic, technical, and innovative projects. It allows you to gain recognition, attract opportunities, and build a strong professional presence that can support your future career.",
+        "getStartedQuestion": "How to get started?",
+        "getStartedAnswer": "Begin by exploring the featured projects for inspiration, then create an account to personalize your experience. Once signed in, you can submit your own projects, save the work that interests you, and build a portfolio that reflects your achievements.",
+        "signinQuestion": "Why would a recruiter benefit from using this website?",
+        "signinAnswer": "Recruiters benefit from NU Podium by gaining direct access to a curated pool of talented students and their verified projects. The platform makes it easier to discover skilled candidates, review their work in depth, and identify individuals whose achievements and expertise align with specific hiring needs.",
+        "audienceQuestion": "Who is this website for?",
+        "audienceAnswer": "NU Podium is designed for Nile University students, faculty members, industry professionals, employers, and alumni who want to explore student achievements, discover talent, and stay connected with the university's most innovative work."
+      },
+      "cta": {
+        "title": "Ready to Showcase Your Work?",
+        "subtitle": "Join the NU Podium community today and let your innovative projects shine, grow your presence, and become part of a network that celebrates creativity and excellence across Nile University.",
+        "startJourney": "Start Your Journey"
+      }
   }
 }
