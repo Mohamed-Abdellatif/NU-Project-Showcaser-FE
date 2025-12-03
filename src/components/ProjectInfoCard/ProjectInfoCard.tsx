@@ -40,6 +40,14 @@ interface ProjectInfoCardProps {
   createdAt?: string;
   isLoading?: boolean;
 }
+const formatName = (name) => {
+  if (!name || typeof name !== 'string') return "—";
+  return name
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
 
 export const ProjectInfoCard = ({
   supervisor,
@@ -198,17 +206,17 @@ export const ProjectInfoCard = ({
             {
               icon: <CalendarTodayOutlined />,
               label: t("viewProject.created"),
-              value: createdAt || "—",
+              value: createdAt ? createdAt.split("T")[0] : "—",
             },
             {
               icon: <SchoolOutlined />,
               label: t("viewProject.supervisor"),
-              value: supervisor || "—",
+              value: formatName(supervisor) || "—",
             },
             {
               icon: <PersonOutlineOutlined />,
               label: t("viewProject.teamLeader"),
-              value: teamLeader?.name || "—",
+              value: formatName(teamLeader?.name) || "—",
               onClick: teamLeader ? () => {
                 navigate(`/profile/${teamLeader?.email.split("@")[0]}`);
               } : undefined,
@@ -233,8 +241,8 @@ export const ProjectInfoCard = ({
                 mt: 4,
                 width: "100%",
                 py: 1.5,
-                bgcolor: colors.buttonBg,
-                "&:hover": { bgcolor: "var(--accent)" },
+                bgcolor: "var(--text-primary)",
+                "&:hover": { bgcolor: "var(--text-Secondary)" },
                 borderRadius: 2,
                 fontWeight: 600,
                 fontFamily: "Poppins",

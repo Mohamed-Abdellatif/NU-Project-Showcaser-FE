@@ -153,7 +153,8 @@
     "mustBeLoggedIn": "You must be logged in to access this page",
     "mustCompleteProfile": "You must complete your profile to access this page",
     "mustBeSupervisor": "You must be a supervisor to access this page",
-    "profileCompletedSuccessfully": "Profile completed already"
+    "profileCompletedSuccessfully": "Profile completed already",
+    "deactivatedAccount": "Your account has been deactivated"
   },
   "starredProjects": {
     "title": "Starred Projects",
@@ -209,6 +210,19 @@
     "profileHeaderSubtitle": "View and manage your personal details and projects",
     "university": "Nile University",
     "submitNewProject": "Submit New Project",
-    "viewProjectDetails": "View Project Details"
+    "viewProjectDetails": "View Project Details",
+  "userProfile": {
+    "requestDeactivateAccountSuccessfully": "Request to deactivate account has been sent successfully",
+    "requestDeactivateAccountFailed": "Failed to send request to deactivate account. Please try again.",
+    "requestDeactivateAccountAlreadyRequested": "Request to deactivate account has already been sent",
+    "deactivateAccountMessage": "Are you sure you want to deactivate your account?     This action will send a deactivation request and you will be logged out. This action cannot be undone.",
+    "deactivateAccountTitle": "Deactivate Account",
+    "deactivateAccountConfirm": "Deactivate"
+  },
+  "validationModal": {
+    "title": "Are you sure?",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   }
+}
 }

@@ -72,8 +72,8 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
       >
         <Avatar
           sx={{
-            bgcolor: "var(--accent)",
-            color: "white",
+            bgcolor: "white",
+            color: "var(--accent)",
             width: { xs: 40, md: 48 },
             height: { xs: 40, md: 48 },
             fontSize: { xs: 16, md: 18 },

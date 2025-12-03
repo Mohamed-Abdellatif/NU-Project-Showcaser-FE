@@ -1,6 +1,3 @@
-
-
-
 export interface User {
   linkedInUrl: string;
   githubUrl: string;
@@ -10,17 +7,19 @@ export interface User {
   _id: string;
   name: string;
   email: string;
-  role: 'student' | 'supervisor' | 'admin';
+  role: "student" | "supervisor" | "admin";
   msId: string;
   firstName: string;
   lastName: string;
   starredProjects?: string[];
+  deactivated: boolean;
+  deactivateRequested: boolean;
 }
 
 export interface Language {
   code: string;
   name: string;
-  dir: 'ltr' | 'rtl';
+  dir: "ltr" | "rtl";
 }
 
 // Add more types as needed
@@ -105,13 +104,10 @@ export interface PaginatedProjectsResponse {
 }
 
 // Comment type (re-exported from commentsApi for convenience)
-export type { Comment, CommentCreatePayload } from '../api/commentsApi';
+export type { Comment, CommentCreatePayload } from "../api/commentsApi";
 
 // User API types (re-exported from userApi for convenience)
-export type {
-  UserUpdatePayload,
-  CompleteProfilePayload,
-} from '../api/userApi';
+export type { UserUpdatePayload, CompleteProfilePayload } from "../api/userApi";
 
 export interface Member {
   name: string;

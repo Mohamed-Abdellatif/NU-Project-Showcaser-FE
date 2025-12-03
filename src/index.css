@@ -1,10 +1,13 @@
 :root {
   /* Theme Color Variables */
   --primary: #1976d2;
-  --accent: #4d6aff;
+  --accent: #5986D9;
   --text-primary: #414F75;
+  --text-Secondary: #4F5F8C;
   --background-light: #e8f1fe;
   --background-lighter: #f0f6ff;
   --tag-background: #fceef2;
+  --golden-yellow: #F59E0B;
+  --Off-White: #F8F9FA;
 }
 
