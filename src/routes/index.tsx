@@ -14,7 +14,7 @@ import EditProfile from "../pages/editProfile";
 import RequireCompleteProfile from "../hoc/RequireCompleteProfile";
 import RequireProfileExists from "../hoc/RequireProfileExists";
 import RequireSupervisor from "../hoc/RequireSupervisor";
-
+import LearnMore from "../pages/LearnMore";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -94,6 +94,11 @@ export const router = createBrowserRouter([
         path: "*",
         element: <Navigate to="/" replace />,
       },
+      {
+        path: "/learn-more",
+        element: <LearnMore />,
+
+      }
       // Add more routes here as needed
     ],
   },
