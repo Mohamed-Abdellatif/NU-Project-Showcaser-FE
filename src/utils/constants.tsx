@@ -363,3 +363,18 @@ NU Project Podium Team`,
 </body>
 </html>`,
 };
+
+export const deactivateAccountEmail = (email: string) => {
+  return {
+    to: "m.abdellatif2319@nu.edu.eg",
+    subject: "Deactivate Account Request - NU Project Podium",
+    html: `
+  <html>
+  <body>
+  <p>A user has requested to deactivate their account.</p>
+  <p>User: ${email}</p>
+  </body>
+  </html>
+  `,
+  };
+};
