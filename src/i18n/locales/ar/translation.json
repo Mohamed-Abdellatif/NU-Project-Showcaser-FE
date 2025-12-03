@@ -153,7 +153,8 @@
     "mustBeLoggedIn": "يجب عليك تسجيل الدخول للوصول إلى هذه الصفحة",
     "mustCompleteProfile": "يجب عليك إكمال ملفك الشخصي للوصول إلى هذه الصفحة",
     "mustBeSupervisor": "يجب أن تكون مشرفًا للوصول إلى هذه الصفحة",
-    "profileCompletedSuccessfully": "تم إكمال ملفك الشخصي بالفعل"
+    "profileCompletedSuccessfully": "تم إكمال ملفك الشخصي بالفعل",
+    "deactivatedAccount": "تم إلغاء تفعيل حسابك"
   },
   "starredProjects": {
     "title": "المشاريع المفضلة",
@@ -177,5 +178,18 @@
     "save": "حفظ التغييرات",
     "failedToUpdateProfile": "فشل تحديث الملف الشخصي. يرجى المحاولة مرة أخرى.",
     "failedToLoadProfile": "فشل تحميل الملف الشخصي. يرجى المحاولة مرة أخرى."
+  },
+  "userProfile": {
+    "requestDeactivateAccountSuccessfully": "تم طلب إلغاء الحساب بنجاح",
+    "requestDeactivateAccountFailed": "فشل طلب إلغاء الحساب. يرجى المحاولة مرة أخرى.",
+    "requestDeactivateAccountAlreadyRequested": "تم طلب إلغاء الحساب بالفعل",
+    "deactivateAccountMessage": "هل أنت متأكد أنك تريد إلغاء تفعيل حسابك؟ سيتم إرسال طلب إلغاء التفعيل وسيتم تسجيل خروجك. لا يمكن التراجع عن هذا الإجراء.",
+    "deactivateAccountTitle": "إلغاء تفعيل الحساب",
+    "deactivateAccountConfirm": "إلغاء التفعيل"
+  },
+  "validationModal": {
+    "title": "هل أنت متأكد؟",
+    "confirm": "تأكيد",
+    "cancel": "إلغاء"
   }
 }

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import type { User } from '../types';
+import axios from "axios";
+import type { User } from "../types";
 
 const USER_BASE = `${import.meta.env.VITE_API_BASE}/user`;
 
@@ -38,9 +38,7 @@ export const getProfileByUserName = async (userName: string): Promise<User> => {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message || 'Failed to fetch user'
-      );
+      throw new Error(error.response?.data?.message || "Failed to fetch user");
     }
     throw error;
   }
@@ -66,7 +64,7 @@ export const updateUser = async (
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(
-        error.response?.data?.message || 'Failed to update user profile'
+        error.response?.data?.message || "Failed to update user profile"
       );
     }
     throw error;
@@ -93,7 +91,7 @@ export const completeProfile = async (
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(
-        error.response?.data?.message || 'Failed to complete profile'
+        error.response?.data?.message || "Failed to complete profile"
       );
     }
     throw error;
@@ -113,10 +111,30 @@ export const getCurrentUser = async (): Promise<User> => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(
-        error.response?.data?.message || 'Failed to fetch current user'
+        error.response?.data?.message || "Failed to fetch current user"
       );
     }
     throw error;
   }
 };
 
+export const requestDeactivateAccount = async (
+  email: string
+): Promise<void> => {
+  try {
+    await axios.put(
+      `${USER_BASE}/request-deactivate`,
+      { email },
+      {
+        withCredentials: true,
+      }
+    );
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        error.response?.data?.message || "Failed to deactivate account"
+      );
+    }
+    throw error;
+  }
+};

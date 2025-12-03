@@ -6,6 +6,7 @@ import {
   getCurrentUser,
   type UserUpdatePayload,
   type CompleteProfilePayload,
+  requestDeactivateAccount,
 } from '../api/userApi';
 import type { User } from '../types';
 import { authKeys } from './useAuth';
@@ -86,3 +87,17 @@ export const useCompleteProfile = () => {
   });
 };
 
+/**
+ * Hook to request deactivate account
+ * @returns Mutation hook for requesting deactivate account
+ */
+export const useRequestDeactivateAccount = () => {
+  const queryClient = useQueryClient();
+  return useMutation<void, Error, string>({
+    mutationFn: requestDeactivateAccount,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: userKeys.me() });
+      queryClient.invalidateQueries({ queryKey: authKeys.me() });
+    },
+  });
+};

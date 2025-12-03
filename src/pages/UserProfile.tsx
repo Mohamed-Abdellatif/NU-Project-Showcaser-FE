@@ -7,15 +7,28 @@ import { useProjects } from "../hooks/useProjects";
 import ProfileHeader from "../components/ProfileHeader/ProfileHeader";
 import PersonalInfoCard from "../components/PersonalInfoCard/PersonalInfoCard";
 import ProjectShowcase from "../components/ProjectShowcase/ProjectShowcase";
-import { useGetProfileByUserName } from "../hooks/useUser";
+import {
+  useGetProfileByUserName,
+  useRequestDeactivateAccount,
+} from "../hooks/useUser";
 import LoadingState from "../components/LoadingState/LoadingState";
 import ProjectsPagination from "../components/ProjectsPagination/ProjectsPagination";
 import type { PaginatedProjectsResponse } from "../types";
+import { useSendMail } from "../hooks/useNotify";
+import { deactivateAccountEmail } from "../utils/constants";
+import { useToastContext } from "../contexts/ToastContext";
+import { useTranslation } from "react-i18next";
+import ValidationModal from "../components/ValidationModal/ValidationModal";
+const LOGOUT_BASE = `${import.meta.env.VITE_API_BASE}/auth/logout`;
 
 // Main Component
 const UserProfile = () => {
+  const { showSuccess, showError } = useToastContext();
+  const { t } = useTranslation();
   const { userName } = useParams();
-  const [ ,setIsAuthenticated] = useAtom(isAuthenticatedAtom);
+  const sendEmail = useSendMail();
+  const requestDeactivateAccount = useRequestDeactivateAccount();
+  const [, setIsAuthenticated] = useAtom(isAuthenticatedAtom);
   const { data: userProfileData, isLoading: isLoadingUserProfile } =
     useGetProfileByUserName(userName);
   const [user, setUser] = useAtom(userAtom);
@@ -31,6 +44,9 @@ const UserProfile = () => {
   // Pagination state
   const [page, setPage] = useState(1);
   const itemsPerPage = 10;
+
+  // Validation modal state
+  const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false);
 
   // Fetch user's projects (as team leader)
   const { data: projectsData } = useProjects(page, itemsPerPage, {
@@ -53,17 +69,32 @@ const UserProfile = () => {
   };
 
   const handleLogout = () => {
-      window.location.href = "http://localhost:3000/auth/logout";
-      setIsAuthenticated(false);
-      setUser(null);
+    window.location.href = LOGOUT_BASE;
+    setIsAuthenticated(false);
+    setUser(null);
     navigate("/");
   };
 
   const handleDeactivate = () => {
-    // Handle deactivate account
-    if (window.confirm("Are you sure you want to deactivate your account?")) {
-      // Implement deactivation logic
+    if(userData?.deactivated || userData?.deactivateRequested) {
+      showError(t("userProfile.requestDeactivateAccountAlreadyRequested"));
+      setIsDeactivateModalOpen(false);
+      return;
     }
+    requestDeactivateAccount.mutate(userData?.email!, {
+      onSuccess: () => {
+        setIsDeactivateModalOpen(false);
+        sendEmail.mutate(deactivateAccountEmail(userData?.email!));
+        showSuccess(t("userProfile.requestDeactivateAccountSuccessfully"));
+        setTimeout(() => {
+          handleLogout();
+        }, 4000);
+      },
+      onError: () => {
+        setIsDeactivateModalOpen(false);
+        showError(t("userProfile.requestDeactivateAccountFailed"));
+      },
+    });
   };
 
   if (isLoadingUserProfile) {
@@ -91,7 +122,11 @@ const UserProfile = () => {
           <ProfileHeader onEditClick={() => navigate("/edit-profile")} />
         )}
         <PersonalInfoCard user={userData || null} />
-        <ProjectShowcase projects={userProjects} user={user} isMyProfile={isMyProfile} />
+        <ProjectShowcase
+          projects={userProjects}
+          user={user}
+          isMyProfile={isMyProfile}
+        />
         {pagination && (
           <ProjectsPagination
             pagination={pagination}
@@ -154,9 +189,9 @@ const UserProfile = () => {
               >
                 Logout
               </Button>
-              <Button
+              {!userData?.deactivated && !userData?.deactivateRequested && <Button
                 variant="outlined"
-                onClick={handleDeactivate}
+                onClick={() => setIsDeactivateModalOpen(true)}
                 sx={{
                   borderColor: "#d32f2f",
                   color: "#d32f2f",
@@ -172,11 +207,24 @@ const UserProfile = () => {
                 }}
               >
                 Deactivate Account
-              </Button>
+              </Button>}
             </Box>
           )}
         </Box>
       </Box>
+
+      {/* Deactivate Account Validation Modal */}
+      <ValidationModal
+        open={isDeactivateModalOpen}
+        onClose={() => setIsDeactivateModalOpen(false)}
+        onConfirm={handleDeactivate}
+        title={t("userProfile.deactivateAccountTitle")}
+        message={t("userProfile.deactivateAccountMessage")}
+        confirmText={t("userProfile.deactivateAccountConfirm")}
+        cancelText={t("validationModal.cancel")}
+        confirmColor="error"
+        loading={requestDeactivateAccount.isPending || sendEmail.isPending}
+      />
     </Box>
   );
 };
