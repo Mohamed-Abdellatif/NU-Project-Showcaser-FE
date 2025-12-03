@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Navbar } from '../components/Navbar/Navbar';
+import BugReportButton from '../components/BugReportButton/BugReportButton';
 
 const MainLayout = () => {
   return (
@@ -15,6 +16,8 @@ const MainLayout = () => {
       <footer className="main-footer">
         {/* Add your footer content here */}
       </footer>
+      
+      <BugReportButton />
     </div>
   );
 };
