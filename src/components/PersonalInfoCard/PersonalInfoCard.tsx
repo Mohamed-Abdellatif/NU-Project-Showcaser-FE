@@ -1,4 +1,4 @@
-import { Box, Typography, Card, CardContent, Avatar } from "@mui/material";
+import { Box, Typography, CardContent, Avatar } from "@mui/material";
 import {
   GitHub as GitHubIcon,
   LinkedIn as LinkedInIcon,
@@ -9,33 +9,38 @@ import {
 } from "@mui/icons-material";
 import type { User } from "../../types";
 import InfoField from "../InfoField/InfoField";
-
+import { useTranslation } from "react-i18next";
+import GlassCard from "../GlassCard/GlassCard";
 interface PersonalInfoCardProps {
   user: User | null;
 }
 
 const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
+  const { t } = useTranslation();
   const getInitials = () => {
-    if (!user) return "U";
+    if (!user) return "";
     const firstInitial = user.firstName?.[0]?.toUpperCase() || "";
     const lastInitial = user.lastName?.[0]?.toUpperCase() || "";
-    return `${firstInitial}${lastInitial}` || "U";
+    return `${firstInitial}.${lastInitial}` || "U";
   };
 
   const fullName = user
     ? `${user.firstName || ""} ${user.lastName || ""}`.trim() ||
-      user.name ||
-      "User"
+    user.name ||
+    "User"
     : "User";
 
   return (
-    <Card
+    <GlassCard
+      elevation="medium"
       sx={{
-        borderRadius: "24px",
-        boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
-        backgroundColor: "#ffffff",
         p: 4,
         mb: 4,
+        background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 246, 255, 0.85) 100%)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        borderRadius: "28px",
+        boxShadow: "0px 8px 32px rgba(0, 0, 0, 0.08)",
       }}
     >
       <CardContent sx={{ p: 0 }}>
@@ -60,7 +65,7 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
               sx={{
                 width: { xs: 120, md: 140 },
                 height: { xs: 120, md: 140 },
-                bgcolor: "#6C3BFF",
+                bgcolor: "var(--primary)",
                 fontSize: "3rem",
                 fontWeight: 700,
               }}
@@ -73,7 +78,8 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
                 sx={{
                   fontWeight: 700,
                   mb: 0.5,
-                  color: "#1a1a1a",
+                  fontFamily: "Inter, Poppins, system-ui, sans-serif",
+                  color: "var(--text-primary)",
                 }}
               >
                 {fullName}
@@ -81,11 +87,12 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
               <Typography
                 variant="body2"
                 sx={{
-                  color: "text.secondary",
+                  color: "#7A86A0",
                   fontSize: "1rem",
+                  fontFamily: "Inter, Poppins, system-ui, sans-serif",
                 }}
               >
-                Computer Science Student
+                {t("profile.university")}
               </Typography>
             </Box>
           </Box>
@@ -103,22 +110,22 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
             }}
           >
             <InfoField
-              label="University ID"
+              label={t("profile.universityId")}
               value={user?.universityId || "N/A"}
               icon={<PersonIcon />}
             />
             <InfoField
-              label="Email"
+              label={t("profile.email")}
               value={user?.email || "N/A"}
               icon={<EmailIcon />}
             />
             <InfoField
-              label="School"
+              label={t("profile.school")}
               value={user?.school || "N/A"}
               icon={<SchoolIcon />}
             />
             <InfoField
-              label="GitHub"
+              label={t("profile.github")}
               value={user?.githubUrl || "N/A"}
               icon={<GitHubIcon />}
               onClick={() => {
@@ -126,12 +133,12 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
               }}
             />
             <InfoField
-              label="Major"
+              label={t("profile.major")}
               value={user?.major || "N/A"}
               icon={<BallotIcon />}
             />
             <InfoField
-              label="LinkedIn"
+              label={t("profile.linkedIn")}
               value={user?.linkedInUrl || "N/A"}
               icon={<LinkedInIcon />}
               onClick={() => {
@@ -141,7 +148,7 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
           </Box>
         </Box>
       </CardContent>
-    </Card>
+    </GlassCard>
   );
 };
 

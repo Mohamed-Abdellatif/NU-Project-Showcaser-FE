@@ -21,10 +21,10 @@ const ProjectRequestAction = ({
           borderRadius: "12px",
           fontWeight: 600,
           textTransform: "none",
-          backgroundColor: "#7B1FA2",
+          backgroundColor: "var(--accent)",
           color: "#fff",
           "&:hover": {
-            backgroundColor: "#6A1B9A",
+            backgroundColor: "var(--primary)",
           },
         }}
       >

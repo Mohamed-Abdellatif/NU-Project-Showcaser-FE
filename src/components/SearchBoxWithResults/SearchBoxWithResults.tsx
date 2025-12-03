@@ -107,7 +107,7 @@ export const SearchBoxWithResults = ({
       {/* Search Results Dropdown */}
       {showResults && (searchResults.length > 0 || isSearching) && (
         <Paper
-          elevation={4}
+          elevation={0}
           sx={{
             position: "absolute",
             top: "100%",
@@ -117,10 +117,16 @@ export const SearchBoxWithResults = ({
             maxHeight: "400px",
             overflow: "auto",
             zIndex: 1300,
+            background: "rgba(255, 255, 255, 0.9)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            borderRadius: "20px",
+            boxShadow: "0px 8px 32px rgba(0, 0, 0, 0.12)",
+            border: "1px solid rgba(255, 255, 255, 0.18)",
             width: {
               xs: showMobile ? "100%" : "200px",
               sm: "250px",
-              md: "300px",
+              md: "380px",
             },
           }}
         >
@@ -142,8 +148,9 @@ export const SearchBoxWithResults = ({
                   <ListItemButton
                     onClick={() => handleProjectClick(project._id)}
                     sx={{
+                      fontFamily: "Inter, Poppins, system-ui, sans-serif",
                       "&:hover": {
-                        backgroundColor: "action.hover",
+                        backgroundColor: "rgba(25, 118, 210, 0.1)",
                       },
                     }}
                   >

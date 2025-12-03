@@ -1,11 +1,12 @@
 import { Box, Typography, Button } from "@mui/material";
 import { Edit as EditIcon } from "@mui/icons-material";
-
+import { useTranslation } from "react-i18next";
 interface ProfileHeaderProps {
   onEditClick?: () => void;
 }
 
 const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
+  const { t } = useTranslation();
   return (
     <Box
       sx={{
@@ -24,19 +25,21 @@ const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
             fontWeight: 700,
             mb: 1,
             fontSize: { xs: "2rem", md: "2.5rem" },
-            color: "#1a1a1a",
+            fontFamily: "Inter, Poppins, system-ui, sans-serif",
+            color: "var(--text-primary)",
           }}
         >
-          User Profile
+          {t("profile.profileHeaderTitle")}
         </Typography>
         <Typography
           variant="body1"
           sx={{
-            color: "text.secondary",
+            color: "#7A86A0",
             fontSize: "1.1rem",
+            fontFamily: "Inter, Poppins, system-ui, sans-serif",
           }}
         >
-          View and manage your personal details and projects
+          {t("profile.profileHeaderSubtitle")}
         </Typography>
       </Box>
       <Button
@@ -44,20 +47,27 @@ const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
         startIcon={<EditIcon />}
         onClick={onEditClick}
         sx={{
-          borderRadius: "24px",
+          borderRadius: "20px",
           px: 3,
           py: 1.5,
-          borderColor: "#6C3BFF",
-          color: "#6C3BFF",
+          background: "rgba(255, 255, 255, 0.8)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          border: "1px solid rgba(89, 134, 217, 0.3)",
+          color: "var(--accent)",
           textTransform: "none",
           fontWeight: 600,
+          fontFamily: "Inter, Poppins, system-ui, sans-serif",
           "&:hover": {
-            borderColor: "#5A2FE6",
-            backgroundColor: "rgba(108, 59, 255, 0.04)",
+            borderColor: "var(--primary)",
+            background: "rgba(255, 255, 255, 0.9)",
+            transform: "translateY(-2px)",
+            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
           },
+          transition: "all 0.25s ease",
         }}
       >
-        Edit Profile
+        {t("profile.editProfile")}
       </Button>
     </Box>
   );

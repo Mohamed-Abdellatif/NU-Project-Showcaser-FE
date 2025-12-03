@@ -1,8 +1,8 @@
 import { Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import type { Project, User } from "../../types";
-import ProfileProjectCard from "../ProfileProjectCard/ProfileProjectCard";
-
+import { useTranslation } from "react-i18next";
+import ProjectCard from "../ProjectCard/ProjectCard";
 interface ProjectShowcaseProps {
   projects: Project[];
   user: User | null;
@@ -11,6 +11,7 @@ interface ProjectShowcaseProps {
 
 const ProjectShowcase = ({ projects, user, isMyProfile }: ProjectShowcaseProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <Box sx={{ mb: 4 }}>
@@ -29,31 +30,35 @@ const ProjectShowcase = ({ projects, user, isMyProfile }: ProjectShowcaseProps) 
           sx={{
             fontWeight: 700,
             fontSize: { xs: "1.75rem", md: "2rem" },
-            color: "#1a1a1a",
+            fontFamily: "Inter, Poppins, system-ui, sans-serif",
+            color: "var(--text-primary)",
           }}
         >
-          Projects Showcase
+          
         </Typography>
           {user && isMyProfile && (
             <Button
             variant="contained"
             onClick={() => navigate("/submit")}
             sx={{
-              backgroundColor: "#6C3BFF",
+              backgroundColor: "var(--primary)",
               color: "#ffffff",
-              borderRadius: "16px",
+              borderRadius: "20px",
               px: 3,
               py: 1.5,
               textTransform: "none",
               fontWeight: 600,
-              boxShadow: "0px 4px 16px rgba(108, 59, 255, 0.3)",
+              fontFamily: "Inter, Poppins, system-ui, sans-serif",
+              boxShadow: "0px 4px 16px rgba(25, 118, 210, 0.3)",
               "&:hover": {
-                backgroundColor: "#5A2FE6",
-                boxShadow: "0px 6px 20px rgba(108, 59, 255, 0.4)",
+                backgroundColor: "var(--accent)",
+                boxShadow: "0px 6px 20px rgba(25, 118, 210, 0.4)",
+                transform: "translateY(-2px)",
               },
+              transition: "all 0.25s ease",
             }}
           >
-            Submit New Project
+            {t("profile.submitNewProject")}
           </Button>)}
       </Box>
 
@@ -68,12 +73,15 @@ const ProjectShowcase = ({ projects, user, isMyProfile }: ProjectShowcaseProps) 
               height: 8,
             },
             "&::-webkit-scrollbar-track": {
-              backgroundColor: "rgba(0,0,0,0.05)",
+              backgroundColor: "rgba(89, 134, 217, 0.1)",
               borderRadius: 4,
             },
             "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "#6C3BFF",
+              backgroundColor: "var(--accent)",
               borderRadius: 4,
+              "&:hover": {
+                backgroundColor: "var(--primary)",
+              },
             },
           }}
         >
@@ -83,9 +91,10 @@ const ProjectShowcase = ({ projects, user, isMyProfile }: ProjectShowcaseProps) 
               sx={{
                 minWidth: { xs: "280px", sm: "320px" },
                 maxWidth: { xs: "280px", sm: "320px" },
+                flexShrink: 0,
               }}
             >
-              <ProfileProjectCard project={project} />
+              <ProjectCard project={project} viewMode="grid" />
             </Box>
           ))}
         </Box>
@@ -94,12 +103,21 @@ const ProjectShowcase = ({ projects, user, isMyProfile }: ProjectShowcaseProps) 
           sx={{
             textAlign: "center",
             py: 8,
-            backgroundColor: "#f8f9fa",
-            borderRadius: "20px",
+            background: "rgba(255, 255, 255, 0.7)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            borderRadius: "28px",
+            border: "1px solid rgba(89, 134, 217, 0.2)",
           }}
         >
-          <Typography variant="body1" sx={{ color: "text.secondary" }}>
-            No projects yet. Submit your first project!
+          <Typography 
+            variant="body1" 
+            sx={{ 
+              color: "#7A86A0",
+              fontFamily: "Inter, Poppins, system-ui, sans-serif",
+            }}
+          >
+            {t("profile.noProjectsSubmitted")}
           </Typography>
         </Box>
       )}

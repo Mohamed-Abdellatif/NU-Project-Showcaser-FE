@@ -11,7 +11,7 @@ const ProjectFilesSection = ({ technologies = [], tags = [] }: Props) => {
     <Box
       sx={{
         width: "100%",
-        bgcolor: "#ffd6e8",
+        bgcolor: "var(--background-lighter)",
         mt: 8,
         py: 8,
         display: "flex",
@@ -25,7 +25,7 @@ const ProjectFilesSection = ({ technologies = [], tags = [] }: Props) => {
         variant="h5"
         sx={{
           mb: 4,
-          color: "#8b3f7f",
+          color: "var(--text-primary)",
           fontWeight: 700,
           fontFamily: "'Poppins', sans-serif",
         }}
@@ -51,8 +51,8 @@ const ProjectFilesSection = ({ technologies = [], tags = [] }: Props) => {
                 px: 2.5,
                 py: 1,
                 borderRadius: "20px",
-                backgroundColor: "#fce1ee",
-                color: "#702f6b",
+                backgroundColor: "var(--background-light)",
+                color: "var(--text-primary)",
                 fontWeight: 300,
                 fontSize: "0.95rem",
                 fontFamily: "'Poppins'",
@@ -64,7 +64,7 @@ const ProjectFilesSection = ({ technologies = [], tags = [] }: Props) => {
           ))
         ) : (
           <Typography
-            sx={{ color: "#6a2c68", fontFamily: "'Poppins', sans-serif" }}
+            sx={{ color: "var(--text-primary)", fontFamily: "'Poppins', sans-serif" }}
           >
             {t("viewProject.notechnology")}
           </Typography>
@@ -75,7 +75,7 @@ const ProjectFilesSection = ({ technologies = [], tags = [] }: Props) => {
         variant="h5"
         sx={{
           mb: 2,
-          color: "#8b3f7f",
+          color: "var(--text-primary)",
           fontWeight: 700,
           fontFamily: "'Poppins', sans-serif",
         }}
@@ -100,8 +100,8 @@ const ProjectFilesSection = ({ technologies = [], tags = [] }: Props) => {
                 px: 2,
                 py: 1,
                 borderRadius: "20px",
-                backgroundColor: "#f3b1d2",
-                color: "#6a2c68",
+                backgroundColor: "var(--background-light)",
+                color: "var(--text-primary)",
                 fontWeight: 300,
                 fontSize: "0.9rem",
                 fontFamily: "'Poppins'",
@@ -113,7 +113,7 @@ const ProjectFilesSection = ({ technologies = [], tags = [] }: Props) => {
           ))
         ) : (
           <Typography
-            sx={{ color: "#6a2c68", fontFamily: "'Poppins', sans-serif" }}
+            sx={{ color: "var(--text-primary)", fontFamily: "'Poppins', sans-serif" }}
           >
             {t("viewProject.notags")}
           </Typography>

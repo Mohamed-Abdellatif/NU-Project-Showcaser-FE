@@ -237,7 +237,7 @@ const SubmitionPage = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        bgcolor: "#f5f5f5",
+        bgcolor: "var(--background-light)",
         py: 4,
         px: 2,
       }}
@@ -259,7 +259,7 @@ const SubmitionPage = () => {
             sx={{
               fontWeight: "bold",
               mb: 1,
-              color: "#6a1b9a",
+              color: "var(--accent)",
             }}
           >
             {t("submissionPage.Submit Project")}
@@ -346,13 +346,13 @@ const SubmitionPage = () => {
           {/* Submission Section */}
           <Box sx={{ mt: 4 }}>
             {/* Action Buttons */}
-            <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+            <Box sx={{ display: "flex", gap: 2, mt: 2}}>
               <Button
                 variant="contained"
                 fullWidth
                 sx={{
-                  bgcolor: "#6a1b9a",
-                  "&:hover": { bgcolor: "#7b1fa2" },
+                  bgcolor: "var(--accent)",
+                  "&:hover": { bgcolor: "var(--primary)" },
                   fontWeight: "bold",
                   py: 1.5,
                 }}

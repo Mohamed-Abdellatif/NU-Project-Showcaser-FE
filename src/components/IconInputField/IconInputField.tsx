@@ -8,7 +8,7 @@ interface IconInputFieldProps extends Omit<TextFieldProps, "InputProps"> {
 
 const IconInputField = ({
   icon,
-  iconColor = "#6C3BFF",
+  iconColor = "var(--accent)",
   sx,
   ...props
 }: IconInputFieldProps) => {
@@ -26,10 +26,10 @@ const IconInputField = ({
             borderColor: "transparent",
           },
           "&:hover fieldset": {
-            borderColor: "rgba(108, 59, 255, 0.3)",
+            borderColor: "var(--background-light)",
           },
           "&.Mui-focused fieldset": {
-            borderColor: "#6C3BFF",
+            borderColor: "var(--accent)",
             borderWidth: "2px",
           },
         },
