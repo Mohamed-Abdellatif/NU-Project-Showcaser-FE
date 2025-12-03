@@ -1,5 +1,5 @@
 import { Box, IconButton, InputBase } from '@mui/material';
-import ClearIcon from '@mui/icons-material/Clear';
+import { Search as SearchIcon, Clear as ClearIcon } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 
 interface SearchBoxProps {
@@ -31,31 +31,55 @@ export const SearchBox = ({
           md: 'flex',
         },
         position: 'relative',
-        backgroundColor: 'white',
-        borderRadius: 2,
+        background: 'rgba(255, 255, 255, 0.8)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        borderRadius: '20px',
+        border: '1px solid rgba(255, 255, 255, 0.18)',
+        boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.06)',
         width: {
           xs: showMobile ? '100%' : '200px',
           sm: '250px',
-          md: '300px',
+          md: '380px',
         },
-        transition: 'width 0.3s',
+        transition: 'all 0.25s ease',
         '&:hover, &:focus-within': {
+          boxShadow: '0px 6px 20px rgba(0, 0, 0, 0.1)',
           width: {
             xs: showMobile ? '100%' : '220px',
             sm: '270px',
-            md: '320px',
+            md: '400px',
           },
         },
       }}
     >
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          pl: 2,
+          color: 'var(--text-primary)',
+          opacity: 0.6,
+        }}
+      >
+        <SearchIcon />
+      </Box>
       <InputBase
         placeholder={defaultPlaceholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         sx={{
           flex: 1,
-          pl: 2,
+          pl: 1,
           pr: value ? 4 : 2,
+          py: 1.5,
+          fontSize: '0.95rem',
+          color: 'var(--text-primary)',
+          '&::placeholder': {
+            color: '#7A86A0',
+            opacity: 1,
+          },
         }}
       />
       {value && (
@@ -67,6 +91,11 @@ export const SearchBox = ({
             right: 4,
             top: '50%',
             transform: 'translateY(-50%)',
+            color: 'var(--text-primary)',
+            opacity: 0.5,
+            '&:hover': {
+              opacity: 0.8,
+            },
           }}
         >
           <ClearIcon fontSize="small" />

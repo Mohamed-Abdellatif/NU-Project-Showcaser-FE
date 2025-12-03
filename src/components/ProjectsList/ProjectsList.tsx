@@ -18,20 +18,27 @@ interface ProjectsListProps {
   projects?: Project[];
   title?: string;
   isViewModeChangeable?: boolean;
+  viewMode?: "grid" | "list";
+  onViewModeChange?: (mode: "grid" | "list") => void;
 }
 
 const ProjectsList = ({
   projects,
   title = "home.featuredProjects",
   isViewModeChangeable = true,
+  viewMode: externalViewMode,
+  onViewModeChange: externalOnViewModeChange,
 }: ProjectsListProps) => {
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [internalViewMode, setInternalViewMode] = useState<"grid" | "list">("grid");
   const displayProjects = projects || [];
 
   const { t } = useTranslation();
   // Use MUI's useMediaQuery for mobile detection
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  
+  // Use external viewMode if provided, otherwise use internal state
+  const viewMode = externalViewMode ?? internalViewMode;
   const effectiveViewMode = isMobile ? "grid" : viewMode;
 
   const handleViewChange = (
@@ -39,7 +46,11 @@ const ProjectsList = ({
     newView: "grid" | "list" | null
   ) => {
     if (newView !== null) {
-      setViewMode(newView);
+      if (externalOnViewModeChange) {
+        externalOnViewModeChange(newView);
+      } else {
+        setInternalViewMode(newView);
+      }
     }
   };
 
@@ -50,18 +61,22 @@ const ProjectsList = ({
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          mb: 3,
+          mb: 4,
         }}
       >
         {title && (
-          <Typography variant="h3" component="h1" sx={{
-            width: "100%",
-            mb: 2.5,
-            color: "#414F75",
-            fontWeight: "bold",
-            fontFamily: 'System-ui, BlinkMacSystemFont,Times New Roman',
-
-          }}>
+          <Typography
+            variant="h3"
+            component="h1"
+            sx={{
+              width: "100%",
+              mb: 2.5,
+              color: "var(--text-primary)",
+              fontWeight: 800,
+              fontFamily: "Inter, Poppins, system-ui, sans-serif",
+              fontSize: { xs: "1.75rem", md: "2.25rem" },
+            }}
+          >
             {t(title)}
           </Typography>
         )}
@@ -71,7 +86,30 @@ const ProjectsList = ({
             exclusive
             onChange={handleViewChange}
             aria-label="view mode"
-            sx={{ display: { xs: "none", sm: "flex" } }}
+            sx={{
+              display: { xs: "none", sm: "flex" },
+              background: "rgba(255, 255, 255, 0.8)",
+              backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
+              borderRadius: "20px",
+              border: "1px solid rgba(255, 255, 255, 0.18)",
+              boxShadow: "0px 4px 16px rgba(0, 0, 0, 0.06)",
+              "& .MuiToggleButton-root": {
+                border: "none",
+                borderRadius: "20px",
+                color: "var(--text-primary)",
+                "&.Mui-selected": {
+                  background: "var(--primary)",
+                  color: "#fff",
+                  "&:hover": {
+                    background: "var(--accent)",
+                  },
+                },
+                "&:hover": {
+                  background: "rgba(25, 118, 210, 0.1)",
+                },
+              },
+            }}
           >
             {theme.direction === "rtl" ? (
               <Box sx={{ display: "flex" }}>
@@ -92,7 +130,6 @@ const ProjectsList = ({
                 </ToggleButton>
               </Box>
             )}
-
           </ToggleButtonGroup>
         )}
       </Box>
@@ -100,17 +137,17 @@ const ProjectsList = ({
       <Box
         sx={{
           display: "grid",
-          gap: 2,
+          gap: { xs: 2, md: 3 },
           ...(effectiveViewMode === "grid"
             ? {
               gridTemplateColumns: {
-                xs: "1fr", // 1 column on mobile
-                sm: "repeat(2, 1fr)", // 2 columns on tablet
-                md: "repeat(3, 1fr)", // 3 columns on desktop
+                xs: "1fr",
+                sm: "repeat(2, 1fr)",
+                md: "repeat(3, 1fr)",
               },
             }
             : {
-              gridTemplateColumns: "1fr", // Always 1 column in list view
+              gridTemplateColumns: "1fr",
             }),
         }}
       >

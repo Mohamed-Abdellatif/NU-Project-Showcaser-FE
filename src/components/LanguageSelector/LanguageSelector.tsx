@@ -89,17 +89,24 @@ export const LanguageSelector = ({
   return (
     <>
       <Button
-        color="inherit"
         onClick={handleLangMenuOpen}
-        endIcon={<LanguageIcon />}
         sx={{
-          borderRadius: 1,
-          border: '1px solid rgba(255,255,255,0.3)',
+          borderRadius: '12px',
+          border: '1px solid rgba(25, 118, 210, 0.3)',
           minWidth: 'auto',
-          px: 1,
+          px: 1.5,
+          py: 0.5,
+          color: 'var(--text-primary)',
+          fontFamily: 'Inter, Poppins, system-ui, sans-serif',
+          fontWeight: 500,
+          textTransform: 'none',
+          '&:hover': {
+            backgroundColor: 'rgba(25, 118, 210, 0.1)',
+            borderColor: 'var(--primary)',
+          },
         }}
       >
-        <Typography variant="button" sx={{ fontSize: '0.875rem', marginRight: 1, marginLeft: 1 }}>
+        <Typography variant="button" sx={{ fontSize: '0.875rem', fontWeight: 600 }}>
           {LANGUAGES.find(l => l.code === i18n.language)?.code.toUpperCase() || 'EN'}
         </Typography>
       </Button>
@@ -109,6 +116,12 @@ export const LanguageSelector = ({
         onClose={handleLangMenuClose}
         sx={{
           '& .MuiPaper-root': {
+            background: 'rgba(255, 255, 255, 0.9)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            borderRadius: '20px',
+            boxShadow: '0px 8px 32px rgba(0, 0, 0, 0.12)',
+            border: '1px solid rgba(255, 255, 255, 0.18)',
             mt: 1,
             minWidth: 120,
           },
@@ -122,6 +135,14 @@ export const LanguageSelector = ({
             sx={{
               justifyContent: 'space-between',
               gap: 1,
+              fontFamily: 'Inter, Poppins, system-ui, sans-serif',
+              color: 'var(--text-primary)',
+              '&:hover': {
+                backgroundColor: 'rgba(25, 118, 210, 0.1)',
+              },
+              '&.Mui-selected': {
+                backgroundColor: 'rgba(25, 118, 210, 0.15)',
+              },
             }}
           >
             {lang.name}
@@ -131,7 +152,7 @@ export const LanguageSelector = ({
                   width: 8,
                   height: 8,
                   borderRadius: '50%',
-                  bgcolor: 'primary.main',
+                  bgcolor: 'var(--primary)',
                 }}
               />
             )}

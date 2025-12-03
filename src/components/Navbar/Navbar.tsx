@@ -15,7 +15,7 @@ import { SearchBoxWithResults } from "../SearchBoxWithResults/SearchBoxWithResul
 import { LanguageSelector } from "../LanguageSelector/LanguageSelector";
 import { UserMenu } from "../UserMenu/UserMenu";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAtom } from "jotai";
 import { isAuthenticatedAtom, userAtom } from "../../atoms/authAtom";
 import type { User } from "../../types";
@@ -34,6 +34,7 @@ export const Navbar = () => {
 
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { data: authData } = useAuth();
@@ -78,12 +79,13 @@ export const Navbar = () => {
       <AppBar
         position="sticky"
         sx={{
-          backgroundColor: "var(--primary)",
-          boxShadow: "none",
+          background: "rgba(255, 255, 255, 0.8) !important",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.08)",
           height: "80px",
           display: "flex",
           justifyContent: "center",
-
         }}
       >
         <Toolbar
@@ -93,7 +95,7 @@ export const Navbar = () => {
             px: { xs: 1, md: 3 },
             display: "flex",
             alignItems: "center",
-            direction: i18n.dir(), // Add RTL support
+            direction: i18n.dir(),
           }}
         >
           {/* LEFT SECTION - Logo & Navigation (flips for RTL) */}
@@ -128,14 +130,50 @@ export const Navbar = () => {
 
             {/* NAVIGATION BUTTONS */}
             {!isMobile && (
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2.5 }}> {/* 1.25x gap (2 * 1.25 = 2.5) */}
-                <Button sx={textStyle} color="inherit" onClick={() => navigate("/")}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2.5 }}>
+                <Button
+                  sx={{
+                    ...textStyle,
+                    color: "var(--text-primary)",
+                    textDecoration: location.pathname === "/" ? "underline" : "none",
+                    textUnderlineOffset: "4px",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                      textDecoration: "underline",
+                    },
+                  }}
+                  onClick={() => navigate("/")}
+                >
                   {t("nav.home")}
                 </Button>
-                <Button sx={textStyle} color="inherit" onClick={() => navigate("/about")}>
+                <Button
+                  sx={{
+                    ...textStyle,
+                    color: "var(--text-primary)",
+                    textDecoration: location.pathname === "/about" ? "underline" : "none",
+                    textUnderlineOffset: "4px",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                      textDecoration: "underline",
+                    },
+                  }}
+                  onClick={() => navigate("/about")}
+                >
                   {t("nav.about")}
                 </Button>
-                <Button sx={textStyle} color="inherit" onClick={() => navigate("/projects")}>
+                <Button
+                  sx={{
+                    ...textStyle,
+                    color: "var(--text-primary)",
+                    textDecoration: location.pathname === "/projects" ? "underline" : "none",
+                    textUnderlineOffset: "4px",
+                    "&:hover": {
+                      backgroundColor: "transparent",
+                      textDecoration: "underline",
+                    },
+                  }}
+                  onClick={() => navigate("/projects")}
+                >
                   {t("nav.projects")}
                 </Button>
               </Box>
@@ -177,13 +215,13 @@ export const Navbar = () => {
                   onClick={handleLogin}
                   sx={{
                     ...textStyle,
-                    color: "#fff",
-                    border: "1.6px solid rgba(255,255,255,.8)",
-                    borderRadius: "8px",
+                    color: "var(--primary)",
+                    border: "1.6px solid var(--primary)",
+                    borderRadius: "12px",
                     px: 2,
                     py: 0.5,
                     "&:hover": {
-                      backgroundColor: "rgba(255,255,255,0.15)",
+                      backgroundColor: "rgba(25, 118, 210, 0.1)",
                     },
                   }}
                 >
@@ -199,14 +237,20 @@ export const Navbar = () => {
               <>
                 {/* Search Toggle */}
                 {!showMobileSearch && (
-                  <IconButton color="inherit" onClick={handleToggleMobileSearch}>
+                  <IconButton
+                    onClick={handleToggleMobileSearch}
+                    sx={{ color: "var(--text-primary)" }}
+                  >
                     <SearchIcon sx={{ fontSize: "26px" }} />
                   </IconButton>
                 )}
 
                 {/* Mobile Menu */}
                 {!showMobileSearch && (
-                  <IconButton color="inherit" onClick={handleMenuOpen}>
+                  <IconButton
+                    onClick={handleMenuOpen}
+                    sx={{ color: "var(--text-primary)" }}
+                  >
                     <MenuIcon sx={{ fontSize: "30px" }} />
                   </IconButton>
                 )}
@@ -217,14 +261,14 @@ export const Navbar = () => {
                     onClick={handleLogin}
                     sx={{
                       ...textStyle,
-                      color: "#fff",
-                      border: "1.6px solid rgba(255,255,255,.8)",
-                      borderRadius: "8px",
+                      color: "var(--primary)",
+                      border: "1.6px solid var(--primary)",
+                      borderRadius: "12px",
                       px: 1.5,
                       py: 0.5,
                       fontSize: "0.9rem",
                       "&:hover": {
-                        backgroundColor: "rgba(255,255,255,0.15)",
+                        backgroundColor: "rgba(25, 118, 210, 0.1)",
                       },
                     }}
                   >
@@ -238,14 +282,57 @@ export const Navbar = () => {
       </AppBar>
 
       {/* MOBILE MENU */}
-      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-        <MenuItem sx={textStyle} onClick={() => navigate("/")}>
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+        sx={{
+          "& .MuiPaper-root": {
+            background: "rgba(255, 255, 255, 0.9)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            borderRadius: "20px",
+            boxShadow: "0px 8px 32px rgba(0, 0, 0, 0.12)",
+            border: "1px solid rgba(255, 255, 255, 0.18)",
+            mt: 1,
+            minWidth: 200,
+          },
+        }}
+      >
+        <MenuItem
+          sx={{
+            ...textStyle,
+            color: "var(--text-primary)",
+            "&:hover": {
+              backgroundColor: "rgba(25, 118, 210, 0.1)",
+            },
+          }}
+          onClick={() => navigate("/")}
+        >
           {t("nav.home")}
         </MenuItem>
-        <MenuItem sx={textStyle} onClick={() => navigate("/about")}>
+        <MenuItem
+          sx={{
+            ...textStyle,
+            color: "var(--text-primary)",
+            "&:hover": {
+              backgroundColor: "rgba(25, 118, 210, 0.1)",
+            },
+          }}
+          onClick={() => navigate("/about")}
+        >
           {t("nav.about")}
         </MenuItem>
-        <MenuItem sx={textStyle} onClick={() => navigate("/projects")}>
+        <MenuItem
+          sx={{
+            ...textStyle,
+            color: "var(--text-primary)",
+            "&:hover": {
+              backgroundColor: "rgba(25, 118, 210, 0.1)",
+            },
+          }}
+          onClick={() => navigate("/projects")}
+        >
           {t("nav.projects")}
         </MenuItem>
         <LanguageSelector variant="menuItem" onLanguageChange={handleMenuClose} />

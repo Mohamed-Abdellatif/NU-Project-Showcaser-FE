@@ -67,18 +67,19 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
           p: 0,
           "&:hover .MuiAvatar-root": {
             bgcolor: "var(--primary)",
+            color: "#fff",
           },
         }}
       >
         <Avatar
           sx={{
-            bgcolor: "white",
-            color: "var(--accent)",
+            bgcolor: "var(--primary)",
+            color: "#fff",
             width: { xs: 40, md: 48 },
             height: { xs: 40, md: 48 },
             fontSize: { xs: 16, md: 18 },
             fontWeight: "bold",
-            transition: "background-color 0.2s",
+            transition: "all 0.25s ease",
           }}
         >
           {getInitials()}
@@ -102,24 +103,80 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
         }}
         sx={{
           "& .MuiPaper-root": {
+            background: "rgba(255, 255, 255, 0.9)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            borderRadius: "20px",
+            boxShadow: "0px 8px 32px rgba(0, 0, 0, 0.12)",
+            border: "1px solid rgba(255, 255, 255, 0.18)",
             mt: 1,
             minWidth: 180,
+            overflow: "hidden",
           },
         }}
       >
-        <MenuItem onClick={handleProfileClick}>{t("nav.profile")}</MenuItem>
+        <MenuItem
+          onClick={handleProfileClick}
+          sx={{
+            fontFamily: "Inter, Poppins, system-ui, sans-serif",
+            color: "var(--text-primary)",
+            "&:hover": {
+              backgroundColor: "rgba(25, 118, 210, 0.1)",
+            },
+          }}
+        >
+          {t("nav.profile")}
+        </MenuItem>
         {user?.role === "supervisor" && (
-          <MenuItem onClick={handleProjectRequestClick}>
+          <MenuItem
+            onClick={handleProjectRequestClick}
+            sx={{
+              fontFamily: "Inter, Poppins, system-ui, sans-serif",
+              color: "var(--text-primary)",
+              "&:hover": {
+                backgroundColor: "rgba(25, 118, 210, 0.1)",
+              },
+            }}
+          >
             {t("nav.project-requests")}
           </MenuItem>
         )}
-        <MenuItem onClick={handleStarredProjectsClick}>
+        <MenuItem
+          onClick={handleStarredProjectsClick}
+          sx={{
+            fontFamily: "Inter, Poppins, system-ui, sans-serif",
+            color: "var(--text-primary)",
+            "&:hover": {
+              backgroundColor: "rgba(25, 118, 210, 0.1)",
+            },
+          }}
+        >
           {t("nav.starred-projects")}
         </MenuItem>
-        <MenuItem onClick={handleSubmitProjectClick}>
+        <MenuItem
+          onClick={handleSubmitProjectClick}
+          sx={{
+            fontFamily: "Inter, Poppins, system-ui, sans-serif",
+            color: "var(--text-primary)",
+            "&:hover": {
+              backgroundColor: "rgba(25, 118, 210, 0.1)",
+            },
+          }}
+        >
           {t("nav.submit-project")}
         </MenuItem>
-        <MenuItem onClick={handleLogoutClick}>{t("nav.logout")}</MenuItem>
+        <MenuItem
+          onClick={handleLogoutClick}
+          sx={{
+            fontFamily: "Inter, Poppins, system-ui, sans-serif",
+            color: "var(--text-primary)",
+            "&:hover": {
+              backgroundColor: "rgba(25, 118, 210, 0.1)",
+            },
+          }}
+        >
+          {t("nav.logout")}
+        </MenuItem>
       </Menu>
     </>
   );
