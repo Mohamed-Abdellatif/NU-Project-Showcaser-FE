@@ -4,8 +4,9 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { HERO_SLIDES_CONFIG } from "../../utils/constants";
-
-
+import { useAtom } from "jotai";
+import { userAtom } from "../../atoms/authAtom";
+import type { User } from "../../types";
 
 interface SlideContent {
   title: string;
@@ -20,22 +21,28 @@ const HeroCard = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.language === 'ar';
-  
+  const isRTL = i18n.language === "ar";
+  const [user] = useAtom<User | null>(userAtom);
   // Get slides from translations
-  const slides = useMemo<SlideContent[]>(() => 
-    HERO_SLIDES_CONFIG.map((config) => ({
-      title: t(config.translationKeys.title),
-      subtitle: t(config.translationKeys.subtitle),
-      ctaText: t(config.translationKeys.ctaText),
-      decorativeBarColor: config.decorativeBarColor,
-      buttonLink: config.buttonLink,
-    }))
-  , [t]);
+  const slides = useMemo<SlideContent[]>(
+    () =>
+      HERO_SLIDES_CONFIG.map((config) => ({
+        title: t(config.translationKeys.title),
+        subtitle: t(config.translationKeys.subtitle),
+        ctaText: t(config.translationKeys.ctaText),
+        decorativeBarColor: config.decorativeBarColor,
+        buttonLink: config.buttonLink,
+      })),
+    [t]
+  );
 
   const currentContent = slides[currentSlide];
-  
+
   const onCtaClick = () => {
+    if (currentContent.buttonLink === "/profile") {
+      navigate(`/profile/${user?.email.split("@")[0]}`);
+      return;
+    }
     navigate(currentContent.buttonLink);
   };
 
@@ -162,7 +169,7 @@ const HeroCard = () => {
                     boxShadow: "0 4px 14px 0 rgba(25, 118, 210, 0.3)",
                     textTransform: "none",
                     "&:hover": {
-                      bgcolor: "var(--accent)",
+                      bgcolor: "var(--text-primary)",
                       transform: "translateY(-2px)",
                       boxShadow: "0 6px 20px 0 rgba(25, 118, 210, 0.4)",
                     },
@@ -186,7 +193,7 @@ const HeroCard = () => {
             top: 0,
             bottom: 0,
             width: "6px",
-            backgroundColor: currentContent.decorativeBarColor ,
+            backgroundColor: currentContent.decorativeBarColor,
             opacity: 0.8,
             zIndex: 0,
             transition: "background-color 0.5s ease",
@@ -224,13 +231,13 @@ const HeroCard = () => {
                   borderRadius: "50%",
                   backgroundColor:
                     index === currentSlide
-                      ? currentContent.decorativeBarColor 
+                      ? currentContent.decorativeBarColor
                       : "rgba(0, 0, 0, 0.2)",
                   cursor: "pointer",
                   transition: "all 0.3s ease",
                   "&:hover": {
                     transform: "scale(1.2)",
-                    backgroundColor: currentContent.decorativeBarColor ,
+                    backgroundColor: currentContent.decorativeBarColor,
                   },
                 }}
               />
@@ -243,4 +250,3 @@ const HeroCard = () => {
 };
 
 export default HeroCard;
-

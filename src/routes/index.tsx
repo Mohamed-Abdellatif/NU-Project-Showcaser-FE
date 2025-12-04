@@ -91,14 +91,15 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "*",
-        element: <Navigate to="/" replace />,
-      },
-      {
         path: "/learn-more",
         element: <LearnMore />,
 
-      }
+      },
+      {
+        path: "*",
+        element: <Navigate to="/" replace />,
+      },
+      
       // Add more routes here as needed
     ],
   },
