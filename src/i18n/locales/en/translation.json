@@ -18,6 +18,31 @@
     "starred-projects": "Starred Projects",
     "submit-project": "Submit Project"
   },
+  "bugReport": {
+    "fabLabel": "Report a Bug",
+    "dialogTitle": "Report a Bug",
+    "titleLabel": "Title",
+    "titlePlaceholder": "Brief description of the bug",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Detailed description of the bug, steps to reproduce, etc.",
+    "screenshotLabel": "Screenshot (Optional)",
+    "captureButton": "Capture Screenshot",
+    "capturing": "Capturing...",
+    "uploadButton": "Upload Image",
+    "annotateButton": "Annotate Screenshot",
+    "annotating": "Annotating...",
+    "removeButton": "Remove",
+    "cancelButton": "Cancel",
+    "submitButton": "Submit Report",
+    "submitting": "Submitting...",
+    "altText": "Bug screenshot",
+    "requiredFieldsError": "Please fill in both title and description",
+    "captureError": "Failed to capture screenshot. Please try again.",
+    "annotationNotReady": "Image is not ready. Please wait a moment and try again.",
+    "annotationInitError": "Failed to initialize annotation tool. Please try again.",
+    "submitSuccess": "Bug report submitted successfully!",
+    "submitError": "Failed to submit bug report. Please try again."
+  },
   "home": {
     "title": "Have a Winning Project?",
     "subtitle": "Submit Your project and we'll check it out!",
@@ -202,27 +227,27 @@
     "failedToUpdateProfile": "Failed to update profile. Please try again.",
     "failedToLoadProfile": "Failed to load profile. Please try again."
   },
-  "profile": {
+  "profile" : {
     "editProfile": "Edit Profile",
     "projectsSubmitted": "Projects Submitted",
     "noProjectsSubmitted": "No projects submitted yet.",
-    "viewProfile": "View Profile",
-    "failedToLoadUserProfile": "Failed to load user profile. Please try again.",
-    "loadingUserProfile": "Loading user profile...",
-    "errorLoadingUserProfile": "Error loading user profile.",
-    "noProjectsFound": "No projects found for this user.",
-    "projects": "Projects",
-    "about": "About",
-    "email": "Email",
-    "major": "Major",
-    "universityId": "University ID",
-    "name": "Name",
+    "viewProfile": "View Profile"
+    ,"failedToLoadUserProfile": "Failed to load user profile. Please try again."
+    ,"loadingUserProfile": "Loading user profile..."
+    ,"errorLoadingUserProfile": "Error loading user profile."
+    ,"noProjectsFound": "No projects found for this user."
+    ,"projects": "Projects"
+    ,"about": "About"
+    ,"email": "Email"
+    ,"major": "Major"
+    ,"universityId": "University ID"
+    ,"name": "Name",
     "edit": "Edit",
     "save": "Save",
     "cancel": "Cancel",
     "profileUpdatedSuccessfully": "Profile updated successfully",
-    "failedToUpdateProfile": "Failed to update profile. Please try again.",
-    "pleaseFixValidationErrorsBeforeSubmitting": "Please fix the validation errors before submitting",
+    "failedToUpdateProfile": "Failed to update profile. Please try again."
+    ,"pleaseFixValidationErrorsBeforeSubmitting": "Please fix the validation errors before submitting",
     "updateProfile": "Update Profile",
     "loading": "Loading profile...",
     "error": "Error loading profile.",
@@ -234,10 +259,9 @@
     "university": "Nile University",
     "submitNewProject": "Submit New Project",
     "viewProjectDetails": "View Project Details",
-    "school": "School",
-    "github": "GitHub",
-    "linkedIn": "LinkedIn"
-  },
+    "school" : "School",
+    "github" : "GitHub",
+    "linkedIn" : "LinkedIn"},
   "userProfile": {
     "requestDeactivateAccountSuccessfully": "Request to deactivate account has been sent successfully",
     "requestDeactivateAccountFailed": "Failed to send request to deactivate account. Please try again.",

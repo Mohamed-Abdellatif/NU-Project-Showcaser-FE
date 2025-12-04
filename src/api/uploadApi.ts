@@ -97,3 +97,38 @@ export const uploadVideo = async (
   }
 };
 
+/**
+ * Upload a single suggestion image
+ * @param file - File object containing the suggestion image
+ * @returns { url: string }
+ */
+export const uploadSuggestionImage = async (
+  file: File
+): Promise<UploadImageSingleResponse> => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await axios.post<UploadImageSingleResponse>(
+      `${UPLOAD_BASE}/suggestion-image`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        (error.response?.data as UploadErrorResponse)?.error ||
+          'Failed to upload suggestion image'
+      );
+    }
+    throw error;
+  }
+};
+

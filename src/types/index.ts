@@ -132,6 +132,20 @@ export interface School {
   majors: string[];
 }
 
+export interface Suggestion {
+  _id: string;
+  title: string;
+  description: string;
+  images?: string[];
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface SuggestionCreatePayload {
+  title: string;
+  description: string;
+  images?: string[];
+}
 export interface HeroSlideConfig {
   decorativeBarColor: string;
   buttonLink: string;
