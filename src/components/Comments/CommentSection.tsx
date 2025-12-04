@@ -46,6 +46,9 @@ export default function CommentSection({ projectId }: { projectId: string }) {
     if (!user) {
       return;
     }
+    if (commentText.trim() === "") {
+      return;
+    }
     createComment.mutate({
       content: commentText,
       projectId: projectId,
@@ -104,14 +107,16 @@ export default function CommentSection({ projectId }: { projectId: string }) {
           <Button
             variant="contained"
             onClick={handleAddComment}
+            disabled={commentText.trim() === ""}
             sx={{
-              bgcolor: "var(--accent)",
+              bgcolor: commentText.trim() === "" ? "var(--text-secondary)" : "var(--accent)",
               width: 80,
               height: 60,
               flexShrink: 0,
+              color: commentText.trim() === "" ? "var(--text-secondary)" : "white",
             }}
           >
-            {t("viewProject.Post")}
+            {commentText.trim() === "" ? t("viewProject.Post") : t("viewProject.Post")}
           </Button>
         </Box>
       ) : (

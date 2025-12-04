@@ -6,12 +6,12 @@ import html2canvas from "html2canvas";
 import { useTranslation } from "react-i18next";
 import { useCreateSuggestion } from "../../hooks/useSuggestions";
 import { useToastContext } from "../../contexts/ToastContext";
-import { uploadSuggestionImage } from "../../api/uploadApi";
 import { MarkerArea } from "markerjs3";
 import { BugReportFab } from "./components/BugReportFab";
 import { BugReportFields } from "./components/BugReportFields";
 import { ScreenshotSection } from "./components/ScreenshotSection";
 import { BugReportActions } from "./components/BugReportActions";
+import { useUploadSuggestionImage } from "../../hooks/useMedia";
 
 const BugReportButton: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -20,6 +20,7 @@ const BugReportButton: React.FC = () => {
   const [screenshot, setScreenshot] = useState<string | null>(null);
   const [isAnnotating, setIsAnnotating] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const imageRef = useRef<HTMLImageElement | null>(null);
   const markerAreaRef = useRef<MarkerArea | null>(null);
   const markerHandlersRef = useRef<{
@@ -28,6 +29,7 @@ const BugReportButton: React.FC = () => {
   }>({});
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  const uploadSuggestionImage = useUploadSuggestionImage();
   const createSuggestion = useCreateSuggestion();
   const { showSuccess, showError } = useToastContext();
   const { t } = useTranslation();
@@ -243,7 +245,9 @@ const BugReportButton: React.FC = () => {
           type: "image/png",
         });
 
-        const uploadResponse = await uploadSuggestionImage(file);
+        setIsUploading(true);
+        const uploadResponse = await uploadSuggestionImage.mutateAsync(file);
+        setIsUploading(false);
         imageUrls = [uploadResponse.url];
       }
 
@@ -266,7 +270,7 @@ const BugReportButton: React.FC = () => {
   };
 
   const isSubmitDisabled =
-    createSuggestion.isPending || !title.trim() || !description.trim();
+    createSuggestion.isPending ||isUploading || !title.trim() || !description.trim();
 
   return (
     <>
@@ -364,8 +368,9 @@ const BugReportButton: React.FC = () => {
           onCancel={handleClose}
           onSubmit={handleSubmit}
           disableCancel={createSuggestion.isPending}
-          disableSubmit={isSubmitDisabled}
+          disableSubmit={isSubmitDisabled }
           isSubmitting={createSuggestion.isPending}
+          isImageUploading={isUploading}
           t={t}
         />
       </Dialog>

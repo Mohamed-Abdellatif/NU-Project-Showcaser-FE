@@ -46,7 +46,7 @@ const HeroCard = () => {
     navigate(currentContent.buttonLink);
   };
 
-  // Auto-rotate slides every 4 seconds
+  // Auto-rotate slides every 8 seconds
   useEffect(() => {
     if (slides.length <= 1) return;
 
@@ -56,7 +56,7 @@ const HeroCard = () => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
         setIsTransitioning(false);
       }, 300);
-    }, 4000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, [slides.length]);

@@ -9,6 +9,7 @@ type BugReportActionsProps = {
   disableSubmit: boolean;
   isSubmitting: boolean;
   t: TFunction;
+  isImageUploading: boolean;
 };
 
 export const BugReportActions: React.FC<BugReportActionsProps> = ({
@@ -18,6 +19,7 @@ export const BugReportActions: React.FC<BugReportActionsProps> = ({
   disableSubmit,
   isSubmitting,
   t,
+  isImageUploading,
 }) => (
   <DialogActions sx={{ px: 3, pb: 2.5, gap: 1 }}>
     <Button
@@ -34,7 +36,7 @@ export const BugReportActions: React.FC<BugReportActionsProps> = ({
       {t("bugReport.cancelButton")}
     </Button>
     <Button
-      onClick={onSubmit}
+      onClick={()=>onSubmit()}
       disabled={disableSubmit}
       variant="contained"
       color="error"
@@ -44,7 +46,7 @@ export const BugReportActions: React.FC<BugReportActionsProps> = ({
         minWidth: 100,
       }}
     >
-      {isSubmitting ? t("bugReport.submitting") : t("bugReport.submitButton")}
+      {isSubmitting || isImageUploading ? t("bugReport.submitting") : t("bugReport.submitButton")}
     </Button>
   </DialogActions>
 );

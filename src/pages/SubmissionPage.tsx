@@ -51,6 +51,8 @@ const SubmitionPage = () => {
   const [liveUrl, setLiveUrl] = useState("");
   const [video, setVideo] = useState<File | null>(null);
   const [newMember, setNewMember] = useState<Member>({ name: "", email: "" });
+  const [isImageUploading, setIsImageUploading] = useState(false);
+  const [isVideoUploading, setIsVideoUploading] = useState(false);
   const teamLeader = useMemo(
     () => user?.firstName + " " + user?.lastName,
     [user]
@@ -152,19 +154,23 @@ const SubmitionPage = () => {
       // Upload images if any
       let imageUrls: string[] = [];
       if (image.length > 0) {
+        setIsImageUploading(true);
         const imageResponse = await uploadImage.mutateAsync(image);
         if ("urls" in imageResponse) {
           imageUrls = imageResponse.urls;
         } else if ("url" in imageResponse) {
           imageUrls = [imageResponse.url];
         }
+        setIsImageUploading(false);
       }
 
       // Upload video if one is selected
       const videoUrls: string[] = [];
       if (video) {
+        setIsVideoUploading(true);
         const videoResponse = await uploadVideo.mutateAsync(video);
         videoUrls.push(videoResponse.url);
+        setIsVideoUploading(false);
       }
 
       // Prepare form data with uploaded URLs
@@ -348,6 +354,7 @@ const SubmitionPage = () => {
             {/* Action Buttons */}
             <Box sx={{ display: "flex", gap: 2, mt: 2}}>
               <Button
+                disabled={createProject.isPending || isImageUploading || isVideoUploading}
                 variant="contained"
                 fullWidth
                 sx={{
@@ -358,7 +365,7 @@ const SubmitionPage = () => {
                 }}
                 onClick={handleSubmit}
               >
-                {t("submissionPage.Submit Project")}
+                {createProject.isPending || isImageUploading || isVideoUploading ? t("submissionPage.Submitting") : t("submissionPage.Submit Project")}
               </Button>
               <Button
                 variant="outlined"

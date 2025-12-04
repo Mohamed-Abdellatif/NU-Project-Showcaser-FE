@@ -5,6 +5,7 @@ import {
   type UploadImageSingleResponse,
   type UploadImageMultipleResponse,
   type UploadVideoResponse,
+  uploadSuggestionImage,
 } from '../api/uploadApi';
 
 // Query keys
@@ -13,6 +14,7 @@ export const mediaKeys = {
   uploads: () => [...mediaKeys.all, 'upload'] as const,
   image: () => [...mediaKeys.uploads(), 'image'] as const,
   video: () => [...mediaKeys.uploads(), 'video'] as const,
+  suggestionImage: () => [...mediaKeys.uploads(), 'suggestionImage'] as const,
 };
 
 /**
@@ -38,6 +40,13 @@ export const useUploadVideo = () => {
   return useMutation<UploadVideoResponse, Error, File>({
     mutationFn: uploadVideo,
     mutationKey: mediaKeys.video(),
+  });
+};
+
+export const useUploadSuggestionImage = () => {
+  return useMutation<UploadImageSingleResponse, Error, File>({
+    mutationFn: uploadSuggestionImage,
+    mutationKey: mediaKeys.suggestionImage(),
   });
 };
 

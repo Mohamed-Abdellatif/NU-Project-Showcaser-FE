@@ -75,7 +75,7 @@ const AboutUsSection = () => {
           align="center"
           sx={{
             fontWeight: 800,
-            color: "#6a2c68",
+            color: "var(--text-primary)",
             marginTop: { xs: "20px", sm: "80px", md: "150px" },
             mb: { xs: 1, sm: 2 },
             fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
@@ -92,7 +92,7 @@ const AboutUsSection = () => {
           variant="h6"
           align="center"
           sx={{
-            color: "#8a4c88",
+            color: "var(--text-secondary)",
             maxWidth: 700,
             mx: "auto",
             mb: { xs: 4, sm: 6, md: 10 },
@@ -118,12 +118,12 @@ const AboutUsSection = () => {
                   alignItems: "center",
                   borderRadius: 4,
                   background: "#FFFFFF",
-                  border: "#B355F2",
+                  border: "var(--accent)",
                   animation: `${fadeIn} 0.8s ease-out ${0.4 + idx * 0.1}s backwards`,
                   "&:hover": {
                     transition: "transform 1s ease, box-shadow 0.3s ease, background 0.3s ease",
                     transform: "translateY(-10px)",
-                    boxShadow: "0 20px 40px rgba(179, 85, 242, 0.2)",
+                    boxShadow: "0 10px 20px var(--accent)",
                     background: "rgba(255, 255, 255, 0.8)",
                     "& .icon-box": {
                       transform: "scale(1.1) rotate(0deg)",

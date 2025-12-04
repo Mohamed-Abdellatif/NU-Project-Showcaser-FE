@@ -161,7 +161,8 @@
     "Please enter a valid email address": "يرجى إدخال عنوان بريد إلكتروني صحيح",
     "Teaching Assistant Email": "البريد الإلكتروني للمساعد التدريسي",
     "Video Too Big!": "الفيديو كبير جدًا!",
-    "Cancel": "إلغاء"
+    "Cancel": "إلغاء",
+    "Submitting": "جاري الإرسال..."
   },
   "projects": {
     "title": "جميع المشاريع",

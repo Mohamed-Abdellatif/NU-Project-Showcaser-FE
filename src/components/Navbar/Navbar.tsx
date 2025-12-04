@@ -117,13 +117,16 @@ export const Navbar = () => {
               }}
             >
               <img
+              onClick={() => navigate("/")}
+
                 src="../../Logo.svg"
                 alt="Logo"
                 style={{
                   width: "100%",
                   height: "100%",
                   objectFit: "contain",
-                  scale: 1.1
+                  scale: 1.1,
+                  cursor: "pointer",
                 }}
               />
             </Box>
