@@ -116,15 +116,15 @@ export const ProjectInfoCard = ({
     <Box
       sx={{
         display: "flex",
-        gap: 6,
-        width: "70%",
+        flexDirection: { xs: "column", md: "row" },
+        gap: { xs: 3, md: 6 },
+        width: { xs: "90%", md: "70%" },
         mt: 6,
         fontFamily: "Poppins, sans-serif",
-        flexWrap: "nowrap",
         justifyContent: "space-between",
       }}
     >
-      <Box flex={1} minWidth="300px">
+      <Box flex={1} minWidth={{ xs: "100%", md: "300px" }}>
         <Typography
           variant="h4"
           sx={{ fontWeight: 800, color: colors.textHeader, mb: 3 }}
@@ -187,7 +187,7 @@ export const ProjectInfoCard = ({
 
       <Card
         sx={{
-          width: "350px",
+          width: { xs: "100%", md: "350px" },
           borderRadius: 3,
           background: colors.cardBg,
           flexShrink: 0,
@@ -319,10 +319,10 @@ const InfoRow = ({
       >
         {label}:
       </Typography>
-      <Typography 
-        sx={{ 
-          fontSize: "1rem", 
-          fontWeight: 500, 
+      <Typography
+        sx={{
+          fontSize: "1rem",
+          fontWeight: 500,
           color: "#222",
           textDecoration: onClick ? "underline" : "none",
           "&:hover": onClick ? {

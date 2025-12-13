@@ -117,7 +117,7 @@ export const Navbar = () => {
               }}
             >
               <img
-              onClick={() => navigate("/")}
+                onClick={() => navigate("/")}
 
                 src="../../Logo.svg"
                 alt="Logo"
@@ -286,6 +286,7 @@ export const Navbar = () => {
 
       {/* MOBILE MENU */}
       <Menu
+        disableScrollLock={true}
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
@@ -310,7 +311,7 @@ export const Navbar = () => {
               backgroundColor: "rgba(25, 118, 210, 0.1)",
             },
           }}
-          onClick={() => navigate("/")}
+          onClick={() => { navigate("/"); handleMenuClose(); }}
         >
           {t("nav.home")}
         </MenuItem>
@@ -322,7 +323,7 @@ export const Navbar = () => {
               backgroundColor: "rgba(25, 118, 210, 0.1)",
             },
           }}
-          onClick={() => navigate("/about")}
+          onClick={() => { navigate("/about"); handleMenuClose(); }}
         >
           {t("nav.about")}
         </MenuItem>
@@ -334,7 +335,7 @@ export const Navbar = () => {
               backgroundColor: "rgba(25, 118, 210, 0.1)",
             },
           }}
-          onClick={() => navigate("/projects")}
+          onClick={() => { navigate("/projects"); handleMenuClose(); }}
         >
           {t("nav.projects")}
         </MenuItem>
