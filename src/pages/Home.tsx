@@ -23,7 +23,7 @@ const HomePage = () => {
     >
       <HeroCard />
 
-      <Box sx={{ padding: "10px", margin: "20px" }}>
+      <Box sx={{ padding: { xs: "8px", md: "10px" }, margin: { xs: "8px", md: "20px" } }}>
         {isLoading && <LoadingState />}
         {isError && <ErrorState error={error} />}
 
