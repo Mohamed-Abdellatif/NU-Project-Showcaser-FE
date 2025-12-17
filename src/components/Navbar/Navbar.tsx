@@ -238,6 +238,16 @@ export const Navbar = () => {
             {/* Mobile Actions */}
             {isMobile && (
               <>
+                {/* Close Search Button - shown when search is active */}
+                {showMobileSearch && (
+                  <IconButton
+                    onClick={handleToggleMobileSearch}
+                    sx={{ color: "var(--text-primary)" }}
+                  >
+                    <SearchIcon sx={{ fontSize: "26px" }} />
+                  </IconButton>
+                )}
+
                 {/* Search Toggle */}
                 {!showMobileSearch && (
                   <IconButton
@@ -258,25 +268,29 @@ export const Navbar = () => {
                   </IconButton>
                 )}
 
-                {/* Mobile Login */}
-                {!showMobileSearch && !isAuthenticated && (
-                  <Button
-                    onClick={handleLogin}
-                    sx={{
-                      ...textStyle,
-                      color: "var(--primary)",
-                      border: "1.6px solid var(--primary)",
-                      borderRadius: "12px",
-                      px: 1.5,
-                      py: 0.5,
-                      fontSize: "0.9rem",
-                      "&:hover": {
-                        backgroundColor: "rgba(25, 118, 210, 0.1)",
-                      },
-                    }}
-                  >
-                    {t("nav.login")}
-                  </Button>
+                {/* Mobile Login or UserMenu */}
+                {!showMobileSearch && (
+                  isAuthenticated ? (
+                    <UserMenu showMobileSearch={showMobileSearch} onLogout={handleLogout} />
+                  ) : (
+                    <Button
+                      onClick={handleLogin}
+                      sx={{
+                        ...textStyle,
+                        color: "var(--primary)",
+                        border: "1.6px solid var(--primary)",
+                        borderRadius: "12px",
+                        px: 1.5,
+                        py: 0.5,
+                        fontSize: "0.9rem",
+                        "&:hover": {
+                          backgroundColor: "rgba(25, 118, 210, 0.1)",
+                        },
+                      }}
+                    >
+                      {t("nav.login")}
+                    </Button>
+                  )
                 )}
               </>
             )}

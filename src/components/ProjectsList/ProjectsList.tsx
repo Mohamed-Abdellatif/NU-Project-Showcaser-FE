@@ -134,7 +134,7 @@ const ProjectsList = ({
         sx={{
           display: "grid",
           gap: { xs: 2.5, sm: 2, md: 3.5 },
-          justifyItems: "stretch",
+          justifyItems: effectiveViewMode === "list" ? "stretch" : "center",
           ...(effectiveViewMode === "grid"
             ? {
               gridTemplateColumns: {
