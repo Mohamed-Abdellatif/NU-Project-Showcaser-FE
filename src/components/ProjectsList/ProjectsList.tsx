@@ -54,7 +54,7 @@ const ProjectsList = ({
   };
 
   return (
-    <Box sx={{ width: "98%", p: 2 }}>
+    <Box sx={{ width: { xs: "100%", sm: "100%", md: "98%" }, px: { xs: 1, sm: 2, md: 2 }, py: 2 }}>
       <Box
         sx={{
           display: "flex",
@@ -133,18 +133,19 @@ const ProjectsList = ({
       <Box
         sx={{
           display: "grid",
-          gap: { xs: 2.5, md: 3.5 },
+          gap: { xs: 2.5, sm: 2, md: 3.5 },
+          justifyItems: effectiveViewMode === "list" ? "stretch" : "center",
           ...(effectiveViewMode === "grid"
             ? {
-                gridTemplateColumns: {
-                  xs: "1fr",
-                  sm: "repeat(2, 1fr)",
-                  md: "repeat(3, 1fr)",
-                },
-              }
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "repeat(2, 1fr)",
+                md: "repeat(3, 1fr)",
+              },
+            }
             : {
-                gridTemplateColumns: "1fr",
-              }),
+              gridTemplateColumns: "1fr",
+            }),
         }}
       >
         {displayProjects.map((project: Project) => (

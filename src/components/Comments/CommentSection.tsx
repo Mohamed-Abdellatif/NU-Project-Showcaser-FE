@@ -17,8 +17,7 @@ import { userAtom } from "../../atoms/authAtom";
 import type { User } from "../../types";
 import { useTranslation } from "react-i18next";
 import "@fontsource/poppins/700.css";
-import { useComments, useDeleteComment } from "../../hooks/useComments";
-import { useCreateComment } from "../../hooks/useComments";
+import { useComments, useDeleteComment, useCreateComment } from "../../hooks/useComments";
 import LoadingState from "../LoadingState/LoadingState";
 import { useToastContext } from "../../contexts/ToastContext";
 
@@ -32,9 +31,7 @@ export default function CommentSection({ projectId }: { projectId: string }) {
   const createComment = useCreateComment();
   const deleteComment = useDeleteComment();
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
-  const [selectedCommentId, setSelectedCommentId] = useState<string | null>(
-    null
-  );
+  const [selectedCommentId, setSelectedCommentId] = useState<string | null>(null);
 
   const getInitials = (firstName?: string, lastName?: string) => {
     const firstInitial = firstName?.[0]?.toUpperCase() || "";
@@ -43,19 +40,15 @@ export default function CommentSection({ projectId }: { projectId: string }) {
   };
 
   const handleAddComment = () => {
-    if (!user) {
-      return;
-    }
-    if (commentText.trim() === "") {
-      return;
-    }
+    if (!user || commentText.trim() === "") return;
+
     createComment.mutate({
       content: commentText,
-      projectId: projectId,
-      userId: user?._id || "",
-      authorFirstName: user?.firstName || "",
-      authorLastName: user?.lastName || "",
-      authorEmail: user?.email,
+      projectId,
+      userId: user._id || "",
+      authorFirstName: user.firstName || "",
+      authorLastName: user.lastName || "",
+      authorEmail: user.email,
     });
     setCommentText("");
     showSuccess(t("viewProject.commentAdded"));
@@ -72,29 +65,30 @@ export default function CommentSection({ projectId }: { projectId: string }) {
   };
 
   const handleDelete = () => {
-    if (!selectedCommentId) {
-      return;
-    }
-    deleteComment.mutate({
-      id: selectedCommentId,
-      projectId: projectId,
-    });
+    if (!selectedCommentId) return;
+
+    deleteComment.mutate({ id: selectedCommentId, projectId });
     closeMenu();
     showSuccess(t("viewProject.commentDeleted"));
-    setSelectedCommentId(null);
   };
 
-  if (isLoading) {
-    return <LoadingState />;
-  }
+  if (isLoading) return <LoadingState />;
+
   return (
-    <Box sx={{ width: "85%", maxWidth: "900px", mt: 1, padding: 2 }}>
-      <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
+    <Box sx={{ width: "100%", maxWidth: 600, mx: "auto", mt: 2, px: { xs: 1, sm: 2 } }}>
+      <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
         {t("viewProject.comments")}
       </Typography>
 
       {user ? (
-        <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            gap: 1,
+            mb: 3,
+          }}
+        >
           <TextField
             fullWidth
             placeholder={t("viewProject.addComment")}
@@ -102,61 +96,68 @@ export default function CommentSection({ projectId }: { projectId: string }) {
             onChange={(e) => setCommentText(e.target.value)}
             multiline
             minRows={1}
-            sx={{ overflow: "auto" }}
+            sx={{ fontSize: { xs: "0.875rem", sm: "1rem" } }}
           />
           <Button
             variant="contained"
             onClick={handleAddComment}
             disabled={commentText.trim() === ""}
             sx={{
+              mt: { xs: 1, sm: 0 },
               bgcolor: commentText.trim() === "" ? "var(--text-secondary)" : "var(--accent)",
-              width: 80,
-              height: 60,
+              color: "white",
+              width: { xs: "100%", sm: 80 },
+              height: 40,
               flexShrink: 0,
-              color: commentText.trim() === "" ? "var(--text-secondary)" : "white",
             }}
           >
-            {commentText.trim() === "" ? t("viewProject.Post") : t("viewProject.Post")}
+            {t("viewProject.Post")}
           </Button>
         </Box>
       ) : (
-        <Typography color="text.secondary" sx={{ mb: 2 }}>
+        <Typography
+          color="text.secondary"
+          sx={{ mb: 2, fontSize: { xs: "0.8rem", sm: "0.875rem" } }}
+        >
           {t("viewProject.loginToComment")}
         </Typography>
       )}
 
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
         {commentsData.map((comment) => (
-          <Card key={comment._id} sx={{ borderRadius: 3 }}>
-            <CardContent sx={{ display: "flex", gap: 2, py: 1, paddingTop: 2 }}>
-              {/* Only show avatar if comment exists */}
+          <Card key={comment._id} sx={{ borderRadius: 2 }}>
+            <CardContent sx={{ display: "flex", gap: 1, py: 1 }}>
               <Avatar
                 sx={{
                   bgcolor: "var(--accent)",
                   fontWeight: 700,
                   fontFamily: "Poppins",
+                  width: { xs: 32, sm: 40 },
+                  height: { xs: 32, sm: 40 },
+                  fontSize: { xs: "0.75rem", sm: "1rem" },
                 }}
               >
                 {getInitials(comment.authorFirstName, comment.authorLastName)}
               </Avatar>
 
               <Box sx={{ flexGrow: 1 }}>
-                <Typography sx={{ fontWeight: "bold" }}>
+                <Typography sx={{ fontWeight: "bold", fontSize: { xs: "0.875rem", sm: "1rem" } }}>
                   {comment.authorFirstName} {comment.authorLastName}
                 </Typography>
                 <Typography
-                  sx={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
+                  sx={{
+                    whiteSpace: "pre-wrap",
+                    wordBreak: "break-word",
+                    fontSize: { xs: "0.8rem", sm: "0.9rem" },
+                  }}
                 >
                   {comment.content}
                 </Typography>
               </Box>
+
               {user?._id === comment.userId && (
-                <IconButton
-                  onClick={(e) => openMenu(e, comment._id)}
-                  sx={{ height: "fit-content" }}
-                  hidden={user?._id !== comment.userId}
-                >
-                  <MoreVertIcon />
+                <IconButton onClick={(e) => openMenu(e, comment._id)} sx={{ p: 0, ml: 1 }}>
+                  <MoreVertIcon fontSize="small" />
                 </IconButton>
               )}
             </CardContent>
@@ -164,11 +165,7 @@ export default function CommentSection({ projectId }: { projectId: string }) {
         ))}
       </Box>
 
-      <Menu
-        anchorEl={menuAnchor}
-        open={Boolean(menuAnchor)}
-        onClose={closeMenu}
-      >
+      <Menu anchorEl={menuAnchor} open={Boolean(menuAnchor)} onClose={closeMenu}>
         <MenuItem onClick={handleDelete} sx={{ color: "red" }}>
           {t("viewProject.delete")}
         </MenuItem>

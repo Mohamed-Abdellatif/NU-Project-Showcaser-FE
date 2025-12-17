@@ -61,6 +61,12 @@ const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
         height: "100%",
         display: "flex",
         flexDirection: viewMode === "list" ? "row" : "column",
+        width: "100%",
+        maxWidth: {
+          xs: 360,
+          sm: "100%",
+        },
+
         transition: "all 0.25s ease",
         cursor: "pointer",
         background:

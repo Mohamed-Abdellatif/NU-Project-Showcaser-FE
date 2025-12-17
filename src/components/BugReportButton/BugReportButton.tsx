@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Dialog, DialogTitle, DialogContent, Box, Typography, IconButton } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, Box, Typography, IconButton, useTheme, useMediaQuery } from "@mui/material";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import CloseIcon from "@mui/icons-material/Close";
 import html2canvas from "html2canvas";
@@ -33,6 +33,8 @@ const BugReportButton: React.FC = () => {
   const createSuggestion = useCreateSuggestion();
   const { showSuccess, showError } = useToastContext();
   const { t } = useTranslation();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   // Cleanup MarkerArea on unmount or when dialog closes
   useEffect(() => {
@@ -176,8 +178,8 @@ const BugReportButton: React.FC = () => {
         markerArea.settings.defaultStrokeWidth = 4;
         const settings = markerArea.settings as typeof markerArea.settings & {
           defaultColorSet:
-            | typeof markerArea.settings.defaultColorSet
-            | "default";
+          | typeof markerArea.settings.defaultColorSet
+          | "default";
         };
         settings.defaultColorSet = "default" as typeof settings.defaultColorSet;
         markerArea.uiStyleSettings.zIndex = "1600";
@@ -270,7 +272,7 @@ const BugReportButton: React.FC = () => {
   };
 
   const isSubmitDisabled =
-    createSuggestion.isPending ||isUploading || !title.trim() || !description.trim();
+    createSuggestion.isPending || isUploading || !title.trim() || !description.trim();
 
   return (
     <>
@@ -292,6 +294,7 @@ const BugReportButton: React.FC = () => {
         onClose={handleClose}
         maxWidth="md"
         fullWidth
+        fullScreen={isMobile}
         sx={{
           "& .MuiDialog-paper": {
             transform: "none !important",
@@ -312,10 +315,10 @@ const BugReportButton: React.FC = () => {
         slotProps={{
           backdrop: isCapturing
             ? {
-                sx: {
-                  backgroundColor: "transparent",
-                },
-              }
+              sx: {
+                backgroundColor: "transparent",
+              },
+            }
             : undefined,
         }}
       >
@@ -368,7 +371,7 @@ const BugReportButton: React.FC = () => {
           onCancel={handleClose}
           onSubmit={handleSubmit}
           disableCancel={createSuggestion.isPending}
-          disableSubmit={isSubmitDisabled }
+          disableSubmit={isSubmitDisabled}
           isSubmitting={createSuggestion.isPending}
           isImageUploading={isUploading}
           t={t}
