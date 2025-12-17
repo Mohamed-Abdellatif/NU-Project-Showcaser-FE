@@ -3,7 +3,11 @@
     "language": "اللغة",
     "search": "بحث",
     "loading": "جاري التحميل...",
-    "error": "خطأ"
+    "error": "خطأ",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "delete": "حذف",
+    "ok": "موافق"
   },
   "nav": {
     "home": "الرئيسية",
@@ -16,7 +20,8 @@
     "profile": "الملف الشخصي",
     "project-requests": "طلبات المشاريع",
     "starred-projects": "المشاريع المفضلة",
-    "submit-project": "إرسال مشروع"
+    "submit-project": "إرسال مشروع",
+    "admin-panel": "لوحة التحكم الإدارية"
   },
   "bugReport": {
     "fabLabel": "الإبلاغ عن خطأ",
@@ -202,6 +207,8 @@
     "mustBeLoggedIn": "يجب عليك تسجيل الدخول للوصول إلى هذه الصفحة",
     "mustCompleteProfile": "يجب عليك إكمال ملفك الشخصي للوصول إلى هذه الصفحة",
     "mustBeSupervisor": "يجب أن تكون مشرفًا للوصول إلى هذه الصفحة",
+    "mustBeAdmin": "يجب أن تكون مسؤولًا للوصول إلى هذه الصفحة",
+    "insufficientPermissions": "ليس لديك الصلاحيات الكافية للوصول إلى هذه الصفحة",
     "profileCompletedSuccessfully": "تم إكمال ملفك الشخصي بالفعل",
     "deactivatedAccount": "تم إلغاء تفعيل حسابك"
   },
@@ -301,5 +308,181 @@
       "subtitle": "انضم إلى مجتمع NU Podium اليوم، ودع مشاريعك المبتكرة تتألق، ووسّع حضورك، وكن جزءًا من شبكة تحتفي بالإبداع والتميّز في جامعة النيل.",
       "startJourney": "ابدأ رحلتك"
     }
+  },
+  "admin": {
+    "sidebar": {
+      "title": "إدارة NU",
+      "dashboard": "لوحة التحكم",
+      "projects": "المشاريع",
+      "users": "المستخدمون",
+      "analytics": "التحليلات",
+      "reports": "التقارير",
+      "schools": "المدارس",
+      "comments": "التعليقات",
+      "suggestions": "الاقتراحات",
+      "settings": "الإعدادات"
+    },
+    "stats": {
+      "totalProjects": "إجمالي المشاريع",
+      "newUsers": "المستخدمون الجدد",
+      "diskUsage": "استخدام القرص",
+      "pending": "قيد الانتظار",
+      "lastWeek": "الأسبوع الماضي",
+      "used": "مستخدم",
+      "comments": "التعليقات"
+    },
+    "projects": {
+      "title": "المشاريع الأخيرة",
+      "tableHeaders": {
+        "title": "العنوان",
+        "teamLeader": "قائد الفريق",
+        "supervisor": "المشرف",
+        "status": "الحالة",
+        "date": "التاريخ",
+        "actions": "الإجراءات"
+      },
+      "noProjects": "لا توجد مشاريع بعد",
+      "noResults": "لم يتم العثور على مشاريع",
+      "totalProjects": "إجمالي المشاريع",
+      "rowsPerPage": "الصفوف لكل صفحة:",
+      "filters": "المرشحات",
+      "applyFilters": "تطبيق المرشحات",
+      "clearFilters": "مسح المرشحات",
+      "allStatuses": "جميع الحالات",
+      "course": "المقرر الدراسي",
+      "deleteTitle": "حذف المشروع",
+      "deleteMessage": "هل أنت متأكد أنك تريد حذف هذا المشروع؟ لا يمكن التراجع عن هذا الإجراء."
+    },
+    "users": {
+      "title": "إدارة المستخدمين",
+      "searchPlaceholder": "البحث عن المستخدمين...",
+      "addButton": "إضافة مستخدم",
+      "roleFilter": "الدور",
+      "allRoles": "جميع الأدوار",
+      "errorLoading": "فشل تحميل المستخدمين",
+      "noUsers": "لم يتم العثور على مستخدمين",
+      "roles": {
+        "student": "طالب",
+        "supervisor": "مشرف",
+        "admin": "مدير"
+      },
+      "tableHeaders": {
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "role": "الدور",
+        "status": "الحالة",
+        "school": "الكلية",
+        "major": "التخصص",
+        "actions": "الإجراءات"
+      }
+    },
+    "status": {
+      "approved": "مقبول",
+      "accepted": "مقبول",
+      "pending": "قيد الانتظار",
+      "pending-ta": "بانتظار مراجعة المساعد",
+      "rejected": "مرفوض",
+      "admin": "مدير",
+      "student": "طالب",
+      "supervisor": "مشرف",
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "analytics": {
+      "pageViews": "مشاهدات الصفحة",
+      "engagement": "معدل التفاعل",
+      "growth": "معدل النمو",
+      "projectTrends": "اتجاهات تقديم المشاريع",
+      "chartPlaceholder": "سيتم عرض الرسم البياني هنا"
+    },
+    "reports": {
+      "projectSummary": "تقرير ملخص المشاريع",
+      "projectSummaryDesc": "نظرة شاملة على جميع المشاريع مع الإحصائيات",
+      "userActivity": "تقرير نشاط المستخدمين",
+      "userActivityDesc": "مقاييس تفصيلية لتفاعل ونشاط المستخدمين",
+      "systemStats": "تقرير إحصائيات النظام",
+      "systemStatsDesc": "إحصائيات الأداء والاستخدام الإجمالية للنظام",
+      "generateCustom": "إنشاء تقرير مخصص",
+      "download": "تحميل التقرير"
+    },
+    "schools": {
+      "engineering": "كلية الهندسة",
+      "business": "كلية الأعمال",
+      "medicine": "كلية الطب",
+      "arts": "كلية الآداب والعلوم الإنسانية",
+      "addSchool": "إضافة كلية",
+      "editSchool": "تعديل كلية",
+      "departments": "الأقسام",
+      "students": "الطلاب",
+      "search": "البحث عن الكليات...",
+      "noSchools": "لم يتم العثور على كليات",
+      "noMajors": "لا توجد تخصصات",
+      "schoolName": "اسم الكلية",
+      "majors": "التخصصات",
+      "addMajor": "إضافة تخصص",
+      "add": "إضافة",
+      "cancel": "إلغاء",
+      "update": "تحديث",
+      "create": "إنشاء",
+      "confirmDelete": "هل أنت متأكد من حذف هذه الكلية؟",
+      "deleteTitle": "حذف الكلية",
+      "deleteMessage": "هل أنت متأكد أنك تريد حذف هذه الكلية؟ لا يمكن التراجع عن هذا الإجراء.",
+      "errorLoading": "فشل تحميل الكليات",
+      "nameRequired": "اسم الكلية مطلوب"
+    },
+    "comments": {
+      "sampleComment1": "مشروع رائع! التنفيذ مبتكر جدًا ومنجز بشكل ممتاز.",
+      "sampleComment2": "عمل مبهر على واجهة المستخدم. تصميم بديهي للغاية.",
+      "sampleComment3": "المنهج التقني متين. أتطلع لرؤية المزيد من التوثيق.",
+      "search": "البحث في التعليقات...",
+      "on": "على",
+      "project": "مشروع",
+      "noComments": "لم يتم العثور على تعليقات",
+      "unknownProject": "مشروع غير معروف",
+      "confirmDelete": "هل أنت متأكد من حذف هذا التعليق؟",
+      "deleteTitle": "حذف التعليق",
+      "deleteMessage": "هل أنت متأكد أنك تريد حذف هذا التعليق؟ لا يمكن التراجع عن هذا الإجراء.",
+      "errorLoading": "فشل تحميل التعليقات"
+    },
+    "suggestions": {
+      "suggestion1Title": "إضافة الوضع الداكن",
+      "suggestion1Desc": "سيكون من الرائع الحصول على خيار الوضع الداكن لرؤية أفضل في الليل.",
+      "suggestion2Title": "تحسين وظيفة البحث",
+      "suggestion2Desc": "إضافة فلاتر وخيارات بحث متقدمة ستسهل العثور على المشاريع.",
+      "suggestion3Title": "ميزة تصدير المشاريع",
+      "suggestion3Desc": "السماح للمستخدمين بتصدير بيانات المشروع بتنسيقات مختلفة مثل PDF وExcel.",
+      "filterBy": "تصفية حسب الفئة",
+      "noSuggestions": "لا توجد اقتراحات بعد",
+      "noResults": "لم يتم العثور على اقتراحات",
+      "total": "إجمالي الاقتراحات",
+      "filters": "الفلاتر",
+      "filterTitle": "العنوان",
+      "filterDescription": "الوصف",
+      "applyFilters": "تطبيق",
+      "rowsPerPage": "صفوف لكل صفحة:",
+      "imagePreview": "معاينة الصورة",
+      "deleteTitle": "حذف الاقتراح",
+      "deleteMessage": "هل أنت متأكد أنك تريد حذف هذا الاقتراح؟ لا يمكن التراجع عن هذا الإجراء."
+    },
+    "settings": {
+      "general": "الإعدادات العامة",
+      "systemConfig": "تكوين النظام",
+      "emailNotifications": "إشعارات البريد الإلكتروني",
+      "emailNotificationsDesc": "إرسال إشعارات بريد إلكتروني للأحداث الهامة",
+      "autoApproval": "الموافقة التلقائية",
+      "autoApprovalDesc": "الموافقة تلقائيًا على المشاريع من المستخدمين المعتمدين",
+      "maintenanceMode": "وضع الصيانة",
+      "maintenanceModeDesc": "وضع النظام في وضع الصيانة",
+      "publicRegistration": "التسجيل العام",
+      "publicRegistrationDesc": "السماح بالتسجيل العام للمستخدمين",
+      "siteName": "اسم الموقع",
+      "siteDescription": "وصف الموقع",
+      "maxFileSize": "الحد الأقصى لحجم الملف",
+      "itemsPerPage": "العناصر لكل صفحة",
+      "saveChanges": "حفظ التغييرات"
+    },
+    "pagination": {
+      "rowsPerPage": "صفوف لكل صفحة:"
+    }
   }
-  }
+}

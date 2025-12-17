@@ -79,9 +79,12 @@ export const useCreateProject = () => {
 
   return useMutation<Project, Error, ProjectCreatePayload>({
     mutationFn: createProject,
-    onSuccess: () => {
+    onSuccess: (data: Project) => {
       // Invalidate and refetch projects list after creating
       queryClient.invalidateQueries({ queryKey: projectKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: projectKeys.featured() });
+      queryClient.invalidateQueries({ queryKey: projectKeys.starred() });
+      queryClient.invalidateQueries({ queryKey: projectKeys.pendingByTA(data.teachingAssistant ) });
     },
   });
 };

@@ -6,15 +6,15 @@ import ViewProject from "../pages/ViewProject";
 import SubmissionPage from "../pages/SubmissionPage";
 import Projects from "../pages/Projects";
 import AcceptProject from "../pages/AcceptProject";
-import RequireAuth from "../hoc/RequireAuth";
+import RequireRole from "../hoc/RequireRole";
 import StarredProjectsPage from "../pages/StarredProjectsPage";
 import Profile from "../pages/UserProfile";
 import CompleteProfile from "../pages/CompleteProfile";
 import EditProfile from "../pages/editProfile";
 import RequireCompleteProfile from "../hoc/RequireCompleteProfile";
 import RequireProfileExists from "../hoc/RequireProfileExists";
-import RequireSupervisor from "../hoc/RequireSupervisor";
 import LearnMore from "../pages/LearnMore";
+import AdminPanel from "../pages/AdminPanel";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -35,11 +35,11 @@ export const router = createBrowserRouter([
       {
         path: "/submit",
         element: (
-          <RequireAuth>
+          <RequireRole auth>
             <RequireCompleteProfile>
               <SubmissionPage />
             </RequireCompleteProfile>
-          </RequireAuth>
+          </RequireRole>
         ),
       },
       {
@@ -49,19 +49,17 @@ export const router = createBrowserRouter([
       {
         path: "/project-requests",
         element: (
-          <RequireAuth>
-            <RequireSupervisor>
-              <AcceptProject />
-            </RequireSupervisor>
-          </RequireAuth>
+          <RequireRole supervisor>
+            <AcceptProject />
+          </RequireRole>
         ),
       },
       {
         path: "/starred-projects",
         element: (
-          <RequireAuth>
+          <RequireRole auth>
             <StarredProjectsPage />
-          </RequireAuth>
+          </RequireRole>
         ),
       },
       {
@@ -76,18 +74,26 @@ export const router = createBrowserRouter([
         path: "/complete-profile",
         element: (
           <RequireCompleteProfile completedProfile={true}>
-            <RequireAuth>
+            <RequireRole auth>
               <CompleteProfile />
-            </RequireAuth>
+            </RequireRole>
           </RequireCompleteProfile>
         ),
       },
       {
         path: "/edit-profile",
         element: (
-          <RequireAuth>
+          <RequireRole auth>
             <EditProfile />
-          </RequireAuth>
+          </RequireRole>
+        ),
+      },
+      {
+        path: "/admin-panel",
+        element: (
+          <RequireRole admin>
+            <AdminPanel />
+          </RequireRole>
         ),
       },
       {
