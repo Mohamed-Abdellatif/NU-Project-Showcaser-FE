@@ -39,6 +39,7 @@ export interface Project {
   createdAt: string;
   course: string;
   repoUrl: string;
+  teachingAssistant: string;
 }
 
 // Project creation/update payload
@@ -128,6 +129,7 @@ export interface FoundingMember {
 }
 
 export interface School {
+  _id?: string;
   name: string;
   majors: string[];
 }

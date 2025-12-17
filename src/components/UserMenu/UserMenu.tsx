@@ -33,26 +33,14 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
     setProfileMenuAnchorEl(null);
   };
 
-  const handleProfileClick = () => {
+  // Reusable navigation handler
+  const handleMenuAction = (action: string | (() => void)) => {
     handleProfileMenuClose();
-    navigate(`/profile/${user?.email.split("@")[0]}`);
-  };
-
-  const handleProjectRequestClick = () => {
-    handleProfileMenuClose();
-    navigate("/project-requests");
-  };
-  const handleStarredProjectsClick = () => {
-    handleProfileMenuClose();
-    navigate("/starred-projects");
-  };
-  const handleSubmitProjectClick = () => {
-    handleProfileMenuClose();
-    navigate("/submit");
-  };
-  const handleLogoutClick = () => {
-    handleProfileMenuClose();
-    onLogout();
+    if (typeof action === "string") {
+      navigate(action);
+    } else {
+      action();
+    }
   };
 
   return (
@@ -116,7 +104,7 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
         }}
       >
         <MenuItem
-          onClick={handleProfileClick}
+          onClick={() => handleMenuAction(`/profile/${user?.email.split("@")[0]}`)}
           sx={{
             fontFamily: "Inter, Poppins, system-ui, sans-serif",
             color: "var(--text-primary)",
@@ -127,9 +115,9 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
         >
           {t("nav.profile")}
         </MenuItem>
-        {user?.role === "supervisor" && (
+        {user?.role === "admin" && (
           <MenuItem
-            onClick={handleProjectRequestClick}
+            onClick={() => handleMenuAction("/admin-panel")}
             sx={{
               fontFamily: "Inter, Poppins, system-ui, sans-serif",
               color: "var(--text-primary)",
@@ -138,11 +126,26 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
               },
             }}
           >
-            {t("nav.project-requests")}
+            {t("nav.admin-panel")}
           </MenuItem>
         )}
+        {user?.role === "supervisor" ||
+          (user?.role === "admin" && (
+            <MenuItem
+              onClick={() => handleMenuAction("/project-requests")}
+              sx={{
+                fontFamily: "Inter, Poppins, system-ui, sans-serif",
+                color: "var(--text-primary)",
+                "&:hover": {
+                  backgroundColor: "rgba(25, 118, 210, 0.1)",
+                },
+              }}
+            >
+              {t("nav.project-requests")}
+            </MenuItem>
+          ))}
         <MenuItem
-          onClick={handleStarredProjectsClick}
+          onClick={() => handleMenuAction("/starred-projects")}
           sx={{
             fontFamily: "Inter, Poppins, system-ui, sans-serif",
             color: "var(--text-primary)",
@@ -154,7 +157,7 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
           {t("nav.starred-projects")}
         </MenuItem>
         <MenuItem
-          onClick={handleSubmitProjectClick}
+          onClick={() => handleMenuAction("/submit")}
           sx={{
             fontFamily: "Inter, Poppins, system-ui, sans-serif",
             color: "var(--text-primary)",
@@ -166,7 +169,7 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
           {t("nav.submit-project")}
         </MenuItem>
         <MenuItem
-          onClick={handleLogoutClick}
+          onClick={() => handleMenuAction(onLogout)}
           sx={{
             fontFamily: "Inter, Poppins, system-ui, sans-serif",
             color: "var(--text-primary)",

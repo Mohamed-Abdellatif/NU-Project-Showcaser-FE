@@ -3,7 +3,11 @@
     "language": "Language",
     "search": "Search",
     "loading": "Loading...",
-    "error": "Error"
+    "error": "Error",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "ok": "OK"
   },
   "nav": {
     "home": "Home",
@@ -16,7 +20,8 @@
     "profile": "Profile",
     "project-requests": "Project Requests",
     "starred-projects": "Starred Projects",
-    "submit-project": "Submit Project"
+    "submit-project": "Submit Project",
+    "admin-panel": "Admin Panel"
   },
   "bugReport": {
     "fabLabel": "Report a Bug",
@@ -202,6 +207,8 @@
     "mustBeLoggedIn": "You must be logged in to access this page",
     "mustCompleteProfile": "You must complete your profile to access this page",
     "mustBeSupervisor": "You must be a supervisor to access this page",
+    "mustBeAdmin": "You must be an admin to access this page",
+    "insufficientPermissions": "You don't have sufficient permissions to access this page",
     "profileCompletedSuccessfully": "Profile completed already",
     "deactivatedAccount": "Your account has been deactivated"
   },
@@ -296,7 +303,183 @@
       "cta": {
         "title": "Ready to Showcase Your Work?",
         "subtitle": "Join the NU Podium community today and let your innovative projects shine, grow your presence, and become part of a network that celebrates creativity and excellence across Nile University.",
-        "startJourney": "Start Your Journey"
+      "startJourney": "Start Your Journey"
+    }
+  },
+  "admin": {
+    "sidebar": {
+      "title": "NU Admin",
+      "dashboard": "Dashboard",
+      "projects": "Projects",
+      "users": "Users",
+      "analytics": "Analytics",
+      "reports": "Reports",
+      "schools": "Schools",
+      "comments": "Comments",
+      "suggestions": "Suggestions",
+      "settings": "Settings"
+    },
+    "stats": {
+      "totalProjects": "Total Projects",
+      "newUsers": "New Users",
+      "diskUsage": "Disk Usage",
+      "pending": "Pending",
+      "lastWeek": "last week",
+      "used": "used",
+      "comments": "Comments"
+    },
+    "projects": {
+      "title": "Recent Projects",
+      "tableHeaders": {
+        "title": "Title",
+        "teamLeader": "Team Leader",
+        "supervisor": "Supervisor",
+        "status": "Status",
+        "date": "Date",
+        "actions": "Actions"
+      },
+      "noProjects": "No projects yet",
+      "noResults": "No projects found",
+      "totalProjects": "Total Projects",
+      "rowsPerPage": "Rows per page:",
+      "filters": "Filters",
+      "applyFilters": "Apply Filters",
+      "clearFilters": "Clear Filters",
+      "allStatuses": "All Statuses",
+      "course": "Course",
+      "deleteTitle": "Delete Project",
+      "deleteMessage": "Are you sure you want to delete this project? This action cannot be undone."
+    },
+    "users": {
+      "title": "User Management",
+      "searchPlaceholder": "Search users...",
+      "addButton": "Add User",
+      "roleFilter": "Role",
+      "allRoles": "All Roles",
+      "errorLoading": "Failed to load users",
+      "noUsers": "No users found",
+      "roles": {
+        "student": "Student",
+        "supervisor": "Supervisor",
+        "admin": "Admin"
+      },
+      "tableHeaders": {
+        "name": "Name",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "school": "School",
+        "major": "Major",
+        "actions": "Actions"
       }
+    },
+    "status": {
+      "approved": "Approved",
+      "accepted": "Accepted",
+      "pending": "Pending",
+      "pending-ta": "Pending TA Review",
+      "rejected": "Rejected",
+      "admin": "Admin",
+      "student": "Student",
+      "supervisor": "Supervisor",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "analytics": {
+      "pageViews": "Page Views",
+      "engagement": "Engagement Rate",
+      "growth": "Growth Rate",
+      "projectTrends": "Project Submission Trends",
+      "chartPlaceholder": "Chart will be displayed here"
+    },
+    "reports": {
+      "projectSummary": "Project Summary Report",
+      "projectSummaryDesc": "Complete overview of all projects with statistics",
+      "userActivity": "User Activity Report",
+      "userActivityDesc": "Detailed user engagement and activity metrics",
+      "systemStats": "System Statistics Report",
+      "systemStatsDesc": "Overall system performance and usage statistics",
+      "generateCustom": "Generate Custom Report",
+      "download": "Download Report"
+    },
+    "schools": {
+      "engineering": "School of Engineering",
+      "business": "School of Business",
+      "medicine": "School of Medicine",
+      "arts": "School of Arts & Humanities",
+      "addSchool": "Add School",
+      "editSchool": "Edit School",
+      "departments": "Departments",
+      "students": "Students",
+      "search": "Search schools...",
+      "noSchools": "No schools found",
+      "noMajors": "No majors",
+      "schoolName": "School Name",
+      "majors": "Majors",
+      "addMajor": "Add major",
+      "add": "Add",
+      "cancel": "Cancel",
+      "update": "Update",
+      "create": "Create",
+      "confirmDelete": "Are you sure you want to delete this school?",
+      "deleteTitle": "Delete School",
+      "deleteMessage": "Are you sure you want to delete this school? This action cannot be undone.",
+      "errorLoading": "Failed to load schools",
+      "nameRequired": "School name is required"
+    },
+    "comments": {
+      "sampleComment1": "Great project! The implementation is very innovative and well-executed.",
+      "sampleComment2": "Impressive work on the user interface. Very intuitive design.",
+      "sampleComment3": "The technical approach is solid. Would love to see more documentation.",
+      "search": "Search comments...",
+      "on": "on",
+      "project": "Project",
+      "noComments": "No comments found",
+      "unknownProject": "Unknown Project",
+      "confirmDelete": "Are you sure you want to delete this comment?",
+      "deleteTitle": "Delete Comment",
+      "deleteMessage": "Are you sure you want to delete this comment? This action cannot be undone.",
+      "errorLoading": "Failed to load comments"
+    },
+    "suggestions": {
+      "suggestion1Title": "Add Dark Mode Theme",
+      "suggestion1Desc": "It would be great to have a dark mode option for better viewing at night.",
+      "suggestion2Title": "Improve Search Functionality",
+      "suggestion2Desc": "Adding filters and advanced search options would make finding projects easier.",
+      "suggestion3Title": "Project Export Feature",
+      "suggestion3Desc": "Allow users to export project data in various formats like PDF and Excel.",
+      "filterBy": "Filter By Category",
+      "noSuggestions": "No suggestions yet",
+      "noResults": "No suggestions found",
+      "total": "Total Suggestions",
+      "filters": "Filters",
+      "filterTitle": "Title",
+      "filterDescription": "Description",
+      "applyFilters": "Apply",
+      "rowsPerPage": "Rows per page:",
+      "imagePreview": "Image Preview",
+      "deleteTitle": "Delete Suggestion",
+      "deleteMessage": "Are you sure you want to delete this suggestion? This action cannot be undone."
+    },
+    "settings": {
+      "general": "General Settings",
+      "systemConfig": "System Configuration",
+      "emailNotifications": "Email Notifications",
+      "emailNotificationsDesc": "Send email notifications for important events",
+      "autoApproval": "Auto Approval",
+      "autoApprovalDesc": "Automatically approve projects from verified users",
+      "maintenanceMode": "Maintenance Mode",
+      "maintenanceModeDesc": "Put the system in maintenance mode",
+      "publicRegistration": "Public Registration",
+      "publicRegistrationDesc": "Allow public user registration",
+      "siteName": "Site Name",
+      "siteDescription": "Site Description",
+      "maxFileSize": "Max File Size",
+      "itemsPerPage": "Items Per Page",
+      "saveChanges": "Save Changes"
+    },
+    "pagination": {
+      "rowsPerPage": "Rows per page:"
+    }
   }
 }
