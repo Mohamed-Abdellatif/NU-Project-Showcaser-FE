@@ -127,9 +127,13 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
             <InfoField
               label={t("profile.github")}
               value={user?.githubUrl || "N/A"}
+              isLink={true}
+              linkLabel="GitHub Profile"
               icon={<GitHubIcon />}
               onClick={() => {
-                window.open(user?.githubUrl || "", "_blank");
+                if (user?.githubUrl && user.githubUrl !== "N/A") {
+                  window.open(user.githubUrl, "_blank");
+                }
               }}
             />
             <InfoField
@@ -140,9 +144,13 @@ const PersonalInfoCard = ({ user }: PersonalInfoCardProps) => {
             <InfoField
               label={t("profile.linkedIn")}
               value={user?.linkedInUrl || "N/A"}
+              isLink={true}
+              linkLabel="LinkedIn Profile"
               icon={<LinkedInIcon />}
               onClick={() => {
-                window.open(user?.linkedInUrl || "", "_blank");
+                if (user?.linkedInUrl && user.linkedInUrl !== "N/A") {
+                  window.open(user.linkedInUrl, "_blank");
+                }
               }}
             />
           </Box>

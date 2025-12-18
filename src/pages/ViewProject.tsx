@@ -31,7 +31,7 @@ const ViewProject = () => {
     return [...imgs, ...vids];
   }, [project]);
 
-  
+
 
   if (isLoading) {
     return <LoadingState />;
@@ -65,6 +65,7 @@ const ViewProject = () => {
         teamLeader={project.teamLeader}
         teamMembers={project.teamMembers}
         repoUrl={project.repoUrl}
+        liveUrl={project.liveUrl}
         stars={project.stars}
         projectId={project._id}
         description={project.description}

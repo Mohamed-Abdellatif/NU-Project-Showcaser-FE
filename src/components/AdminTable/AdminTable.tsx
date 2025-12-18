@@ -153,6 +153,7 @@ const AdminTable = <T,>({
             onRowsPerPageChange={handleChangeRowsPerPage}
             rowsPerPageOptions={rowsPerPageOptions}
             labelRowsPerPage={t("admin.pagination.rowsPerPage")}
+            dir="ltr"
           />
         </Box>
       )}

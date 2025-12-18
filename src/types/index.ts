@@ -39,6 +39,7 @@ export interface Project {
   createdAt: string;
   course: string;
   repoUrl: string;
+  liveUrl?: string;
   teachingAssistant: string;
 }
 

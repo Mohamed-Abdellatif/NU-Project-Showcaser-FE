@@ -16,6 +16,7 @@ import {
   SchoolOutlined,
   PersonOutlineOutlined,
   PeopleOutlineOutlined,
+  LaunchOutlined,
 } from "@mui/icons-material";
 import { useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -32,6 +33,7 @@ interface ProjectInfoCardProps {
   teamLeader?: Member;
   teamMembers?: Member[];
   repoUrl?: string;
+  liveUrl?: string;
   stars: number;
   projectId: string;
   description?: string;
@@ -54,6 +56,7 @@ export const ProjectInfoCard = ({
   teamLeader,
   teamMembers,
   repoUrl,
+  liveUrl,
   stars,
   projectId,
   description,
@@ -252,6 +255,30 @@ export const ProjectInfoCard = ({
               <span style={{ margin: "0 10px" }}>
                 {" "}
                 {t("viewProject.githubRepo")}
+              </span>
+            </Button>
+          )}
+
+          {liveUrl && (
+            <Button
+              variant="contained"
+              startIcon={<LaunchOutlined />}
+              onClick={() => window.open(liveUrl, "_blank")}
+              sx={{
+                mt: 2,
+                width: "100%",
+                py: 1.5,
+                bgcolor: "var(--accent)",
+                "&:hover": { bgcolor: "var(--primary)" },
+                borderRadius: 2,
+                fontWeight: 600,
+                fontFamily: "Poppins",
+                textTransform: "none",
+              }}
+            >
+              <span style={{ margin: "0 10px" }}>
+                {" "}
+                {t("viewProject.liveDemo")}
               </span>
             </Button>
           )}

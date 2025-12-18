@@ -172,16 +172,30 @@ const SchoolsSection = () => {
   const schools = useMemo(() => data?.data || [], [data]);
   const totalSchools = data?.pagination?.total || 0;
 
-  const schoolColors = [
-    "#667eea",
-    "#f093fb",
-    "#4facfe",
-    "#43e97b",
-    "#fa709a",
-    "#fee140",
-    "#30cfd0",
-    "#a8edea",
-  ];
+  // Function to get color based on school name
+  const getSchoolColor = (schoolName: string): string => {
+    const name = schoolName.toLowerCase();
+
+    if (name.includes('biotechnology')) {
+      return '#2d7a4f'; // mid dark green
+    } else if (name.includes('business') || name.includes('administration')) {
+      return '#ff8c42'; // orange
+    } else if (name.includes('digital humanities')) {
+      return '#e91e63'; // pink
+    } else if (name.includes('energy') || name.includes('environmental')) {
+      return '#4caf50'; // green
+    } else if (name.includes('engineering') || name.includes('applied sciences')) {
+      return '#8bc34a'; // light green
+    } else if (name.includes('itcs') || name.includes('information technology')) {
+      return '#9c27b0'; // purple
+    } else if (name.includes('sciences') && !name.includes('applied')) {
+      return '#26a69a'; // bluish green
+    } else if (name.includes('water') || name.includes('food security')) {
+      return '#64b5f6'; // light blue
+    } else {
+      return '#1976d2'; // default blue
+    }
+  };
 
   // Only show loading state on initial load (no data yet)
   if (isLoading && !data) {
@@ -202,7 +216,7 @@ const SchoolsSection = () => {
         <Typography variant="h4" sx={{ fontWeight: 700, color: "var(--text)" }}>
           {t("admin.sidebar.schools")}
         </Typography>
-        
+
         <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
           <TextField
             placeholder={t("admin.schools.search")}
@@ -223,7 +237,7 @@ const SchoolsSection = () => {
               ),
             }}
           />
-          
+
           <Button
             variant="contained"
             startIcon={<AddIcon />}
@@ -244,8 +258,8 @@ const SchoolsSection = () => {
       ) : (
         <>
           <Grid container spacing={3}>
-            {schools.map((school, index) => {
-              const color = schoolColors[index % schoolColors.length];
+            {schools.map((school) => {
+              const color = getSchoolColor(school.name);
               return (
                 <Grid size={{ xs: 12 }} key={school._id}>
                   <Paper
@@ -337,6 +351,7 @@ const SchoolsSection = () => {
               onRowsPerPageChange={handleChangeRowsPerPage}
               rowsPerPageOptions={[4, 8, 12, 16]}
               labelRowsPerPage={t("admin.pagination.rowsPerPage")}
+              dir="ltr"
             />
           </Box>
         </>
