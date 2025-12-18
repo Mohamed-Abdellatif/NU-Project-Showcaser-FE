@@ -113,8 +113,8 @@ const SuggestionsSection = () => {
     const date = new Date(dateString);
     const now = new Date();
     const diffTime = Math.abs(now.getTime() - date.getTime());
-    const diffDays = Math.ceil((diffTime-2*60*60*1000) / (1000 * 60 * 60 * 24));
-    
+    const diffDays = Math.ceil((diffTime - 2 * 60 * 60 * 1000) / (1000 * 60 * 60 * 24));
+
     if (diffDays === 0) return "Today";
     if (diffDays === 1) return "Yesterday";
     if (diffDays < 7) return `${diffDays} days ago`;
@@ -287,11 +287,11 @@ const SuggestionsSection = () => {
                       )}
                     </IconButton>
                   </Box>
-                  
+
                   <Typography variant="body1" sx={{ color: "var(--text)", mb: 2 }}>
                     {suggestion.description}
                   </Typography>
-                  
+
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
                     <Typography variant="caption" sx={{ color: "var(--secondary)" }}>
                       {formatDate(suggestion.createdAt)}

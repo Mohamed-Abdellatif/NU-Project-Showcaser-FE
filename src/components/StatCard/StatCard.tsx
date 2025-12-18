@@ -47,14 +47,19 @@ const StatCard = ({ title, value, icon, badge, subtitle, progress }: StatCardPro
         </Typography>
         <Box
           sx={{
-            width: 48,
-            height: 48,
-            borderRadius: "12px",
-            background: "var(--background-light)",
+            width: 56,
+            height: 56,
+            borderRadius: "50%",
+            background: "rgba(89, 134, 217, 0.12)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             color: "var(--primary)",
+            transition: "all 0.2s ease",
+            "&:hover": {
+              background: "rgba(89, 134, 217, 0.18)",
+              transform: "scale(1.05)",
+            },
           }}
         >
           {icon}

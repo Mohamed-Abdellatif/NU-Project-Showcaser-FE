@@ -24,6 +24,10 @@ import { useSendMail } from "../hooks/useNotify";
 import {
   requestProjectToTAEmail,
 } from "../utils/constants";
+import {
+  isValidUrl,
+  isValidGitHubUrl,
+} from "../utils/validation";
 
 const SubmitionPage = () => {
   const { t } = useTranslation();
@@ -132,12 +136,28 @@ const SubmitionPage = () => {
     // Validate required fields
     if (
       !projectTitle.trim() ||
+      !description.trim() ||
       !repoLink.trim() ||
       !teamLeader.trim() ||
       !supervisor.trim() ||
-      !teachingAssistantEmail.trim()
+      !course.trim() ||
+      !teachingAssistantEmail.trim() ||
+      !tags.trim() ||
+      !technologies.trim()
     ) {
       showError(t("submissionPage.Error: Please fill in all required fields."));
+      return;
+    }
+
+    // Validate GitHub repository URL
+    if (!isValidGitHubUrl(repoLink)) {
+      showError(t("submissionPage.Error: Please enter a valid GitHub repository URL."));
+      return;
+    }
+
+    // Validate live URL if provided
+    if (liveUrl.trim() && !isValidUrl(liveUrl)) {
+      showError(t("submissionPage.Error: Please enter a valid live URL."));
       return;
     }
 
@@ -352,7 +372,7 @@ const SubmitionPage = () => {
           {/* Submission Section */}
           <Box sx={{ mt: 4 }}>
             {/* Action Buttons */}
-            <Box sx={{ display: "flex", gap: 2, mt: 2}}>
+            <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
               <Button
                 disabled={createProject.isPending || isImageUploading || isVideoUploading}
                 variant="contained"

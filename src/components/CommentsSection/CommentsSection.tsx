@@ -120,61 +120,61 @@ const CommentsSection = () => {
         <EmptyResults message={t("admin.comments.noComments")} />
       ) : (
         <>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-        {comments.map((comment) => (
-          <Paper
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            {comments.map((comment) => (
+              <Paper
                 key={comment._id}
-            sx={{
-              p: 3,
-              borderRadius: "16px",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-            }}
-          >
-            <Box sx={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
-              <Box sx={{ display: "flex", alignItems: "flex-start", flex: 1 }}>
-                <Avatar
-                  sx={{
-                    background: "linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%)",
-                    mr: 2,
-                  }}
-                >
+                sx={{
+                  p: 3,
+                  borderRadius: "16px",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+                }}
+              >
+                <Box sx={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
+                  <Box sx={{ display: "flex", alignItems: "flex-start", flex: 1 }}>
+                    <Avatar
+                      sx={{
+                        background: "linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%)",
+                        mr: 2,
+                      }}
+                    >
                       {comment.authorFirstName?.[0].toUpperCase() || "?"}
                       {comment.authorLastName?.[0].toUpperCase() || ""}
-                </Avatar>
-                <Box sx={{ flex: 1 }}>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}>
-                    <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+                    </Avatar>
+                    <Box sx={{ flex: 1 }}>
+                      <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}>
+                        <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
                           {comment.authorFirstName?.toUpperCase()} {comment.authorLastName?.toUpperCase()}
-                    </Typography>
-                    <Typography variant="caption" sx={{ color: "var(--secondary)" }}>
+                        </Typography>
+                        <Typography variant="caption" sx={{ color: "var(--secondary)" }}>
                           • {new Date(comment.createdAt).toLocaleDateString()}
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" sx={{ color: "var(--secondary)", mb: 1 }}>
+                        </Typography>
+                      </Box>
+                      <Typography variant="body2" sx={{ color: "var(--secondary)", mb: 1 }}>
                         {t("admin.comments.on")} <strong>{t("admin.comments.project")}</strong>
-                  </Typography>
-                  <Typography variant="body1" sx={{ color: "var(--text)" }}>
+                      </Typography>
+                      <Typography variant="body1" sx={{ color: "var(--text)" }}>
                         {comment.content}
-                  </Typography>
-                </Box>
-              </Box>
-              <Box sx={{ display: "flex", gap: 1 }}>
-                <IconButton
-                  size="small"
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box sx={{ display: "flex", gap: 1 }}>
+                    <IconButton
+                      size="small"
                       onClick={() => handleDelete(comment._id)}
                       disabled={deleteCommentMutation.isPending}
-                  sx={{
-                    color: "error.main",
-                    "&:hover": { backgroundColor: "error.lighter" },
-                  }}
-                >
+                      sx={{
+                        color: "error.main",
+                        "&:hover": { backgroundColor: "error.lighter" },
+                      }}
+                    >
                       {deleteCommentMutation.isPending ? <CircularProgress size={20} /> : <DeleteIcon />}
-                </IconButton>
-              </Box>
-            </Box>
-          </Paper>
-        ))}
-      </Box>
+                    </IconButton>
+                  </Box>
+                </Box>
+              </Paper>
+            ))}
+          </Box>
 
           {/* Pagination */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
@@ -187,6 +187,7 @@ const CommentsSection = () => {
               onRowsPerPageChange={handleChangeRowsPerPage}
               rowsPerPageOptions={[5, 10, 25, 50]}
               labelRowsPerPage={t("admin.pagination.rowsPerPage")}
+              dir="ltr"
             />
           </Box>
         </>

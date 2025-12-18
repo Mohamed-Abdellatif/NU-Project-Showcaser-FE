@@ -138,6 +138,7 @@ const AcceptProject = () => {
         teamMembers={activeProject?.teamMembers}
         supervisor={activeProject?.supervisor}
         repoUrl={activeProject?.repoUrl}
+        liveUrl={activeProject?.liveUrl}
         stars={activeProject?.stars || 0}
         projectId={activeProject?._id || ""}
         description={activeProject?.description}
