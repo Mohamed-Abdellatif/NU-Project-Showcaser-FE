@@ -1,6 +1,10 @@
 import type { FoundingMember, HeroSlideConfig, Language } from "../types";
 
 import * as Icons from "@mui/icons-material";
+import MohamedImg from "../assets/Mohamed.jpg";
+import FahdImg from "../assets/Fahd.jpg";
+import ZeyadImg from "../assets/Zeyad.jpg";
+import OmarImg from "../assets/Omar.jpg";
 
 const HailIcon = Icons.Hail;
 const StarIcon = Icons.Star;
@@ -58,8 +62,7 @@ export const HERO_SLIDES_CONFIG: HeroSlideConfig[] = [
 export const foundingMembers: FoundingMember[] = [
   {
     icon: <AllInclusiveIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
-    image:
-      "https://media.licdn.com/dms/image/v2/D4D03AQGtGQEb_iUdBA/profile-displayphoto-shrink_800_800/B4DZSyHXscGkAc-/0/1738155065020?e=1766016000&v=beta&t=HhlK6uGfntPwIRQ2p08M1FZyYFM8UuBavJN1XqQSeyk",
+    image: MohamedImg,
     name: "Mohamed",
     description: "Full Stack Developer",
     mail: "m.abdellatif2319@nu.edu.eg",
@@ -71,8 +74,7 @@ export const foundingMembers: FoundingMember[] = [
   },
   {
     icon: <HailIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
-    image:
-      "https://media.licdn.com/dms/image/v2/D4E03AQHqobwKdu293g/profile-displayphoto-shrink_800_800/B4EZZDNwJZG0Ag-/0/1744884407028?e=1766016000&v=beta&t=TlSsh3ThfEK8gly7a93nv1KtT4Pe78ofYtW5aT4xcAA",
+    image: FahdImg,
     name: "Fahd",
     description: "Frontend Developer",
     mail: "f.essameldin2333@nu.edu.eg",
@@ -84,8 +86,7 @@ export const foundingMembers: FoundingMember[] = [
   },
   {
     icon: <CodeIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
-    image:
-      "https://media.licdn.com/dms/image/v2/D4E03AQH4F0D7vnNZGQ/profile-displayphoto-shrink_800_800/B4EZTDCdtXHcAg-/0/1738438991474?e=1766016000&v=beta&t=eKEO6mjaXKz76NZKZER5nBTDKHrjMg1y_0zB08T0yQk",
+    image: ZeyadImg,
     name: "Zeyad",
     description: "Frontend Developer",
     mail: "z.ahmed2310@nu.edu.eg",
@@ -97,8 +98,7 @@ export const foundingMembers: FoundingMember[] = [
   },
   {
     icon: <StarIcon sx={{ fontSize: 40, color: "#9900ffff" }} />,
-    image:
-      "https://media.licdn.com/dms/image/v2/D4D03AQEeIgWJLMoIaA/profile-displayphoto-shrink_800_800/B4DZVLPlO9HIAc-/0/1740724131973?e=1766016000&v=beta&t=z55N1VaKGJJe2uvB5V_9dC44Y7RBG8KcBg4amK0cYZk",
+    image: OmarImg,
     name: "Omar",
     description: "Backend Developer",
     mail: "o.tamer2391@nu.edu.eg",

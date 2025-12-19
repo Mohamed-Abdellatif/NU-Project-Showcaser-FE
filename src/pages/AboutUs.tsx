@@ -5,6 +5,7 @@ import { keyframes } from "@mui/system";
 import { useToastContext } from "../contexts/ToastContext";
 import { foundingMembers } from "../utils/constants";
 import type { FoundingMember } from "../types";
+import NUHeaderBg from "../assets/NU Header Background.png";
 
 
 const MailIcon = Icons.Mail;
@@ -46,7 +47,7 @@ const AboutUsSection = () => {
           left: 0,
           width: "100%",
           height: "300px",
-          backgroundImage: "url('https://www.nu.edu.eg/sites/default/files/banners/2024-03/1920x480_-_copy.png')",
+          backgroundImage: `url(${NUHeaderBg})`,
           backgroundPosition: "center top",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
@@ -154,8 +155,8 @@ const AboutUsSection = () => {
                   }}
                 >
                   {member.name}
-                  <Typography 
-                    variant="body1" 
+                  <Typography
+                    variant="body1"
                     align="center"
                     sx={{
                       fontSize: { xs: "0.85rem", sm: "0.9rem", md: "1rem" },
@@ -164,7 +165,7 @@ const AboutUsSection = () => {
                   >
                     {member.description}
                   </Typography>
-                  <Typography 
+                  <Typography
                     align="center"
                     sx={{
                       mt: { xs: 1, sm: 1.5 },
