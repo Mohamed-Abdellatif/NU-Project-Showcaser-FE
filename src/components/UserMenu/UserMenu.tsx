@@ -129,8 +129,8 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
             {t("nav.admin-panel")}
           </MenuItem>
         )}
-        {user?.role === "supervisor" ||
-          (user?.role === "admin" && (
+        {(user?.role === "supervisor" ||
+          user?.role === "admin" )&& (
             <MenuItem
               onClick={() => handleMenuAction("/project-requests")}
               sx={{
@@ -143,7 +143,7 @@ export const UserMenu = ({ showMobileSearch, onLogout }: UserMenuProps) => {
             >
               {t("nav.project-requests")}
             </MenuItem>
-          ))}
+          )}
         <MenuItem
           onClick={() => handleMenuAction("/starred-projects")}
           sx={{
