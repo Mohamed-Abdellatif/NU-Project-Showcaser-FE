@@ -32,7 +32,7 @@ import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
 
 const AdminProjectsSection = () => {
   const { t } = useTranslation();
-  
+
   // Filters state
   const [filters, setFilters] = useState<ProjectFilters>({
     page: 1,
@@ -43,7 +43,7 @@ const AdminProjectsSection = () => {
     supervisor: "",
     teamLeader: "",
   });
-  
+
   const [showFilters, setShowFilters] = useState(false);
   const [tempFilters, setTempFilters] = useState(filters);
 
@@ -88,11 +88,11 @@ const AdminProjectsSection = () => {
     setDeletingId(projectToDelete);
     try {
       await deleteProjectMutation.mutateAsync(projectToDelete);
-      
+
       // If we just deleted the last item on the current page (and we're not on the first page),
       // navigate to the previous page
-      if (projects.length === 1 && filters.page > 1) {
-        setFilters((prev) => ({ ...prev, page: prev.page - 1 }));
+      if (projects.length === 1 && filters.page && filters.page > 1) {
+        setFilters((prev) => ({ ...prev, page: (prev.page || 2) - 1 }));
       }
     } catch (error) {
       console.error("Error deleting project:", error);
@@ -203,7 +203,7 @@ const AdminProjectsSection = () => {
         width: "15%",
         render: (project) => {
           const name = project.teamLeader?.name || "N/A";
-          const formattedName = name !== "N/A" 
+          const formattedName = name !== "N/A"
             ? name.split(" ").map(part => part?.toUpperCase()).join(" ")
             : "N/A";
           return (
@@ -431,7 +431,7 @@ const AdminProjectsSection = () => {
         sx={{
           borderRadius: "16px",
           boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-                      overflow: "hidden",
+          overflow: "hidden",
         }}
       >
         <AdminTable

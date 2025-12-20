@@ -90,11 +90,11 @@ const SuggestionsSection = () => {
     setDeletingId(suggestionToDelete);
     try {
       await deleteSuggestionMutation.mutateAsync(suggestionToDelete);
-      
+
       // If we just deleted the last item on the current page (and we're not on the first page),
       // navigate to the previous page
-      if (suggestions.length === 1 && filters.page > 1) {
-        setFilters((prev) => ({ ...prev, page: prev.page - 1 }));
+      if (suggestions.length === 1 && filters.page && filters.page > 1) {
+        setFilters((prev) => ({ ...prev, page: (prev.page || 2) - 1 }));
       }
     } catch (error) {
       console.error("Error deleting suggestion:", error);
