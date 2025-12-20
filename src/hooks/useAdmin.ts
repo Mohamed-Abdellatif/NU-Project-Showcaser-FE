@@ -26,6 +26,11 @@ import {
   createSchool,
   editSchool,
   deleteSchool,
+  // Course Management
+  getAllCourses,
+  createCourse,
+  editCourse,
+  deleteCourse,
   // Dashboard Stats
   getDashboardStats,
   // Types
@@ -34,15 +39,18 @@ import {
   type CommentUpdatePayload,
   type SuggestionUpdatePayload,
   type SchoolUpdatePayload,
+  type CourseCreatePayload,
+  type CourseUpdatePayload,
   type PaginatedResponse,
   type ProjectFilters,
   type UserFilters,
   type CommentFilters,
   type SuggestionFilters,
   type SchoolFilters,
+  type CourseFilters,
   type DashboardStats,
 } from '../api/adminApi';
-import type { Project, User, School, Suggestion } from '../types';
+import type { Project, User, School, Suggestion, Course } from '../types';
 import type { Comment } from '../api/commentsApi';
 
 // Query keys for React Query
@@ -86,6 +94,12 @@ export const adminKeys = {
     list: (filters?: SchoolFilters) => [...adminKeys.schools.lists(), filters] as const,
     details: () => [...adminKeys.schools.all, 'detail'] as const,
     detail: (id: string) => [...adminKeys.schools.details(), id] as const,
+  },
+  // Courses
+  courses: {
+    all: ['admin', 'courses'] as const,
+    lists: () => [...adminKeys.courses.all, 'list'] as const,
+    list: (filters?: CourseFilters) => [...adminKeys.courses.lists(), filters] as const,
   },
   // Dashboard Stats
   stats: () => ['admin', 'stats'] as const,
@@ -397,7 +411,68 @@ export const useAdminDeleteSchool = () => {
 };
 
 // ============================================
-// 6. Dashboard Stats Hooks
+// 6. Course Management Hooks
+// ============================================
+
+/**
+ * Hook to get all courses
+ * @param filters - Optional pagination and filter parameters
+ */
+export const useAdminCourses = (filters?: CourseFilters) => {
+  return useQuery<PaginatedResponse<Course>, Error>({
+    queryKey: adminKeys.courses.list(filters),
+    queryFn: () => getAllCourses(filters),
+    placeholderData: keepPreviousData,
+  });
+};
+
+/**
+ * Hook to create a new course
+ */
+export const useAdminCreateCourse = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<Course, Error, CourseCreatePayload>({
+    mutationFn: (courseData) => createCourse(courseData),
+    onSuccess: () => {
+      // Invalidate all course lists
+      queryClient.invalidateQueries({ queryKey: adminKeys.courses.lists() });
+    },
+  });
+};
+
+/**
+ * Hook to edit/update a course
+ */
+export const useAdminEditCourse = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<Course, Error, { courseId: string; updates: CourseUpdatePayload }>({
+    mutationFn: ({ courseId, updates }) => editCourse(courseId, updates),
+    onSuccess: () => {
+      // Invalidate all course lists
+      queryClient.invalidateQueries({ queryKey: adminKeys.courses.lists() });
+    },
+  });
+};
+
+/**
+ * Hook to delete a course
+ */
+export const useAdminDeleteCourse = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<string, Error, string>({
+    mutationFn: (courseId) => deleteCourse(courseId),
+    onSuccess: () => {
+      // Invalidate all course lists
+      queryClient.invalidateQueries({ queryKey: adminKeys.courses.lists() });
+    },
+  });
+};
+
+// ============================================
+// 7. Dashboard Stats Hooks
 // ============================================
 
 /**

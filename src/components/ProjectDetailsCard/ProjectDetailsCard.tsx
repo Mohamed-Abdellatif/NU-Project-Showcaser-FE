@@ -1,5 +1,8 @@
-import { Card, CardContent, Typography, TextField } from "@mui/material";
+import { Card, CardContent, Typography, TextField, Select, MenuItem, FormControl, InputLabel, CircularProgress, Box, Divider } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { useCourses } from "../../hooks/useCourses";
+import { useState, useMemo, useEffect } from "react";
+import SearchIcon from "@mui/icons-material/Search";
 
 interface ProjectDetailsCardProps {
     projectTitle: string;
@@ -20,6 +23,7 @@ interface ProjectDetailsCardProps {
     onTeachingAssistantEmailChange: (value: string) => void;
     onTechnologiesChange: (value: string) => void;
     onTagsChange: (value: string) => void;
+    onTaEmailErrorChange?: (hasError: boolean) => void;
 }
 
 const ProjectDetailsCard = ({
@@ -41,9 +45,64 @@ const ProjectDetailsCard = ({
     onTeachingAssistantEmailChange,
     onTechnologiesChange,
     onTagsChange,
+    onTaEmailErrorChange,
 }: ProjectDetailsCardProps) => {
     const { t, i18n } = useTranslation();
     const currentDir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+    const [courseSearch, setCourseSearch] = useState('');
+    const [debouncedSearch, setDebouncedSearch] = useState('');
+    const [selectOpen, setSelectOpen] = useState(false);
+    const [taEmailError, setTaEmailError] = useState(false);
+
+    // Debounce search input to avoid excessive API calls
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearch(courseSearch);
+        }, 300); // 300ms delay
+
+        return () => clearTimeout(timer);
+    }, [courseSearch]);
+
+    // Fetch courses with server-side filtering
+    // When searching, pass the search term to filter by both code and title
+    // When not searching, fetch all courses
+    const { data: allCourses, isLoading: coursesLoading } = useCourses(
+        debouncedSearch.trim() 
+            ? { code: debouncedSearch, title: debouncedSearch }
+            : undefined
+    );
+
+    // Limit to first 5 courses when not searching (client-side limit for display)
+    const filteredCourses = useMemo(() => {
+        if (!allCourses) return [];
+        
+        // If searching, show all server-filtered results
+        if (debouncedSearch.trim()) {
+            return allCourses;
+        }
+        
+        // If not searching, show only first 5
+        return allCourses.slice(0, 5);
+    }, [allCourses, debouncedSearch]);
+
+    // Validate teaching assistant email
+    const validateTaEmail = (email: string) => {
+        if (email.trim() === '') {
+            setTaEmailError(false);
+            onTaEmailErrorChange?.(false);
+            return true;
+        }
+        const isValid = email.endsWith('@nu.edu.eg');
+        setTaEmailError(!isValid);
+        onTaEmailErrorChange?.(!isValid);
+        return isValid;
+    };
+
+    // Handle TA email change with validation
+    const handleTaEmailChange = (value: string) => {
+        onTeachingAssistantEmailChange(value);
+        validateTaEmail(value);
+    };
 
     return (
         <Card
@@ -93,6 +152,7 @@ const ProjectDetailsCard = ({
                 <TextField
                     label={t("submissionPage.Project Description")}
                     fullWidth
+                    required
                     multiline
                     rows={3}
                     value={description}
@@ -168,6 +228,7 @@ const ProjectDetailsCard = ({
                     label={t("submissionPage.Supervisor")}
                     placeholder="Dr. Name"
                     fullWidth
+                    required
                     value={supervisor}
                     onChange={(e) => onSupervisorChange(e.target.value)}
                     dir={currentDir}
@@ -188,29 +249,134 @@ const ProjectDetailsCard = ({
                     }}
                 />
 
-                <TextField
-                    label={t("submissionPage.Course")}
-                    placeholder="Machine Learning"
-                    fullWidth
-                    value={course}
-                    onChange={(e) => onCourseChange(e.target.value)}
-                    dir={currentDir}
+                <FormControl 
+                    fullWidth 
+                    required
                     sx={{ 
                         mb: 2,
                         direction: currentDir,
-                        "& .MuiInputBase-input": {
-                            direction: currentDir,
-                        },
-                        "& .MuiInputLabel-root": {
-                            direction: currentDir,
-                        },
                     }}
-                    slotProps={{
-                        input: {
-                            dir: currentDir,
-                        },
-                    }}
-                />
+                >
+                    <InputLabel 
+                        id="course-select-label"
+                        required
+                        sx={{
+                            direction: currentDir,
+                        }}
+                    >
+                        {t("submissionPage.Course")}
+                    </InputLabel>
+                    <Select
+                        labelId="course-select-label"
+                        value={course}
+                        label={t("submissionPage.Course")}
+                        required
+                        onChange={(e) => onCourseChange(e.target.value)}
+                        dir={currentDir}
+                        disabled={coursesLoading}
+                        open={selectOpen}
+                        onOpen={() => setSelectOpen(true)}
+                        onClose={() => {
+                            setSelectOpen(false);
+                            setCourseSearch('');
+                        }}
+                        sx={{
+                            direction: currentDir,
+                            "& .MuiSelect-select": {
+                                direction: currentDir,
+                            },
+                        }}
+                        endAdornment={
+                            coursesLoading ? (
+                                <CircularProgress 
+                                    size={20} 
+                                    sx={{ 
+                                        position: 'absolute', 
+                                        right: currentDir === 'rtl' ? 'auto' : 40,
+                                        left: currentDir === 'rtl' ? 40 : 'auto',
+                                    }} 
+                                />
+                            ) : null
+                        }
+                        MenuProps={{
+                            PaperProps: {
+                                sx: {
+                                    maxHeight: 400,
+                                },
+                            },
+                        }}
+                    >
+                        {/* Search Field */}
+                        <Box 
+                            sx={{ 
+                                position: 'sticky', 
+                                top: 0, 
+                                bgcolor: 'background.paper', 
+                                zIndex: 1,
+                                p: 1,
+                                direction: currentDir,
+                            }}
+                            onKeyDown={(e) => e.stopPropagation()}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <TextField
+                                size="small"
+                                placeholder={t("submissionPage.Search courses...")}
+                                value={courseSearch}
+                                onChange={(e) => setCourseSearch(e.target.value)}
+                                dir={currentDir}
+                                fullWidth
+                                autoFocus
+                                InputProps={{
+                                    startAdornment: <SearchIcon sx={{ mr: 1, color: 'text.secondary' }} />,
+                                }}
+                                sx={{
+                                    direction: currentDir,
+                                    "& .MuiInputBase-input": {
+                                        direction: currentDir,
+                                    },
+                                }}
+                            />
+                        </Box>
+                        <Divider />
+
+                        {/* Course List */}
+                        {filteredCourses.length > 0 ? (
+                            filteredCourses.map((courseItem) => (
+                                <MenuItem 
+                                    key={courseItem._id} 
+                                    value={courseItem.code}
+                                    sx={{ direction: currentDir }}
+                                >
+                                    {courseItem.code} - {courseItem.title}
+                                </MenuItem>
+                            ))
+                        ) : (
+                            <MenuItem disabled sx={{ direction: currentDir }}>
+                                {debouncedSearch ? t("submissionPage.No courses found") : t("submissionPage.No courses available")}
+                            </MenuItem>
+                        )}
+
+                        {/* Show "Search to see more" hint when showing only first 5 */}
+                        {!debouncedSearch && allCourses && allCourses.length > 5 && (
+                            <>
+                                <Divider />
+                                <Box 
+                                    sx={{ 
+                                        p: 1.5, 
+                                        textAlign: 'center', 
+                                        color: 'text.secondary',
+                                        fontSize: '0.875rem',
+                                        fontStyle: 'italic',
+                                        direction: currentDir,
+                                    }}
+                                >
+                                    {t("submissionPage.Search to see more courses")} 
+                                </Box>
+                            </>
+                        )}
+                    </Select>
+                </FormControl>
 
                 <TextField
                     label={t("submissionPage.Teaching Assistant Email")}
@@ -218,7 +384,10 @@ const ProjectDetailsCard = ({
                     fullWidth
                     type="email"
                     value={teachingAssistantEmail}
-                    onChange={(e) => onTeachingAssistantEmailChange(e.target.value)}
+                    required
+                    onChange={(e) => handleTaEmailChange(e.target.value)}
+                    error={taEmailError}
+                    helperText={taEmailError ? t("submissionPage.Email must end with @nu.edu.eg") : ""}
                     dir={currentDir}
                     sx={{ 
                         mb: 2,
@@ -241,6 +410,7 @@ const ProjectDetailsCard = ({
                     label={t("submissionPage.Technologies (comma separated)")}
                     placeholder="Python, React, Node.js"
                     fullWidth
+                    required
                     value={technologies}
                     onChange={(e) => onTechnologiesChange(e.target.value)}
                     dir={currentDir}
@@ -265,6 +435,7 @@ const ProjectDetailsCard = ({
                     label={t("submissionPage.Tags (comma separated)")}
                     placeholder="AI, Robotics, ML"
                     fullWidth
+                    required
                     value={tags}
                     onChange={(e) => onTagsChange(e.target.value)}
                     dir={currentDir}

@@ -22,6 +22,7 @@ const Projects = () => {
     teamLeader: { name: "", email: "" },
     supervisor: "",
     major: "",
+    technology: "",
     course: "",
     teamMembers: [{ name: "", email: "" }],
   });
@@ -51,6 +52,10 @@ const Projects = () => {
     }
     if (filters.major?.trim()) {
       params.major = filters.major.trim();
+      hasFilters = true;
+    }
+    if (filters.technology?.trim()) {
+      params.technology = filters.technology.trim();
       hasFilters = true;
     }
     if (filters.course?.trim()) {
@@ -94,6 +99,7 @@ const Projects = () => {
       teamLeader: { name: "", email: "" },
       supervisor: "",
       major: "",
+      technology: "",
       course: "",
       teamMembers: [{ name: "", email: "" }],
     });

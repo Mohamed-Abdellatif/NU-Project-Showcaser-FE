@@ -88,6 +88,12 @@ const AdminProjectsSection = () => {
     setDeletingId(projectToDelete);
     try {
       await deleteProjectMutation.mutateAsync(projectToDelete);
+      
+      // If we just deleted the last item on the current page (and we're not on the first page),
+      // navigate to the previous page
+      if (projects.length === 1 && filters.page > 1) {
+        setFilters((prev) => ({ ...prev, page: prev.page - 1 }));
+      }
     } catch (error) {
       console.error("Error deleting project:", error);
     } finally {

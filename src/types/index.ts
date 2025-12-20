@@ -87,6 +87,7 @@ export interface ProjectSearchParams {
   teamMembers?: Member[];
   teamLeader?: Member;
   course?: string;
+  technology?: string;
   page?: number;
   limit?: number;
 }
@@ -157,4 +158,12 @@ export interface HeroSlideConfig {
     subtitle: string;
     ctaText: string;
   };
+}
+
+export interface Course {
+  _id: string;
+  code: string;
+  title: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

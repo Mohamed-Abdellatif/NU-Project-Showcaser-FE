@@ -66,6 +66,12 @@ const CommentsSection = () => {
 
     try {
       await deleteCommentMutation.mutateAsync(commentToDelete);
+      
+      // If we just deleted the last item on the current page (and we're not on the first page),
+      // navigate to the previous page
+      if (comments.length === 1 && page > 0) {
+        setPage(page - 1);
+      }
     } catch (error) {
       console.error("Failed to delete comment:", error);
     } finally {

@@ -172,7 +172,13 @@
     "Cancel": "إلغاء",
     "Submitting": "جاري الإرسال...",
     "Error: Please enter a valid GitHub repository URL.": "خطأ: يرجى إدخال رابط صحيح لمستودع GitHub.",
-    "Error: Please enter a valid live URL.": "خطأ: يرجى إدخال رابط صحيح للعرض المباشر."
+    "Error: Please enter a valid live URL.": "خطأ: يرجى إدخال رابط صحيح للعرض المباشر.",
+    "Search courses...": "ابحث عن المقررات...",
+    "No courses found": "لم يتم العثور على مقررات",
+    "No courses available": "لا توجد مقررات متاحة",
+    "Search to see more courses": "ابحث لرؤية المزيد من المقررات",
+    "more": "إضافي",
+    "Email must end with @nu.edu.eg": "يجب أن ينتهي البريد الإلكتروني بـ @nu.edu.eg"
   },
   "projects": {
     "title": "جميع المشاريع",
@@ -186,6 +192,7 @@
       "teamLeader": "قائد الفريق",
       "supervisor": "المشرف",
       "major": "التخصص",
+      "technology": "التقنية",
       "course": "المقرر الدراسي",
       "teamMember": "عضو الفريق"
     },
@@ -323,6 +330,7 @@
       "analytics": "التحليلات",
       "reports": "التقارير",
       "schools": "المدارس",
+      "courses": "المقررات الدراسية",
       "comments": "التعليقات",
       "suggestions": "الاقتراحات",
       "settings": "الإعدادات",
@@ -436,6 +444,25 @@
       "deleteMessage": "هل أنت متأكد أنك تريد حذف هذه الكلية؟ لا يمكن التراجع عن هذا الإجراء.",
       "errorLoading": "فشل تحميل الكليات",
       "nameRequired": "اسم الكلية مطلوب"
+    },
+    "courses": {
+      "search": "البحث عن المقررات...",
+      "addCourse": "إضافة مقرر",
+      "editCourse": "تعديل مقرر",
+      "noCourses": "لم يتم العثور على مقررات",
+      "courseCode": "رمز المقرر",
+      "courseTitle": "عنوان المقرر",
+      "code": "الرمز",
+      "title": "العنوان",
+      "add": "إضافة",
+      "cancel": "إلغاء",
+      "update": "تحديث",
+      "create": "إنشاء",
+      "deleteTitle": "حذف المقرر",
+      "deleteMessage": "هل أنت متأكد أنك تريد حذف هذا المقرر؟ لا يمكن التراجع عن هذا الإجراء.",
+      "errorLoading": "فشل تحميل المقررات",
+      "codeRequired": "رمز المقرر مطلوب",
+      "titleRequired": "عنوان المقرر مطلوب"
     },
     "comments": {
       "sampleComment1": "مشروع رائع! التنفيذ مبتكر جدًا ومنجز بشكل ممتاز.",

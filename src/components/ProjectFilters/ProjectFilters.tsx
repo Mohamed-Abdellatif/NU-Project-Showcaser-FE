@@ -24,7 +24,7 @@ const ProjectFilters = ({
     (filters.title?.trim() ?? "") !== "" ||
     (filters.teamLeader?.name?.trim() ?? "") !== "" ||
     (filters.supervisor?.trim() ?? "") !== "" ||
-    (filters.major?.trim() ?? "") !== "" ||
+    (filters.technology?.trim() ?? "") !== "" ||
     (filters.course?.trim() ?? "") !== "" ||
     (filters.teamMembers && filters.teamMembers.length > 0 && 
      filters.teamMembers.some(member => (member.name?.trim() ?? "") !== "" || (member.email?.trim() ?? "") !== ""));
@@ -135,9 +135,9 @@ const ProjectFilters = ({
         />
         {/* Row 2 */}
         <GlassInput
-          placeholder={t("projects.filters.major")}
-          value={filters.major || ""}
-          onChange={(value) => onFilterChange("major", value)}
+          placeholder={t("projects.filters.technology")}
+          value={filters.technology || ""}
+          onChange={(value) => onFilterChange("technology", value)}
           fullWidth
           sx={{
             borderRadius: "24px",

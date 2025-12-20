@@ -4,6 +4,7 @@ import StatCard from "../StatCard/StatCard";
 import RecentProjectsTable from "../RecentProjectsTable/RecentProjectsTable";
 import UserManagementSection from "../UserManagementSection/UserManagementSection";
 import SchoolsSection from "../SchoolsSection/SchoolsSection";
+import CoursesSection from "../CoursesSection/CoursesSection";
 import CommentsSection from "../CommentsSection/CommentsSection";
 import SuggestionsSection from "../SuggestionsSection/SuggestionsSection";
 import AdminProjectsSection from "../AdminProjectsSection/AdminProjectsSection";
@@ -76,6 +77,9 @@ const AdminPanelContent = ({
 
     case "schools":
       return <SchoolsSection />;
+
+    case "courses":
+      return <CoursesSection />;
 
     case "comments":
       return <CommentsSection />;

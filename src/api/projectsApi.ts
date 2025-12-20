@@ -29,6 +29,7 @@ export const searchProjects = async (
     if (params?.title) queryParams.append("title", params.title);
     if (params?.major) queryParams.append("major", params.major);
     if (params?.supervisor) queryParams.append("supervisor", params.supervisor);
+    if (params?.technology) queryParams.append("technology", params.technology);
     if (params?.teamLeader) {
       const teamLeaderValue = typeof params.teamLeader === 'string'
         ? params.teamLeader
@@ -66,7 +67,7 @@ export const searchProjects = async (
  * Get all projects from the database with pagination and optional filters
  * @param page - Page number (default: 1)
  * @param limit - Items per page (default: 10, max: 100)
- * @param filters - Optional filter parameters (title, major, supervisor, teamMember, teamLeader, course)
+ * @param filters - Optional filter parameters (title, major, supervisor, teamMember, teamLeader, course, technology)
  * @returns Paginated response with projects and pagination info
  */
 export const getProjects = async (
@@ -84,6 +85,8 @@ export const getProjects = async (
     if (filters?.major) queryParams.append("major", filters.major);
     if (filters?.supervisor)
       queryParams.append("supervisor", filters.supervisor);
+    if (filters?.technology)
+      queryParams.append("technology", filters.technology);
     if (filters?.teamLeader) {
       const teamLeaderValue = typeof filters.teamLeader === 'string'
         ? filters.teamLeader
