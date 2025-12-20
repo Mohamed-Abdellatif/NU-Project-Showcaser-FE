@@ -13,8 +13,6 @@ const CompleteProfileSkipLink = ({ onSkip, skipLinkText }: CompleteProfileSkipLi
     e.preventDefault();
     if (onSkip) {
       onSkip();
-    } else {
-      console.log("Skip clicked");
     }
   };
 

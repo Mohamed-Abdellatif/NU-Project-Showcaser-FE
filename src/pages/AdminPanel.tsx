@@ -11,7 +11,6 @@ const AdminPanel = () => {
   // Handlers
   const handleMenuItemClick = (itemId: string) => {
     setActiveMenuItem(itemId);
-    console.log("Menu item clicked:", itemId);
   };
 
   return (
