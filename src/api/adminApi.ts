@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Project, User, School, Suggestion } from "../types";
+import type { Project, User, School, Suggestion, Course } from "../types";
 import type { Comment } from "./commentsApi";
 
 const API_BASE = import.meta.env.VITE_API_BASE;
@@ -87,6 +87,13 @@ export interface SchoolFilters {
   majors?: string;
 }
 
+export interface CourseFilters {
+  page?: number;
+  limit?: number;
+  code?: string;
+  title?: string;
+}
+
 // Update payload types
 export interface ProjectUpdatePayload {
   title?: string;
@@ -136,6 +143,16 @@ export interface SuggestionUpdatePayload {
 export interface SchoolUpdatePayload {
   name?: string;
   majors?: string[];
+}
+
+export interface CourseCreatePayload {
+  code: string;
+  title: string;
+}
+
+export interface CourseUpdatePayload {
+  code?: string;
+  title?: string;
 }
 
 // ============================================
@@ -825,6 +842,140 @@ export const deleteSchool = async (schoolId: string): Promise<string> => {
       }
       throw new Error(
         error.response?.data?.message || "Failed to delete school"
+      );
+    }
+    throw error;
+  }
+};
+
+// ============================================
+// 6. Course Management APIs
+// Base path: /admin/course
+// ============================================
+
+/**
+ * Get all courses
+ * @param filters - Optional pagination and filter parameters
+ * @returns Paginated response with courses
+ */
+export const getAllCourses = async (
+  filters?: CourseFilters
+): Promise<PaginatedResponse<Course>> => {
+  try {
+    const queryParams = new URLSearchParams();
+    
+    if (filters) {
+      if (filters.page) queryParams.append("page", filters.page.toString());
+      if (filters.limit) queryParams.append("limit", filters.limit.toString());
+      if (filters.code) queryParams.append("code", filters.code);
+      if (filters.title) queryParams.append("title", filters.title);
+    }
+
+    const queryString = queryParams.toString();
+    const url = queryString
+      ? `${API_BASE}/admin/course/all-courses?${queryString}`
+      : `${API_BASE}/admin/course/all-courses`;
+
+    const response = await axios.get<PaginatedResponse<Course>>(url, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        error.response?.data?.message || "Failed to fetch all courses"
+      );
+    }
+    throw error;
+  }
+};
+
+/**
+ * Create a new course
+ * @param courseData - Course data to create (code and title required)
+ * @returns Created course object
+ */
+export const createCourse = async (
+  courseData: CourseCreatePayload
+): Promise<Course> => {
+  try {
+    const response = await axios.post<Course>(
+      `${API_BASE}/admin/course`,
+      courseData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        error.response?.data?.message || "Failed to create course"
+      );
+    }
+    throw error;
+  }
+};
+
+/**
+ * Edit/Update a course by ID
+ * @param courseId - MongoDB ObjectId of the course
+ * @param updates - Partial course object with fields to update
+ * @returns Updated course object
+ */
+export const editCourse = async (
+  courseId: string,
+  updates: CourseUpdatePayload
+): Promise<Course> => {
+  try {
+    const response = await axios.put<Course>(
+      `${API_BASE}/admin/course/${courseId}`,
+      updates,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        throw new Error("Course not found");
+      }
+      throw new Error(
+        error.response?.data?.message || "Failed to update course"
+      );
+    }
+    throw error;
+  }
+};
+
+/**
+ * Permanently delete a course
+ * @param courseId - MongoDB ObjectId of the course
+ * @returns Success message
+ */
+export const deleteCourse = async (courseId: string): Promise<string> => {
+  try {
+    const response = await axios.delete<DeleteResponse>(
+      `${API_BASE}/admin/course/${courseId}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data.message;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        throw new Error("Course not found");
+      }
+      throw new Error(
+        error.response?.data?.message || "Failed to delete course"
       );
     }
     throw error;

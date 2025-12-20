@@ -11,6 +11,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import FolderIcon from "@mui/icons-material/Folder";
 import PeopleIcon from "@mui/icons-material/People";
 import SchoolIcon from "@mui/icons-material/School";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import CommentIcon from "@mui/icons-material/Comment";
 import LightbulbIcon from "@mui/icons-material/Lightbulb";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -48,6 +49,7 @@ const AdminSidebar = ({
       labelKey: "admin.sidebar.comments",
       icon: <CommentIcon />,
     },
+    { id: "courses", labelKey: "admin.sidebar.courses", icon: <MenuBookIcon /> },
     {
       id: "projects",
       labelKey: "admin.sidebar.projects",
@@ -147,6 +149,7 @@ const AdminSidebar = ({
                     backgroundColor: "rgba(255, 255, 255, 0.3)",
                     color: "var(--golden-yellow)",
                   },
+                  mr: collapsed ? 0 : 2,
                 }}
               >
                 {item.icon}

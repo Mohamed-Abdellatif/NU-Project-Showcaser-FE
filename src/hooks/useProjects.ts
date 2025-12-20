@@ -40,7 +40,7 @@ export const projectKeys = {
  * Hook to fetch all projects with pagination and optional filters
  * @param page - Page number (default: 1)
  * @param limit - Items per page (default: 10)
- * @param filters - Optional filter parameters (title, major, supervisor, teamMember, teamLeader, course)
+ * @param filters - Optional filter parameters (title, major, supervisor, teamMember, teamLeader, course, technology)
  */
 export const useProjects = (
   page: number = 1, 
@@ -145,6 +145,9 @@ export const useStarProject = () => {
       queryClient.invalidateQueries({ queryKey: projectKeys.lists() });
       queryClient.invalidateQueries({ queryKey: authKeys.me() });
       queryClient.invalidateQueries({ queryKey: projectKeys.starred() });
+      queryClient.invalidateQueries({ queryKey: projectKeys.featured() });
+      // Invalidate ALL related projects queries since the starred project might appear in any of them
+      queryClient.invalidateQueries({ queryKey: [...projectKeys.all, 'related'] });
     },
   });
 };

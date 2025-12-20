@@ -28,22 +28,6 @@ const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
     return `https://placehold.co/600x400/5986D9/FFF?text=${project.title}`;
   };
 
-  const renderStars = (count: number) => {
-    const stars = [];
-    const fullStars = Math.floor(count);
-    for (let i = 0; i < 5; i++) {
-      stars.push(
-        <Star
-          key={i}
-          sx={{
-            fontSize: "16px",
-            color: i < fullStars ? "var(--golden-yellow)" : "#E0E0E0",
-          }}
-        />
-      );
-    }
-    return stars;
-  };
 
   const handleCardClick = (e: React.MouseEvent) => {
     // Don't navigate if clicking on "View Project" link
@@ -248,12 +232,27 @@ const ProjectCard = ({ project, viewMode }: ProjectCardProps) => {
             ))}
         </Box>
 
-        {/* Star Ratings */}
+        {/* Star Count */}
         {project.stars !== undefined && project.stars > 0 && (
           <Box
             sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 0.5 }}
           >
-            {renderStars(project.stars)}
+            <Star
+              sx={{
+                fontSize: "18px",
+                color: "var(--golden-yellow)",
+              }}
+            />
+            <Typography
+              sx={{
+                fontFamily: "Inter, Poppins, system-ui, sans-serif",
+                fontWeight: 600,
+                color: "var(--text-primary)",
+                fontSize: "0.875rem",
+              }}
+            >
+              {project.stars}
+            </Typography>
           </Box>
         )}
       </CardContent>

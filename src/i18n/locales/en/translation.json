@@ -172,7 +172,13 @@
     "Cancel": "Cancel",
     "Submitting": "Submitting...",
     "Error: Please enter a valid GitHub repository URL.": "Error: Please enter a valid GitHub repository URL.",
-    "Error: Please enter a valid live URL.": "Error: Please enter a valid live URL."
+    "Error: Please enter a valid live URL.": "Error: Please enter a valid live URL.",
+    "Search courses...": "Search courses...",
+    "No courses found": "No courses found",
+    "No courses available": "No courses available",
+    "Search to see more courses": "Search to see more courses",
+    "more": "more",
+    "Email must end with @nu.edu.eg": "Email must end with @nu.edu.eg"
   },
   "projects": {
     "title": "All Projects",
@@ -186,6 +192,7 @@
       "teamLeader": "Team Leader",
       "supervisor": "Supervisor",
       "major": "Major",
+      "technology": "Technology",
       "course": "Course",
       "teamMember": "Team Member"
     },
@@ -321,6 +328,7 @@
       "analytics": "Analytics",
       "reports": "Reports",
       "schools": "Schools",
+      "courses": "Courses",
       "comments": "Comments",
       "suggestions": "Suggestions",
       "settings": "Settings",
@@ -434,6 +442,25 @@
       "deleteMessage": "Are you sure you want to delete this school? This action cannot be undone.",
       "errorLoading": "Failed to load schools",
       "nameRequired": "School name is required"
+    },
+    "courses": {
+      "search": "Search courses...",
+      "addCourse": "Add Course",
+      "editCourse": "Edit Course",
+      "noCourses": "No courses found",
+      "courseCode": "Course Code",
+      "courseTitle": "Course Title",
+      "code": "Code",
+      "title": "Title",
+      "add": "Add",
+      "cancel": "Cancel",
+      "update": "Update",
+      "create": "Create",
+      "deleteTitle": "Delete Course",
+      "deleteMessage": "Are you sure you want to delete this course? This action cannot be undone.",
+      "errorLoading": "Failed to load courses",
+      "codeRequired": "Course code is required",
+      "titleRequired": "Course title is required"
     },
     "comments": {
       "sampleComment1": "Great project! The implementation is very innovative and well-executed.",

@@ -57,6 +57,7 @@ const SubmitionPage = () => {
   const [newMember, setNewMember] = useState<Member>({ name: "", email: "" });
   const [isImageUploading, setIsImageUploading] = useState(false);
   const [isVideoUploading, setIsVideoUploading] = useState(false);
+  const [hasTaEmailError, setHasTaEmailError] = useState(false);
   const teamLeader = useMemo(
     () => user?.firstName + " " + user?.lastName,
     [user]
@@ -146,6 +147,12 @@ const SubmitionPage = () => {
       !technologies.trim()
     ) {
       showError(t("submissionPage.Error: Please fill in all required fields."));
+      return;
+    }
+
+    // Check for TA email validation errors
+    if (hasTaEmailError) {
+      showError(t("submissionPage.Email must end with @nu.edu.eg"));
       return;
     }
 
@@ -325,6 +332,7 @@ const SubmitionPage = () => {
                 onTeachingAssistantEmailChange={setTeachingAssistantEmail}
                 onTechnologiesChange={setTechnologies}
                 onTagsChange={setTags}
+                onTaEmailErrorChange={setHasTaEmailError}
               />
             </Grid>
 

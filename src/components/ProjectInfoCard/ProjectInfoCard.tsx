@@ -17,6 +17,7 @@ import {
   PersonOutlineOutlined,
   PeopleOutlineOutlined,
   LaunchOutlined,
+  MenuBookOutlined,
 } from "@mui/icons-material";
 import { useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -64,6 +65,7 @@ export const ProjectInfoCard = ({
   tags = [],
   createdAt,
   isLoading,
+  course,
 }: ProjectInfoCardProps) => {
   const [user] = useAtom(userAtom);
   const navigate = useNavigate();
@@ -210,6 +212,11 @@ export const ProjectInfoCard = ({
               icon: <CalendarTodayOutlined />,
               label: t("viewProject.created"),
               value: createdAt ? createdAt.split("T")[0] : "—",
+            },
+            {
+              icon: <MenuBookOutlined />,
+              label: t("viewProject.course"),
+              value: course || "—",
             },
             {
               icon: <SchoolOutlined />,
