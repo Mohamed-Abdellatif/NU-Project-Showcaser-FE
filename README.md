@@ -24,6 +24,7 @@ A modern, responsive frontend application for showcasing Nile University student
 - [Internationalization](#internationalization)
 - [API Integration](#api-integration)
 - [Deployment](#deployment)
+- [Testing](#testing)
 - [Development Guidelines](#development-guidelines)
 - [Contributing](#contributing)
 - [Team](#team)
@@ -355,6 +356,12 @@ npm run lint             # Run ESLint to check code quality
 
 # Type Checking
 npm run type-check       # Run TypeScript compiler (check only)
+
+# Testing
+npm run test             # Run all tests once
+npm run test:watch       # Run tests in watch mode
+npm run test:coverage    # Run tests with coverage report
+npm run test:ci          # Run tests in CI mode (with coverage)
 ```
 
 ### Script Details
@@ -833,21 +840,81 @@ Not recommended due to routing complexities, but possible with hash routing.
 
 #### Docker
 
-```dockerfile
-# Dockerfile
-FROM node:18-alpine AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
+The application can be containerized using Docker for consistent deployment across environments.
 
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+**Prerequisites:**
+- Docker installed on your system
+- Docker Compose (optional, for easier management)
+
+**Build the Docker Image:**
+
+```bash
+# Build with default API URL (localhost:3000)
+docker build -t nu-project-showcaser-fe .
+
+# Build with custom API URL
+docker build --build-arg VITE_API_BASE=https://your-api-url.com -t nu-project-showcaser-fe .
 ```
+
+**Run the Container:**
+
+```bash
+# Run on port 80
+docker run -d -p 80:80 --name nu-project-showcaser-fe nu-project-showcaser-fe
+
+# Run on custom port (e.g., 3000)
+docker run -d -p 3000:80 --name nu-project-showcaser-fe nu-project-showcaser-fe
+```
+
+**Using Docker Compose:**
+
+1. **Set environment variable** (optional, defaults to `http://localhost:3000`):
+   ```bash
+   # Create .env file or export variable
+   export VITE_API_BASE=https://your-api-url.com
+   ```
+
+2. **Build and run:**
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **View logs:**
+   ```bash
+   docker-compose logs -f
+   ```
+
+4. **Stop the container:**
+   ```bash
+   docker-compose down
+   ```
+
+**Environment Variables:**
+
+The `VITE_API_BASE` environment variable must be provided at **build time** (not runtime) because Vite embeds environment variables during the build process. 
+
+- **Development:** `VITE_API_BASE=http://localhost:3000`
+- **Production:** `VITE_API_BASE=https://nuprojectpodium-0348c7352ec2.herokuapp.com`
+
+See `.env.example` for the template.
+
+**Docker Image Features:**
+
+- Multi-stage build for optimized image size (~20MB final image)
+- nginx for efficient static file serving
+- Non-root user for enhanced security
+- SPA routing support (React Router)
+- Health check endpoint at `/health`
+- Gzip compression enabled
+- Security headers configured
+- Static asset caching
+
+**Production Deployment:**
+
+The Docker image can be:
+- Pushed to container registries (Docker Hub, AWS ECR, Azure Container Registry)
+- Deployed to container platforms (Kubernetes, Docker Swarm, AWS ECS, Azure Container Instances)
+- Used in CI/CD pipelines for automated deployments
 
 ### Production Checklist
 
@@ -951,27 +1018,272 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 - Form inputs
 - UI state (modals, dropdowns)
 
-### Testing (Future Enhancement)
+## Testing
 
-Recommended testing setup:
+The project uses **Jest** and **React Testing Library** for comprehensive testing of components, hooks, API functions, and utilities.
+
+### Test Framework
+
+- **[Jest 30.2.0](https://jestjs.io/)** - JavaScript testing framework
+- **[React Testing Library 16.3.1](https://testing-library.com/react)** - React component testing utilities
+- **[@testing-library/jest-dom](https://github.com/testing-library/jest-dom)** - Custom Jest matchers for DOM elements
+- **[@testing-library/user-event](https://testing-library.com/docs/user-event/intro)** - User interaction simulation
+
+### Running Tests
+
 ```bash
-npm install -D vitest @testing-library/react @testing-library/jest-dom
+# Run all tests once
+npm run test
+
+# Run tests in watch mode (re-runs on file changes)
+npm run test:watch
+
+# Run tests with coverage report
+npm run test:coverage
+
+# Run tests in CI mode (with coverage, optimized for CI environments)
+npm run test:ci
 ```
 
-**Test Structure:**
+### Test Structure
+
+Tests are organized alongside the code they test:
+
+```
+src/
+├── components/
+│   ├── Navbar/
+│   │   ├── Navbar.tsx
+│   │   └── __tests__/
+│   │       └── Navbar.test.tsx
+│   └── ProjectCard/
+│       ├── ProjectCard.tsx
+│       └── __tests__/
+│           └── ProjectCard.test.tsx
+├── hooks/
+│   ├── useAuth.ts
+│   └── __tests__/
+│       ├── useAuth.test.tsx
+│       └── useProjects.test.tsx
+├── api/
+│   ├── authApi.ts
+│   └── __tests__/
+│       ├── authApi.test.ts
+│       └── projectsApi.test.ts
+├── utils/
+│   ├── validation.ts
+│   └── __tests__/
+│       ├── validation.test.ts
+│       └── helperfunctions.test.ts
+└── test-utils/
+    └── index.tsx          # Testing utilities and helpers
+```
+
+### Test Utilities
+
+The project includes a custom test utilities file (`src/test-utils/index.tsx`) that provides:
+
+**Custom Render Function:**
+- Wraps components with all necessary providers (QueryClient, BrowserRouter, I18nextProvider)
+- Ensures consistent test environment setup
+
+**Mock Data Factories:**
+- `createMockUser()` - Creates mock user objects
+- `createMockProject()` - Creates mock project objects
+- `createMockMember()` - Creates mock team member objects
+
+**Example Usage:**
 ```typescript
-// ProjectCard.test.tsx
+import { render, screen, createMockUser, createMockProject } from '../../test-utils';
+import { ProjectCard } from '../ProjectCard';
+
 describe('ProjectCard', () => {
   it('renders project title', () => {
+    const mockProject = createMockProject({ title: 'My Test Project' });
     render(<ProjectCard project={mockProject} />);
-    expect(screen.getByText(mockProject.title)).toBeInTheDocument();
+    expect(screen.getByText('My Test Project')).toBeInTheDocument();
   });
-  
-  it('calls onStar when star button clicked', () => {
-    const onStar = vi.fn();
-    render(<ProjectCard project={mockProject} onStar={onStar} />);
-    fireEvent.click(screen.getByLabelText('Star project'));
-    expect(onStar).toHaveBeenCalledWith(mockProject.id);
+});
+```
+
+### Test Examples
+
+**Component Testing:**
+```typescript
+import { render, screen, fireEvent } from '../../test-utils';
+import { Navbar } from '../Navbar';
+
+describe('Navbar', () => {
+  it('renders navigation links', () => {
+    render(<Navbar />);
+    expect(screen.getByText('Home')).toBeInTheDocument();
+    expect(screen.getByText('Projects')).toBeInTheDocument();
+  });
+
+  it('handles user interactions', () => {
+    render(<Navbar />);
+    const searchBox = screen.getByPlaceholderText('Search...');
+    fireEvent.change(searchBox, { target: { value: 'test query' } });
+    expect(searchBox).toHaveValue('test query');
+  });
+});
+```
+
+**Hook Testing:**
+```typescript
+import { renderHook, waitFor } from '@testing-library/react';
+import { useAuth } from '../useAuth';
+import * as authApi from '../../api/authApi';
+
+jest.mock('../../api/authApi');
+
+describe('useAuth', () => {
+  it('fetches user data on mount', async () => {
+    const mockUser = createMockUser();
+    (authApi.getCurrentUser as jest.Mock).mockResolvedValue(mockUser);
+
+    const { result } = renderHook(() => useAuth());
+
+    await waitFor(() => {
+      expect(result.current.user).toEqual(mockUser);
+    });
+  });
+});
+```
+
+**API Testing:**
+```typescript
+import axios from 'axios';
+import { projectsApi } from '../projectsApi';
+
+jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
+
+describe('projectsApi', () => {
+  it('fetches all projects', async () => {
+    const mockProjects = [createMockProject()];
+    mockedAxios.get.mockResolvedValue({ data: mockProjects });
+
+    const result = await projectsApi.getAll({});
+
+    expect(result.data).toEqual(mockProjects);
+    expect(mockedAxios.get).toHaveBeenCalledWith('/project', { params: {} });
+  });
+});
+```
+
+**Utility Function Testing:**
+```typescript
+import { validateEmail, validateUrl } from '../validation';
+
+describe('validation', () => {
+  it('validates email addresses', () => {
+    expect(validateEmail('test@nu.edu.eg')).toBe(true);
+    expect(validateEmail('invalid-email')).toBe(false);
+  });
+
+  it('validates URLs', () => {
+    expect(validateUrl('https://github.com/user/repo')).toBe(true);
+    expect(validateUrl('not-a-url')).toBe(false);
+  });
+});
+```
+
+### Test Configuration
+
+**Jest Configuration (`jest.config.ts`):**
+- TypeScript support via `ts-jest`
+- jsdom environment for React component testing
+- Module name mapping for CSS and assets
+- Coverage thresholds and reporting
+- Custom setup file (`jest.setup.ts`)
+
+**Jest Setup (`jest.setup.ts`):**
+- Configures `@testing-library/jest-dom` matchers
+- Mocks browser APIs (matchMedia, IntersectionObserver, scrollTo)
+- Sets up Vite environment variables for tests
+- Polyfills for TextEncoder/TextDecoder
+
+### Coverage
+
+The project tracks test coverage with the following thresholds:
+
+- **Lines:** 8% (target: 70%)
+- **Branches:** 6% (target: 65%)
+- **Functions:** 7% (target: 70%)
+- **Statements:** 8% (target: 70%)
+
+Coverage reports are generated in multiple formats:
+- **Text** - Console output
+- **LCOV** - For CI/CD integration
+- **HTML** - Interactive report in `coverage/` directory
+
+View the HTML coverage report:
+```bash
+npm run test:coverage
+# Open coverage/index.html in your browser
+```
+
+### Testing Best Practices
+
+1. **Test Behavior, Not Implementation**
+   - Focus on what users see and interact with
+   - Avoid testing internal component state
+
+2. **Use Accessible Queries**
+   - Prefer `getByRole`, `getByLabelText`, `getByText`
+   - Use `data-testid` as a last resort
+
+3. **Mock External Dependencies**
+   - Mock API calls, external libraries, and browser APIs
+   - Use `jest.mock()` for module mocking
+
+4. **Test User Interactions**
+   - Use `@testing-library/user-event` for realistic interactions
+   - Test complete user flows, not just isolated actions
+
+5. **Keep Tests Isolated**
+   - Each test should be independent
+   - Use `beforeEach`/`afterEach` for cleanup
+   - Don't rely on test execution order
+
+6. **Write Descriptive Test Names**
+   - Use clear, descriptive test descriptions
+   - Follow the pattern: "should [expected behavior] when [condition]"
+
+### Current Test Coverage
+
+The project includes tests for:
+
+- ✅ **Components:** Navbar, ProjectCard
+- ✅ **Hooks:** useAuth, useProjects
+- ✅ **API Functions:** authApi, projectsApi
+- ✅ **Utilities:** validation, helperfunctions
+
+### Adding New Tests
+
+When adding new features, follow these steps:
+
+1. **Create test file** in `__tests__/` directory next to the component/function
+2. **Import testing utilities** from `test-utils`
+3. **Write test cases** covering:
+   - Happy paths
+   - Edge cases
+   - Error handling
+   - User interactions
+4. **Run tests** to ensure they pass
+5. **Check coverage** to identify untested code paths
+
+**Example: Adding a test for a new component**
+```typescript
+// src/components/NewComponent/__tests__/NewComponent.test.tsx
+import { render, screen } from '../../../test-utils';
+import { NewComponent } from '../NewComponent';
+
+describe('NewComponent', () => {
+  it('renders correctly', () => {
+    render(<NewComponent />);
+    expect(screen.getByText('Expected Text')).toBeInTheDocument();
   });
 });
 ```
