@@ -110,7 +110,7 @@ export const foundingMembers: FoundingMember[] = [
   },
 ];
 
-export const acceptProjectEmail = (projectName: string) => {
+export const acceptProjectEmail = (projectName: string, projectId: string) => {
   return {
     subject: `Your Project ${projectName} Has Been Accepted - NU Project Podium`,
     text: `Congratulations! Your project ${projectName} has been accepted for the NU Project Podium.
@@ -133,11 +133,11 @@ NU Project Podium Team`,
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       line-height: 1.6;
-      color: #333333;
+      color: #414F75;
       max-width: 600px;
       margin: 0 auto;
       padding: 20px;
-      background-color: #f5f5f5;
+      background-color: #f0f6ff;
     }
     .email-container {
       background-color: #ffffff;
@@ -150,7 +150,7 @@ NU Project Podium Team`,
       margin-bottom: 30px;
     }
     .header h1 {
-      color: #6C3BFF;
+      color: #1976d2;
       font-size: 28px;
       margin: 0 0 10px 0;
     }
@@ -162,18 +162,36 @@ NU Project Podium Team`,
       font-size: 16px;
     }
     .highlight-box {
-      background-color: #f0f7ff;
-      border-left: 4px solid #6C3BFF;
+      background-color: #e8f1fe;
+      border-left: 4px solid #1976d2;
       padding: 20px;
       margin: 25px 0;
       border-radius: 4px;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #1976d2;
+      color: #ffffff !important;
+      padding: 12px 32px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      margin: 20px 0;
+      text-align: center;
+    }
+    .cta-button:hover {
+      background-color: #5986D9;
+    }
+    .button-container {
+      text-align: center;
+      margin: 30px 0;
     }
     .footer {
       margin-top: 30px;
       padding-top: 20px;
       border-top: 1px solid #e0e0e0;
       text-align: center;
-      color: #666666;
+      color: #4F5F8C;
       font-size: 14px;
     }
   </style>
@@ -187,10 +205,14 @@ NU Project Podium Team`,
       <p>We are pleased to inform you that your project <strong>${projectName}</strong> submission has been <strong>reviewed and accepted</strong> by a Teaching Assistant.</p>
       
       <div class="highlight-box">
-        <p style="margin: 0; font-weight: 600; color: #6C3BFF;">Your project will now be featured on the NU Project Podium platform, where it can be viewed by students, faculty, and visitors.</p>
+        <p style="margin: 0; font-weight: 600; color: #1976d2;">Your project will now be featured on the NU Project Podium platform, where it can be viewed by students, faculty, and visitors.</p>
       </div>
       
       <p>This is a great achievement and recognition of your hard work and innovation. Your project <strong>${projectName}</strong> will serve as an inspiration to other students at Nile University.</p>
+      
+      <div class="button-container">
+        <a href="${window.location.origin}/projects/${projectId}" class="cta-button">View Your Project</a>
+      </div>
       
       <p>Thank you for contributing to the NU Project Podium community. We wish you continued success in your academic journey.</p>
     </div>
@@ -228,11 +250,11 @@ NU Project Podium Team`,
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       line-height: 1.6;
-      color: #333333;
+      color: #414F75;
       max-width: 600px;
       margin: 0 auto;
       padding: 20px;
-      background-color: #f5f5f5;
+      background-color: #f0f6ff;
     }
     .email-container {
       background-color: #ffffff;
@@ -245,7 +267,7 @@ NU Project Podium Team`,
       margin-bottom: 30px;
     }
     .header h1 {
-      color: #666666;
+      color: #4F5F8C;
       font-size: 28px;
       margin: 0 0 10px 0;
     }
@@ -258,7 +280,7 @@ NU Project Podium Team`,
     }
     .info-box {
       background-color: #fff9e6;
-      border-left: 4px solid #ffa500;
+      border-left: 4px solid #F59E0B;
       padding: 20px;
       margin: 25px 0;
       border-radius: 4px;
@@ -268,7 +290,7 @@ NU Project Podium Team`,
       padding-top: 20px;
       border-top: 1px solid #e0e0e0;
       text-align: center;
-      color: #666666;
+      color: #4F5F8C;
       font-size: 14px;
     }
   </style>
@@ -322,11 +344,11 @@ NU Project Podium Team`,
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       line-height: 1.6;
-      color: #333333;
+      color: #414F75;
       max-width: 600px;
       margin: 0 auto;
       padding: 20px;
-      background-color: #f5f5f5;
+      background-color: #f0f6ff;
     }
     .email-container {
       background-color: #ffffff;
@@ -339,7 +361,7 @@ NU Project Podium Team`,
       margin-bottom: 30px;
     }
     .header h1 {
-      color: #6C3BFF;
+      color: #1976d2;
       font-size: 28px;
       margin: 0 0 10px 0;
     }
@@ -351,28 +373,35 @@ NU Project Podium Team`,
       font-size: 16px;
     }
     .action-box {
-      background-color: #f0f7ff;
-      border-left: 4px solid #6C3BFF;
+      background-color: #e8f1fe;
+      border-left: 4px solid #1976d2;
       padding: 20px;
       margin: 25px 0;
       border-radius: 4px;
     }
     .cta-button {
       display: inline-block;
-      background-color: #6C3BFF;
-      color: #ffffff;
-      padding: 12px 24px;
+      background-color: #1976d2;
+      color: #ffffff !important;
+      padding: 12px 32px;
       text-decoration: none;
       border-radius: 6px;
       font-weight: 600;
       margin-top: 10px;
+    }
+    .cta-button:hover {
+      background-color: #5986D9;
+    }
+    .button-container {
+      text-align: center;
+      margin: 30px 0;
     }
     .footer {
       margin-top: 30px;
       padding-top: 20px;
       border-top: 1px solid #e0e0e0;
       text-align: center;
-      color: #666666;
+      color: #4F5F8C;
       font-size: 14px;
     }
   </style>
@@ -392,6 +421,10 @@ NU Project Podium Team`,
       <div class="action-box">
         <p style="margin: 0 0 10px 0; font-weight: 600;">Action Required:</p>
         <p style="margin: 0;">Please log in to the NU Project Podium platform to review the project details and provide your feedback. Your timely review helps maintain the quality and standards of the showcase.</p>
+      </div>
+      
+      <div class="button-container">
+        <a href="${window.location.origin}/project-requests" class="cta-button">Review Projects</a>
       </div>
       
       <p>Thank you for your continued support in helping students showcase their work.</p>

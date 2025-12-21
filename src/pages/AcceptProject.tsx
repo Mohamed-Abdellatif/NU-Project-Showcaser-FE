@@ -64,8 +64,8 @@ const AcceptProject = () => {
           if (action === "accept") {
             sendEmail.mutate({
               to: activeProject.teamLeader.email,
-              subject: acceptProjectEmail(activeProject.title.toUpperCase()).subject,
-              html: acceptProjectEmail(activeProject.title.toUpperCase()).html,
+              subject: acceptProjectEmail(activeProject.title.toUpperCase(), activeProject._id).subject,
+              html: acceptProjectEmail(activeProject.title.toUpperCase(), activeProject._id).html,
             });
           } else {
             sendEmail.mutate({
