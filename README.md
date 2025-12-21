@@ -24,6 +24,7 @@ A modern, responsive frontend application for showcasing Nile University student
 - [Internationalization](#internationalization)
 - [API Integration](#api-integration)
 - [Deployment](#deployment)
+- [Docker](#docker)
 - [Testing](#testing)
 - [Development Guidelines](#development-guidelines)
 - [Contributing](#contributing)
@@ -838,7 +839,7 @@ This ensures all routes work correctly with React Router's client-side routing.
 
 Not recommended due to routing complexities, but possible with hash routing.
 
-#### Docker
+### Docker
 
 The application can be containerized using Docker for consistent deployment across environments.
 
