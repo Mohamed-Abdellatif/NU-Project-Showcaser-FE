@@ -38,7 +38,7 @@ window.scrollTo = jest.fn();
 
 // Mock import.meta.env for Vite environment variables
 // This must be done before any imports that use import.meta
-if (typeof globalThis.import === 'undefined') {
+if (typeof (globalThis as any).import === 'undefined') {
   Object.defineProperty(globalThis, 'import', {
     value: {
       meta: {

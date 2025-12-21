@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "types": ["@jest/globals", "@testing-library/jest-dom", "node"],
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/__tests__/**/*",
+    "jest.setup.ts",
+    "jest.config.ts",
+    "src/test-utils/**/*",
+    "src/test.d.ts",
+    "src/vite-env.d.ts"
+  ],
+  "files": ["./src/test.d.ts"]
+}

@@ -84,7 +84,7 @@ describe('useAuth', () => {
       user: mockUser,
     });
 
-    const { result } = renderHook(() => useAuth(), { wrapper });
+    renderHook(() => useAuth(), { wrapper });
 
     // The query should be registered with the correct key
     const queryState = queryClient.getQueryState(['auth', 'me']);

@@ -1,8 +1,8 @@
+import React from 'react';
 import { describe, it, expect, jest, beforeEach } from '@jest/globals';
 import { screen, fireEvent, waitFor } from '@testing-library/react';
 import { render, createMockUser } from '../../../test-utils';
 import { Navbar } from '../Navbar';
-import * as authApi from '../../../api/authApi';
 
 // Mock useAuth hook
 jest.mock('../../../hooks/useAuth');
@@ -205,7 +205,6 @@ describe('Navbar', () => {
     render(<Navbar />);
 
     const projectsButton = screen.getByText('nav.projects');
-    const buttonStyle = window.getComputedStyle(projectsButton);
     
     // Check that the button has underline styling
     expect(projectsButton).toBeInTheDocument();
@@ -236,7 +235,7 @@ describe('Navbar', () => {
     // Verify that window.location.href was set (the actual redirect happens)
     expect(mockLocation.href).toBeDefined();
     
-    window.location = originalLocation;
+    (window as any).location = originalLocation;
   });
 
   it('should handle logout through UserMenu', async () => {
@@ -268,6 +267,6 @@ describe('Navbar', () => {
     // Verify that window.location.href was set (the actual redirect happens)
     expect(mockLocation.href).toBeDefined();
     
-    window.location = originalLocation;
+    (window as any).location = originalLocation;
   });
 });
