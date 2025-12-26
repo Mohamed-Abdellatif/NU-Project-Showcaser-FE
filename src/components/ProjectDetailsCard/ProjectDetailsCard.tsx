@@ -66,24 +66,57 @@ const ProjectDetailsCard = ({
     // Fetch courses with server-side filtering
     // When searching, pass the search term to filter by both code and title
     // When not searching, fetch all courses
-    const { data: allCourses, isLoading: coursesLoading } = useCourses(
+    const { data: filteredCoursesData, isLoading: coursesLoading } = useCourses(
         debouncedSearch.trim() 
             ? { code: debouncedSearch, title: debouncedSearch }
             : undefined
     );
 
+    // Always fetch all courses for validation (without filters)
+    const { data: allCoursesForValidation } = useCourses(undefined);
+
     // Limit to first 5 courses when not searching (client-side limit for display)
+    // Always include the selected course if it exists
     const filteredCourses = useMemo(() => {
-        if (!allCourses) return [];
+        if (!filteredCoursesData) return [];
         
         // If searching, show all server-filtered results
         if (debouncedSearch.trim()) {
-            return allCourses;
+            return filteredCoursesData;
         }
         
-        // If not searching, show only first 5
-        return allCourses.slice(0, 5);
-    }, [allCourses, debouncedSearch]);
+        // If not searching, show only first 5, but always include selected course if it exists
+        const firstFive = filteredCoursesData.slice(0, 5);
+        
+        // If a course is selected and it's not in the first 5, add it to the list
+        if (course) {
+            const selectedCourse = filteredCoursesData.find(c => c.code === course);
+            if (selectedCourse && !firstFive.some(c => c.code === course)) {
+                return [selectedCourse, ...firstFive];
+            }
+        }
+        
+        return firstFive;
+    }, [filteredCoursesData, debouncedSearch, course]);
+
+    // Validate course value - reset if not in available options
+    // Only validate against the complete course list, not filtered results
+    // This prevents false resets when user selects from search results
+    useEffect(() => {
+        if (!course) return;
+        
+        // Only validate if we have the complete course list loaded
+        // Don't validate against filteredCoursesData as it's just for display
+        if (allCoursesForValidation && allCoursesForValidation.length > 0) {
+            const courseExists = allCoursesForValidation.some(c => c.code === course);
+            if (!courseExists) {
+                // Only reset if course definitely doesn't exist in the complete list
+                onCourseChange('');
+            }
+        }
+        // If allCoursesForValidation hasn't loaded yet, don't validate
+        // This prevents false resets during initial load
+    }, [course, allCoursesForValidation, onCourseChange]);
 
     // Validate teaching assistant email
     const validateTaEmail = (email: string) => {
@@ -129,7 +162,7 @@ const ProjectDetailsCard = ({
                     placeholder={t("submissionPage.Short Title for your Project")}
                     fullWidth
                     required
-                    value={projectTitle}
+                    value={projectTitle || ''}
                     onChange={(e) => onProjectTitleChange(e.target.value)}
                     dir={currentDir}
                     sx={{ 
@@ -155,7 +188,7 @@ const ProjectDetailsCard = ({
                     required
                     multiline
                     rows={3}
-                    value={description}
+                    value={description || ''}
                     onChange={(e) => onDescriptionChange(e.target.value)}
                     dir={currentDir}
                     sx={{ 
@@ -180,7 +213,7 @@ const ProjectDetailsCard = ({
                     placeholder="https://github.com/Account-Name/Repo-Name"
                     fullWidth
                     required
-                    value={repoLink}
+                    value={repoLink || ''}
                     onChange={(e) => onRepoLinkChange(e.target.value)}
                     dir={currentDir}
                     sx={{ 
@@ -204,7 +237,7 @@ const ProjectDetailsCard = ({
                     label={t("submissionPage.Live Demo URL (optional)")}
                     placeholder="https://yourproject.com"
                     fullWidth
-                    value={liveUrl}
+                    value={liveUrl || ''}
                     onChange={(e) => onLiveUrlChange(e.target.value)}
                     dir={currentDir}
                     sx={{ 
@@ -229,7 +262,7 @@ const ProjectDetailsCard = ({
                     placeholder="Dr. Name"
                     fullWidth
                     required
-                    value={supervisor}
+                    value={supervisor || ''}
                     onChange={(e) => onSupervisorChange(e.target.value)}
                     dir={currentDir}
                     sx={{ 
@@ -268,7 +301,7 @@ const ProjectDetailsCard = ({
                     </InputLabel>
                     <Select
                         labelId="course-select-label"
-                        value={course}
+                        value={course || ''}
                         label={t("submissionPage.Course")}
                         required
                         onChange={(e) => onCourseChange(e.target.value)}
@@ -301,7 +334,14 @@ const ProjectDetailsCard = ({
                         MenuProps={{
                             PaperProps: {
                                 sx: {
-                                    maxHeight: 400,
+                                    maxHeight: 'calc(100vh - 120px)',
+                                    overflow: 'auto',
+                                },
+                            },
+                            MenuListProps: {
+                                sx: {
+                                    maxHeight: 'calc(100vh - 120px)',
+                                    overflow: 'auto',
                                 },
                             },
                         }}
@@ -358,23 +398,22 @@ const ProjectDetailsCard = ({
                         )}
 
                         {/* Show "Search to see more" hint when showing only first 5 */}
-                        {!debouncedSearch && allCourses && allCourses.length > 5 && (
-                            <>
-                                <Divider />
-                                <Box 
-                                    sx={{ 
-                                        p: 1.5, 
-                                        textAlign: 'center', 
-                                        color: 'text.secondary',
-                                        fontSize: '0.875rem',
-                                        fontStyle: 'italic',
-                                        direction: currentDir,
-                                    }}
-                                >
-                                    {t("submissionPage.Search to see more courses")} 
-                                </Box>
-                            </>
-                        )}
+                        {!debouncedSearch && filteredCoursesData && filteredCoursesData.length > 5 && [
+                            <Divider key="divider" />,
+                            <Box 
+                                key="hint"
+                                sx={{ 
+                                    p: 1.5, 
+                                    textAlign: 'center', 
+                                    color: 'text.secondary',
+                                    fontSize: '0.875rem',
+                                    fontStyle: 'italic',
+                                    direction: currentDir,
+                                }}
+                            >
+                                {t("submissionPage.Search to see more courses")} 
+                            </Box>
+                        ]}
                     </Select>
                 </FormControl>
 
@@ -383,7 +422,7 @@ const ProjectDetailsCard = ({
                     placeholder="ta@nu.edu.eg"
                     fullWidth
                     type="email"
-                    value={teachingAssistantEmail}
+                    value={teachingAssistantEmail || ''}
                     required
                     onChange={(e) => handleTaEmailChange(e.target.value)}
                     error={taEmailError}
@@ -411,7 +450,7 @@ const ProjectDetailsCard = ({
                     placeholder="Python, React, Node.js"
                     fullWidth
                     required
-                    value={technologies}
+                    value={technologies || ''}
                     onChange={(e) => onTechnologiesChange(e.target.value)}
                     dir={currentDir}
                     sx={{ 
@@ -436,7 +475,7 @@ const ProjectDetailsCard = ({
                     placeholder="AI, Robotics, ML"
                     fullWidth
                     required
-                    value={tags}
+                    value={tags || ''}
                     onChange={(e) => onTagsChange(e.target.value)}
                     dir={currentDir}
                     sx={{

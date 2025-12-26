@@ -124,7 +124,7 @@ const TeamMembersCard = ({
                             label={t("submissionPage.email")}
                             fullWidth
                             required
-                            value={teamLeaderEmail}
+                            value={teamLeaderEmail || ''}
                             dir={currentDir}
                             sx={{
                                 direction: currentDir,
@@ -178,7 +178,7 @@ const TeamMembersCard = ({
                         placeholder={t("submissionPage.Enter member name")}
                         fullWidth
                         size="small"
-                        value={newMember.name}
+                        value={newMember.name || ''}
                         onChange={(e) => handleNameChange(e.target.value)}
                         error={!!errors.name}
                         helperText={errors.name}
@@ -198,7 +198,7 @@ const TeamMembersCard = ({
                         placeholder={t("submissionPage.Enter member email")}
                         fullWidth
                         size="small"
-                        value={newMember.email}
+                        value={newMember.email || ''}
                         onChange={(e) => handleEmailChange(e.target.value)}
                         error={!!errors.email}
                         helperText={errors.email}

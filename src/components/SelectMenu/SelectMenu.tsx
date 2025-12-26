@@ -37,6 +37,18 @@ const SelectMenu = ({ anchorEl, open, onClose, options, onSelect }: SelectMenuPr
         vertical: "top",
         horizontal: "left",
       }}
+      PaperProps={{
+        sx: {
+          maxHeight: 'calc(100vh - 120px)',
+          overflow: 'auto',
+        },
+      }}
+      MenuListProps={{
+        sx: {
+          maxHeight: 'calc(100vh - 120px)',
+          overflow: 'auto',
+        },
+      }}
     >
       {options.map((option) => (
         <MenuItem key={option.value} onClick={() => handleSelect(option.value)}>

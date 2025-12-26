@@ -47,8 +47,9 @@ export const LanguageSelector = ({
 
   if (variant === 'menuItem') {
     return (
-      <>
+      [
         <MenuItem
+          key="language-label"
           sx={{
             borderTop: '1px solid',
             borderColor: 'divider',
@@ -58,8 +59,8 @@ export const LanguageSelector = ({
         >
           <LanguageIcon fontSize="small" sx={{ mr: 1 }} />
           {i18n.t('common.language')}
-        </MenuItem>
-        {LANGUAGES.map((lang) => (
+        </MenuItem>,
+        ...LANGUAGES.map((lang) => (
           <MenuItem
             key={lang.code}
             onClick={() => handleLanguageChange(lang.code)}
@@ -81,8 +82,8 @@ export const LanguageSelector = ({
               />
             )}
           </MenuItem>
-        ))}
-      </>
+        ))
+      ]
     );
   }
 
@@ -114,6 +115,12 @@ export const LanguageSelector = ({
         anchorEl={langMenuAnchor}
         open={Boolean(langMenuAnchor)}
         onClose={handleLangMenuClose}
+        PaperProps={{
+          sx: {
+            maxHeight: 400,
+            overflow: 'auto',
+          },
+        }}
         sx={{
           '& .MuiPaper-root': {
             background: 'rgba(255, 255, 255, 0.9)',
